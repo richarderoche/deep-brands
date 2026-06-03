@@ -57,7 +57,7 @@
 }
 
 body {
-  @apply antialiased min-w-[320px] selection:bg-accent/50;
+  @apply antialiased min-w-[320px];
 }
 
 button {

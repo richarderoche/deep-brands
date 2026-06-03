@@ -22,6 +22,7 @@
     "@tailwindcss/forms": "^0.5.11",
     "@tailwindcss/postcss": "^4.3.0",
     "@tailwindcss/typography": "^0.5.19",
+    "chroma-js": "^3.2.0",
     "classnames": "2.5.1",
     "clsx": "^2.1.1",
     "date-fns": "4.4.0",

@@ -2,6 +2,7 @@ import {
   IconBrandFacebook,
   IconBrandGithub,
   IconBrandInstagram,
+  IconBrandLinkedin,
   IconBrandSoundcloud,
   IconBrandSpotify,
   IconBrandThreads,
@@ -31,6 +32,8 @@ const getIcon = (icon: string) => {
       return IconBrandGithub
     case 'Tiktok':
       return IconBrandTiktok
+    case 'Linkedin':
+      return IconBrandLinkedin
     default:
       return false
   }
@@ -52,14 +55,15 @@ export default defineType({
       options: {
         list: [
           { title: 'Facebook', value: 'Facebook' },
+          { title: 'Github', value: 'Github' },
           { title: 'Instagram', value: 'Instagram' },
+          { title: 'LinkedIn', value: 'Linkedin' },
           { title: 'Soundcloud', value: 'Soundcloud' },
           { title: 'Spotify', value: 'Spotify' },
-          { title: 'X/Twitter', value: 'Twitter' },
           { title: 'Threads', value: 'Threads' },
-          { title: 'YouTube', value: 'YouTube' },
           { title: 'Tiktok', value: 'Tiktok' },
-          { title: 'Github', value: 'Github' },
+          { title: 'X/Twitter', value: 'Twitter' },
+          { title: 'YouTube', value: 'YouTube' },
         ],
       },
     }),

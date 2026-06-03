@@ -15,12 +15,6 @@
     "type-check": "npm run type-check --workspaces"
   },
   "prettier": "@sanity/prettier-config",
-  "overrides": {
-    "@sanity/cli": "6.6.0",
-    "sanity": {
-      "@sanity/cli": "6.6.0"
-    }
-  },
   "devDependencies": {
     "@ianvs/prettier-plugin-sort-imports": "^4.7.1",
     "@sanity/prettier-config": "^3.0.0",

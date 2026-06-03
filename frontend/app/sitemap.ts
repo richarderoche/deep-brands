@@ -1,19 +1,19 @@
-import { sanityFetch } from '@/sanity/lib/live'
-import { sitemapByTypeQuery } from '@/sanity/lib/queries'
-import { resolveHref } from '@/sanity/lib/utils'
-import { MetadataRoute } from 'next'
+import {sanityFetch} from '@/sanity/lib/live'
+import {sitemapByTypeQuery} from '@/sanity/lib/queries'
+import {resolveHref} from '@/sanity/lib/utils'
+import {MetadataRoute} from 'next'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseURL = 'https://website.com'
+  const baseURL = 'https://www.deepbrands.com'
   const home = await sanityFetch({
     query: sitemapByTypeQuery,
-    params: { type: 'home' },
+    params: {type: 'home'},
     stega: false,
     perspective: 'published',
   })
   const pages = await sanityFetch({
     query: sitemapByTypeQuery,
-    params: { type: 'page' },
+    params: {type: 'page'},
     stega: false,
     perspective: 'published',
   })
@@ -27,7 +27,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
   ]
 
-  pages.data.map(({ slug, updatedAt }) => {
+  pages.data.map(({slug, updatedAt}) => {
     sitemap.push(smObject(baseURL, slug, 'page', 'yearly', 0.8, updatedAt))
   })
 
@@ -38,15 +38,9 @@ function smObject(
   baseURL: string,
   slug: string | null,
   type = 'page',
-  freq:
-    | 'yearly'
-    | 'monthly'
-    | 'weekly'
-    | 'daily'
-    | 'hourly'
-    | 'never' = 'yearly',
+  freq: 'yearly' | 'monthly' | 'weekly' | 'daily' | 'hourly' | 'never' = 'yearly',
   prio: number = 0.8,
-  updatedAt: string
+  updatedAt: string,
 ) {
   const url = baseURL + resolveHref(type, slug)
 

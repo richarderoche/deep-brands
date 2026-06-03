@@ -6,7 +6,6 @@ export const textStyleOptions = [
   { title: 'H2', value: 'ts-h2' },
   { title: 'H3', value: 'ts-h3' },
   { title: 'H4', value: 'ts-h4' },
-  { title: 'Body XL', value: 'ts-p-xl' },
   { title: 'Body Large', value: 'ts-p-lg' },
   { title: 'Body Medium', value: 'ts-p-md' },
   { title: 'Body Small', value: 'ts-p-sm' },
