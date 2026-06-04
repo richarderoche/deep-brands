@@ -95,7 +95,7 @@ export type ImageElementImage = {
 
 export type SocialLink = {
   _type: "socialLink";
-  icon?: "Facebook" | "Instagram" | "Soundcloud" | "Spotify" | "Twitter" | "Threads" | "YouTube" | "Tiktok" | "Github";
+  icon?: "Facebook" | "Github" | "Instagram" | "Linkedin" | "Soundcloud" | "Spotify" | "Threads" | "Tiktok" | "Twitter" | "YouTube";
   url?: string;
 };
 
@@ -304,7 +304,7 @@ export type PbBlockText = {
 
 export type PbBlockPlainText = {
   _type: "pbBlockPlainText";
-  textStyle?: "ts-h1" | "ts-h2" | "ts-h3" | "ts-h4" | "ts-p-xl" | "ts-p-lg" | "ts-p-md" | "ts-p-sm" | "ts-p-xs" | "ts-h5" | "ts-h6";
+  textStyle?: "ts-h1" | "ts-h2" | "ts-h3" | "ts-h4" | "ts-p-lg" | "ts-p-md" | "ts-p-sm" | "ts-p-xs" | "ts-h5" | "ts-h6";
   color?: "text-body" | "text-accent";
   balanceLines?: boolean;
   textContent?: string;
@@ -315,7 +315,7 @@ export type PbBlockMarquee = {
   settings?: PbBlockMarqueeSettings;
   elements?: Array<{
     text?: string;
-    style?: "ts-h1" | "ts-h2" | "ts-h3" | "ts-h4" | "ts-p-xl" | "ts-p-lg" | "ts-p-md" | "ts-p-sm" | "ts-p-xs" | "ts-h5" | "ts-h6";
+    style?: "ts-h1" | "ts-h2" | "ts-h3" | "ts-h4" | "ts-p-lg" | "ts-p-md" | "ts-p-sm" | "ts-p-xs" | "ts-h5" | "ts-h6";
     _type: "textElement";
     _key: string;
   } | {
@@ -391,6 +391,7 @@ export type NavPage = {
   _type: "navPage";
   title?: string;
   page?: HomeReference | PageReference;
+  anchorLink?: string;
 };
 
 export type NavLinks = {
@@ -431,6 +432,64 @@ export type Redirect = {
 
 export type Note = string;
 
+export type Brands = {
+  _id: string;
+  _type: "brands";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  brandsNote?: Note;
+  title?: string;
+  websiteLink?: NavExternal;
+  socialIcons?: Array<{
+    _key: string;
+  } & SocialLink>;
+  logo?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  maskShape?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  bgShape?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+};
+
+export type SanityImageCrop = {
+  _type: "sanity.imageCrop";
+  top: number;
+  bottom: number;
+  left: number;
+  right: number;
+};
+
+export type SanityImageHotspot = {
+  _type: "sanity.imageHotspot";
+  x: number;
+  y: number;
+  height: number;
+  width: number;
+};
+
+export type BrandsReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "brands";
+};
+
 export type Settings = {
   _id: string;
   _type: "settings";
@@ -438,11 +497,24 @@ export type Settings = {
   _updatedAt: string;
   _rev: string;
   headerNav?: NavLinks;
-  footerNav?: NavLinks;
+  contactEmail?: string;
   socialIcons?: Array<{
     _key: string;
   } & SocialLink>;
-  title?: string;
+  badges?: Array<{
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+    _key: string;
+  }>;
+  footerNav?: NavLinks;
+  footerNav2?: NavLinks;
+  footerBrands?: Array<{
+    _key: string;
+  } & BrandsReference>;
   seo?: Seo;
   googletagmanagerID?: string;
   customScripts?: Array<{
@@ -474,22 +546,6 @@ export type Page = {
   slug: Slug;
   pbSections?: PbSections;
   seo?: Seo;
-};
-
-export type SanityImageCrop = {
-  _type: "sanity.imageCrop";
-  top: number;
-  bottom: number;
-  left: number;
-  right: number;
-};
-
-export type SanityImageHotspot = {
-  _type: "sanity.imageHotspot";
-  x: number;
-  y: number;
-  height: number;
-  width: number;
 };
 
 export type Slug = {
@@ -595,5 +651,5 @@ export type Geopoint = {
   alt?: number;
 };
 
-export type AllSanitySchemaTypes = Size | Start | VideoAspectRatio | FileLink | PbBlockMarqueeSettings | BlockWidths | YAlignment | SanityFileAssetReference | FileLinkFile | PbBlockButtonFileLinkFile | SanityImageAssetReference | ImageElementImage | SocialLink | Seo | PageReference | PtSlim | PtSingle | PtBody | PtBasic | PbTitleSection | PbSectionSettings | PbSections | PbGridDouble | PbGridSingle | PbGridMulti | PbColSettings | PbBlockVideoEmbed | PbBlockText | PbBlockPlainText | PbBlockMarquee | PbBlockDivider | PbBlocks | PbBlockButton | PbBlockImage | HomeReference | NavPage | NavLinks | NavExternal | Column | Redirect | Note | Settings | Home | Page | SanityImageCrop | SanityImageHotspot | Slug | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageMetadata | SanityFileAsset | SanityAssetSourceData | SanityImageAsset | Geopoint;
+export type AllSanitySchemaTypes = Size | Start | VideoAspectRatio | FileLink | PbBlockMarqueeSettings | BlockWidths | YAlignment | SanityFileAssetReference | FileLinkFile | PbBlockButtonFileLinkFile | SanityImageAssetReference | ImageElementImage | SocialLink | Seo | PageReference | PtSlim | PtSingle | PtBody | PtBasic | PbTitleSection | PbSectionSettings | PbSections | PbGridDouble | PbGridSingle | PbGridMulti | PbColSettings | PbBlockVideoEmbed | PbBlockText | PbBlockPlainText | PbBlockMarquee | PbBlockDivider | PbBlocks | PbBlockButton | PbBlockImage | HomeReference | NavPage | NavLinks | NavExternal | Column | Redirect | Note | Brands | SanityImageCrop | SanityImageHotspot | BrandsReference | Settings | Home | Page | Slug | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageMetadata | SanityFileAsset | SanityAssetSourceData | SanityImageAsset | Geopoint;
 

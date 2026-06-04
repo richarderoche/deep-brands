@@ -1,5 +1,14 @@
 @theme inline {
   --font-sans: var(--mori), 'Helvetica Neue', helvetica, sans-serif;
+  --font-sans-extended: var(--mori), 'Helvetica Neue', helvetica, sans-serif;
+}
+
+.ts-sans-wide {
+  @apply font-sans-extended leading-115 uppercase tracking-2;
+}
+
+.ts-sans-tall {
+  @apply font-sans font-black leading-115 uppercase;
 }
 
 /*
@@ -26,11 +35,11 @@ Example: ts-size-24/36 → font-size = var(--gut) × (24÷36)
 
 /* Labels */
 .ts-h5 {
-  @apply uppercase leading-none tracking-5 ts-size-16/24 md:ts-size-36/36;
+  @apply ts-size-16/24 md:ts-size-36/36;
 }
 
 .ts-h6 {
-  @apply uppercase leading-none tracking-5 ts-size-14/24 md:ts-size-24/36;
+  @apply ts-size-14/24 md:ts-size-24/36;
 }
 
 /* Paragraphs */
@@ -53,7 +62,11 @@ Example: ts-size-24/36 → font-size = var(--gut) × (24÷36)
 
 /* Misc */
 .ts-btn {
-  @apply uppercase leading-none tracking-5 ts-size-15/24 md:ts-size-18/36;
+  @apply font-sans font-black uppercase leading-none ts-size-15/24 md:ts-size-18/36;
+}
+
+.ts-meta {
+  @apply ts-size-9/24 md:ts-size-10/36;
 }
 
 .inline-link {

@@ -1,6 +1,6 @@
-import { sanityFetch } from '@/sanity/lib/live'
-import { settingsQuery } from '@/sanity/lib/queries'
-import type { NavItem } from '@/types'
+import {sanityFetch} from '@/sanity/lib/live'
+import {settingsQuery} from '@/sanity/lib/queries'
+import type {NavItem} from '@/types'
 import Link from 'next/link'
 import NavLinks from '../shared/NavLinks'
 import SiteWidth from '../shared/SiteWidth'
@@ -8,12 +8,12 @@ import MobileNav from './MobileNav'
 import SkipLink from './SkipLink'
 
 export default async function Navbar() {
-  const { data } = await sanityFetch({
+  const {data} = await sanityFetch({
     query: settingsQuery,
     stega: false,
   })
   const headerNav = data?.headerNav || ([] as NavItem[])
-  const siteTitle = data?.title || 'Missing Site Title'
+  const siteTitle = data?.seoTitle || 'Deep Brands'
 
   return (
     <header className="h-header fixed top-0 left-0 w-full z-10">

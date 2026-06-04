@@ -20,6 +20,12 @@ export default defineType({
       type: 'reference',
       to: [{ type: 'home' }, { type: 'page' }],
     }),
+    defineField({
+      name: 'anchorLink',
+      title: 'Anchor Link',
+      type: 'string',
+      description: 'Scroll to an anchor link (e.g. #about)',
+    }),
   ],
   preview: {
     select: {

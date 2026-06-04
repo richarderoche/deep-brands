@@ -47,6 +47,7 @@
   --spacing-outdent: -0.065em;
   --spacing-max-ch: 55ch;
   --spacing-header: calc(var(--gut) * 2);
+  --spacing-ornament: calc(var(--gut) * 1.25);
 
   /* Use .corner-container > .corner or .corner-sm
   for container-relative rounded corners */

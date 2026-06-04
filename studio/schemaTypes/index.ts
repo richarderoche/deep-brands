@@ -1,3 +1,4 @@
+import brands from './documents/brands'
 import page from './documents/page'
 import redirect from './documents/redirect'
 import navExternal from './objects/navExternal'
@@ -36,6 +37,7 @@ export const schemaTypes = [
   settings,
   // Documents
   page,
+  brands,
   redirect,
   // Objects
   column,

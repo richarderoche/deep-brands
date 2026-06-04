@@ -1,11 +1,12 @@
-import { DocumentIcon, StackCompactIcon } from '@sanity/icons'
+import { StackCompactIcon } from '@sanity/icons'
+import { File, Files } from 'lucide-react'
 import { defineField, defineType } from 'sanity'
 
 export default defineType({
   type: 'document',
   name: 'page',
-  title: 'Page',
-  icon: DocumentIcon,
+  title: 'Pages',
+  icon: Files,
   fields: [
     defineField({
       type: 'string',
@@ -42,9 +43,9 @@ export default defineType({
     },
     prepare({ title, slug, seoImage }) {
       return {
-        title: title ? title : 'Page',
+        title: title ? title : 'Pages',
         subtitle: slug ? `/${slug}` : '(No slug set)',
-        media: seoImage || DocumentIcon,
+        media: seoImage || File,
       }
     },
   },

@@ -32,9 +32,9 @@ export default defineType({
       group: 'header',
     }),
     defineField({
-      title: 'Footer Nav',
-      name: 'footerNav',
-      type: 'navLinks',
+      name: 'contactEmail',
+      title: 'Contact Email',
+      type: 'email',
       group: 'footer',
     }),
     defineField({
@@ -49,11 +49,46 @@ export default defineType({
       ],
     }),
     defineField({
-      name: 'title',
-      description: 'Used as the base in the <title> tag for SEO',
-      title: 'Site Title',
-      type: 'string',
-      group: 'seo',
+      name: 'badges',
+      title: 'Badges (transparent PNGs)',
+      type: 'array',
+      group: 'footer',
+      of: [
+        {
+          type: 'image',
+          fields: [
+            defineField({
+              name: 'alt',
+              title: 'Alt Text',
+              type: 'string',
+            }),
+          ],
+        },
+      ],
+    }),
+    defineField({
+      title: 'Footer Nav - Info',
+      name: 'footerNav',
+      type: 'navLinks',
+      group: 'footer',
+    }),
+    defineField({
+      title: 'Footer Nav - Secondary',
+      name: 'footerNav2',
+      type: 'navLinks',
+      group: 'footer',
+    }),
+    defineField({
+      name: 'footerBrands',
+      title: 'Footer Brands',
+      type: 'array',
+      group: 'footer',
+      of: [
+        {
+          type: 'reference',
+          to: [{ type: 'brands' }],
+        },
+      ],
     }),
     defineField({
       name: 'seo',

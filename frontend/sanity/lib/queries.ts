@@ -1,4 +1,4 @@
-import { defineQuery } from 'next-sanity'
+import {defineQuery} from 'next-sanity'
 
 // PARTIALS
 const seo = `
@@ -128,6 +128,15 @@ export const settingsQuery = defineQuery(`
     },
     "footerNav": footerNav.navItems[]{
       ${link},
+    },
+    "footerNav2": footerNav2.navItems[]{
+      ${link},
+    },
+    "footerBrands": footerBrands[]->{
+      _id,
+      title,
+      websiteLink,
+      socialIcons,
     },
     ${seo},
   }

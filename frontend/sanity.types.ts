@@ -94,14 +94,15 @@ export type SocialLink = {
   _type: 'socialLink'
   icon?:
     | 'Facebook'
+    | 'Github'
     | 'Instagram'
+    | 'Linkedin'
     | 'Soundcloud'
     | 'Spotify'
-    | 'Twitter'
     | 'Threads'
-    | 'YouTube'
     | 'Tiktok'
-    | 'Github'
+    | 'Twitter'
+    | 'YouTube'
   url?: string
 }
 
@@ -342,7 +343,6 @@ export type PbBlockPlainText = {
     | 'ts-h2'
     | 'ts-h3'
     | 'ts-h4'
-    | 'ts-p-xl'
     | 'ts-p-lg'
     | 'ts-p-md'
     | 'ts-p-sm'
@@ -365,7 +365,6 @@ export type PbBlockMarquee = {
           | 'ts-h2'
           | 'ts-h3'
           | 'ts-h4'
-          | 'ts-p-xl'
           | 'ts-p-lg'
           | 'ts-p-md'
           | 'ts-p-sm'
@@ -457,6 +456,7 @@ export type NavPage = {
   _type: 'navPage'
   title?: string
   page?: HomeReference | PageReference
+  anchorLink?: string
 }
 
 export type NavLinks = {
@@ -506,6 +506,66 @@ export type Redirect = {
 
 export type Note = string
 
+export type Brands = {
+  _id: string
+  _type: 'brands'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  brandsNote?: Note
+  title?: string
+  websiteLink?: NavExternal
+  socialIcons?: Array<
+    {
+      _key: string
+    } & SocialLink
+  >
+  logo?: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+  }
+  maskShape?: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+  }
+  bgShape?: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+  }
+}
+
+export type SanityImageCrop = {
+  _type: 'sanity.imageCrop'
+  top: number
+  bottom: number
+  left: number
+  right: number
+}
+
+export type SanityImageHotspot = {
+  _type: 'sanity.imageHotspot'
+  x: number
+  y: number
+  height: number
+  width: number
+}
+
+export type BrandsReference = {
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'brands'
+}
+
 export type Settings = {
   _id: string
   _type: 'settings'
@@ -513,13 +573,28 @@ export type Settings = {
   _updatedAt: string
   _rev: string
   headerNav?: NavLinks
-  footerNav?: NavLinks
+  contactEmail?: string
   socialIcons?: Array<
     {
       _key: string
     } & SocialLink
   >
-  title?: string
+  badges?: Array<{
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    alt?: string
+    _type: 'image'
+    _key: string
+  }>
+  footerNav?: NavLinks
+  footerNav2?: NavLinks
+  footerBrands?: Array<
+    {
+      _key: string
+    } & BrandsReference
+  >
   seo?: Seo
   googletagmanagerID?: string
   customScripts?: Array<{
@@ -551,22 +626,6 @@ export type Page = {
   slug: Slug
   pbSections?: PbSections
   seo?: Seo
-}
-
-export type SanityImageCrop = {
-  _type: 'sanity.imageCrop'
-  top: number
-  bottom: number
-  left: number
-  right: number
-}
-
-export type SanityImageHotspot = {
-  _type: 'sanity.imageHotspot'
-  x: number
-  y: number
-  height: number
-  width: number
 }
 
 export type Slug = {
@@ -714,11 +773,13 @@ export type AllSanitySchemaTypes =
   | Column
   | Redirect
   | Note
+  | Brands
+  | SanityImageCrop
+  | SanityImageHotspot
+  | BrandsReference
   | Settings
   | Home
   | Page
-  | SanityImageCrop
-  | SanityImageHotspot
   | Slug
   | SanityImagePaletteSwatch
   | SanityImagePalette
@@ -772,6 +833,7 @@ export type HomePageQueryResult = {
                         title: string
                       }
                     | null
+                  anchorLink?: string
                 } | null
                 externalLink: {
                   _type: 'navExternal'
@@ -838,7 +900,6 @@ export type HomePageQueryResult = {
                         | 'ts-p-lg'
                         | 'ts-p-md'
                         | 'ts-p-sm'
-                        | 'ts-p-xl'
                         | 'ts-p-xs'
                       _type: 'textElement'
                       _key: string
@@ -858,7 +919,6 @@ export type HomePageQueryResult = {
                   | 'ts-p-lg'
                   | 'ts-p-md'
                   | 'ts-p-sm'
-                  | 'ts-p-xl'
                   | 'ts-p-xs'
                 color?: 'text-accent' | 'text-body'
                 balanceLines?: boolean
@@ -940,6 +1000,7 @@ export type HomePageQueryResult = {
                         title: string
                       }
                     | null
+                  anchorLink?: string
                 } | null
                 externalLink: {
                   _type: 'navExternal'
@@ -1006,7 +1067,6 @@ export type HomePageQueryResult = {
                         | 'ts-p-lg'
                         | 'ts-p-md'
                         | 'ts-p-sm'
-                        | 'ts-p-xl'
                         | 'ts-p-xs'
                       _type: 'textElement'
                       _key: string
@@ -1026,7 +1086,6 @@ export type HomePageQueryResult = {
                   | 'ts-p-lg'
                   | 'ts-p-md'
                   | 'ts-p-sm'
-                  | 'ts-p-xl'
                   | 'ts-p-xs'
                 color?: 'text-accent' | 'text-body'
                 balanceLines?: boolean
@@ -1116,6 +1175,7 @@ export type HomePageQueryResult = {
                         title: string
                       }
                     | null
+                  anchorLink?: string
                 } | null
                 externalLink: {
                   _type: 'navExternal'
@@ -1182,7 +1242,6 @@ export type HomePageQueryResult = {
                         | 'ts-p-lg'
                         | 'ts-p-md'
                         | 'ts-p-sm'
-                        | 'ts-p-xl'
                         | 'ts-p-xs'
                       _type: 'textElement'
                       _key: string
@@ -1202,7 +1261,6 @@ export type HomePageQueryResult = {
                   | 'ts-p-lg'
                   | 'ts-p-md'
                   | 'ts-p-sm'
-                  | 'ts-p-xl'
                   | 'ts-p-xs'
                 color?: 'text-accent' | 'text-body'
                 balanceLines?: boolean
@@ -1290,6 +1348,7 @@ export type HomePageQueryResult = {
                       title: string
                     }
                   | null
+                anchorLink?: string
               } | null
               externalLink: {
                 _type: 'navExternal'
@@ -1356,7 +1415,6 @@ export type HomePageQueryResult = {
                       | 'ts-p-lg'
                       | 'ts-p-md'
                       | 'ts-p-sm'
-                      | 'ts-p-xl'
                       | 'ts-p-xs'
                     _type: 'textElement'
                     _key: string
@@ -1376,7 +1434,6 @@ export type HomePageQueryResult = {
                 | 'ts-p-lg'
                 | 'ts-p-md'
                 | 'ts-p-sm'
-                | 'ts-p-xl'
                 | 'ts-p-xs'
               color?: 'text-accent' | 'text-body'
               balanceLines?: boolean
@@ -1498,6 +1555,7 @@ export type PagesBySlugQueryResult = {
                         title: string
                       }
                     | null
+                  anchorLink?: string
                 } | null
                 externalLink: {
                   _type: 'navExternal'
@@ -1564,7 +1622,6 @@ export type PagesBySlugQueryResult = {
                         | 'ts-p-lg'
                         | 'ts-p-md'
                         | 'ts-p-sm'
-                        | 'ts-p-xl'
                         | 'ts-p-xs'
                       _type: 'textElement'
                       _key: string
@@ -1584,7 +1641,6 @@ export type PagesBySlugQueryResult = {
                   | 'ts-p-lg'
                   | 'ts-p-md'
                   | 'ts-p-sm'
-                  | 'ts-p-xl'
                   | 'ts-p-xs'
                 color?: 'text-accent' | 'text-body'
                 balanceLines?: boolean
@@ -1666,6 +1722,7 @@ export type PagesBySlugQueryResult = {
                         title: string
                       }
                     | null
+                  anchorLink?: string
                 } | null
                 externalLink: {
                   _type: 'navExternal'
@@ -1732,7 +1789,6 @@ export type PagesBySlugQueryResult = {
                         | 'ts-p-lg'
                         | 'ts-p-md'
                         | 'ts-p-sm'
-                        | 'ts-p-xl'
                         | 'ts-p-xs'
                       _type: 'textElement'
                       _key: string
@@ -1752,7 +1808,6 @@ export type PagesBySlugQueryResult = {
                   | 'ts-p-lg'
                   | 'ts-p-md'
                   | 'ts-p-sm'
-                  | 'ts-p-xl'
                   | 'ts-p-xs'
                 color?: 'text-accent' | 'text-body'
                 balanceLines?: boolean
@@ -1842,6 +1897,7 @@ export type PagesBySlugQueryResult = {
                         title: string
                       }
                     | null
+                  anchorLink?: string
                 } | null
                 externalLink: {
                   _type: 'navExternal'
@@ -1908,7 +1964,6 @@ export type PagesBySlugQueryResult = {
                         | 'ts-p-lg'
                         | 'ts-p-md'
                         | 'ts-p-sm'
-                        | 'ts-p-xl'
                         | 'ts-p-xs'
                       _type: 'textElement'
                       _key: string
@@ -1928,7 +1983,6 @@ export type PagesBySlugQueryResult = {
                   | 'ts-p-lg'
                   | 'ts-p-md'
                   | 'ts-p-sm'
-                  | 'ts-p-xl'
                   | 'ts-p-xs'
                 color?: 'text-accent' | 'text-body'
                 balanceLines?: boolean
@@ -2016,6 +2070,7 @@ export type PagesBySlugQueryResult = {
                       title: string
                     }
                   | null
+                anchorLink?: string
               } | null
               externalLink: {
                 _type: 'navExternal'
@@ -2082,7 +2137,6 @@ export type PagesBySlugQueryResult = {
                       | 'ts-p-lg'
                       | 'ts-p-md'
                       | 'ts-p-sm'
-                      | 'ts-p-xl'
                       | 'ts-p-xs'
                     _type: 'textElement'
                     _key: string
@@ -2102,7 +2156,6 @@ export type PagesBySlugQueryResult = {
                 | 'ts-p-lg'
                 | 'ts-p-md'
                 | 'ts-p-sm'
-                | 'ts-p-xl'
                 | 'ts-p-xs'
               color?: 'text-accent' | 'text-body'
               balanceLines?: boolean
@@ -2214,7 +2267,7 @@ export type SitemapByTypeQueryResult = Array<
 
 // Source: sanity/lib/queries.ts
 // Variable: settingsQuery
-// Query: *[_type == "settings"][0]{    ...,    "headerNav": headerNav.navItems[]{        ...,  "page": page->{      "type": _type,  "slug": slug.current,  title,  },    },    "footerNav": footerNav.navItems[]{        ...,  "page": page->{      "type": _type,  "slug": slug.current,  title,  },    },      "seoTitle": seo.seoTitle,  "description": seo.description,  "ogImage": seo.image,  "noIndex": seo.hideFromSearchEngines,  }
+// Query: *[_type == "settings"][0]{    ...,    "headerNav": headerNav.navItems[]{        ...,  "page": page->{      "type": _type,  "slug": slug.current,  title,  },    },    "footerNav": footerNav.navItems[]{        ...,  "page": page->{      "type": _type,  "slug": slug.current,  title,  },    },    "footerNav2": footerNav2.navItems[]{        ...,  "page": page->{      "type": _type,  "slug": slug.current,  title,  },    },    "footerBrands": footerBrands[]->{      _id,      title,      websiteLink,      socialIcons,    },      "seoTitle": seo.seoTitle,  "description": seo.description,  "ogImage": seo.image,  "noIndex": seo.hideFromSearchEngines,  }
 export type SettingsQueryResult = {
   _id: string
   _type: 'settings'
@@ -2245,8 +2298,24 @@ export type SettingsQueryResult = {
               title: string
             }
           | null
+        anchorLink?: string
       }
   > | null
+  contactEmail?: string
+  socialIcons?: Array<
+    {
+      _key: string
+    } & SocialLink
+  >
+  badges?: Array<{
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    alt?: string
+    _type: 'image'
+    _key: string
+  }>
   footerNav: Array<
     | {
         _key: string
@@ -2271,14 +2340,46 @@ export type SettingsQueryResult = {
               title: string
             }
           | null
+        anchorLink?: string
       }
   > | null
-  socialIcons?: Array<
-    {
-      _key: string
-    } & SocialLink
-  >
-  title?: string
+  footerNav2: Array<
+    | {
+        _key: string
+        _type: 'navExternal'
+        title?: string
+        url?: string
+        page: null
+      }
+    | {
+        _key: string
+        _type: 'navPage'
+        title?: string
+        page:
+          | {
+              type: 'home'
+              slug: null
+              title: string
+            }
+          | {
+              type: 'page'
+              slug: string
+              title: string
+            }
+          | null
+        anchorLink?: string
+      }
+  > | null
+  footerBrands: Array<{
+    _id: string
+    title: string | null
+    websiteLink: NavExternal | null
+    socialIcons: Array<
+      {
+        _key: string
+      } & SocialLink
+    > | null
+  }> | null
   seo?: Seo
   googletagmanagerID?: string
   customScripts?: Array<{
@@ -2322,7 +2423,7 @@ declare module '@sanity/client' {
     '\n  *[_type == "page" && slug.current == $slug][0] {\n    ...,\n    "slug": slug.current,\n    \n  pbSections[]{\n    ...,\n    _type == "pbGridMulti" => {\n      columns[]{\n        ...,\n        pbBlocks[]{\n          \n  ...,\n  _type == "pbBlockText" => {\n    ...,\n    textContent[]{\n      \n  ...,\n  markDefs[]{\n    ...,\n    _type == "internalLink" => {\n      ...,\n      "slug": reference->slug,\n      "type": reference->_type\n    }\n  }\n\n    }\n  },\n  _type == "pbBlockButton" => {\n    \n  ...,\n  sitePage {\n    \n  ...,\n  "page": page->{\n    \n  "type": _type,\n  "slug": slug.current,\n  title\n,\n  }\n,\n  },\n  externalLink {\n    \n  ...,\n  "page": page->{\n    \n  "type": _type,\n  "slug": slug.current,\n  title\n,\n  }\n,\n  },\n  fileLink {\n    ...,\n    "url": file.asset->url,\n  },\n\n  },\n\n        }\n      }\n    },\n    _type == "pbGridSingle" => {\n      ...,\n      pbBlocks[]{\n        \n  ...,\n  _type == "pbBlockText" => {\n    ...,\n    textContent[]{\n      \n  ...,\n  markDefs[]{\n    ...,\n    _type == "internalLink" => {\n      ...,\n      "slug": reference->slug,\n      "type": reference->_type\n    }\n  }\n\n    }\n  },\n  _type == "pbBlockButton" => {\n    \n  ...,\n  sitePage {\n    \n  ...,\n  "page": page->{\n    \n  "type": _type,\n  "slug": slug.current,\n  title\n,\n  }\n,\n  },\n  externalLink {\n    \n  ...,\n  "page": page->{\n    \n  "type": _type,\n  "slug": slug.current,\n  title\n,\n  }\n,\n  },\n  fileLink {\n    ...,\n    "url": file.asset->url,\n  },\n\n  },\n\n      }\n    },\n    _type == "pbGridDouble" => {\n      ...,\n      columnOne {\n        ...,\n        pbBlocks[]{\n          \n  ...,\n  _type == "pbBlockText" => {\n    ...,\n    textContent[]{\n      \n  ...,\n  markDefs[]{\n    ...,\n    _type == "internalLink" => {\n      ...,\n      "slug": reference->slug,\n      "type": reference->_type\n    }\n  }\n\n    }\n  },\n  _type == "pbBlockButton" => {\n    \n  ...,\n  sitePage {\n    \n  ...,\n  "page": page->{\n    \n  "type": _type,\n  "slug": slug.current,\n  title\n,\n  }\n,\n  },\n  externalLink {\n    \n  ...,\n  "page": page->{\n    \n  "type": _type,\n  "slug": slug.current,\n  title\n,\n  }\n,\n  },\n  fileLink {\n    ...,\n    "url": file.asset->url,\n  },\n\n  },\n\n        }\n      },\n      columnTwo {\n        ...,\n        pbBlocks[]{\n          \n  ...,\n  _type == "pbBlockText" => {\n    ...,\n    textContent[]{\n      \n  ...,\n  markDefs[]{\n    ...,\n    _type == "internalLink" => {\n      ...,\n      "slug": reference->slug,\n      "type": reference->_type\n    }\n  }\n\n    }\n  },\n  _type == "pbBlockButton" => {\n    \n  ...,\n  sitePage {\n    \n  ...,\n  "page": page->{\n    \n  "type": _type,\n  "slug": slug.current,\n  title\n,\n  }\n,\n  },\n  externalLink {\n    \n  ...,\n  "page": page->{\n    \n  "type": _type,\n  "slug": slug.current,\n  title\n,\n  }\n,\n  },\n  fileLink {\n    ...,\n    "url": file.asset->url,\n  },\n\n  },\n\n        }\n      }\n    },\n  }\n,\n    \n  "seoTitle": seo.seoTitle,\n  "description": seo.description,\n  "ogImage": seo.image,\n  "noIndex": seo.hideFromSearchEngines\n,\n  }\n': PagesBySlugQueryResult
     '\n  *[_type == $type && defined(slug.current)]{"slug": slug.current}\n': SlugsByTypeQueryResult
     '\n  *[_type == $type]{"slug": slug.current, "updatedAt": _updatedAt}\n': SitemapByTypeQueryResult
-    '\n  *[_type == "settings"][0]{\n    ...,\n    "headerNav": headerNav.navItems[]{\n      \n  ...,\n  "page": page->{\n    \n  "type": _type,\n  "slug": slug.current,\n  title\n,\n  }\n,\n    },\n    "footerNav": footerNav.navItems[]{\n      \n  ...,\n  "page": page->{\n    \n  "type": _type,\n  "slug": slug.current,\n  title\n,\n  }\n,\n    },\n    \n  "seoTitle": seo.seoTitle,\n  "description": seo.description,\n  "ogImage": seo.image,\n  "noIndex": seo.hideFromSearchEngines\n,\n  }\n': SettingsQueryResult
+    '\n  *[_type == "settings"][0]{\n    ...,\n    "headerNav": headerNav.navItems[]{\n      \n  ...,\n  "page": page->{\n    \n  "type": _type,\n  "slug": slug.current,\n  title\n,\n  }\n,\n    },\n    "footerNav": footerNav.navItems[]{\n      \n  ...,\n  "page": page->{\n    \n  "type": _type,\n  "slug": slug.current,\n  title\n,\n  }\n,\n    },\n    "footerNav2": footerNav2.navItems[]{\n      \n  ...,\n  "page": page->{\n    \n  "type": _type,\n  "slug": slug.current,\n  title\n,\n  }\n,\n    },\n    "footerBrands": footerBrands[]->{\n      _id,\n      title,\n      websiteLink,\n      socialIcons,\n    },\n    \n  "seoTitle": seo.seoTitle,\n  "description": seo.description,\n  "ogImage": seo.image,\n  "noIndex": seo.hideFromSearchEngines\n,\n  }\n': SettingsQueryResult
     '\n  *[_type == "settings"][0]{\n    "gtmId": googletagmanagerID,\n    customScripts,\n  }\n': ScriptsQueryResult
   }
 }

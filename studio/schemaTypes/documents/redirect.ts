@@ -1,11 +1,11 @@
-import { RedoIcon } from '@sanity/icons'
+import { Undo2 } from 'lucide-react'
 import { defineField, defineType } from 'sanity'
 
 export default defineType({
   name: 'redirect',
   title: 'Redirects',
   type: 'document',
-  icon: RedoIcon,
+  icon: Undo2,
   fields: [
     defineField({
       name: 'deployNote',
