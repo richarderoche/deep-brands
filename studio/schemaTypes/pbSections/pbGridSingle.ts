@@ -17,6 +17,12 @@ export default defineType({
     }),
     defineField(sectionNameField),
     defineField(rowWidthField),
+    defineField({
+      title: 'Background Logo Shape',
+      name: 'bgLogoShape',
+      type: 'boolean',
+      initialValue: false,
+    }),
     ...columnFields,
   ],
   preview: {

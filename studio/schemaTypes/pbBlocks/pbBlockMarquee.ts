@@ -3,7 +3,7 @@ import { defineField, defineType } from 'sanity'
 import { marqueeIcon } from '../../lib/customIcons'
 import { capitalize } from '../../lib/utils'
 import { crops, hotspotPreviews } from './pbBlockImage'
-import { textColorOptions, textStyleOptions } from './pbBlockPlainText'
+import { textColorOptions, textSizeOptionsAll } from './pbBlockPlainText'
 
 export default defineType({
   title: 'Scrolling Marquee',
@@ -84,7 +84,7 @@ export default defineType({
               name: 'style',
               type: 'string',
               options: {
-                list: textStyleOptions,
+                list: textSizeOptionsAll,
               },
               initialValue: 'ts-p-md',
             }),
@@ -96,8 +96,8 @@ export default defineType({
             },
             prepare({ text, style }) {
               const textStyleText =
-                textStyleOptions.find((o) => o.value === style)?.title ??
-                'Normal'
+                textSizeOptionsAll.find((o) => o.value === style)?.title ??
+                'Body'
               return {
                 title: text ? text : 'Text',
                 subtitle: textStyleText,

@@ -20,7 +20,6 @@ const DELAY = 0.2
 export default function Revealer({children, direction = 'fade-up', ...props}: RevealerProps) {
   const ref = useRef<HTMLDivElement>(null)
   const reducedMotion = usePrefersReducedMotion()
-  const distance = reducedMotion || direction === 'fade-only' ? 0 : 30
 
   useGSAP(
     () => {
@@ -29,26 +28,30 @@ export default function Revealer({children, direction = 'fade-up', ...props}: Re
       const el = ref.current
       if (!el) return
 
+      const distance = reducedMotion || direction === 'fade-only' ? 0 : 30
+
       const fromMove = direction === 'fade-right' ? {x: -distance} : {y: distance}
       const toMove = direction === 'fade-right' ? {x: 0} : {y: 0}
 
       if (direction === 'stagger') {
-        gsap.from('.column-blocks > *', {
-          y: distance,
-          filter: 'blur(10px)',
-          opacity: 0,
-          duration: DURATION,
-          ease: 'expo.out',
-          stagger: 0.15,
-          delay: DELAY,
-          scrollTrigger: {trigger: el, start: TRIGGER_START, markers: false},
-        })
+        gsap.fromTo(
+          '.column-blocks > *',
+          {y: distance, opacity: 0},
+          {
+            y: 0,
+            opacity: 1,
+            duration: DURATION,
+            ease: 'expo.out',
+            stagger: 0.15,
+            delay: DELAY,
+            scrollTrigger: {trigger: el, start: TRIGGER_START, markers: false},
+          },
+        )
       } else {
         gsap.fromTo(
           el,
-          {filter: 'blur(10px)', opacity: 0, ...fromMove},
+          {opacity: 0, ...fromMove},
           {
-            filter: 'blur(0px)',
             opacity: 1,
             ...toMove,
             duration: DURATION,
@@ -63,7 +66,7 @@ export default function Revealer({children, direction = 'fade-up', ...props}: Re
         )
       }
     },
-    {scope: ref, dependencies: [direction, distance]},
+    {scope: ref, dependencies: [direction, reducedMotion]},
   )
 
   return (

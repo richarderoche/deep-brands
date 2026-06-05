@@ -166,6 +166,21 @@ export type PtSingle = Array<{
   _key: string;
 }>;
 
+export type PtItalic = Array<{
+  children?: Array<{
+    marks?: Array<string>;
+    text?: string;
+    _type: "span";
+    _key: string;
+  }>;
+  style?: "normal";
+  listItem?: never;
+  markDefs?: null;
+  level?: number;
+  _type: "block";
+  _key: string;
+}>;
+
 export type PtBody = Array<{
   children?: Array<{
     marks?: Array<string>;
@@ -229,6 +244,8 @@ export type PbSectionSettings = {
   _type: "pbSectionSettings";
   enableSection?: boolean;
   sectionId?: string;
+  topOrnament?: boolean;
+  sectionBgColor?: ColorChoice;
   marginTop?: 1 | 2 | 3 | 4 | 5;
   marginBottom?: 1 | 2 | 3 | 4 | 5;
 };
@@ -259,6 +276,7 @@ export type PbGridSingle = {
   sectionSettings?: PbSectionSettings;
   sectionName?: string;
   rowWidth?: 12 | 10 | 8 | 6;
+  bgLogoShape?: boolean;
   cardMode?: boolean;
   revealEffect?: "none" | "stagger" | "fade-up" | "fade-right";
   pbBlocks?: PbBlocks;
@@ -304,10 +322,15 @@ export type PbBlockText = {
 
 export type PbBlockPlainText = {
   _type: "pbBlockPlainText";
-  textStyle?: "ts-h1" | "ts-h2" | "ts-h3" | "ts-h4" | "ts-p-lg" | "ts-p-md" | "ts-p-sm" | "ts-p-xs" | "ts-h5" | "ts-h6";
-  color?: "text-body" | "text-accent";
-  balanceLines?: boolean;
+  textStyle: "ts-body" | "ts-serif" | "ts-sans-tall" | "ts-sans-wide";
+  textSize?: "ts-p-lg" | "ts-p-md" | "ts-p-sm" | "ts-p-xs";
+  textSizeSerif?: "ts-h1" | "ts-h2" | "ts-h3" | "ts-h4";
+  textSizeSans?: "ts-h5" | "ts-h6";
   textContent?: string;
+  textContentRich?: PtItalic;
+  textAlign?: "text-left" | "text-center" | "text-right";
+  textColor?: ColorChoice;
+  balanceLines?: boolean;
 };
 
 export type PbBlockMarquee = {
@@ -407,6 +430,14 @@ export type NavExternal = {
   _type: "navExternal";
   title?: string;
   url?: string;
+};
+
+export type ColorChoice = {
+  _type: "colorChoice";
+  colorType?: "none" | "dark" | "light" | "custom";
+  colorDark?: "--color-blue-800" | "--color-blue-650" | "--color-teal" | "--color-logo-red" | "--color-ik-red" | "--color-tt-pink" | "--color-tt-teal" | "--color-saffron-600" | "--color-chili-600" | "--color-tumeric-600" | "--color-lime-600" | "--color-lotus-600";
+  colorLight?: "--color-offwhite" | "--color-blue-200" | "--color-saffron-200" | "--color-chili-200" | "--color-tumeric-200" | "--color-lime-200" | "--color-lotus-200";
+  colorCustom?: Color;
 };
 
 export type Column = {
@@ -554,6 +585,39 @@ export type Slug = {
   source?: string;
 };
 
+export type Color = {
+  _type: "color";
+  hex?: string;
+  alpha?: number;
+  hsl?: HslaColor;
+  hsv?: HsvaColor;
+  rgb?: RgbaColor;
+};
+
+export type RgbaColor = {
+  _type: "rgbaColor";
+  r?: number;
+  g?: number;
+  b?: number;
+  a?: number;
+};
+
+export type HsvaColor = {
+  _type: "hsvaColor";
+  h?: number;
+  s?: number;
+  v?: number;
+  a?: number;
+};
+
+export type HslaColor = {
+  _type: "hslaColor";
+  h?: number;
+  s?: number;
+  l?: number;
+  a?: number;
+};
+
 export type SanityImagePaletteSwatch = {
   _type: "sanity.imagePaletteSwatch";
   background?: string;
@@ -651,5 +715,5 @@ export type Geopoint = {
   alt?: number;
 };
 
-export type AllSanitySchemaTypes = Size | Start | VideoAspectRatio | FileLink | PbBlockMarqueeSettings | BlockWidths | YAlignment | SanityFileAssetReference | FileLinkFile | PbBlockButtonFileLinkFile | SanityImageAssetReference | ImageElementImage | SocialLink | Seo | PageReference | PtSlim | PtSingle | PtBody | PtBasic | PbTitleSection | PbSectionSettings | PbSections | PbGridDouble | PbGridSingle | PbGridMulti | PbColSettings | PbBlockVideoEmbed | PbBlockText | PbBlockPlainText | PbBlockMarquee | PbBlockDivider | PbBlocks | PbBlockButton | PbBlockImage | HomeReference | NavPage | NavLinks | NavExternal | Column | Redirect | Note | Brands | SanityImageCrop | SanityImageHotspot | BrandsReference | Settings | Home | Page | Slug | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageMetadata | SanityFileAsset | SanityAssetSourceData | SanityImageAsset | Geopoint;
+export type AllSanitySchemaTypes = Size | Start | VideoAspectRatio | FileLink | PbBlockMarqueeSettings | BlockWidths | YAlignment | SanityFileAssetReference | FileLinkFile | PbBlockButtonFileLinkFile | SanityImageAssetReference | ImageElementImage | SocialLink | Seo | PageReference | PtSlim | PtSingle | PtItalic | PtBody | PtBasic | PbTitleSection | PbSectionSettings | PbSections | PbGridDouble | PbGridSingle | PbGridMulti | PbColSettings | PbBlockVideoEmbed | PbBlockText | PbBlockPlainText | PbBlockMarquee | PbBlockDivider | PbBlocks | PbBlockButton | PbBlockImage | HomeReference | NavPage | NavLinks | NavExternal | ColorChoice | Column | Redirect | Note | Brands | SanityImageCrop | SanityImageHotspot | BrandsReference | Settings | Home | Page | Slug | Color | RgbaColor | HsvaColor | HslaColor | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageMetadata | SanityFileAsset | SanityAssetSourceData | SanityImageAsset | Geopoint;
 

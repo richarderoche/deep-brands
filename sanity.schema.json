@@ -1362,6 +1362,118 @@
     }
   },
   {
+    "name": "ptItalic",
+    "type": "type",
+    "value": {
+      "type": "array",
+      "of": {
+        "type": "object",
+        "attributes": {
+          "children": {
+            "type": "objectAttribute",
+            "value": {
+              "type": "array",
+              "of": {
+                "type": "object",
+                "attributes": {
+                  "marks": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "array",
+                      "of": {
+                        "type": "string"
+                      }
+                    },
+                    "optional": true
+                  },
+                  "text": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "string"
+                    },
+                    "optional": true
+                  },
+                  "_type": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "string",
+                      "value": "span"
+                    }
+                  }
+                },
+                "rest": {
+                  "type": "object",
+                  "attributes": {
+                    "_key": {
+                      "type": "objectAttribute",
+                      "value": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "optional": true
+          },
+          "style": {
+            "type": "objectAttribute",
+            "value": {
+              "type": "union",
+              "of": [
+                {
+                  "type": "string",
+                  "value": "normal"
+                }
+              ]
+            },
+            "optional": true
+          },
+          "listItem": {
+            "type": "objectAttribute",
+            "value": {
+              "type": "union",
+              "of": []
+            },
+            "optional": true
+          },
+          "markDefs": {
+            "type": "objectAttribute",
+            "value": {
+              "type": "null"
+            },
+            "optional": true
+          },
+          "level": {
+            "type": "objectAttribute",
+            "value": {
+              "type": "number"
+            },
+            "optional": true
+          },
+          "_type": {
+            "type": "objectAttribute",
+            "value": {
+              "type": "string",
+              "value": "block"
+            }
+          }
+        },
+        "rest": {
+          "type": "object",
+          "attributes": {
+            "_key": {
+              "type": "objectAttribute",
+              "value": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
     "name": "ptBody",
     "type": "type",
     "value": {
@@ -1885,6 +1997,21 @@
           },
           "optional": true
         },
+        "topOrnament": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "boolean"
+          },
+          "optional": true
+        },
+        "sectionBgColor": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "inline",
+            "name": "colorChoice"
+          },
+          "optional": true
+        },
         "marginTop": {
           "type": "objectAttribute",
           "value": {
@@ -2182,6 +2309,13 @@
                 "value": 6
               }
             ]
+          },
+          "optional": true
+        },
+        "bgLogoShape": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "boolean"
           },
           "optional": true
         },
@@ -2566,20 +2700,29 @@
             "of": [
               {
                 "type": "string",
-                "value": "ts-h1"
+                "value": "ts-body"
               },
               {
                 "type": "string",
-                "value": "ts-h2"
+                "value": "ts-serif"
               },
               {
                 "type": "string",
-                "value": "ts-h3"
+                "value": "ts-sans-tall"
               },
               {
                 "type": "string",
-                "value": "ts-h4"
-              },
+                "value": "ts-sans-wide"
+              }
+            ]
+          },
+          "optional": false
+        },
+        "textSize": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "union",
+            "of": [
               {
                 "type": "string",
                 "value": "ts-p-lg"
@@ -2595,7 +2738,41 @@
               {
                 "type": "string",
                 "value": "ts-p-xs"
+              }
+            ]
+          },
+          "optional": true
+        },
+        "textSizeSerif": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "union",
+            "of": [
+              {
+                "type": "string",
+                "value": "ts-h1"
               },
+              {
+                "type": "string",
+                "value": "ts-h2"
+              },
+              {
+                "type": "string",
+                "value": "ts-h3"
+              },
+              {
+                "type": "string",
+                "value": "ts-h4"
+              }
+            ]
+          },
+          "optional": true
+        },
+        "textSizeSans": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "union",
+            "of": [
               {
                 "type": "string",
                 "value": "ts-h5"
@@ -2608,20 +2785,47 @@
           },
           "optional": true
         },
-        "color": {
+        "textContent": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
+          },
+          "optional": true
+        },
+        "textContentRich": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "inline",
+            "name": "ptItalic"
+          },
+          "optional": true
+        },
+        "textAlign": {
           "type": "objectAttribute",
           "value": {
             "type": "union",
             "of": [
               {
                 "type": "string",
-                "value": "text-body"
+                "value": "text-left"
               },
               {
                 "type": "string",
-                "value": "text-accent"
+                "value": "text-center"
+              },
+              {
+                "type": "string",
+                "value": "text-right"
               }
             ]
+          },
+          "optional": true
+        },
+        "textColor": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "inline",
+            "name": "colorChoice"
           },
           "optional": true
         },
@@ -2629,13 +2833,6 @@
           "type": "objectAttribute",
           "value": {
             "type": "boolean"
-          },
-          "optional": true
-        },
-        "textContent": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "string"
           },
           "optional": true
         }
@@ -3390,6 +3587,149 @@
           "type": "objectAttribute",
           "value": {
             "type": "string"
+          },
+          "optional": true
+        }
+      }
+    }
+  },
+  {
+    "name": "colorChoice",
+    "type": "type",
+    "value": {
+      "type": "object",
+      "attributes": {
+        "_type": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string",
+            "value": "colorChoice"
+          }
+        },
+        "colorType": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "union",
+            "of": [
+              {
+                "type": "string",
+                "value": "none"
+              },
+              {
+                "type": "string",
+                "value": "dark"
+              },
+              {
+                "type": "string",
+                "value": "light"
+              },
+              {
+                "type": "string",
+                "value": "custom"
+              }
+            ]
+          },
+          "optional": true
+        },
+        "colorDark": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "union",
+            "of": [
+              {
+                "type": "string",
+                "value": "--color-blue-800"
+              },
+              {
+                "type": "string",
+                "value": "--color-blue-650"
+              },
+              {
+                "type": "string",
+                "value": "--color-teal"
+              },
+              {
+                "type": "string",
+                "value": "--color-logo-red"
+              },
+              {
+                "type": "string",
+                "value": "--color-ik-red"
+              },
+              {
+                "type": "string",
+                "value": "--color-tt-pink"
+              },
+              {
+                "type": "string",
+                "value": "--color-tt-teal"
+              },
+              {
+                "type": "string",
+                "value": "--color-saffron-600"
+              },
+              {
+                "type": "string",
+                "value": "--color-chili-600"
+              },
+              {
+                "type": "string",
+                "value": "--color-tumeric-600"
+              },
+              {
+                "type": "string",
+                "value": "--color-lime-600"
+              },
+              {
+                "type": "string",
+                "value": "--color-lotus-600"
+              }
+            ]
+          },
+          "optional": true
+        },
+        "colorLight": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "union",
+            "of": [
+              {
+                "type": "string",
+                "value": "--color-offwhite"
+              },
+              {
+                "type": "string",
+                "value": "--color-blue-200"
+              },
+              {
+                "type": "string",
+                "value": "--color-saffron-200"
+              },
+              {
+                "type": "string",
+                "value": "--color-chili-200"
+              },
+              {
+                "type": "string",
+                "value": "--color-tumeric-200"
+              },
+              {
+                "type": "string",
+                "value": "--color-lime-200"
+              },
+              {
+                "type": "string",
+                "value": "--color-lotus-200"
+              }
+            ]
+          },
+          "optional": true
+        },
+        "colorCustom": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "inline",
+            "name": "color"
           },
           "optional": true
         }
@@ -4311,6 +4651,192 @@
           "type": "objectAttribute",
           "value": {
             "type": "string"
+          },
+          "optional": true
+        }
+      }
+    }
+  },
+  {
+    "name": "color",
+    "type": "type",
+    "value": {
+      "type": "object",
+      "attributes": {
+        "_type": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string",
+            "value": "color"
+          }
+        },
+        "hex": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
+          },
+          "optional": true
+        },
+        "alpha": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "number"
+          },
+          "optional": true
+        },
+        "hsl": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "inline",
+            "name": "hslaColor"
+          },
+          "optional": true
+        },
+        "hsv": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "inline",
+            "name": "hsvaColor"
+          },
+          "optional": true
+        },
+        "rgb": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "inline",
+            "name": "rgbaColor"
+          },
+          "optional": true
+        }
+      }
+    }
+  },
+  {
+    "name": "rgbaColor",
+    "type": "type",
+    "value": {
+      "type": "object",
+      "attributes": {
+        "_type": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string",
+            "value": "rgbaColor"
+          }
+        },
+        "r": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "number"
+          },
+          "optional": true
+        },
+        "g": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "number"
+          },
+          "optional": true
+        },
+        "b": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "number"
+          },
+          "optional": true
+        },
+        "a": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "number"
+          },
+          "optional": true
+        }
+      }
+    }
+  },
+  {
+    "name": "hsvaColor",
+    "type": "type",
+    "value": {
+      "type": "object",
+      "attributes": {
+        "_type": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string",
+            "value": "hsvaColor"
+          }
+        },
+        "h": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "number"
+          },
+          "optional": true
+        },
+        "s": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "number"
+          },
+          "optional": true
+        },
+        "v": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "number"
+          },
+          "optional": true
+        },
+        "a": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "number"
+          },
+          "optional": true
+        }
+      }
+    }
+  },
+  {
+    "name": "hslaColor",
+    "type": "type",
+    "value": {
+      "type": "object",
+      "attributes": {
+        "_type": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string",
+            "value": "hslaColor"
+          }
+        },
+        "h": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "number"
+          },
+          "optional": true
+        },
+        "s": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "number"
+          },
+          "optional": true
+        },
+        "l": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "number"
+          },
+          "optional": true
+        },
+        "a": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "number"
           },
           "optional": true
         }

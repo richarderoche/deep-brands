@@ -1,7 +1,6 @@
 import '@/app/globals.css'
 import DraftModeToast from '@/components/DraftModeToast'
 import Footer from '@/components/Footer'
-import Navbar from '@/components/Navbar'
 import GlobalScripts from '@/components/shared/GlobalScripts'
 import {GSAP} from '@/components/shared/GSAP'
 import {Lenis} from '@/components/shared/Lenis'
@@ -66,38 +65,63 @@ export const viewport: Viewport = {
   themeColor: '#000',
 }
 
-const sansFont = localFont({
+const serifFont = localFont({
   src: [
     {
-      path: '../public/fonts/PPMori-Regular.woff2',
+      path: '../public/fonts/GT-Alpina-Condensed-Light.woff2',
       weight: '400',
       style: 'normal',
     },
     {
-      path: '../public/fonts/PPMori-RegularItalic.woff2',
+      path: '../public/fonts/GT-Alpina-Condensed-Light-Italic.woff2',
       weight: '400',
       style: 'italic',
     },
+  ],
+  variable: '--alpina',
+})
+
+const sansFont = localFont({
+  src: [
     {
-      path: '../public/fonts/PPMori-Bold.woff2',
-      weight: '600',
+      path: '../public/fonts/GT-America-Condensed-Medium.woff2',
+      weight: '400',
+      style: 'normal',
+    },
+    {
+      path: '../public/fonts/GT-America-Condensed-Black.woff2',
+      weight: '900',
       style: 'normal',
     },
   ],
-  display: 'swap', // or replace with preload: true
-  variable: '--mori',
+  variable: '--america-cond',
+})
+
+const sansExtendedFont = localFont({
+  src: [
+    {
+      path: '../public/fonts/GT-America-Extended-Black.woff2',
+      weight: '900',
+      style: 'normal',
+    },
+  ],
+  variable: '--america-ex',
 })
 
 export default async function RootLayout({children}: LayoutProps<'/'>) {
   const {isEnabled: isDraftMode} = await draftMode()
 
   return (
-    <html lang="en" className={`${sansFont.variable} light-theme`} data-scroll-behavior="smooth">
+    <html
+      lang="en"
+      className={`${serifFont.variable} ${sansFont.variable} ${sansExtendedFont.variable} light-theme`}
+      data-scroll-behavior="smooth"
+    >
       <body>
         <Lenis />
         <GSAP />
-        <div className="flex min-h-screen flex-col justify-start ts-p-md">
-          <Navbar />
+        <div className="flex min-h-screen flex-col justify-start ts-body ts-p-md">
+          {/* <Navbar /> */}
           <main className="grow" id="main-content">
             {children}
           </main>

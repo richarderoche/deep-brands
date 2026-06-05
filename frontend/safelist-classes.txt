@@ -154,3 +154,8 @@ gap-gut-1000
 // Colors
 text-body
 text-accent
+
+// Align
+text-left
+text-center
+text-right

@@ -74,27 +74,27 @@ const ipsum =
 const hStyles = [
   {
     name: 'H1 Heading',
-    style: 'ts-h1',
+    style: 'ts-h1 ts-serif',
   },
   {
     name: 'H2 Heading',
-    style: 'ts-h2',
+    style: 'ts-h2 ts-serif',
   },
   {
     name: 'H3 Heading',
-    style: 'ts-h3',
+    style: 'ts-h3 ts-serif',
   },
   {
     name: 'H4 Heading',
-    style: 'ts-h4',
+    style: 'ts-h4 ts-serif',
   },
   {
     name: 'H5 Label',
-    style: 'ts-h5',
+    style: 'ts-h5 ts-serif',
   },
   {
     name: 'H6 Label',
-    style: 'ts-h6',
+    style: 'ts-h6 ts-sans-wide',
   },
 ]
 

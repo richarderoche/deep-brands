@@ -14,6 +14,7 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
+    "@sanity/color-input": "^6.0.6",
     "@sanity/dashboard": "^5.0.1",
     "@sanity/icons": "^3.7.4",
     "@sanity/vision": "^5.29.0",

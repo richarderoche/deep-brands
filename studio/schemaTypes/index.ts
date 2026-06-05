@@ -1,11 +1,13 @@
 import brands from './documents/brands'
 import page from './documents/page'
 import redirect from './documents/redirect'
+import colorChoice from './objects/colorChoice'
 import navExternal from './objects/navExternal'
 import navLinks from './objects/navLinks'
 import navPage from './objects/navPage'
 import ptBasic from './objects/ptBasic'
 import ptBody from './objects/ptBody'
+import ptItalic from './objects/ptItalic'
 import ptSingle from './objects/ptSingle'
 import ptSlim from './objects/ptSlim'
 import seo from './objects/seo'
@@ -41,6 +43,7 @@ export const schemaTypes = [
   redirect,
   // Objects
   column,
+  colorChoice,
   navExternal,
   navLinks,
   navPage,
@@ -61,6 +64,7 @@ export const schemaTypes = [
   pbTitleSection,
   ptBasic,
   ptBody,
+  ptItalic,
   ptSingle,
   ptSlim,
   seo,

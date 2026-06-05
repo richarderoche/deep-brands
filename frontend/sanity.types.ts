@@ -179,6 +179,21 @@ export type PtSingle = Array<{
   _key: string
 }>
 
+export type PtItalic = Array<{
+  children?: Array<{
+    marks?: Array<string>
+    text?: string
+    _type: 'span'
+    _key: string
+  }>
+  style?: 'normal'
+  listItem?: never
+  markDefs?: null
+  level?: number
+  _type: 'block'
+  _key: string
+}>
+
 export type PtBody = Array<{
   children?: Array<{
     marks?: Array<string>
@@ -246,6 +261,8 @@ export type PbSectionSettings = {
   _type: 'pbSectionSettings'
   enableSection?: boolean
   sectionId?: string
+  topOrnament?: boolean
+  sectionBgColor?: ColorChoice
   marginTop?: 1 | 2 | 3 | 4 | 5
   marginBottom?: 1 | 2 | 3 | 4 | 5
 }
@@ -281,6 +298,7 @@ export type PbGridSingle = {
   sectionSettings?: PbSectionSettings
   sectionName?: string
   rowWidth?: 12 | 10 | 8 | 6
+  bgLogoShape?: boolean
   cardMode?: boolean
   revealEffect?: 'none' | 'stagger' | 'fade-up' | 'fade-right'
   pbBlocks?: PbBlocks
@@ -338,20 +356,15 @@ export type PbBlockText = {
 
 export type PbBlockPlainText = {
   _type: 'pbBlockPlainText'
-  textStyle?:
-    | 'ts-h1'
-    | 'ts-h2'
-    | 'ts-h3'
-    | 'ts-h4'
-    | 'ts-p-lg'
-    | 'ts-p-md'
-    | 'ts-p-sm'
-    | 'ts-p-xs'
-    | 'ts-h5'
-    | 'ts-h6'
-  color?: 'text-body' | 'text-accent'
-  balanceLines?: boolean
+  textStyle: 'ts-body' | 'ts-serif' | 'ts-sans-tall' | 'ts-sans-wide'
+  textSize?: 'ts-p-lg' | 'ts-p-md' | 'ts-p-sm' | 'ts-p-xs'
+  textSizeSerif?: 'ts-h1' | 'ts-h2' | 'ts-h3' | 'ts-h4'
+  textSizeSans?: 'ts-h5' | 'ts-h6'
   textContent?: string
+  textContentRich?: PtItalic
+  textAlign?: 'text-left' | 'text-center' | 'text-right'
+  textColor?: ColorChoice
+  balanceLines?: boolean
 }
 
 export type PbBlockMarquee = {
@@ -475,6 +488,33 @@ export type NavExternal = {
   _type: 'navExternal'
   title?: string
   url?: string
+}
+
+export type ColorChoice = {
+  _type: 'colorChoice'
+  colorType?: 'none' | 'dark' | 'light' | 'custom'
+  colorDark?:
+    | '--color-blue-800'
+    | '--color-blue-650'
+    | '--color-teal'
+    | '--color-logo-red'
+    | '--color-ik-red'
+    | '--color-tt-pink'
+    | '--color-tt-teal'
+    | '--color-saffron-600'
+    | '--color-chili-600'
+    | '--color-tumeric-600'
+    | '--color-lime-600'
+    | '--color-lotus-600'
+  colorLight?:
+    | '--color-offwhite'
+    | '--color-blue-200'
+    | '--color-saffron-200'
+    | '--color-chili-200'
+    | '--color-tumeric-200'
+    | '--color-lime-200'
+    | '--color-lotus-200'
+  colorCustom?: Color
 }
 
 export type Column = {
@@ -634,6 +674,39 @@ export type Slug = {
   source?: string
 }
 
+export type Color = {
+  _type: 'color'
+  hex?: string
+  alpha?: number
+  hsl?: HslaColor
+  hsv?: HsvaColor
+  rgb?: RgbaColor
+}
+
+export type RgbaColor = {
+  _type: 'rgbaColor'
+  r?: number
+  g?: number
+  b?: number
+  a?: number
+}
+
+export type HsvaColor = {
+  _type: 'hsvaColor'
+  h?: number
+  s?: number
+  v?: number
+  a?: number
+}
+
+export type HslaColor = {
+  _type: 'hslaColor'
+  h?: number
+  s?: number
+  l?: number
+  a?: number
+}
+
 export type SanityImagePaletteSwatch = {
   _type: 'sanity.imagePaletteSwatch'
   background?: string
@@ -749,6 +822,7 @@ export type AllSanitySchemaTypes =
   | PageReference
   | PtSlim
   | PtSingle
+  | PtItalic
   | PtBody
   | PtBasic
   | PbTitleSection
@@ -770,6 +844,7 @@ export type AllSanitySchemaTypes =
   | NavPage
   | NavLinks
   | NavExternal
+  | ColorChoice
   | Column
   | Redirect
   | Note
@@ -781,6 +856,10 @@ export type AllSanitySchemaTypes =
   | Home
   | Page
   | Slug
+  | Color
+  | RgbaColor
+  | HsvaColor
+  | HslaColor
   | SanityImagePaletteSwatch
   | SanityImagePalette
   | SanityImageDimensions
@@ -792,7 +871,7 @@ export type AllSanitySchemaTypes =
 
 // Source: sanity/lib/queries.ts
 // Variable: homePageQuery
-// Query: *[_type == "home"][0]{    ...,      pbSections[]{    ...,    _type == "pbGridMulti" => {      columns[]{        ...,        pbBlocks[]{            ...,  _type == "pbBlockText" => {    ...,    textContent[]{        ...,  markDefs[]{    ...,    _type == "internalLink" => {      ...,      "slug": reference->slug,      "type": reference->_type    }  }    }  },  _type == "pbBlockButton" => {      ...,  sitePage {      ...,  "page": page->{      "type": _type,  "slug": slug.current,  title,  },  },  externalLink {      ...,  "page": page->{      "type": _type,  "slug": slug.current,  title,  },  },  fileLink {    ...,    "url": file.asset->url,  },  },        }      }    },    _type == "pbGridSingle" => {      ...,      pbBlocks[]{          ...,  _type == "pbBlockText" => {    ...,    textContent[]{        ...,  markDefs[]{    ...,    _type == "internalLink" => {      ...,      "slug": reference->slug,      "type": reference->_type    }  }    }  },  _type == "pbBlockButton" => {      ...,  sitePage {      ...,  "page": page->{      "type": _type,  "slug": slug.current,  title,  },  },  externalLink {      ...,  "page": page->{      "type": _type,  "slug": slug.current,  title,  },  },  fileLink {    ...,    "url": file.asset->url,  },  },      }    },    _type == "pbGridDouble" => {      ...,      columnOne {        ...,        pbBlocks[]{            ...,  _type == "pbBlockText" => {    ...,    textContent[]{        ...,  markDefs[]{    ...,    _type == "internalLink" => {      ...,      "slug": reference->slug,      "type": reference->_type    }  }    }  },  _type == "pbBlockButton" => {      ...,  sitePage {      ...,  "page": page->{      "type": _type,  "slug": slug.current,  title,  },  },  externalLink {      ...,  "page": page->{      "type": _type,  "slug": slug.current,  title,  },  },  fileLink {    ...,    "url": file.asset->url,  },  },        }      },      columnTwo {        ...,        pbBlocks[]{            ...,  _type == "pbBlockText" => {    ...,    textContent[]{        ...,  markDefs[]{    ...,    _type == "internalLink" => {      ...,      "slug": reference->slug,      "type": reference->_type    }  }    }  },  _type == "pbBlockButton" => {      ...,  sitePage {      ...,  "page": page->{      "type": _type,  "slug": slug.current,  title,  },  },  externalLink {      ...,  "page": page->{      "type": _type,  "slug": slug.current,  title,  },  },  fileLink {    ...,    "url": file.asset->url,  },  },        }      }    },  },  }
+// Query: *[_type == "home"][0]{    ...,      pbSections[]{    ...,    _type == "pbGridMulti" => {      columns[]{        ...,        pbBlocks[]{            ...,  _type == "pbBlockPlainText" => {    ...,      "textSize": select(    textStyle == "ts-body" => textSize,    textStyle == "ts-serif" => textSizeSerif,    textStyle == "ts-sans" || textStyle == "ts-sans-extended" => textSizeSans  ),  },  _type == "pbBlockText" => {    ...,    textContent[]{        ...,  markDefs[]{    ...,    _type == "internalLink" => {      ...,      "slug": reference->slug,      "type": reference->_type    }  }    }  },  _type == "pbBlockButton" => {      ...,  sitePage {      ...,  "page": page->{      "type": _type,  "slug": slug.current,  title,  },  },  externalLink {      ...,  "page": page->{      "type": _type,  "slug": slug.current,  title,  },  },  fileLink {    ...,    "url": file.asset->url,  },  },        }      }    },    _type == "pbGridSingle" => {      ...,      pbBlocks[]{          ...,  _type == "pbBlockPlainText" => {    ...,      "textSize": select(    textStyle == "ts-body" => textSize,    textStyle == "ts-serif" => textSizeSerif,    textStyle == "ts-sans" || textStyle == "ts-sans-extended" => textSizeSans  ),  },  _type == "pbBlockText" => {    ...,    textContent[]{        ...,  markDefs[]{    ...,    _type == "internalLink" => {      ...,      "slug": reference->slug,      "type": reference->_type    }  }    }  },  _type == "pbBlockButton" => {      ...,  sitePage {      ...,  "page": page->{      "type": _type,  "slug": slug.current,  title,  },  },  externalLink {      ...,  "page": page->{      "type": _type,  "slug": slug.current,  title,  },  },  fileLink {    ...,    "url": file.asset->url,  },  },      }    },    _type == "pbGridDouble" => {      ...,      columnOne {        ...,        pbBlocks[]{            ...,  _type == "pbBlockPlainText" => {    ...,      "textSize": select(    textStyle == "ts-body" => textSize,    textStyle == "ts-serif" => textSizeSerif,    textStyle == "ts-sans" || textStyle == "ts-sans-extended" => textSizeSans  ),  },  _type == "pbBlockText" => {    ...,    textContent[]{        ...,  markDefs[]{    ...,    _type == "internalLink" => {      ...,      "slug": reference->slug,      "type": reference->_type    }  }    }  },  _type == "pbBlockButton" => {      ...,  sitePage {      ...,  "page": page->{      "type": _type,  "slug": slug.current,  title,  },  },  externalLink {      ...,  "page": page->{      "type": _type,  "slug": slug.current,  title,  },  },  fileLink {    ...,    "url": file.asset->url,  },  },        }      },      columnTwo {        ...,        pbBlocks[]{            ...,  _type == "pbBlockPlainText" => {    ...,      "textSize": select(    textStyle == "ts-body" => textSize,    textStyle == "ts-serif" => textSizeSerif,    textStyle == "ts-sans" || textStyle == "ts-sans-extended" => textSizeSans  ),  },  _type == "pbBlockText" => {    ...,    textContent[]{        ...,  markDefs[]{    ...,    _type == "internalLink" => {      ...,      "slug": reference->slug,      "type": reference->_type    }  }    }  },  _type == "pbBlockButton" => {      ...,  sitePage {      ...,  "page": page->{      "type": _type,  "slug": slug.current,  title,  },  },  externalLink {      ...,  "page": page->{      "type": _type,  "slug": slug.current,  title,  },  },  fileLink {    ...,    "url": file.asset->url,  },  },        }      }    },  },  }
 export type HomePageQueryResult = {
   _id: string
   _type: 'home'
@@ -909,20 +988,24 @@ export type HomePageQueryResult = {
             | {
                 _key: string
                 _type: 'pbBlockPlainText'
-                textStyle?:
+                textStyle: 'ts-body' | 'ts-sans-tall' | 'ts-sans-wide' | 'ts-serif'
+                textSize:
                   | 'ts-h1'
                   | 'ts-h2'
                   | 'ts-h3'
                   | 'ts-h4'
-                  | 'ts-h5'
-                  | 'ts-h6'
+                  | null
                   | 'ts-p-lg'
                   | 'ts-p-md'
                   | 'ts-p-sm'
                   | 'ts-p-xs'
-                color?: 'text-accent' | 'text-body'
-                balanceLines?: boolean
+                textSizeSerif?: 'ts-h1' | 'ts-h2' | 'ts-h3' | 'ts-h4'
+                textSizeSans?: 'ts-h5' | 'ts-h6'
                 textContent?: string
+                textContentRich?: PtItalic
+                textAlign?: 'text-center' | 'text-left' | 'text-right'
+                textColor?: ColorChoice
+                balanceLines?: boolean
               }
             | {
                 _key: string
@@ -1076,20 +1159,24 @@ export type HomePageQueryResult = {
             | {
                 _key: string
                 _type: 'pbBlockPlainText'
-                textStyle?:
+                textStyle: 'ts-body' | 'ts-sans-tall' | 'ts-sans-wide' | 'ts-serif'
+                textSize:
                   | 'ts-h1'
                   | 'ts-h2'
                   | 'ts-h3'
                   | 'ts-h4'
-                  | 'ts-h5'
-                  | 'ts-h6'
+                  | null
                   | 'ts-p-lg'
                   | 'ts-p-md'
                   | 'ts-p-sm'
                   | 'ts-p-xs'
-                color?: 'text-accent' | 'text-body'
-                balanceLines?: boolean
+                textSizeSerif?: 'ts-h1' | 'ts-h2' | 'ts-h3' | 'ts-h4'
+                textSizeSans?: 'ts-h5' | 'ts-h6'
                 textContent?: string
+                textContentRich?: PtItalic
+                textAlign?: 'text-center' | 'text-left' | 'text-right'
+                textColor?: ColorChoice
+                balanceLines?: boolean
               }
             | {
                 _key: string
@@ -1251,20 +1338,24 @@ export type HomePageQueryResult = {
             | {
                 _key: string
                 _type: 'pbBlockPlainText'
-                textStyle?:
+                textStyle: 'ts-body' | 'ts-sans-tall' | 'ts-sans-wide' | 'ts-serif'
+                textSize:
                   | 'ts-h1'
                   | 'ts-h2'
                   | 'ts-h3'
                   | 'ts-h4'
-                  | 'ts-h5'
-                  | 'ts-h6'
+                  | null
                   | 'ts-p-lg'
                   | 'ts-p-md'
                   | 'ts-p-sm'
                   | 'ts-p-xs'
-                color?: 'text-accent' | 'text-body'
-                balanceLines?: boolean
+                textSizeSerif?: 'ts-h1' | 'ts-h2' | 'ts-h3' | 'ts-h4'
+                textSizeSans?: 'ts-h5' | 'ts-h6'
                 textContent?: string
+                textContentRich?: PtItalic
+                textAlign?: 'text-center' | 'text-left' | 'text-right'
+                textColor?: ColorChoice
+                balanceLines?: boolean
               }
             | {
                 _key: string
@@ -1326,6 +1417,7 @@ export type HomePageQueryResult = {
         sectionSettings?: PbSectionSettings
         sectionName?: string
         rowWidth?: 10 | 12 | 6 | 8
+        bgLogoShape?: boolean
         cardMode?: boolean
         revealEffect?: 'fade-right' | 'fade-up' | 'none' | 'stagger'
         pbBlocks: Array<
@@ -1424,20 +1516,24 @@ export type HomePageQueryResult = {
           | {
               _key: string
               _type: 'pbBlockPlainText'
-              textStyle?:
+              textStyle: 'ts-body' | 'ts-sans-tall' | 'ts-sans-wide' | 'ts-serif'
+              textSize:
                 | 'ts-h1'
                 | 'ts-h2'
                 | 'ts-h3'
                 | 'ts-h4'
-                | 'ts-h5'
-                | 'ts-h6'
+                | null
                 | 'ts-p-lg'
                 | 'ts-p-md'
                 | 'ts-p-sm'
                 | 'ts-p-xs'
-              color?: 'text-accent' | 'text-body'
-              balanceLines?: boolean
+              textSizeSerif?: 'ts-h1' | 'ts-h2' | 'ts-h3' | 'ts-h4'
+              textSizeSans?: 'ts-h5' | 'ts-h6'
               textContent?: string
+              textContentRich?: PtItalic
+              textAlign?: 'text-center' | 'text-left' | 'text-right'
+              textColor?: ColorChoice
+              balanceLines?: boolean
             }
           | {
               _key: string
@@ -1513,7 +1609,7 @@ export type HomePageQueryResult = {
 
 // Source: sanity/lib/queries.ts
 // Variable: pagesBySlugQuery
-// Query: *[_type == "page" && slug.current == $slug][0] {    ...,    "slug": slug.current,      pbSections[]{    ...,    _type == "pbGridMulti" => {      columns[]{        ...,        pbBlocks[]{            ...,  _type == "pbBlockText" => {    ...,    textContent[]{        ...,  markDefs[]{    ...,    _type == "internalLink" => {      ...,      "slug": reference->slug,      "type": reference->_type    }  }    }  },  _type == "pbBlockButton" => {      ...,  sitePage {      ...,  "page": page->{      "type": _type,  "slug": slug.current,  title,  },  },  externalLink {      ...,  "page": page->{      "type": _type,  "slug": slug.current,  title,  },  },  fileLink {    ...,    "url": file.asset->url,  },  },        }      }    },    _type == "pbGridSingle" => {      ...,      pbBlocks[]{          ...,  _type == "pbBlockText" => {    ...,    textContent[]{        ...,  markDefs[]{    ...,    _type == "internalLink" => {      ...,      "slug": reference->slug,      "type": reference->_type    }  }    }  },  _type == "pbBlockButton" => {      ...,  sitePage {      ...,  "page": page->{      "type": _type,  "slug": slug.current,  title,  },  },  externalLink {      ...,  "page": page->{      "type": _type,  "slug": slug.current,  title,  },  },  fileLink {    ...,    "url": file.asset->url,  },  },      }    },    _type == "pbGridDouble" => {      ...,      columnOne {        ...,        pbBlocks[]{            ...,  _type == "pbBlockText" => {    ...,    textContent[]{        ...,  markDefs[]{    ...,    _type == "internalLink" => {      ...,      "slug": reference->slug,      "type": reference->_type    }  }    }  },  _type == "pbBlockButton" => {      ...,  sitePage {      ...,  "page": page->{      "type": _type,  "slug": slug.current,  title,  },  },  externalLink {      ...,  "page": page->{      "type": _type,  "slug": slug.current,  title,  },  },  fileLink {    ...,    "url": file.asset->url,  },  },        }      },      columnTwo {        ...,        pbBlocks[]{            ...,  _type == "pbBlockText" => {    ...,    textContent[]{        ...,  markDefs[]{    ...,    _type == "internalLink" => {      ...,      "slug": reference->slug,      "type": reference->_type    }  }    }  },  _type == "pbBlockButton" => {      ...,  sitePage {      ...,  "page": page->{      "type": _type,  "slug": slug.current,  title,  },  },  externalLink {      ...,  "page": page->{      "type": _type,  "slug": slug.current,  title,  },  },  fileLink {    ...,    "url": file.asset->url,  },  },        }      }    },  },      "seoTitle": seo.seoTitle,  "description": seo.description,  "ogImage": seo.image,  "noIndex": seo.hideFromSearchEngines,  }
+// Query: *[_type == "page" && slug.current == $slug][0] {    ...,    "slug": slug.current,      pbSections[]{    ...,    _type == "pbGridMulti" => {      columns[]{        ...,        pbBlocks[]{            ...,  _type == "pbBlockPlainText" => {    ...,      "textSize": select(    textStyle == "ts-body" => textSize,    textStyle == "ts-serif" => textSizeSerif,    textStyle == "ts-sans" || textStyle == "ts-sans-extended" => textSizeSans  ),  },  _type == "pbBlockText" => {    ...,    textContent[]{        ...,  markDefs[]{    ...,    _type == "internalLink" => {      ...,      "slug": reference->slug,      "type": reference->_type    }  }    }  },  _type == "pbBlockButton" => {      ...,  sitePage {      ...,  "page": page->{      "type": _type,  "slug": slug.current,  title,  },  },  externalLink {      ...,  "page": page->{      "type": _type,  "slug": slug.current,  title,  },  },  fileLink {    ...,    "url": file.asset->url,  },  },        }      }    },    _type == "pbGridSingle" => {      ...,      pbBlocks[]{          ...,  _type == "pbBlockPlainText" => {    ...,      "textSize": select(    textStyle == "ts-body" => textSize,    textStyle == "ts-serif" => textSizeSerif,    textStyle == "ts-sans" || textStyle == "ts-sans-extended" => textSizeSans  ),  },  _type == "pbBlockText" => {    ...,    textContent[]{        ...,  markDefs[]{    ...,    _type == "internalLink" => {      ...,      "slug": reference->slug,      "type": reference->_type    }  }    }  },  _type == "pbBlockButton" => {      ...,  sitePage {      ...,  "page": page->{      "type": _type,  "slug": slug.current,  title,  },  },  externalLink {      ...,  "page": page->{      "type": _type,  "slug": slug.current,  title,  },  },  fileLink {    ...,    "url": file.asset->url,  },  },      }    },    _type == "pbGridDouble" => {      ...,      columnOne {        ...,        pbBlocks[]{            ...,  _type == "pbBlockPlainText" => {    ...,      "textSize": select(    textStyle == "ts-body" => textSize,    textStyle == "ts-serif" => textSizeSerif,    textStyle == "ts-sans" || textStyle == "ts-sans-extended" => textSizeSans  ),  },  _type == "pbBlockText" => {    ...,    textContent[]{        ...,  markDefs[]{    ...,    _type == "internalLink" => {      ...,      "slug": reference->slug,      "type": reference->_type    }  }    }  },  _type == "pbBlockButton" => {      ...,  sitePage {      ...,  "page": page->{      "type": _type,  "slug": slug.current,  title,  },  },  externalLink {      ...,  "page": page->{      "type": _type,  "slug": slug.current,  title,  },  },  fileLink {    ...,    "url": file.asset->url,  },  },        }      },      columnTwo {        ...,        pbBlocks[]{            ...,  _type == "pbBlockPlainText" => {    ...,      "textSize": select(    textStyle == "ts-body" => textSize,    textStyle == "ts-serif" => textSizeSerif,    textStyle == "ts-sans" || textStyle == "ts-sans-extended" => textSizeSans  ),  },  _type == "pbBlockText" => {    ...,    textContent[]{        ...,  markDefs[]{    ...,    _type == "internalLink" => {      ...,      "slug": reference->slug,      "type": reference->_type    }  }    }  },  _type == "pbBlockButton" => {      ...,  sitePage {      ...,  "page": page->{      "type": _type,  "slug": slug.current,  title,  },  },  externalLink {      ...,  "page": page->{      "type": _type,  "slug": slug.current,  title,  },  },  fileLink {    ...,    "url": file.asset->url,  },  },        }      }    },  },      "seoTitle": seo.seoTitle,  "description": seo.description,  "ogImage": seo.image,  "noIndex": seo.hideFromSearchEngines,  }
 export type PagesBySlugQueryResult = {
   _id: string
   _type: 'page'
@@ -1631,20 +1727,24 @@ export type PagesBySlugQueryResult = {
             | {
                 _key: string
                 _type: 'pbBlockPlainText'
-                textStyle?:
+                textStyle: 'ts-body' | 'ts-sans-tall' | 'ts-sans-wide' | 'ts-serif'
+                textSize:
                   | 'ts-h1'
                   | 'ts-h2'
                   | 'ts-h3'
                   | 'ts-h4'
-                  | 'ts-h5'
-                  | 'ts-h6'
+                  | null
                   | 'ts-p-lg'
                   | 'ts-p-md'
                   | 'ts-p-sm'
                   | 'ts-p-xs'
-                color?: 'text-accent' | 'text-body'
-                balanceLines?: boolean
+                textSizeSerif?: 'ts-h1' | 'ts-h2' | 'ts-h3' | 'ts-h4'
+                textSizeSans?: 'ts-h5' | 'ts-h6'
                 textContent?: string
+                textContentRich?: PtItalic
+                textAlign?: 'text-center' | 'text-left' | 'text-right'
+                textColor?: ColorChoice
+                balanceLines?: boolean
               }
             | {
                 _key: string
@@ -1798,20 +1898,24 @@ export type PagesBySlugQueryResult = {
             | {
                 _key: string
                 _type: 'pbBlockPlainText'
-                textStyle?:
+                textStyle: 'ts-body' | 'ts-sans-tall' | 'ts-sans-wide' | 'ts-serif'
+                textSize:
                   | 'ts-h1'
                   | 'ts-h2'
                   | 'ts-h3'
                   | 'ts-h4'
-                  | 'ts-h5'
-                  | 'ts-h6'
+                  | null
                   | 'ts-p-lg'
                   | 'ts-p-md'
                   | 'ts-p-sm'
                   | 'ts-p-xs'
-                color?: 'text-accent' | 'text-body'
-                balanceLines?: boolean
+                textSizeSerif?: 'ts-h1' | 'ts-h2' | 'ts-h3' | 'ts-h4'
+                textSizeSans?: 'ts-h5' | 'ts-h6'
                 textContent?: string
+                textContentRich?: PtItalic
+                textAlign?: 'text-center' | 'text-left' | 'text-right'
+                textColor?: ColorChoice
+                balanceLines?: boolean
               }
             | {
                 _key: string
@@ -1973,20 +2077,24 @@ export type PagesBySlugQueryResult = {
             | {
                 _key: string
                 _type: 'pbBlockPlainText'
-                textStyle?:
+                textStyle: 'ts-body' | 'ts-sans-tall' | 'ts-sans-wide' | 'ts-serif'
+                textSize:
                   | 'ts-h1'
                   | 'ts-h2'
                   | 'ts-h3'
                   | 'ts-h4'
-                  | 'ts-h5'
-                  | 'ts-h6'
+                  | null
                   | 'ts-p-lg'
                   | 'ts-p-md'
                   | 'ts-p-sm'
                   | 'ts-p-xs'
-                color?: 'text-accent' | 'text-body'
-                balanceLines?: boolean
+                textSizeSerif?: 'ts-h1' | 'ts-h2' | 'ts-h3' | 'ts-h4'
+                textSizeSans?: 'ts-h5' | 'ts-h6'
                 textContent?: string
+                textContentRich?: PtItalic
+                textAlign?: 'text-center' | 'text-left' | 'text-right'
+                textColor?: ColorChoice
+                balanceLines?: boolean
               }
             | {
                 _key: string
@@ -2048,6 +2156,7 @@ export type PagesBySlugQueryResult = {
         sectionSettings?: PbSectionSettings
         sectionName?: string
         rowWidth?: 10 | 12 | 6 | 8
+        bgLogoShape?: boolean
         cardMode?: boolean
         revealEffect?: 'fade-right' | 'fade-up' | 'none' | 'stagger'
         pbBlocks: Array<
@@ -2146,20 +2255,24 @@ export type PagesBySlugQueryResult = {
           | {
               _key: string
               _type: 'pbBlockPlainText'
-              textStyle?:
+              textStyle: 'ts-body' | 'ts-sans-tall' | 'ts-sans-wide' | 'ts-serif'
+              textSize:
                 | 'ts-h1'
                 | 'ts-h2'
                 | 'ts-h3'
                 | 'ts-h4'
-                | 'ts-h5'
-                | 'ts-h6'
+                | null
                 | 'ts-p-lg'
                 | 'ts-p-md'
                 | 'ts-p-sm'
                 | 'ts-p-xs'
-              color?: 'text-accent' | 'text-body'
-              balanceLines?: boolean
+              textSizeSerif?: 'ts-h1' | 'ts-h2' | 'ts-h3' | 'ts-h4'
+              textSizeSans?: 'ts-h5' | 'ts-h6'
               textContent?: string
+              textContentRich?: PtItalic
+              textAlign?: 'text-center' | 'text-left' | 'text-right'
+              textColor?: ColorChoice
+              balanceLines?: boolean
             }
           | {
               _key: string
@@ -2419,8 +2532,8 @@ export type ScriptsQueryResult = {
 import '@sanity/client'
 declare module '@sanity/client' {
   interface SanityQueries {
-    '\n  *[_type == "home"][0]{\n    ...,\n    \n  pbSections[]{\n    ...,\n    _type == "pbGridMulti" => {\n      columns[]{\n        ...,\n        pbBlocks[]{\n          \n  ...,\n  _type == "pbBlockText" => {\n    ...,\n    textContent[]{\n      \n  ...,\n  markDefs[]{\n    ...,\n    _type == "internalLink" => {\n      ...,\n      "slug": reference->slug,\n      "type": reference->_type\n    }\n  }\n\n    }\n  },\n  _type == "pbBlockButton" => {\n    \n  ...,\n  sitePage {\n    \n  ...,\n  "page": page->{\n    \n  "type": _type,\n  "slug": slug.current,\n  title\n,\n  }\n,\n  },\n  externalLink {\n    \n  ...,\n  "page": page->{\n    \n  "type": _type,\n  "slug": slug.current,\n  title\n,\n  }\n,\n  },\n  fileLink {\n    ...,\n    "url": file.asset->url,\n  },\n\n  },\n\n        }\n      }\n    },\n    _type == "pbGridSingle" => {\n      ...,\n      pbBlocks[]{\n        \n  ...,\n  _type == "pbBlockText" => {\n    ...,\n    textContent[]{\n      \n  ...,\n  markDefs[]{\n    ...,\n    _type == "internalLink" => {\n      ...,\n      "slug": reference->slug,\n      "type": reference->_type\n    }\n  }\n\n    }\n  },\n  _type == "pbBlockButton" => {\n    \n  ...,\n  sitePage {\n    \n  ...,\n  "page": page->{\n    \n  "type": _type,\n  "slug": slug.current,\n  title\n,\n  }\n,\n  },\n  externalLink {\n    \n  ...,\n  "page": page->{\n    \n  "type": _type,\n  "slug": slug.current,\n  title\n,\n  }\n,\n  },\n  fileLink {\n    ...,\n    "url": file.asset->url,\n  },\n\n  },\n\n      }\n    },\n    _type == "pbGridDouble" => {\n      ...,\n      columnOne {\n        ...,\n        pbBlocks[]{\n          \n  ...,\n  _type == "pbBlockText" => {\n    ...,\n    textContent[]{\n      \n  ...,\n  markDefs[]{\n    ...,\n    _type == "internalLink" => {\n      ...,\n      "slug": reference->slug,\n      "type": reference->_type\n    }\n  }\n\n    }\n  },\n  _type == "pbBlockButton" => {\n    \n  ...,\n  sitePage {\n    \n  ...,\n  "page": page->{\n    \n  "type": _type,\n  "slug": slug.current,\n  title\n,\n  }\n,\n  },\n  externalLink {\n    \n  ...,\n  "page": page->{\n    \n  "type": _type,\n  "slug": slug.current,\n  title\n,\n  }\n,\n  },\n  fileLink {\n    ...,\n    "url": file.asset->url,\n  },\n\n  },\n\n        }\n      },\n      columnTwo {\n        ...,\n        pbBlocks[]{\n          \n  ...,\n  _type == "pbBlockText" => {\n    ...,\n    textContent[]{\n      \n  ...,\n  markDefs[]{\n    ...,\n    _type == "internalLink" => {\n      ...,\n      "slug": reference->slug,\n      "type": reference->_type\n    }\n  }\n\n    }\n  },\n  _type == "pbBlockButton" => {\n    \n  ...,\n  sitePage {\n    \n  ...,\n  "page": page->{\n    \n  "type": _type,\n  "slug": slug.current,\n  title\n,\n  }\n,\n  },\n  externalLink {\n    \n  ...,\n  "page": page->{\n    \n  "type": _type,\n  "slug": slug.current,\n  title\n,\n  }\n,\n  },\n  fileLink {\n    ...,\n    "url": file.asset->url,\n  },\n\n  },\n\n        }\n      }\n    },\n  }\n,\n  }\n': HomePageQueryResult
-    '\n  *[_type == "page" && slug.current == $slug][0] {\n    ...,\n    "slug": slug.current,\n    \n  pbSections[]{\n    ...,\n    _type == "pbGridMulti" => {\n      columns[]{\n        ...,\n        pbBlocks[]{\n          \n  ...,\n  _type == "pbBlockText" => {\n    ...,\n    textContent[]{\n      \n  ...,\n  markDefs[]{\n    ...,\n    _type == "internalLink" => {\n      ...,\n      "slug": reference->slug,\n      "type": reference->_type\n    }\n  }\n\n    }\n  },\n  _type == "pbBlockButton" => {\n    \n  ...,\n  sitePage {\n    \n  ...,\n  "page": page->{\n    \n  "type": _type,\n  "slug": slug.current,\n  title\n,\n  }\n,\n  },\n  externalLink {\n    \n  ...,\n  "page": page->{\n    \n  "type": _type,\n  "slug": slug.current,\n  title\n,\n  }\n,\n  },\n  fileLink {\n    ...,\n    "url": file.asset->url,\n  },\n\n  },\n\n        }\n      }\n    },\n    _type == "pbGridSingle" => {\n      ...,\n      pbBlocks[]{\n        \n  ...,\n  _type == "pbBlockText" => {\n    ...,\n    textContent[]{\n      \n  ...,\n  markDefs[]{\n    ...,\n    _type == "internalLink" => {\n      ...,\n      "slug": reference->slug,\n      "type": reference->_type\n    }\n  }\n\n    }\n  },\n  _type == "pbBlockButton" => {\n    \n  ...,\n  sitePage {\n    \n  ...,\n  "page": page->{\n    \n  "type": _type,\n  "slug": slug.current,\n  title\n,\n  }\n,\n  },\n  externalLink {\n    \n  ...,\n  "page": page->{\n    \n  "type": _type,\n  "slug": slug.current,\n  title\n,\n  }\n,\n  },\n  fileLink {\n    ...,\n    "url": file.asset->url,\n  },\n\n  },\n\n      }\n    },\n    _type == "pbGridDouble" => {\n      ...,\n      columnOne {\n        ...,\n        pbBlocks[]{\n          \n  ...,\n  _type == "pbBlockText" => {\n    ...,\n    textContent[]{\n      \n  ...,\n  markDefs[]{\n    ...,\n    _type == "internalLink" => {\n      ...,\n      "slug": reference->slug,\n      "type": reference->_type\n    }\n  }\n\n    }\n  },\n  _type == "pbBlockButton" => {\n    \n  ...,\n  sitePage {\n    \n  ...,\n  "page": page->{\n    \n  "type": _type,\n  "slug": slug.current,\n  title\n,\n  }\n,\n  },\n  externalLink {\n    \n  ...,\n  "page": page->{\n    \n  "type": _type,\n  "slug": slug.current,\n  title\n,\n  }\n,\n  },\n  fileLink {\n    ...,\n    "url": file.asset->url,\n  },\n\n  },\n\n        }\n      },\n      columnTwo {\n        ...,\n        pbBlocks[]{\n          \n  ...,\n  _type == "pbBlockText" => {\n    ...,\n    textContent[]{\n      \n  ...,\n  markDefs[]{\n    ...,\n    _type == "internalLink" => {\n      ...,\n      "slug": reference->slug,\n      "type": reference->_type\n    }\n  }\n\n    }\n  },\n  _type == "pbBlockButton" => {\n    \n  ...,\n  sitePage {\n    \n  ...,\n  "page": page->{\n    \n  "type": _type,\n  "slug": slug.current,\n  title\n,\n  }\n,\n  },\n  externalLink {\n    \n  ...,\n  "page": page->{\n    \n  "type": _type,\n  "slug": slug.current,\n  title\n,\n  }\n,\n  },\n  fileLink {\n    ...,\n    "url": file.asset->url,\n  },\n\n  },\n\n        }\n      }\n    },\n  }\n,\n    \n  "seoTitle": seo.seoTitle,\n  "description": seo.description,\n  "ogImage": seo.image,\n  "noIndex": seo.hideFromSearchEngines\n,\n  }\n': PagesBySlugQueryResult
+    '\n  *[_type == "home"][0]{\n    ...,\n    \n  pbSections[]{\n    ...,\n    _type == "pbGridMulti" => {\n      columns[]{\n        ...,\n        pbBlocks[]{\n          \n  ...,\n  _type == "pbBlockPlainText" => {\n    ...,\n    \n  "textSize": select(\n    textStyle == "ts-body" => textSize,\n    textStyle == "ts-serif" => textSizeSerif,\n    textStyle == "ts-sans" || textStyle == "ts-sans-extended" => textSizeSans\n  )\n,\n  },\n  _type == "pbBlockText" => {\n    ...,\n    textContent[]{\n      \n  ...,\n  markDefs[]{\n    ...,\n    _type == "internalLink" => {\n      ...,\n      "slug": reference->slug,\n      "type": reference->_type\n    }\n  }\n\n    }\n  },\n  _type == "pbBlockButton" => {\n    \n  ...,\n  sitePage {\n    \n  ...,\n  "page": page->{\n    \n  "type": _type,\n  "slug": slug.current,\n  title\n,\n  }\n,\n  },\n  externalLink {\n    \n  ...,\n  "page": page->{\n    \n  "type": _type,\n  "slug": slug.current,\n  title\n,\n  }\n,\n  },\n  fileLink {\n    ...,\n    "url": file.asset->url,\n  },\n\n  },\n\n        }\n      }\n    },\n    _type == "pbGridSingle" => {\n      ...,\n      pbBlocks[]{\n        \n  ...,\n  _type == "pbBlockPlainText" => {\n    ...,\n    \n  "textSize": select(\n    textStyle == "ts-body" => textSize,\n    textStyle == "ts-serif" => textSizeSerif,\n    textStyle == "ts-sans" || textStyle == "ts-sans-extended" => textSizeSans\n  )\n,\n  },\n  _type == "pbBlockText" => {\n    ...,\n    textContent[]{\n      \n  ...,\n  markDefs[]{\n    ...,\n    _type == "internalLink" => {\n      ...,\n      "slug": reference->slug,\n      "type": reference->_type\n    }\n  }\n\n    }\n  },\n  _type == "pbBlockButton" => {\n    \n  ...,\n  sitePage {\n    \n  ...,\n  "page": page->{\n    \n  "type": _type,\n  "slug": slug.current,\n  title\n,\n  }\n,\n  },\n  externalLink {\n    \n  ...,\n  "page": page->{\n    \n  "type": _type,\n  "slug": slug.current,\n  title\n,\n  }\n,\n  },\n  fileLink {\n    ...,\n    "url": file.asset->url,\n  },\n\n  },\n\n      }\n    },\n    _type == "pbGridDouble" => {\n      ...,\n      columnOne {\n        ...,\n        pbBlocks[]{\n          \n  ...,\n  _type == "pbBlockPlainText" => {\n    ...,\n    \n  "textSize": select(\n    textStyle == "ts-body" => textSize,\n    textStyle == "ts-serif" => textSizeSerif,\n    textStyle == "ts-sans" || textStyle == "ts-sans-extended" => textSizeSans\n  )\n,\n  },\n  _type == "pbBlockText" => {\n    ...,\n    textContent[]{\n      \n  ...,\n  markDefs[]{\n    ...,\n    _type == "internalLink" => {\n      ...,\n      "slug": reference->slug,\n      "type": reference->_type\n    }\n  }\n\n    }\n  },\n  _type == "pbBlockButton" => {\n    \n  ...,\n  sitePage {\n    \n  ...,\n  "page": page->{\n    \n  "type": _type,\n  "slug": slug.current,\n  title\n,\n  }\n,\n  },\n  externalLink {\n    \n  ...,\n  "page": page->{\n    \n  "type": _type,\n  "slug": slug.current,\n  title\n,\n  }\n,\n  },\n  fileLink {\n    ...,\n    "url": file.asset->url,\n  },\n\n  },\n\n        }\n      },\n      columnTwo {\n        ...,\n        pbBlocks[]{\n          \n  ...,\n  _type == "pbBlockPlainText" => {\n    ...,\n    \n  "textSize": select(\n    textStyle == "ts-body" => textSize,\n    textStyle == "ts-serif" => textSizeSerif,\n    textStyle == "ts-sans" || textStyle == "ts-sans-extended" => textSizeSans\n  )\n,\n  },\n  _type == "pbBlockText" => {\n    ...,\n    textContent[]{\n      \n  ...,\n  markDefs[]{\n    ...,\n    _type == "internalLink" => {\n      ...,\n      "slug": reference->slug,\n      "type": reference->_type\n    }\n  }\n\n    }\n  },\n  _type == "pbBlockButton" => {\n    \n  ...,\n  sitePage {\n    \n  ...,\n  "page": page->{\n    \n  "type": _type,\n  "slug": slug.current,\n  title\n,\n  }\n,\n  },\n  externalLink {\n    \n  ...,\n  "page": page->{\n    \n  "type": _type,\n  "slug": slug.current,\n  title\n,\n  }\n,\n  },\n  fileLink {\n    ...,\n    "url": file.asset->url,\n  },\n\n  },\n\n        }\n      }\n    },\n  }\n,\n  }\n': HomePageQueryResult
+    '\n  *[_type == "page" && slug.current == $slug][0] {\n    ...,\n    "slug": slug.current,\n    \n  pbSections[]{\n    ...,\n    _type == "pbGridMulti" => {\n      columns[]{\n        ...,\n        pbBlocks[]{\n          \n  ...,\n  _type == "pbBlockPlainText" => {\n    ...,\n    \n  "textSize": select(\n    textStyle == "ts-body" => textSize,\n    textStyle == "ts-serif" => textSizeSerif,\n    textStyle == "ts-sans" || textStyle == "ts-sans-extended" => textSizeSans\n  )\n,\n  },\n  _type == "pbBlockText" => {\n    ...,\n    textContent[]{\n      \n  ...,\n  markDefs[]{\n    ...,\n    _type == "internalLink" => {\n      ...,\n      "slug": reference->slug,\n      "type": reference->_type\n    }\n  }\n\n    }\n  },\n  _type == "pbBlockButton" => {\n    \n  ...,\n  sitePage {\n    \n  ...,\n  "page": page->{\n    \n  "type": _type,\n  "slug": slug.current,\n  title\n,\n  }\n,\n  },\n  externalLink {\n    \n  ...,\n  "page": page->{\n    \n  "type": _type,\n  "slug": slug.current,\n  title\n,\n  }\n,\n  },\n  fileLink {\n    ...,\n    "url": file.asset->url,\n  },\n\n  },\n\n        }\n      }\n    },\n    _type == "pbGridSingle" => {\n      ...,\n      pbBlocks[]{\n        \n  ...,\n  _type == "pbBlockPlainText" => {\n    ...,\n    \n  "textSize": select(\n    textStyle == "ts-body" => textSize,\n    textStyle == "ts-serif" => textSizeSerif,\n    textStyle == "ts-sans" || textStyle == "ts-sans-extended" => textSizeSans\n  )\n,\n  },\n  _type == "pbBlockText" => {\n    ...,\n    textContent[]{\n      \n  ...,\n  markDefs[]{\n    ...,\n    _type == "internalLink" => {\n      ...,\n      "slug": reference->slug,\n      "type": reference->_type\n    }\n  }\n\n    }\n  },\n  _type == "pbBlockButton" => {\n    \n  ...,\n  sitePage {\n    \n  ...,\n  "page": page->{\n    \n  "type": _type,\n  "slug": slug.current,\n  title\n,\n  }\n,\n  },\n  externalLink {\n    \n  ...,\n  "page": page->{\n    \n  "type": _type,\n  "slug": slug.current,\n  title\n,\n  }\n,\n  },\n  fileLink {\n    ...,\n    "url": file.asset->url,\n  },\n\n  },\n\n      }\n    },\n    _type == "pbGridDouble" => {\n      ...,\n      columnOne {\n        ...,\n        pbBlocks[]{\n          \n  ...,\n  _type == "pbBlockPlainText" => {\n    ...,\n    \n  "textSize": select(\n    textStyle == "ts-body" => textSize,\n    textStyle == "ts-serif" => textSizeSerif,\n    textStyle == "ts-sans" || textStyle == "ts-sans-extended" => textSizeSans\n  )\n,\n  },\n  _type == "pbBlockText" => {\n    ...,\n    textContent[]{\n      \n  ...,\n  markDefs[]{\n    ...,\n    _type == "internalLink" => {\n      ...,\n      "slug": reference->slug,\n      "type": reference->_type\n    }\n  }\n\n    }\n  },\n  _type == "pbBlockButton" => {\n    \n  ...,\n  sitePage {\n    \n  ...,\n  "page": page->{\n    \n  "type": _type,\n  "slug": slug.current,\n  title\n,\n  }\n,\n  },\n  externalLink {\n    \n  ...,\n  "page": page->{\n    \n  "type": _type,\n  "slug": slug.current,\n  title\n,\n  }\n,\n  },\n  fileLink {\n    ...,\n    "url": file.asset->url,\n  },\n\n  },\n\n        }\n      },\n      columnTwo {\n        ...,\n        pbBlocks[]{\n          \n  ...,\n  _type == "pbBlockPlainText" => {\n    ...,\n    \n  "textSize": select(\n    textStyle == "ts-body" => textSize,\n    textStyle == "ts-serif" => textSizeSerif,\n    textStyle == "ts-sans" || textStyle == "ts-sans-extended" => textSizeSans\n  )\n,\n  },\n  _type == "pbBlockText" => {\n    ...,\n    textContent[]{\n      \n  ...,\n  markDefs[]{\n    ...,\n    _type == "internalLink" => {\n      ...,\n      "slug": reference->slug,\n      "type": reference->_type\n    }\n  }\n\n    }\n  },\n  _type == "pbBlockButton" => {\n    \n  ...,\n  sitePage {\n    \n  ...,\n  "page": page->{\n    \n  "type": _type,\n  "slug": slug.current,\n  title\n,\n  }\n,\n  },\n  externalLink {\n    \n  ...,\n  "page": page->{\n    \n  "type": _type,\n  "slug": slug.current,\n  title\n,\n  }\n,\n  },\n  fileLink {\n    ...,\n    "url": file.asset->url,\n  },\n\n  },\n\n        }\n      }\n    },\n  }\n,\n    \n  "seoTitle": seo.seoTitle,\n  "description": seo.description,\n  "ogImage": seo.image,\n  "noIndex": seo.hideFromSearchEngines\n,\n  }\n': PagesBySlugQueryResult
     '\n  *[_type == $type && defined(slug.current)]{"slug": slug.current}\n': SlugsByTypeQueryResult
     '\n  *[_type == $type]{"slug": slug.current, "updatedAt": _updatedAt}\n': SitemapByTypeQueryResult
     '\n  *[_type == "settings"][0]{\n    ...,\n    "headerNav": headerNav.navItems[]{\n      \n  ...,\n  "page": page->{\n    \n  "type": _type,\n  "slug": slug.current,\n  title\n,\n  }\n,\n    },\n    "footerNav": footerNav.navItems[]{\n      \n  ...,\n  "page": page->{\n    \n  "type": _type,\n  "slug": slug.current,\n  title\n,\n  }\n,\n    },\n    "footerNav2": footerNav2.navItems[]{\n      \n  ...,\n  "page": page->{\n    \n  "type": _type,\n  "slug": slug.current,\n  title\n,\n  }\n,\n    },\n    "footerBrands": footerBrands[]->{\n      _id,\n      title,\n      websiteLink,\n      socialIcons,\n    },\n    \n  "seoTitle": seo.seoTitle,\n  "description": seo.description,\n  "ogImage": seo.image,\n  "noIndex": seo.hideFromSearchEngines\n,\n  }\n': SettingsQueryResult

@@ -1,3 +1,4 @@
+import { colorInput } from '@sanity/color-input'
 import { dashboardTool } from '@sanity/dashboard'
 import { visionTool } from '@sanity/vision'
 import { find, without } from 'lodash'
@@ -59,6 +60,7 @@ export default defineConfig({
       widgets: [vercelWidget()],
     }),
     noteField(),
+    colorInput(),
   ],
 
   tools: (prev: any) => {

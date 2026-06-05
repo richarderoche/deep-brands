@@ -29,6 +29,19 @@ export default defineType({
       validation: (Rule) => Rule.regex(/^\S*$/).warning('No spaces allowed'),
     }),
     defineField({
+      title: 'Top Ornament',
+      name: 'topOrnament',
+      type: 'boolean',
+      initialValue: false,
+    }),
+    defineField(
+      {
+        title: 'Color',
+        name: 'sectionBgColor',
+        type: 'colorChoice',
+      }
+    ),    
+    defineField({
       title: 'Top',
       name: 'marginTop',
       type: 'number',

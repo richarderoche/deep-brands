@@ -33,6 +33,14 @@ const portableText = `
   }
 `
 
+const textSizeByStyle = `
+  "textSize": select(
+    textStyle == "ts-body" => textSize,
+    textStyle == "ts-serif" => textSizeSerif,
+    textStyle == "ts-sans" || textStyle == "ts-sans-extended" => textSizeSans
+  )
+`
+
 const pbButton = `
   ...,
   sitePage {
@@ -49,6 +57,10 @@ const pbButton = `
 
 const pbBlocks = `
   ...,
+  _type == "pbBlockPlainText" => {
+    ...,
+    ${textSizeByStyle},
+  },
   _type == "pbBlockText" => {
     ...,
     textContent[]{

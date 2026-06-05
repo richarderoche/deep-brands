@@ -56,7 +56,8 @@
   }
 }
 
-@theme {
+/* use static to force inclusion */
+@theme static {
   --color-blue-900: oklch(var(--blue-900-oklch));
   --color-blue-800: oklch(var(--blue-800-oklch));
   --color-blue-700: oklch(var(--blue-700-oklch));

@@ -23,8 +23,8 @@ export default async function Footer() {
   const hasFooterBrands = footerBrands && footerBrands?.length > 0
 
   return (
-    <footer className="bottom-0 mt-gut-300 dark-theme theme-vars-only flex flex-col">
-      <IconOrnamentTop className="h-ornament text-bg" />
+    <footer className="dark-theme theme-vars-only flex flex-col">
+      <IconOrnamentTop />
       <div className="bg-bg text-body">
         <SiteWidth className="pb-gut pt-gut-150 md:pt-gut-200">
           <div className="grid grid-cols-2 lg:grid-cols-12 gap-gut-150 md:gap-gut">

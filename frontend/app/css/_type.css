@@ -1,10 +1,19 @@
 @theme inline {
-  --font-sans: var(--mori), 'Helvetica Neue', helvetica, sans-serif;
-  --font-sans-extended: var(--mori), 'Helvetica Neue', helvetica, sans-serif;
+  --font-serif: var(--alpina), serif;
+  --font-sans: var(--america-cond), 'Helvetica Neue', helvetica, sans-serif;
+  --font-sans-extended: var(--america-ex), 'Helvetica Neue', helvetica, sans-serif;
+}
+
+.ts-body {
+  @apply font-sans font-normal leading-130;
+}
+
+.ts-serif {
+  @apply font-serif font-normal leading-105 -tracking-3;
 }
 
 .ts-sans-wide {
-  @apply font-sans-extended leading-115 uppercase tracking-2;
+  @apply font-sans-extended font-black leading-115 uppercase tracking-2;
 }
 
 .ts-sans-tall {
@@ -45,19 +54,19 @@ Example: ts-size-24/36 → font-size = var(--gut) × (24÷36)
 /* Paragraphs */
 
 .ts-p-lg {
-  @apply leading-130 ts-size-19/24 md:ts-size-24/36;
+  @apply ts-size-19/24 md:ts-size-24/36;
 }
 
 .ts-p-md {
-  @apply leading-130 ts-size-17/24 md:ts-size-22/36;
+  @apply ts-size-17/24 md:ts-size-22/36;
 }
 
 .ts-p-sm {
-  @apply leading-130 ts-size-15/24 md:ts-size-20/36;
+  @apply ts-size-15/24 md:ts-size-20/36;
 }
 
 .ts-p-xs {
-  @apply leading-130 ts-size-13/24 md:ts-size-15/36;
+  @apply ts-size-13/24 md:ts-size-15/36;
 }
 
 /* Misc */
