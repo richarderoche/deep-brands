@@ -5,18 +5,23 @@ import { imgAltField } from '../fields'
 export const crops = [
   { title: 'Original', value: 0 },
   { title: '1:1 (square)', value: 1 },
+  { title: '4:5', value: 0.8 },
   { title: '4:6', value: 0.6666666667 },
+  { title: '5:4', value: 1.25 },
   { title: '6:4', value: 1.5 },
   { title: '16:9', value: 1.7777777778 },
   { title: '5:2', value: 2.5 },
 ]
 
 export const hotspotPreviews = [
-  { title: '1:1', aspectRatio: 1 },
+  { title: '1:1 / Arches', aspectRatio: 1 },
+  { title: '4:5', aspectRatio: 0.8 },
   { title: '4:6', aspectRatio: 0.6666666667 },
+  { title: '5:4', aspectRatio: 1.25 },
   { title: '6:4', aspectRatio: 1.5 },
   { title: '16:9', aspectRatio: 1.7777777778 },
   { title: '5:2', aspectRatio: 2.5 },
+  { title: 'Logo - DB', aspectRatio: 1.6411287988 },
 ]
 
 export default defineType({
@@ -29,11 +34,29 @@ export default defineType({
       name: 'image',
       title: 'Image',
       type: 'image',
+      fields: [
+        defineField(imgAltField),
+      ],
       options: {
         hotspot: {
           previews: hotspotPreviews,
         },
       },
+    }),
+    defineField({
+      name: 'imageMaskType',
+      title: 'Image Mask',
+      type: 'string',
+      options: {
+        list: [
+          { title: 'None', value: 'none' },
+          { title: 'Notches', value: 'notches' },
+          { title: 'Logo - DB', value: 'logoDB' },
+          { title: 'Arch - IK', value: 'archIK' },
+          { title: 'Arch - TT', value: 'archTT' },
+        ],
+      },
+      initialValue: 'none',
     }),
     defineField({
       name: 'imageCrop',
@@ -43,6 +66,7 @@ export default defineType({
         list: crops,
       },
       initialValue: 0,
+      hidden: ({ parent }) => parent?.imageMaskType !== 'none' && parent?.imageMaskType !== 'notches',
     }),
     defineField({
       name: 'imageWidth',
@@ -53,7 +77,6 @@ export default defineType({
       initialValue: 100,
       validation: (Rule) => Rule.max(100),
     }),
-    defineField(imgAltField),
     defineField({
       name: 'caption',
       title: 'Caption (optional supporting text for all users)',
@@ -76,6 +99,7 @@ export default defineType({
         'Disable if corner rounding causes issues (e.g. logos, icons, infographics).',
       type: 'boolean',
       initialValue: false,
+      hidden: ({ parent }) => parent?.imageMaskType !== 'none',
     }),
   ],
   preview: {

@@ -1,0 +1,11 @@
+import IconLogoShape from './IconLogoShape'
+import NotchMasks from './NotchMasks'
+
+export default function IconMasks() {
+  return (
+    <div className="absolute size-0 overflow-hidden" aria-hidden="true" tabIndex={-1}>
+      <IconLogoShape forMask={true} />
+      <NotchMasks />
+    </div>
+  )
+}

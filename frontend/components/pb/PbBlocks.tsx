@@ -1,7 +1,7 @@
 'use client'
 
 import {colorValue} from '@/lib/colorValue'
-import {cn} from '@/lib/utils'
+import {cn, getClipPath} from '@/lib/utils'
 import type {PbBlockVideoEmbed} from '@/sanity.types'
 import {NavItem, PbBlocksQueryResult} from '@/types'
 import {PortableText, PortableTextBlock} from 'next-sanity'
@@ -146,25 +146,37 @@ export function PlainTextBlock({block}) {
 }
 
 export function ImageBlock({block, trueSizes}) {
+  const {image, imageMaskType, disableCorners, imageWidth, imageCrop, priority, caption} = block
+  const roundCorners = !disableCorners && imageMaskType === 'none'
+  const cropRatio = (() => {
+    switch (imageMaskType) {
+      case 'logoDB':
+        return 1.6411287988
+      case 'archIK':
+      case 'archTT':
+        return 1
+      default:
+        return imageCrop || 0
+    }
+  })()
   return (
     <>
       <div
-        className={cn('relative group', !block.disableCorners ? 'corner' : '')}
+        className={cn('relative group', roundCorners ? 'corner' : '')}
         style={{
-          width: block.imageWidth ? block.imageWidth + '%' : 'auto',
+          width: imageWidth ? imageWidth + '%' : 'auto',
+          clipPath: getClipPath(imageMaskType, cropRatio),
         }}
       >
         <ImageBasic
-          image={block.image as SanityImageType}
-          alt={block.alt}
+          image={image as SanityImageType}
+          alt={image?.alt || ''}
           sizes={trueSizes}
-          ratio={block.imageCrop || 0}
-          priority={block.priority ?? false}
+          ratio={cropRatio}
+          priority={priority ?? false}
         />
       </div>
-      {block.caption && (
-        <div className="ts-p-sm text-pretty text-body-subtle mt-gut-50">{block.caption}</div>
-      )}
+      {caption && <div className="ts-p-sm text-pretty text-body-subtle mt-gut-50">{caption}</div>}
     </>
   )
 }

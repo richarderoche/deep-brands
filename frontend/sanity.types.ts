@@ -450,6 +450,7 @@ export type PbBlockImage = {
     crop?: SanityImageCrop
     _type: 'image'
   }
+  imageMaskType?: 'none' | 'notches' | 'logoDB' | 'archIK' | 'archTT'
   imageCrop?: 0 | 1 | 0.6666666667 | 1.5 | 1.7777777778 | 2.5
   imageWidth?: number
   alt?: string
@@ -495,6 +496,7 @@ export type ColorChoice = {
   colorType?: 'none' | 'dark' | 'light' | 'custom'
   colorDark?:
     | '--color-blue-800'
+    | '--color-blue-700'
     | '--color-blue-650'
     | '--color-teal'
     | '--color-logo-red'
@@ -945,6 +947,7 @@ export type HomePageQueryResult = {
                   crop?: SanityImageCrop
                   _type: 'image'
                 }
+                imageMaskType?: 'archIK' | 'archTT' | 'logoDB' | 'none' | 'notches'
                 imageCrop?: 0.6666666667 | 0 | 1.5 | 1.7777777778 | 1 | 2.5
                 imageWidth?: number
                 alt?: string
@@ -1116,6 +1119,7 @@ export type HomePageQueryResult = {
                   crop?: SanityImageCrop
                   _type: 'image'
                 }
+                imageMaskType?: 'archIK' | 'archTT' | 'logoDB' | 'none' | 'notches'
                 imageCrop?: 0.6666666667 | 0 | 1.5 | 1.7777777778 | 1 | 2.5
                 imageWidth?: number
                 alt?: string
@@ -1295,6 +1299,7 @@ export type HomePageQueryResult = {
                   crop?: SanityImageCrop
                   _type: 'image'
                 }
+                imageMaskType?: 'archIK' | 'archTT' | 'logoDB' | 'none' | 'notches'
                 imageCrop?: 0.6666666667 | 0 | 1.5 | 1.7777777778 | 1 | 2.5
                 imageWidth?: number
                 alt?: string
@@ -1473,6 +1478,7 @@ export type HomePageQueryResult = {
                 crop?: SanityImageCrop
                 _type: 'image'
               }
+              imageMaskType?: 'archIK' | 'archTT' | 'logoDB' | 'none' | 'notches'
               imageCrop?: 0.6666666667 | 0 | 1.5 | 1.7777777778 | 1 | 2.5
               imageWidth?: number
               alt?: string
@@ -1684,6 +1690,7 @@ export type PagesBySlugQueryResult = {
                   crop?: SanityImageCrop
                   _type: 'image'
                 }
+                imageMaskType?: 'archIK' | 'archTT' | 'logoDB' | 'none' | 'notches'
                 imageCrop?: 0.6666666667 | 0 | 1.5 | 1.7777777778 | 1 | 2.5
                 imageWidth?: number
                 alt?: string
@@ -1855,6 +1862,7 @@ export type PagesBySlugQueryResult = {
                   crop?: SanityImageCrop
                   _type: 'image'
                 }
+                imageMaskType?: 'archIK' | 'archTT' | 'logoDB' | 'none' | 'notches'
                 imageCrop?: 0.6666666667 | 0 | 1.5 | 1.7777777778 | 1 | 2.5
                 imageWidth?: number
                 alt?: string
@@ -2034,6 +2042,7 @@ export type PagesBySlugQueryResult = {
                   crop?: SanityImageCrop
                   _type: 'image'
                 }
+                imageMaskType?: 'archIK' | 'archTT' | 'logoDB' | 'none' | 'notches'
                 imageCrop?: 0.6666666667 | 0 | 1.5 | 1.7777777778 | 1 | 2.5
                 imageWidth?: number
                 alt?: string
@@ -2212,6 +2221,7 @@ export type PagesBySlugQueryResult = {
                 crop?: SanityImageCrop
                 _type: 'image'
               }
+              imageMaskType?: 'archIK' | 'archTT' | 'logoDB' | 'none' | 'notches'
               imageCrop?: 0.6666666667 | 0 | 1.5 | 1.7777777778 | 1 | 2.5
               imageWidth?: number
               alt?: string

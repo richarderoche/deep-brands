@@ -3357,6 +3357,35 @@
           },
           "optional": true
         },
+        "imageMaskType": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "union",
+            "of": [
+              {
+                "type": "string",
+                "value": "none"
+              },
+              {
+                "type": "string",
+                "value": "notches"
+              },
+              {
+                "type": "string",
+                "value": "logoDB"
+              },
+              {
+                "type": "string",
+                "value": "archIK"
+              },
+              {
+                "type": "string",
+                "value": "archTT"
+              }
+            ]
+          },
+          "optional": true
+        },
         "imageCrop": {
           "type": "objectAttribute",
           "value": {
@@ -3639,6 +3668,10 @@
               {
                 "type": "string",
                 "value": "--color-blue-800"
+              },
+              {
+                "type": "string",
+                "value": "--color-blue-700"
               },
               {
                 "type": "string",
