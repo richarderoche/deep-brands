@@ -11,8 +11,24 @@ import {
   FaYoutube,
 } from 'react-icons/fa6'
 
-const SocialIcon = (name) => {
-  switch (name.name) {
+export type SocialIconName =
+  | 'Facebook'
+  | 'Instagram'
+  | 'Soundcloud'
+  | 'Spotify'
+  | 'Tiktok'
+  | 'Twitter'
+  | 'Threads'
+  | 'YouTube'
+  | 'Github'
+  | 'Linkedin'
+
+export type SocialIconProps = {
+  name?: SocialIconName
+}
+
+const SocialIcon = ({name}: SocialIconProps) => {
+  switch (name) {
     case 'Facebook':
       return <FaFacebookF className="block" />
     case 'Instagram':
@@ -33,6 +49,8 @@ const SocialIcon = (name) => {
       return <FaGithub className="block" />
     case 'Linkedin':
       return <FaLinkedinIn className="block" />
+    default:
+      return null
   }
 }
 

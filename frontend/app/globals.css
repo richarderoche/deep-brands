@@ -48,7 +48,9 @@
   --spacing-max-ch: 55ch;
   --spacing-header: calc(var(--gut) * 2);
   --spacing-ornament: calc(var(--gut) * 1.25);
+  --spacing-btn: 1.625em;
 
+  --radius-btn: 3px;
   /* Use .corner-container > .corner or .corner-sm
   for container-relative rounded corners */
   --radius-xs: 0.4rem;

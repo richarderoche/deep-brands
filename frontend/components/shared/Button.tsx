@@ -1,16 +1,20 @@
 import Link from 'next/link'
 
 import {cn} from '@/lib/utils'
+import type {PbBlockButton} from '@/sanity.types'
 import {resolveHref} from '@/sanity/lib/utils'
 import {NavItem} from '@/types'
-import {PiFunnelBold} from 'react-icons/pi'
+import IconArrow from '../icons/IconArrow'
+import SocialIcon, {type SocialIconName} from './SocialIcon'
+
+export type ButtonIcon = NonNullable<PbBlockButton['icon']>
 
 type ButtonOwnProps = {
   text?: string
   path?: string
   navItem?: NavItem
   download?: boolean
-  icon?: 'filter' | 'none'
+  icon?: ButtonIcon
   outline?: boolean
 }
 
@@ -34,7 +38,7 @@ export default function Button(props: ButtonProps) {
     onClick,
     className,
     download,
-    icon = 'none',
+    icon = 'arrow',
     disabled = false,
     outline = false,
     ...rest
@@ -53,8 +57,8 @@ export default function Button(props: ButtonProps) {
 
   const isExternal = href?.startsWith('http')
   const buttonClasses = cn(
-    'flex w-fit items-center py-[.25em] px-[.6em] rounded-full  transition-colors ts-btn',
-    outline ? 'border' : 'dark-theme',
+    'flex w-fit items-center h-btn px-[.5em] rounded-btn ts-btn border transition-all hover:scale-105',
+    outline ? '' : 'border-transparent bg-body text-btn-fg',
     disabled && 'opacity-50 pointer-events-none',
     className,
   )
@@ -70,24 +74,44 @@ export default function Button(props: ButtonProps) {
         onClick={onClick}
         {...rest}
       >
-        <ButtonContent text={buttonText} icon={icon} />
+        <ButtonContent text={buttonText} icon={icon} outline={outline} />
       </Link>
     )
   }
 
   return (
     <button type="button" className={buttonClasses} onClick={onClick} disabled={disabled} {...rest}>
-      <ButtonContent text={buttonText} icon={icon} />
+      <ButtonContent text={buttonText} icon={icon} outline={outline} />
     </button>
   )
 }
 
-const ButtonContent = ({text, icon}: {text: string; icon: 'filter' | 'none'}) => {
+function isSocialIcon(icon: ButtonIcon): icon is SocialIconName {
+  return icon !== 'none' && icon !== 'arrow'
+}
+
+const ButtonContent = ({
+  text,
+  icon,
+  outline,
+}: {
+  text: string
+  icon: ButtonIcon
+  outline: boolean
+}) => {
   return (
     <>
-      <span className="whitespace-nowrap center-caps">{text}</span>
-      {icon === 'filter' && (
-        <PiFunnelBold className="size-[.8em] relative top-[-.02em] ml-[.2em]" />
+      <span className="whitespace-nowrap">{text}</span>
+      {icon === 'arrow' && <IconArrow className="pl-[.35em] h-[.6em] w-auto" />}
+      {isSocialIcon(icon) && (
+        <span
+          className={cn(
+            'rounded-full  flex justify-center items-center ml-[.5em] p-[.45em] aspect-square text-[.6em] text-center',
+            outline ? 'bg-body text-btn-fg' : 'bg-btn-fg text-body',
+          )}
+        >
+          <SocialIcon name={icon} />
+        </span>
       )}
     </>
   )

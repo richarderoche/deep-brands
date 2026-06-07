@@ -39,6 +39,19 @@ const getIcon = (icon: string) => {
   }
 }
 
+export const socialIconOptions = [
+  { title: 'Facebook', value: 'Facebook' },
+  { title: 'Github', value: 'Github' },
+  { title: 'Instagram', value: 'Instagram' },
+  { title: 'LinkedIn', value: 'Linkedin' },
+  { title: 'Soundcloud', value: 'Soundcloud' },
+  { title: 'Spotify', value: 'Spotify' },
+  { title: 'Threads', value: 'Threads' },
+  { title: 'Tiktok', value: 'Tiktok' },
+  { title: 'X/Twitter', value: 'Twitter' },
+  { title: 'YouTube', value: 'YouTube' },
+]
+
 export default defineType({
   title: 'Social Link',
   name: 'socialLink',
@@ -53,18 +66,7 @@ export default defineType({
       name: 'icon',
       type: 'string',
       options: {
-        list: [
-          { title: 'Facebook', value: 'Facebook' },
-          { title: 'Github', value: 'Github' },
-          { title: 'Instagram', value: 'Instagram' },
-          { title: 'LinkedIn', value: 'Linkedin' },
-          { title: 'Soundcloud', value: 'Soundcloud' },
-          { title: 'Spotify', value: 'Spotify' },
-          { title: 'Threads', value: 'Threads' },
-          { title: 'Tiktok', value: 'Tiktok' },
-          { title: 'X/Twitter', value: 'Twitter' },
-          { title: 'YouTube', value: 'YouTube' },
-        ],
+        list: socialIconOptions,
       },
     }),
     defineField({

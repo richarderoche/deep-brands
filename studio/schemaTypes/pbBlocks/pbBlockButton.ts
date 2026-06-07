@@ -1,5 +1,6 @@
 import { CircleArrowRight } from 'lucide-react'
 import { defineField, defineType } from 'sanity'
+import { socialIconOptions } from '../objects/socialLink'
 
 const BUTTON_TYPE_OPTIONS: { title: string; value: string }[] = [
   { title: 'Internal', value: 'sitePage' },
@@ -56,6 +57,31 @@ export default defineType({
           description: 'Text shown on the button (e.g. "Download PDF")',
         }),
       ],
+    }),
+    defineField({
+      title: 'Icon',
+      name: 'icon',
+      type: 'string',
+      options: {
+        list: [
+          { title: 'None', value: 'none' },
+          { title: 'Arrow', value: 'arrow' },
+          ...socialIconOptions
+        ],
+      },
+      initialValue: 'arrow',
+    }),
+    defineField({
+      title: 'Style',
+      name: 'buttonStyle',
+      type: 'string',
+      options: {
+        list: [
+          { title: 'Default', value: 'default' },
+          { title: 'Outline', value: 'outline' },
+        ],
+      },
+      initialValue: 'default',
     }),
   ],
   validation: (Rule) =>

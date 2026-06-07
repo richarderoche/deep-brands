@@ -2979,7 +2979,15 @@
                           },
                           {
                             "type": "number",
+                            "value": 0.8
+                          },
+                          {
+                            "type": "number",
                             "value": 0.6666666667
+                          },
+                          {
+                            "type": "number",
+                            "value": 1.25
                           },
                           {
                             "type": "number",
@@ -3293,6 +3301,80 @@
             "name": "fileLink"
           },
           "optional": true
+        },
+        "icon": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "union",
+            "of": [
+              {
+                "type": "string",
+                "value": "none"
+              },
+              {
+                "type": "string",
+                "value": "arrow"
+              },
+              {
+                "type": "string",
+                "value": "Facebook"
+              },
+              {
+                "type": "string",
+                "value": "Github"
+              },
+              {
+                "type": "string",
+                "value": "Instagram"
+              },
+              {
+                "type": "string",
+                "value": "Linkedin"
+              },
+              {
+                "type": "string",
+                "value": "Soundcloud"
+              },
+              {
+                "type": "string",
+                "value": "Spotify"
+              },
+              {
+                "type": "string",
+                "value": "Threads"
+              },
+              {
+                "type": "string",
+                "value": "Tiktok"
+              },
+              {
+                "type": "string",
+                "value": "Twitter"
+              },
+              {
+                "type": "string",
+                "value": "YouTube"
+              }
+            ]
+          },
+          "optional": true
+        },
+        "buttonStyle": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "union",
+            "of": [
+              {
+                "type": "string",
+                "value": "default"
+              },
+              {
+                "type": "string",
+                "value": "outline"
+              }
+            ]
+          },
+          "optional": true
         }
       }
     }
@@ -3343,6 +3425,13 @@
                 "value": {
                   "type": "inline",
                   "name": "sanity.imageCrop"
+                },
+                "optional": true
+              },
+              "alt": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "string"
                 },
                 "optional": true
               },
@@ -3401,7 +3490,15 @@
               },
               {
                 "type": "number",
+                "value": 0.8
+              },
+              {
+                "type": "number",
                 "value": 0.6666666667
+              },
+              {
+                "type": "number",
+                "value": 1.25
               },
               {
                 "type": "number",
@@ -3423,13 +3520,6 @@
           "type": "objectAttribute",
           "value": {
             "type": "number"
-          },
-          "optional": true
-        },
-        "alt": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "string"
           },
           "optional": true
         },

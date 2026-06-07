@@ -390,7 +390,7 @@ export type PbBlockMarquee = {
     | {
         image?: ImageElementImage
         altText?: string
-        imageCrop?: 0 | 1 | 0.6666666667 | 1.5 | 1.7777777778 | 2.5
+        imageCrop?: 0 | 1 | 0.8 | 0.6666666667 | 1.25 | 1.5 | 1.7777777778 | 2.5
         roundedCorners?: boolean
         invertColor?: boolean
         blendModeLighten?: boolean
@@ -439,6 +439,20 @@ export type PbBlockButton = {
   sitePage?: NavPage
   externalLink?: NavExternal
   fileLink?: FileLink
+  icon?:
+    | 'none'
+    | 'arrow'
+    | 'Facebook'
+    | 'Github'
+    | 'Instagram'
+    | 'Linkedin'
+    | 'Soundcloud'
+    | 'Spotify'
+    | 'Threads'
+    | 'Tiktok'
+    | 'Twitter'
+    | 'YouTube'
+  buttonStyle?: 'default' | 'outline'
 }
 
 export type PbBlockImage = {
@@ -448,12 +462,12 @@ export type PbBlockImage = {
     media?: unknown
     hotspot?: SanityImageHotspot
     crop?: SanityImageCrop
+    alt?: string
     _type: 'image'
   }
   imageMaskType?: 'none' | 'notches' | 'logoDB' | 'archIK' | 'archTT'
-  imageCrop?: 0 | 1 | 0.6666666667 | 1.5 | 1.7777777778 | 2.5
+  imageCrop?: 0 | 1 | 0.8 | 0.6666666667 | 1.25 | 1.5 | 1.7777777778 | 2.5
   imageWidth?: number
-  alt?: string
   caption?: string
   priority?: boolean
   disableCorners?: boolean
@@ -927,6 +941,20 @@ export type HomePageQueryResult = {
                   buttonText?: string
                   url: string | null
                 } | null
+                icon?:
+                  | 'arrow'
+                  | 'Facebook'
+                  | 'Github'
+                  | 'Instagram'
+                  | 'Linkedin'
+                  | 'none'
+                  | 'Soundcloud'
+                  | 'Spotify'
+                  | 'Threads'
+                  | 'Tiktok'
+                  | 'Twitter'
+                  | 'YouTube'
+                buttonStyle?: 'default' | 'outline'
               }
             | {
                 _key: string
@@ -945,12 +973,12 @@ export type HomePageQueryResult = {
                   media?: unknown
                   hotspot?: SanityImageHotspot
                   crop?: SanityImageCrop
+                  alt?: string
                   _type: 'image'
                 }
                 imageMaskType?: 'archIK' | 'archTT' | 'logoDB' | 'none' | 'notches'
-                imageCrop?: 0.6666666667 | 0 | 1.5 | 1.7777777778 | 1 | 2.5
+                imageCrop?: 0.6666666667 | 0.8 | 0 | 1.25 | 1.5 | 1.7777777778 | 1 | 2.5
                 imageWidth?: number
-                alt?: string
                 caption?: string
                 priority?: boolean
                 disableCorners?: boolean
@@ -963,7 +991,7 @@ export type HomePageQueryResult = {
                   | {
                       image?: ImageElementImage
                       altText?: string
-                      imageCrop?: 0.6666666667 | 0 | 1.5 | 1.7777777778 | 1 | 2.5
+                      imageCrop?: 0.6666666667 | 0.8 | 0 | 1.25 | 1.5 | 1.7777777778 | 1 | 2.5
                       roundedCorners?: boolean
                       invertColor?: boolean
                       blendModeLighten?: boolean
@@ -1099,6 +1127,20 @@ export type HomePageQueryResult = {
                   buttonText?: string
                   url: string | null
                 } | null
+                icon?:
+                  | 'arrow'
+                  | 'Facebook'
+                  | 'Github'
+                  | 'Instagram'
+                  | 'Linkedin'
+                  | 'none'
+                  | 'Soundcloud'
+                  | 'Spotify'
+                  | 'Threads'
+                  | 'Tiktok'
+                  | 'Twitter'
+                  | 'YouTube'
+                buttonStyle?: 'default' | 'outline'
               }
             | {
                 _key: string
@@ -1117,12 +1159,12 @@ export type HomePageQueryResult = {
                   media?: unknown
                   hotspot?: SanityImageHotspot
                   crop?: SanityImageCrop
+                  alt?: string
                   _type: 'image'
                 }
                 imageMaskType?: 'archIK' | 'archTT' | 'logoDB' | 'none' | 'notches'
-                imageCrop?: 0.6666666667 | 0 | 1.5 | 1.7777777778 | 1 | 2.5
+                imageCrop?: 0.6666666667 | 0.8 | 0 | 1.25 | 1.5 | 1.7777777778 | 1 | 2.5
                 imageWidth?: number
-                alt?: string
                 caption?: string
                 priority?: boolean
                 disableCorners?: boolean
@@ -1135,7 +1177,7 @@ export type HomePageQueryResult = {
                   | {
                       image?: ImageElementImage
                       altText?: string
-                      imageCrop?: 0.6666666667 | 0 | 1.5 | 1.7777777778 | 1 | 2.5
+                      imageCrop?: 0.6666666667 | 0.8 | 0 | 1.25 | 1.5 | 1.7777777778 | 1 | 2.5
                       roundedCorners?: boolean
                       invertColor?: boolean
                       blendModeLighten?: boolean
@@ -1279,6 +1321,20 @@ export type HomePageQueryResult = {
                   buttonText?: string
                   url: string | null
                 } | null
+                icon?:
+                  | 'arrow'
+                  | 'Facebook'
+                  | 'Github'
+                  | 'Instagram'
+                  | 'Linkedin'
+                  | 'none'
+                  | 'Soundcloud'
+                  | 'Spotify'
+                  | 'Threads'
+                  | 'Tiktok'
+                  | 'Twitter'
+                  | 'YouTube'
+                buttonStyle?: 'default' | 'outline'
               }
             | {
                 _key: string
@@ -1297,12 +1353,12 @@ export type HomePageQueryResult = {
                   media?: unknown
                   hotspot?: SanityImageHotspot
                   crop?: SanityImageCrop
+                  alt?: string
                   _type: 'image'
                 }
                 imageMaskType?: 'archIK' | 'archTT' | 'logoDB' | 'none' | 'notches'
-                imageCrop?: 0.6666666667 | 0 | 1.5 | 1.7777777778 | 1 | 2.5
+                imageCrop?: 0.6666666667 | 0.8 | 0 | 1.25 | 1.5 | 1.7777777778 | 1 | 2.5
                 imageWidth?: number
-                alt?: string
                 caption?: string
                 priority?: boolean
                 disableCorners?: boolean
@@ -1315,7 +1371,7 @@ export type HomePageQueryResult = {
                   | {
                       image?: ImageElementImage
                       altText?: string
-                      imageCrop?: 0.6666666667 | 0 | 1.5 | 1.7777777778 | 1 | 2.5
+                      imageCrop?: 0.6666666667 | 0.8 | 0 | 1.25 | 1.5 | 1.7777777778 | 1 | 2.5
                       roundedCorners?: boolean
                       invertColor?: boolean
                       blendModeLighten?: boolean
@@ -1458,6 +1514,20 @@ export type HomePageQueryResult = {
                 buttonText?: string
                 url: string | null
               } | null
+              icon?:
+                | 'arrow'
+                | 'Facebook'
+                | 'Github'
+                | 'Instagram'
+                | 'Linkedin'
+                | 'none'
+                | 'Soundcloud'
+                | 'Spotify'
+                | 'Threads'
+                | 'Tiktok'
+                | 'Twitter'
+                | 'YouTube'
+              buttonStyle?: 'default' | 'outline'
             }
           | {
               _key: string
@@ -1476,12 +1546,12 @@ export type HomePageQueryResult = {
                 media?: unknown
                 hotspot?: SanityImageHotspot
                 crop?: SanityImageCrop
+                alt?: string
                 _type: 'image'
               }
               imageMaskType?: 'archIK' | 'archTT' | 'logoDB' | 'none' | 'notches'
-              imageCrop?: 0.6666666667 | 0 | 1.5 | 1.7777777778 | 1 | 2.5
+              imageCrop?: 0.6666666667 | 0.8 | 0 | 1.25 | 1.5 | 1.7777777778 | 1 | 2.5
               imageWidth?: number
-              alt?: string
               caption?: string
               priority?: boolean
               disableCorners?: boolean
@@ -1494,7 +1564,7 @@ export type HomePageQueryResult = {
                 | {
                     image?: ImageElementImage
                     altText?: string
-                    imageCrop?: 0.6666666667 | 0 | 1.5 | 1.7777777778 | 1 | 2.5
+                    imageCrop?: 0.6666666667 | 0.8 | 0 | 1.25 | 1.5 | 1.7777777778 | 1 | 2.5
                     roundedCorners?: boolean
                     invertColor?: boolean
                     blendModeLighten?: boolean
@@ -1670,6 +1740,20 @@ export type PagesBySlugQueryResult = {
                   buttonText?: string
                   url: string | null
                 } | null
+                icon?:
+                  | 'arrow'
+                  | 'Facebook'
+                  | 'Github'
+                  | 'Instagram'
+                  | 'Linkedin'
+                  | 'none'
+                  | 'Soundcloud'
+                  | 'Spotify'
+                  | 'Threads'
+                  | 'Tiktok'
+                  | 'Twitter'
+                  | 'YouTube'
+                buttonStyle?: 'default' | 'outline'
               }
             | {
                 _key: string
@@ -1688,12 +1772,12 @@ export type PagesBySlugQueryResult = {
                   media?: unknown
                   hotspot?: SanityImageHotspot
                   crop?: SanityImageCrop
+                  alt?: string
                   _type: 'image'
                 }
                 imageMaskType?: 'archIK' | 'archTT' | 'logoDB' | 'none' | 'notches'
-                imageCrop?: 0.6666666667 | 0 | 1.5 | 1.7777777778 | 1 | 2.5
+                imageCrop?: 0.6666666667 | 0.8 | 0 | 1.25 | 1.5 | 1.7777777778 | 1 | 2.5
                 imageWidth?: number
-                alt?: string
                 caption?: string
                 priority?: boolean
                 disableCorners?: boolean
@@ -1706,7 +1790,7 @@ export type PagesBySlugQueryResult = {
                   | {
                       image?: ImageElementImage
                       altText?: string
-                      imageCrop?: 0.6666666667 | 0 | 1.5 | 1.7777777778 | 1 | 2.5
+                      imageCrop?: 0.6666666667 | 0.8 | 0 | 1.25 | 1.5 | 1.7777777778 | 1 | 2.5
                       roundedCorners?: boolean
                       invertColor?: boolean
                       blendModeLighten?: boolean
@@ -1842,6 +1926,20 @@ export type PagesBySlugQueryResult = {
                   buttonText?: string
                   url: string | null
                 } | null
+                icon?:
+                  | 'arrow'
+                  | 'Facebook'
+                  | 'Github'
+                  | 'Instagram'
+                  | 'Linkedin'
+                  | 'none'
+                  | 'Soundcloud'
+                  | 'Spotify'
+                  | 'Threads'
+                  | 'Tiktok'
+                  | 'Twitter'
+                  | 'YouTube'
+                buttonStyle?: 'default' | 'outline'
               }
             | {
                 _key: string
@@ -1860,12 +1958,12 @@ export type PagesBySlugQueryResult = {
                   media?: unknown
                   hotspot?: SanityImageHotspot
                   crop?: SanityImageCrop
+                  alt?: string
                   _type: 'image'
                 }
                 imageMaskType?: 'archIK' | 'archTT' | 'logoDB' | 'none' | 'notches'
-                imageCrop?: 0.6666666667 | 0 | 1.5 | 1.7777777778 | 1 | 2.5
+                imageCrop?: 0.6666666667 | 0.8 | 0 | 1.25 | 1.5 | 1.7777777778 | 1 | 2.5
                 imageWidth?: number
-                alt?: string
                 caption?: string
                 priority?: boolean
                 disableCorners?: boolean
@@ -1878,7 +1976,7 @@ export type PagesBySlugQueryResult = {
                   | {
                       image?: ImageElementImage
                       altText?: string
-                      imageCrop?: 0.6666666667 | 0 | 1.5 | 1.7777777778 | 1 | 2.5
+                      imageCrop?: 0.6666666667 | 0.8 | 0 | 1.25 | 1.5 | 1.7777777778 | 1 | 2.5
                       roundedCorners?: boolean
                       invertColor?: boolean
                       blendModeLighten?: boolean
@@ -2022,6 +2120,20 @@ export type PagesBySlugQueryResult = {
                   buttonText?: string
                   url: string | null
                 } | null
+                icon?:
+                  | 'arrow'
+                  | 'Facebook'
+                  | 'Github'
+                  | 'Instagram'
+                  | 'Linkedin'
+                  | 'none'
+                  | 'Soundcloud'
+                  | 'Spotify'
+                  | 'Threads'
+                  | 'Tiktok'
+                  | 'Twitter'
+                  | 'YouTube'
+                buttonStyle?: 'default' | 'outline'
               }
             | {
                 _key: string
@@ -2040,12 +2152,12 @@ export type PagesBySlugQueryResult = {
                   media?: unknown
                   hotspot?: SanityImageHotspot
                   crop?: SanityImageCrop
+                  alt?: string
                   _type: 'image'
                 }
                 imageMaskType?: 'archIK' | 'archTT' | 'logoDB' | 'none' | 'notches'
-                imageCrop?: 0.6666666667 | 0 | 1.5 | 1.7777777778 | 1 | 2.5
+                imageCrop?: 0.6666666667 | 0.8 | 0 | 1.25 | 1.5 | 1.7777777778 | 1 | 2.5
                 imageWidth?: number
-                alt?: string
                 caption?: string
                 priority?: boolean
                 disableCorners?: boolean
@@ -2058,7 +2170,7 @@ export type PagesBySlugQueryResult = {
                   | {
                       image?: ImageElementImage
                       altText?: string
-                      imageCrop?: 0.6666666667 | 0 | 1.5 | 1.7777777778 | 1 | 2.5
+                      imageCrop?: 0.6666666667 | 0.8 | 0 | 1.25 | 1.5 | 1.7777777778 | 1 | 2.5
                       roundedCorners?: boolean
                       invertColor?: boolean
                       blendModeLighten?: boolean
@@ -2201,6 +2313,20 @@ export type PagesBySlugQueryResult = {
                 buttonText?: string
                 url: string | null
               } | null
+              icon?:
+                | 'arrow'
+                | 'Facebook'
+                | 'Github'
+                | 'Instagram'
+                | 'Linkedin'
+                | 'none'
+                | 'Soundcloud'
+                | 'Spotify'
+                | 'Threads'
+                | 'Tiktok'
+                | 'Twitter'
+                | 'YouTube'
+              buttonStyle?: 'default' | 'outline'
             }
           | {
               _key: string
@@ -2219,12 +2345,12 @@ export type PagesBySlugQueryResult = {
                 media?: unknown
                 hotspot?: SanityImageHotspot
                 crop?: SanityImageCrop
+                alt?: string
                 _type: 'image'
               }
               imageMaskType?: 'archIK' | 'archTT' | 'logoDB' | 'none' | 'notches'
-              imageCrop?: 0.6666666667 | 0 | 1.5 | 1.7777777778 | 1 | 2.5
+              imageCrop?: 0.6666666667 | 0.8 | 0 | 1.25 | 1.5 | 1.7777777778 | 1 | 2.5
               imageWidth?: number
-              alt?: string
               caption?: string
               priority?: boolean
               disableCorners?: boolean
@@ -2237,7 +2363,7 @@ export type PagesBySlugQueryResult = {
                 | {
                     image?: ImageElementImage
                     altText?: string
-                    imageCrop?: 0.6666666667 | 0 | 1.5 | 1.7777777778 | 1 | 2.5
+                    imageCrop?: 0.6666666667 | 0.8 | 0 | 1.25 | 1.5 | 1.7777777778 | 1 | 2.5
                     roundedCorners?: boolean
                     invertColor?: boolean
                     blendModeLighten?: boolean

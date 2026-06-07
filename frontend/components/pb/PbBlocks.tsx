@@ -3,7 +3,7 @@
 import {colorValue} from '@/lib/colorValue'
 import {cn, getClipPath} from '@/lib/utils'
 import type {PbBlockVideoEmbed} from '@/sanity.types'
-import {NavItem, PbBlocksQueryResult} from '@/types'
+import {PbBlocksQueryResult} from '@/types'
 import {PortableText, PortableTextBlock} from 'next-sanity'
 import type {Image as SanityImageType} from 'sanity'
 import Button from '../shared/Button'
@@ -182,18 +182,26 @@ export function ImageBlock({block, trueSizes}) {
 }
 
 export function ButtonBlock({block}) {
+  const isPage = block.linkType === 'sitePage'
+  const isExternal = block.linkType === 'externalLink'
+  const isFile = block.linkType === 'file'
   return (
-    <>
-      {block.linkType === 'sitePage' && <Button navItem={block.sitePage as NavItem} />}
-      {block.linkType === 'externalLink' && <Button navItem={block.externalLink as NavItem} />}
-      {block.linkType === 'file' && (
-        <Button
-          path={block.fileLink?.url || ''}
-          text={block.fileLink?.buttonText || 'Download'}
-          download
-        />
-      )}
-    </>
+    <Button
+      navItem={
+        isPage
+          ? block.sitePage
+          : isExternal
+            ? block.externalLink
+            : isFile
+              ? block.fileLink
+              : undefined
+      }
+      path={isFile ? block.fileLink?.url || '' : undefined}
+      text={isFile ? block.fileLink?.buttonText || 'Download' : undefined}
+      download={isFile ? true : false}
+      icon={block.icon}
+      outline={block.buttonStyle === 'outline'}
+    />
   )
 }
 
