@@ -22,6 +22,7 @@ import pbBlockText from './pbBlocks/pbBlockText'
 import pbBlockVideoEmbed from './pbBlocks/pbBlockVideoEmbed'
 import pbSections from './pbSections'
 import column from './pbSections/column'
+import pbBanner from './pbSections/pbBanner'
 import pbColSettings from './pbSections/pbColSettings'
 import pbGridDouble from './pbSections/pbGridDouble'
 import pbGridMulti from './pbSections/pbGridMulti'
@@ -47,6 +48,7 @@ export const schemaTypes = [
   navExternal,
   navLinks,
   navPage,
+  pbBanner,
   pbBlockImage,
   pbBlockButton,
   pbBlocks,

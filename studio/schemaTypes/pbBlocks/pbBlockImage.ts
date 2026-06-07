@@ -24,6 +24,14 @@ export const hotspotPreviews = [
   { title: 'Logo - DB', aspectRatio: 1.6411287988 },
 ]
 
+export const imageMaskTypes = [
+  { title: 'None', value: 'none' },
+  { title: 'Notches', value: 'notches' },
+  { title: 'Logo - DB', value: 'logoDB' },
+  { title: 'Arch - IK', value: 'archIK' },
+  { title: 'Arch - TT', value: 'archTT' },
+]
+
 export default defineType({
   name: 'pbBlockImage',
   title: 'Image',
@@ -48,13 +56,7 @@ export default defineType({
       title: 'Image Mask',
       type: 'string',
       options: {
-        list: [
-          { title: 'None', value: 'none' },
-          { title: 'Notches', value: 'notches' },
-          { title: 'Logo - DB', value: 'logoDB' },
-          { title: 'Arch - IK', value: 'archIK' },
-          { title: 'Arch - TT', value: 'archTT' },
-        ],
+        list: imageMaskTypes,
       },
       initialValue: 'none',
     }),
@@ -92,15 +94,6 @@ export default defineType({
         'Enable for images above the fold to improve loading performance',
       initialValue: false,
     }),
-    defineField({
-      name: 'disableCorners',
-      title: 'Disable Rounded Corners?',
-      description:
-        'Disable if corner rounding causes issues (e.g. logos, icons, infographics).',
-      type: 'boolean',
-      initialValue: false,
-      hidden: ({ parent }) => parent?.imageMaskType !== 'none',
-    }),
   ],
   preview: {
     select: {
@@ -119,18 +112,13 @@ export default defineType({
       const imageCropText = imageCrop
         ? `: ${crops.find((crop) => crop.value === imageCrop)?.title}`
         : 'Original'
-      const disableCornersText = disableCorners
-        ? '/ Corners: Normal'
-        : '/ Corners: Rounded'
       return {
         title: 'Image: ' + altText,
         subtitle:
           'Crop: ' +
           imageCropText +
           ' / Priority: ' +
-          priorityText +
-          ' / Tone: ' +
-          disableCornersText,
+          priorityText,
         media: image ? image : ImageIcon,
       }
     },

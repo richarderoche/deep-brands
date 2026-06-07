@@ -24,6 +24,7 @@ export interface PbBlocksProps {
     tablet?: string
     desktop?: string
   }
+  className?: string
 }
 
 export default function PbBlocks({
@@ -35,6 +36,7 @@ export default function PbBlocks({
     tablet: 'md:grid-cols-1',
     desktop: 'lg:grid-cols-1',
   },
+  className,
 }: PbBlocksProps) {
   const {getDataAttribute} = useSanityDataAttribute()
   return (
@@ -45,6 +47,7 @@ export default function PbBlocks({
         blockWidths.tablet,
         blockWidths.desktop,
         spaceBetweenBlocks,
+        className,
       )}
     >
       {columnBlocks &&

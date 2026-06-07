@@ -569,6 +569,121 @@
   },
   {
     "type": "type",
+    "name": "bannerImage",
+    "value": {
+      "type": "object",
+      "attributes": {
+        "position": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "union",
+            "of": [
+              {
+                "type": "string",
+                "value": "offsetXY"
+              },
+              {
+                "type": "string",
+                "value": "offsetX"
+              },
+              {
+                "type": "string",
+                "value": "edge"
+              }
+            ]
+          },
+          "optional": true
+        },
+        "image": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "inline",
+            "name": "bannerImage.image"
+          },
+          "optional": true
+        },
+        "imageMaskType": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "union",
+            "of": [
+              {
+                "type": "string",
+                "value": "none"
+              },
+              {
+                "type": "string",
+                "value": "notches"
+              },
+              {
+                "type": "string",
+                "value": "logoDB"
+              },
+              {
+                "type": "string",
+                "value": "archIK"
+              },
+              {
+                "type": "string",
+                "value": "archTT"
+              }
+            ]
+          },
+          "optional": true
+        },
+        "imageCrop": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "union",
+            "of": [
+              {
+                "type": "number",
+                "value": 0
+              },
+              {
+                "type": "number",
+                "value": 1
+              },
+              {
+                "type": "number",
+                "value": 0.8
+              },
+              {
+                "type": "number",
+                "value": 0.6666666667
+              },
+              {
+                "type": "number",
+                "value": 1.25
+              },
+              {
+                "type": "number",
+                "value": 1.5
+              },
+              {
+                "type": "number",
+                "value": 1.7777777778
+              },
+              {
+                "type": "number",
+                "value": 2.5
+              }
+            ]
+          },
+          "optional": true
+        },
+        "priority": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "boolean"
+          },
+          "optional": true
+        }
+      }
+    }
+  },
+  {
+    "type": "type",
     "name": "yAlignment",
     "value": {
       "type": "object",
@@ -806,6 +921,61 @@
           "value": {
             "type": "inline",
             "name": "sanity.imageCrop"
+          },
+          "optional": true
+        },
+        "_type": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string",
+            "value": "image"
+          }
+        }
+      }
+    }
+  },
+  {
+    "type": "type",
+    "name": "bannerImage.image",
+    "value": {
+      "type": "object",
+      "attributes": {
+        "asset": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "inline",
+            "name": "sanity.imageAsset.reference"
+          },
+          "optional": true
+        },
+        "media": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "inline",
+            "name": "bannerImage.image.media"
+          },
+          "optional": true
+        },
+        "hotspot": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "inline",
+            "name": "sanity.imageHotspot"
+          },
+          "optional": true
+        },
+        "crop": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "inline",
+            "name": "sanity.imageCrop"
+          },
+          "optional": true
+        },
+        "alt": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
           },
           "optional": true
         },
@@ -2139,6 +2309,21 @@
             "rest": {
               "type": "inline",
               "name": "pbGridDouble"
+            }
+          },
+          {
+            "type": "object",
+            "attributes": {
+              "_key": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "string"
+                }
+              }
+            },
+            "rest": {
+              "type": "inline",
+              "name": "pbBanner"
             }
           }
         ]
@@ -3536,11 +3721,109 @@
             "type": "boolean"
           },
           "optional": true
-        },
-        "disableCorners": {
+        }
+      }
+    }
+  },
+  {
+    "name": "pbBanner",
+    "type": "type",
+    "value": {
+      "type": "object",
+      "attributes": {
+        "_type": {
           "type": "objectAttribute",
           "value": {
-            "type": "boolean"
+            "type": "string",
+            "value": "pbBanner"
+          }
+        },
+        "sectionSettings": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "inline",
+            "name": "pbSectionSettings"
+          },
+          "optional": true
+        },
+        "sectionName": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
+          },
+          "optional": true
+        },
+        "bannerDirection": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "union",
+            "of": [
+              {
+                "type": "string",
+                "value": "ltr"
+              },
+              {
+                "type": "string",
+                "value": "rtl"
+              }
+            ]
+          },
+          "optional": true
+        },
+        "bgColor": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "inline",
+            "name": "colorChoice"
+          },
+          "optional": true
+        },
+        "bannerImage": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "inline",
+            "name": "bannerImage"
+          },
+          "optional": true
+        },
+        "pbBlocks": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "inline",
+            "name": "pbBlocks"
+          },
+          "optional": true
+        },
+        "spaceBetweenBlocks": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "union",
+            "of": [
+              {
+                "type": "string",
+                "value": "gap-0"
+              },
+              {
+                "type": "string",
+                "value": "gap-gut-25"
+              },
+              {
+                "type": "string",
+                "value": "gap-gut-50"
+              },
+              {
+                "type": "string",
+                "value": "gap-gut"
+              },
+              {
+                "type": "string",
+                "value": "gap-gut-150"
+              },
+              {
+                "type": "string",
+                "value": "gap-gut-200"
+              }
+            ]
           },
           "optional": true
         }

@@ -51,6 +51,7 @@
   --spacing-btn: 1.625em;
 
   --radius-btn: 3px;
+  --radius-banner: var(--gut);
   /* Use .corner-container > .corner or .corner-sm
   for container-relative rounded corners */
   --radius-xs: 0.4rem;

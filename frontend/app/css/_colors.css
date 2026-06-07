@@ -32,6 +32,7 @@
   --black-oklch: 0 0 0;
 }
 
+.dark-theme .light-theme,
 .light-theme {
   --theme-body: oklch(var(--blue-800-oklch));
   --theme-bg: oklch(var(--offwhite-oklch));
@@ -46,6 +47,7 @@
   }
 }
 
+.light-theme .dark-theme,
 .dark-theme {
   --theme-body: oklch(var(--offwhite-oklch));
   --theme-bg: oklch(var(--blue-900-oklch));

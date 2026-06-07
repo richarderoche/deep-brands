@@ -11,6 +11,7 @@ import {
   SanityVisualEditingPath,
   useSanityDataAttribute,
 } from './SanityVisualEditingContext'
+import SectionBanner from './SectionBanner'
 import SectionGridDouble from './SectionGridDouble'
 import SectionGridMulti from './SectionGridMulti'
 import SectionGridSingle from './SectionGridSingle'
@@ -68,7 +69,9 @@ export default function PageBuilderSections({
                 className={cn('h-ornament', !bgColor && 'text-bg')}
               />
             )}
-            <div className={cn('py-gut-50 group-first:pt-0 group-last:pb-gut-300 overflow-x-hidden')}>
+            <div
+              className={cn('py-gut-50 group-first:pt-0 group-last:pb-gut-300 overflow-x-hidden')}
+            >
               <div
                 style={{
                   paddingTop: marginTop ? `calc(var(--gut) * ${marginTop})` : undefined,
@@ -89,6 +92,13 @@ export default function PageBuilderSections({
                   )}
                   {section._type === 'pbTitleSection' && (
                     <SectionTitleHero section={section} isFirst={_key === firstPbSectionKey} />
+                  )}
+                  {section._type === 'pbBanner' && (
+                    <SectionBanner
+                      section={section}
+                      sectionKey={_key}
+                      isDarkBgColor={isDarkBgColor}
+                    />
                   )}
                 </SanityVisualEditingPath>
               </div>

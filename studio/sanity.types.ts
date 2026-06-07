@@ -50,6 +50,14 @@ export type BlockWidths = {
   desktop?: "lg:grid-cols-1" | "lg:grid-cols-2" | "lg:grid-cols-3" | "lg:grid-cols-4";
 };
 
+export type BannerImage = {
+  position?: "offsetXY" | "offsetX" | "edge";
+  image?: BannerImageImage;
+  imageMaskType?: "none" | "notches" | "logoDB" | "archIK" | "archTT";
+  imageCrop?: 0 | 1 | 0.8 | 0.6666666667 | 1.25 | 1.5 | 1.7777777778 | 2.5;
+  priority?: boolean;
+};
+
 export type YAlignment = {
   mobile: "self-start" | "self-center" | "self-end";
   tablet: "inherit" | "self-start" | "self-center" | "self-end";
@@ -90,6 +98,16 @@ export type ImageElementImage = {
 ;
   hotspot?: SanityImageHotspot;
   crop?: SanityImageCrop;
+  _type: "image";
+};
+
+export type BannerImageImage = {
+  asset?: SanityImageAssetReference;
+  media?: unknown // Unable to locate the referenced type "bannerImage.image.media" in schema
+;
+  hotspot?: SanityImageHotspot;
+  crop?: SanityImageCrop;
+  alt?: string;
   _type: "image";
 };
 
@@ -258,7 +276,9 @@ export type PbSections = Array<{
   _key: string;
 } & PbGridSingle | {
   _key: string;
-} & PbGridDouble>;
+} & PbGridDouble | {
+  _key: string;
+} & PbBanner>;
 
 export type PbGridDouble = {
   _type: "pbGridDouble";
@@ -403,7 +423,17 @@ export type PbBlockImage = {
   imageWidth?: number;
   caption?: string;
   priority?: boolean;
-  disableCorners?: boolean;
+};
+
+export type PbBanner = {
+  _type: "pbBanner";
+  sectionSettings?: PbSectionSettings;
+  sectionName?: string;
+  bannerDirection?: "ltr" | "rtl";
+  bgColor?: ColorChoice;
+  bannerImage?: BannerImage;
+  pbBlocks?: PbBlocks;
+  spaceBetweenBlocks?: "gap-0" | "gap-gut-25" | "gap-gut-50" | "gap-gut" | "gap-gut-150" | "gap-gut-200";
 };
 
 export type HomeReference = {
@@ -718,5 +748,5 @@ export type Geopoint = {
   alt?: number;
 };
 
-export type AllSanitySchemaTypes = Size | Start | VideoAspectRatio | FileLink | PbBlockMarqueeSettings | BlockWidths | YAlignment | SanityFileAssetReference | FileLinkFile | PbBlockButtonFileLinkFile | SanityImageAssetReference | ImageElementImage | SocialLink | Seo | PageReference | PtSlim | PtSingle | PtItalic | PtBody | PtBasic | PbTitleSection | PbSectionSettings | PbSections | PbGridDouble | PbGridSingle | PbGridMulti | PbColSettings | PbBlockVideoEmbed | PbBlockText | PbBlockPlainText | PbBlockMarquee | PbBlockDivider | PbBlocks | PbBlockButton | PbBlockImage | HomeReference | NavPage | NavLinks | NavExternal | ColorChoice | Column | Redirect | Note | Brands | SanityImageCrop | SanityImageHotspot | BrandsReference | Settings | Home | Page | Slug | Color | RgbaColor | HsvaColor | HslaColor | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageMetadata | SanityFileAsset | SanityAssetSourceData | SanityImageAsset | Geopoint;
+export type AllSanitySchemaTypes = Size | Start | VideoAspectRatio | FileLink | PbBlockMarqueeSettings | BlockWidths | BannerImage | YAlignment | SanityFileAssetReference | FileLinkFile | PbBlockButtonFileLinkFile | SanityImageAssetReference | ImageElementImage | BannerImageImage | SocialLink | Seo | PageReference | PtSlim | PtSingle | PtItalic | PtBody | PtBasic | PbTitleSection | PbSectionSettings | PbSections | PbGridDouble | PbGridSingle | PbGridMulti | PbColSettings | PbBlockVideoEmbed | PbBlockText | PbBlockPlainText | PbBlockMarquee | PbBlockDivider | PbBlocks | PbBlockButton | PbBlockImage | PbBanner | HomeReference | NavPage | NavLinks | NavExternal | ColorChoice | Column | Redirect | Note | Brands | SanityImageCrop | SanityImageHotspot | BrandsReference | Settings | Home | Page | Slug | Color | RgbaColor | HsvaColor | HslaColor | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageMetadata | SanityFileAsset | SanityAssetSourceData | SanityImageAsset | Geopoint;
 

@@ -104,6 +104,12 @@ const pb = `
         }
       }
     },
+    _type == "pbBanner" => {
+      ...,
+      pbBlocks[]{
+        ${pbBlocks}
+      }
+    },
   }
 `
 
