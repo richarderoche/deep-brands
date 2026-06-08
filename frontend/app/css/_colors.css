@@ -35,6 +35,7 @@
 .dark-theme .light-theme,
 .light-theme {
   --theme-body: oklch(var(--blue-800-oklch));
+  --theme-body-semitransparent: oklch(var(--blue-800-oklch) / 0.65);
   --theme-bg: oklch(var(--offwhite-oklch));
   --theme-bg-subtle: oklch(var(--logo-tan-oklch));
 
@@ -50,6 +51,7 @@
 .light-theme .dark-theme,
 .dark-theme {
   --theme-body: oklch(var(--offwhite-oklch));
+  --theme-body-semitransparent: oklch(var(--offwhite-oklch) / 0.65);
   --theme-bg: oklch(var(--blue-900-oklch));
   --theme-bg-subtle: oklch(var(--blue-800-oklch));
 

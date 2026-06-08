@@ -1,8 +1,12 @@
-import type { ColorChoice } from '@/sanity.types'
+import type {ColorChoice} from '@/sanity.types'
 
 export function colorValue(color?: ColorChoice | null): string | undefined {
   if (!color?.colorType || color.colorType === 'none') {
     return undefined
+  }
+
+  if (color.colorType === 'semitransparent') {
+    return `var(--theme-body-semitransparent)`
   }
 
   switch (color.colorType) {

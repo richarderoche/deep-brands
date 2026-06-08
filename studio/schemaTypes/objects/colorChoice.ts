@@ -15,6 +15,7 @@ export default defineType({
       options: {
         list: [
           { title: 'Default', value: 'none' },
+          { title: 'Default 65%', value: 'semitransparent' },
           { title: 'Dark', value: 'dark' },
           { title: 'Light', value: 'light' },
           { title: 'Custom', value: 'custom' },

@@ -1,20 +1,29 @@
-import {PbBanner} from '@/sanity.types'
-
+'use client'
 import {isDark} from '@/lib/checkColor'
 import {colorValue} from '@/lib/colorValue'
+import {usePrefersReducedMotion} from '@/lib/hooks'
 import {cn} from '@/lib/utils'
+import {PbBanner} from '@/sanity.types'
 import {PbBlocksQueryResult} from '@/types'
+import {useGSAP} from '@gsap/react'
+import gsap from 'gsap'
+import {ScrollTrigger} from 'gsap/all'
+import {useRef} from 'react'
+import IconOrnamentRight from '../icons/IconOrnamentRight'
 import PbBlocks, {ImageBlock} from './PbBlocks'
 
-export default function SectionGridSingle({
-  section,
-  sectionKey,
-  isDarkBgColor,
-}: {
-  section: PbBanner
-  sectionKey: string
-  isDarkBgColor: boolean
-}) {
+gsap.registerPlugin(ScrollTrigger)
+
+const TRIGGER_START = 'top 95%'
+const BACKDROP_DURATION = 0.8
+const BLOCKS_DURATION = 1.3
+const BACKDROP_EASE = 'power3.out'
+const BLOCKS_EASE = 'expo.out'
+const DELAY = 0.2
+const STAGGER = 0.15
+const BLOCKS_OVERLAP = 0.3
+
+export default function SectionGridSingle({section}: {section: PbBanner}) {
   const {pbBlocks, spaceBetweenBlocks, bgColor, bannerImage, bannerDirection} = section
   const hasBlocks = pbBlocks && pbBlocks.length > 0
   const hasBannerImage = bannerImage && bannerImage.image
@@ -23,9 +32,46 @@ export default function SectionGridSingle({
   const isOffset = isOffsetX || isOffsetXY
   const isRTL = bannerDirection === 'rtl'
   const bannerColor = colorValue(bgColor)
+  const bannerContainerRef = useRef<HTMLDivElement>(null)
+  const reducedMotion = usePrefersReducedMotion()
   const isDarkBannerColor =
     (bgColor?.colorType === 'custom' && !!bannerColor && isDark(bannerColor)) ||
     (bgColor?.colorType === 'dark' && !!bannerColor)
+
+  useGSAP(
+    () => {
+      const el = bannerContainerRef.current
+      if (!el) return
+
+      const scrollTrigger = {trigger: el, start: TRIGGER_START, markers: false}
+      const blockDistance = reducedMotion ? 0 : 30
+
+      const tl = gsap.timeline({scrollTrigger, delay: DELAY})
+
+      if (!reducedMotion) {
+        const slideFrom = isRTL ? window.innerWidth : -window.innerWidth
+        tl.fromTo(
+          '.banner-backdrop',
+          {x: slideFrom},
+          {x: 0, duration: BACKDROP_DURATION, ease: BACKDROP_EASE},
+        )
+      }
+
+      tl.fromTo(
+        '.column-blocks > *',
+        {y: blockDistance, opacity: 0},
+        {
+          y: 0,
+          opacity: 1,
+          duration: BLOCKS_DURATION,
+          ease: BLOCKS_EASE,
+          stagger: STAGGER,
+        },
+        reducedMotion ? 0 : `-=${BACKDROP_DURATION * BLOCKS_OVERLAP}`,
+      )
+    },
+    {scope: bannerContainerRef, dependencies: [isRTL, reducedMotion, hasBlocks]},
+  )
 
   if (!hasBlocks && !hasBannerImage) {
     return null
@@ -45,21 +91,27 @@ export default function SectionGridSingle({
           className={cn(
             'relative z-1 shadow-md max-lg:top-gut-150',
             isOffset ? 'lg:w-[40vw]' : 'w-[35vw] lg:w-[30vw]',
-            isOffsetXY && 'lg:self-start lg:-top-gut-200',
-            isOffset && isRTL && '-right-gut lg:-right-gut-200',
-            isOffset && !isRTL && '-left-gut lg:-left-gut-200',
+            isOffsetXY && 'lg:self-start lg:-top-gut-150',
+            isOffset && isRTL && '-right-gut',
+            isOffset && !isRTL && '-left-gut',
           )}
         >
           <ImageBlock block={bannerImage} trueSizes="40vw" />
         </div>
-        <div className="relative">
+        <div ref={bannerContainerRef} className="relative">
           <div
             className={cn(
-              'absolute top-0 w-[200vw] h-full rounded-banner',
+              'banner-backdrop absolute top-0 w-[200vw] h-full rounded-banner',
               isRTL ? 'left-0' : 'right-0',
             )}
             style={{backgroundColor: bannerColor}}
-          ></div>
+          >
+            <IconOrnamentRight
+              style={{color: bannerColor}}
+              className={cn('w-gut-150 md:w-gut', !bannerColor && 'text-bg')}
+              flip={isRTL}
+            />
+          </div>
           <div
             className={cn(
               'max-lg:px-gut max-lg:pt-gut-300 pt-gut-200 pb-gut-200 relative z-1',

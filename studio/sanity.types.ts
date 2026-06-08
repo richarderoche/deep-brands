@@ -467,7 +467,7 @@ export type NavExternal = {
 
 export type ColorChoice = {
   _type: "colorChoice";
-  colorType?: "none" | "dark" | "light" | "custom";
+  colorType?: "none" | "semitransparent" | "dark" | "light" | "custom";
   colorDark?: "--color-blue-800" | "--color-blue-700" | "--color-blue-650" | "--color-teal" | "--color-logo-red" | "--color-ik-red" | "--color-tt-pink" | "--color-tt-teal" | "--color-saffron-600" | "--color-chili-600" | "--color-tumeric-600" | "--color-lime-600" | "--color-lotus-600";
   colorLight?: "--color-offwhite" | "--color-blue-200" | "--color-saffron-200" | "--color-chili-200" | "--color-tumeric-200" | "--color-lime-200" | "--color-lotus-200";
   colorCustom?: Color;

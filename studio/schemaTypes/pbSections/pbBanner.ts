@@ -2,7 +2,7 @@ import { defineField, defineType } from 'sanity'
 import { IconBanner } from '../../lib/customIcons'
 import { getTypeTitles } from '../../lib/utils'
 import { imgAltField, sectionNameField, spaceBetweenBlocksField } from '../fields'
-import { crops, imageMaskTypes } from '../pbBlocks/pbBlockImage'
+import { crops, hotspotPreviews, imageMaskTypes } from '../pbBlocks/pbBlockImage'
 
 export default defineType({
   title: 'Banner Section',
@@ -51,7 +51,9 @@ export default defineType({
             defineField(imgAltField),
           ],
           options: {
-            hotspot: true,
+            hotspot: {
+              previews: hotspotPreviews,
+            },
             collapsible: false,
           },
         }),

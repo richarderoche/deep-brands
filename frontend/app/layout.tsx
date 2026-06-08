@@ -122,7 +122,7 @@ export default async function RootLayout({children}: LayoutProps<'/'>) {
         <IconMasks />
         <Lenis />
         <GSAP />
-        <div className="flex min-h-screen flex-col justify-start ts-body ts-p-md">
+        <div className="flex min-h-screen flex-col justify-start ts-body ts-p-md overflow-x-hidden max-w-full">
           {/* <Navbar /> */}
           <main className="grow" id="main-content">
             {children}

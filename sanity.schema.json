@@ -4019,6 +4019,10 @@
               },
               {
                 "type": "string",
+                "value": "semitransparent"
+              },
+              {
+                "type": "string",
                 "value": "dark"
               },
               {

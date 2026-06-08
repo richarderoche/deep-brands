@@ -543,7 +543,7 @@ export type NavExternal = {
 
 export type ColorChoice = {
   _type: 'colorChoice'
-  colorType?: 'none' | 'dark' | 'light' | 'custom'
+  colorType?: 'none' | 'semitransparent' | 'dark' | 'light' | 'custom'
   colorDark?:
     | '--color-blue-800'
     | '--color-blue-700'
