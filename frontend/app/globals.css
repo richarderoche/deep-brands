@@ -49,7 +49,7 @@
   --spacing-max-ch: 55ch;
   --spacing-header: calc(var(--gut) * 2);
   --spacing-ornament: calc(var(--gut) * 1.25);
-  --spacing-btn: 1.625em;
+  --spacing-btn: 1.75em;
 
   --radius-btn: 3px;
   --radius-banner: var(--gut);

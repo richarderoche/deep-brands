@@ -62,7 +62,7 @@ export default function SectionGridSingle({
           ></div>
           <div
             className={cn(
-              'px-gut max-lg:pt-gut-300 pt-gut-200 pb-gut-200 relative z-1',
+              'max-lg:px-gut max-lg:pt-gut-300 pt-gut-200 pb-gut-200 relative z-1',
               isOffset ? 'lg:w-[50vw]' : 'lg:w-[55vw]',
               !isRTL && 'lg:pr-gut',
               isRTL && 'lg:pl-gut',
