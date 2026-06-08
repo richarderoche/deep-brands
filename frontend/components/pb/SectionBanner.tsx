@@ -35,21 +35,22 @@ export default function SectionGridSingle({
     <div className={isOffset ? 'max-w-[2000px] mx-auto' : ''}>
       <div
         className={cn(
-          'max-md:flex-col flex md:items-center',
-          isRTL && 'flex-row-reverse',
+          'flex max-lg:flex-col lg:items-center',
+          isRTL ? 'flex-row-reverse max-lg:pl-gut-200' : 'max-lg:pr-gut-200',
           isOffset && 'pt-gut-200',
+          !isOffset && isRTL && 'max-lg:items-end',
         )}
       >
         <div
           className={cn(
-            'relative z-1',
-            isOffset ? 'w-[40vw]' : 'w-[30vw]',
-            isOffsetXY && 'self-start -top-gut-200',
-            isOffset && isRTL && '-right-gut-200',
-            isOffset && !isRTL && '-left-gut-200',
+            'relative z-1 shadow-md max-lg:top-gut-150',
+            isOffset ? 'lg:w-[40vw]' : 'w-[35vw] lg:w-[30vw]',
+            isOffsetXY && 'lg:self-start lg:-top-gut-200',
+            isOffset && isRTL && '-right-gut lg:-right-gut-200',
+            isOffset && !isRTL && '-left-gut lg:-left-gut-200',
           )}
         >
-          <ImageBlock block={bannerImage} trueSizes="30vw" />
+          <ImageBlock block={bannerImage} trueSizes="40vw" />
         </div>
         <div className="relative">
           <div
@@ -61,12 +62,12 @@ export default function SectionGridSingle({
           ></div>
           <div
             className={cn(
-              'py-gut-200 relative z-1 border',
-              isOffset ? 'w-[50vw]' : 'w-[55vw]',
-              !isRTL && 'pr-gut',
-              isRTL && 'pl-gut',
-              !isOffset && !isRTL && 'pl-gut-200',
-              !isOffset && isRTL && 'pr-gut-200',
+              'px-gut max-lg:pt-gut-300 pt-gut-200 pb-gut-200 relative z-1',
+              isOffset ? 'lg:w-[50vw]' : 'lg:w-[55vw]',
+              !isRTL && 'lg:pr-gut',
+              isRTL && 'lg:pl-gut',
+              !isOffset && !isRTL && 'lg:pl-gut-200',
+              !isOffset && isRTL && 'lg:pr-gut-200',
               isDarkBannerColor
                 ? 'dark-theme theme-vars-only text-body'
                 : 'light-theme theme-vars-only text-body',
@@ -76,7 +77,6 @@ export default function SectionGridSingle({
               columnBlocks={pbBlocks as PbBlocksQueryResult}
               trueSizes="66vw"
               spaceBetweenBlocks={spaceBetweenBlocks || 'gap-gut'}
-              className="border"
             />
           </div>
         </div>

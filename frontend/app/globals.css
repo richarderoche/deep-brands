@@ -23,6 +23,7 @@
 
   --leading-*: initial;
   --tracking-*: initial;
+  --shadow-*: initial;
 
   --spacing: 0.0625rem;
   --spacing-em: 1em;
