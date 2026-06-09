@@ -15,6 +15,7 @@ import SectionBanner from './SectionBanner'
 import SectionGridDouble from './SectionGridDouble'
 import SectionGridMulti from './SectionGridMulti'
 import SectionGridSingle from './SectionGridSingle'
+import SectionImageAndCard from './SectionImageAndCard'
 import SectionTitleHero from './SectionTitleHero'
 
 export interface PageBuilderContentProps {
@@ -66,10 +67,10 @@ export default function PageBuilderSections({
             {topOrnament && (
               <IconOrnamentTop
                 style={{color: bgColor}}
-                className={cn('h-ornament', !bgColor && 'text-bg')}
+                className={cn('h-ornament w-auto', !bgColor && 'text-bg')}
               />
             )}
-            <div className={cn('py-gut-50 group-first:pt-0 group-last:pb-gut-300')}>
+            <div className={cn('py-gut-50 group-first:pt-0 group-last:pb-gut-500')}>
               <div
                 style={{
                   paddingTop: marginTop ? `calc(var(--gut) * ${marginTop})` : undefined,
@@ -92,6 +93,7 @@ export default function PageBuilderSections({
                     <SectionTitleHero section={section} isFirst={_key === firstPbSectionKey} />
                   )}
                   {section._type === 'pbBanner' && <SectionBanner section={section} />}
+                  {section._type === 'pbImageWithCard' && <SectionImageAndCard section={section} />}
                 </SanityVisualEditingPath>
               </div>
             </div>

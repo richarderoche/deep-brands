@@ -90,9 +90,9 @@ export default function SectionGridSingle({section}: {section: PbBanner}) {
         <div
           className={cn(
             'relative z-1 shadow-md max-lg:top-gut-150',
-            isOffset ? 'lg:w-[40vw]' : 'w-[35vw] lg:w-[30vw]',
+            isOffset ? 'md:w-[75vw] lg:w-[40vw]' : 'w-[35vw] lg:w-[30vw]',
             isOffsetXY && 'lg:self-start lg:-top-gut-150',
-            isOffset && isRTL && '-right-gut',
+            isOffset && isRTL && '-right-gut md:max-lg:ml-auto',
             isOffset && !isRTL && '-left-gut',
           )}
         >
@@ -115,9 +115,9 @@ export default function SectionGridSingle({section}: {section: PbBanner}) {
           <div
             className={cn(
               'max-lg:px-gut max-lg:pt-gut-300 pt-gut-200 pb-gut-200 relative z-1',
-              isOffset ? 'lg:w-[50vw]' : 'lg:w-[55vw]',
-              !isRTL && 'lg:pr-gut',
-              isRTL && 'lg:pl-gut',
+              isOffset ? 'lg:w-[50vw] lg:px-gut' : 'lg:w-[55vw]',
+              !isRTL && 'lg:pr-gut-150',
+              isRTL && 'lg:pl-gut-150',
               !isOffset && !isRTL && 'lg:pl-gut-200',
               !isOffset && isRTL && 'lg:pr-gut-200',
               isDarkBannerColor

@@ -12,741 +12,963 @@
  * ---------------------------------------------------------------------------------
  */
 
-export declare const internalGroqTypeReferenceTo: unique symbol;
+export declare const internalGroqTypeReferenceTo: unique symbol
 
 // Source: ../sanity.schema.json
 export type Size = {
-  mobile: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
-  tablet: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
-  desktop: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
-};
+  mobile: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12
+  tablet: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12
+  desktop: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12
+}
 
 export type Start = {
-  mobile: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
-  tablet: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
-  desktop: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
-};
+  mobile: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12
+  tablet: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12
+  desktop: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12
+}
 
 export type VideoAspectRatio = {
-  width: number;
-  height: number;
-};
+  width: number
+  height: number
+}
 
 export type FileLink = {
-  file?: PbBlockButtonFileLinkFile;
-  buttonText?: string;
-};
+  file?: PbBlockButtonFileLinkFile
+  buttonText?: string
+}
 
 export type PbBlockMarqueeSettings = {
-  speed: number;
-  direction?: "left" | "right";
-  color?: "text-body" | "text-accent";
-  imageSize: number;
-};
+  speed: number
+  direction?: 'left' | 'right'
+  color?: 'text-body' | 'text-accent'
+  imageSize: number
+}
 
 export type BlockWidths = {
-  mobile?: "grid-cols-1" | "grid-cols-2" | "grid-cols-3" | "grid-cols-4";
-  tablet?: "md:grid-cols-1" | "md:grid-cols-2" | "md:grid-cols-3" | "md:grid-cols-4";
-  desktop?: "lg:grid-cols-1" | "lg:grid-cols-2" | "lg:grid-cols-3" | "lg:grid-cols-4";
-};
+  mobile?: 'grid-cols-1' | 'grid-cols-2' | 'grid-cols-3' | 'grid-cols-4'
+  tablet?: 'md:grid-cols-1' | 'md:grid-cols-2' | 'md:grid-cols-3' | 'md:grid-cols-4'
+  desktop?: 'lg:grid-cols-1' | 'lg:grid-cols-2' | 'lg:grid-cols-3' | 'lg:grid-cols-4'
+}
 
 export type BannerImage = {
-  position?: "offsetXY" | "offsetX" | "edge";
-  image?: BannerImageImage;
-  imageMaskType?: "none" | "notches" | "logoDB" | "archIK" | "archTT";
-  imageCrop?: 0 | 1 | 0.8 | 0.6666666667 | 1.25 | 1.5 | 1.7777777778 | 2.5;
-  priority?: boolean;
-};
+  position?: 'offsetXY' | 'offsetX' | 'edge'
+  image?: BannerImageImage
+  imageMaskType?: 'none' | 'notches' | 'logoDB' | 'archIK' | 'archTT'
+  imageCrop?: 0 | 1 | 0.8 | 0.6666666667 | 1.25 | 1.5 | 1.7777777778 | 2.5
+  priority?: boolean
+}
+
+export type BackgroundImage = {
+  image?: BackgroundImageImage
+  imageMaskType?: 'none' | 'notches' | 'logoDB' | 'archIK' | 'archTT'
+  imageCrop?: 0 | 1 | 0.8 | 0.6666666667 | 1.25 | 1.5 | 1.7777777778 | 2.5
+  priority?: boolean
+}
 
 export type YAlignment = {
-  mobile: "self-start" | "self-center" | "self-end";
-  tablet: "inherit" | "self-start" | "self-center" | "self-end";
-  desktop: "inherit" | "self-start" | "self-center" | "self-end";
-};
+  mobile: 'self-start' | 'self-center' | 'self-end'
+  tablet: 'inherit' | 'self-start' | 'self-center' | 'self-end'
+  desktop: 'inherit' | 'self-start' | 'self-center' | 'self-end'
+}
 
 export type SanityFileAssetReference = {
-  _ref: string;
-  _type: "reference";
-  _weak?: boolean;
-  [internalGroqTypeReferenceTo]?: "sanity.fileAsset";
-};
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+}
 
 export type FileLinkFile = {
-  asset?: SanityFileAssetReference;
+  asset?: SanityFileAssetReference
   media?: unknown // Unable to locate the referenced type "file.media" in schema
-;
-  _type: "file";
-};
+  _type: 'file'
+}
 
 export type PbBlockButtonFileLinkFile = {
-  asset?: SanityFileAssetReference;
+  asset?: SanityFileAssetReference
   media?: unknown // Unable to locate the referenced type "fileLink.file.media" in schema
-;
-  _type: "file";
-};
+  _type: 'file'
+}
 
 export type SanityImageAssetReference = {
-  _ref: string;
-  _type: "reference";
-  _weak?: boolean;
-  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-};
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+}
 
 export type ImageElementImage = {
-  asset?: SanityImageAssetReference;
+  asset?: SanityImageAssetReference
   media?: unknown // Unable to locate the referenced type "imageElement.image.media" in schema
-;
-  hotspot?: SanityImageHotspot;
-  crop?: SanityImageCrop;
-  _type: "image";
-};
+  hotspot?: SanityImageHotspot
+  crop?: SanityImageCrop
+  _type: 'image'
+}
 
 export type BannerImageImage = {
-  asset?: SanityImageAssetReference;
+  asset?: SanityImageAssetReference
   media?: unknown // Unable to locate the referenced type "bannerImage.image.media" in schema
-;
-  hotspot?: SanityImageHotspot;
-  crop?: SanityImageCrop;
-  alt?: string;
-  _type: "image";
-};
+  hotspot?: SanityImageHotspot
+  crop?: SanityImageCrop
+  alt?: string
+  _type: 'image'
+}
+
+export type BackgroundImageImage = {
+  asset?: SanityImageAssetReference
+  media?: unknown // Unable to locate the referenced type "backgroundImage.image.media" in schema
+  hotspot?: SanityImageHotspot
+  crop?: SanityImageCrop
+  alt?: string
+  _type: 'image'
+}
 
 export type SocialLink = {
-  _type: "socialLink";
-  icon?: "Facebook" | "Github" | "Instagram" | "Linkedin" | "Soundcloud" | "Spotify" | "Threads" | "Tiktok" | "Twitter" | "YouTube";
-  url?: string;
-};
+  _type: 'socialLink'
+  icon?:
+    | 'Facebook'
+    | 'Github'
+    | 'Instagram'
+    | 'Linkedin'
+    | 'Soundcloud'
+    | 'Spotify'
+    | 'Threads'
+    | 'Tiktok'
+    | 'Twitter'
+    | 'YouTube'
+  url?: string
+}
 
 export type Seo = {
-  _type: "seo";
+  _type: 'seo'
   image?: {
-    asset?: SanityImageAssetReference;
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    _type: "image";
-  };
-  seoTitle?: string;
-  description?: string;
-  hideFromSearchEngines?: boolean;
-};
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+  }
+  seoTitle?: string
+  description?: string
+  hideFromSearchEngines?: boolean
+}
 
 export type PageReference = {
-  _ref: string;
-  _type: "reference";
-  _weak?: boolean;
-  [internalGroqTypeReferenceTo]?: "page";
-};
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'page'
+}
 
 export type PtSlim = Array<{
   children?: Array<{
-    marks?: Array<string>;
-    text?: string;
-    _type: "span";
-    _key: string;
-  }>;
-  style?: "normal";
-  listItem?: never;
-  markDefs?: Array<{
-    href?: string;
-    _type: "link";
-    _key: string;
-  } | {
-    reference?: PageReference;
-    _type: "internalLink";
-    _key: string;
-  }>;
-  level?: number;
-  _type: "block";
-  _key: string;
-}>;
+    marks?: Array<string>
+    text?: string
+    _type: 'span'
+    _key: string
+  }>
+  style?: 'normal'
+  listItem?: never
+  markDefs?: Array<
+    | {
+        href?: string
+        _type: 'link'
+        _key: string
+      }
+    | {
+        reference?: PageReference
+        _type: 'internalLink'
+        _key: string
+      }
+  >
+  level?: number
+  _type: 'block'
+  _key: string
+}>
 
 export type PtSingle = Array<{
   children?: Array<{
-    marks?: Array<string>;
-    text?: string;
-    _type: "span";
-    _key: string;
-  }>;
-  style?: "normal";
-  listItem?: never;
-  markDefs?: Array<{
-    href?: string;
-    _type: "link";
-    _key: string;
-  } | {
-    reference?: PageReference;
-    _type: "internalLink";
-    _key: string;
-  }>;
-  level?: number;
-  _type: "block";
-  _key: string;
-}>;
+    marks?: Array<string>
+    text?: string
+    _type: 'span'
+    _key: string
+  }>
+  style?: 'normal'
+  listItem?: never
+  markDefs?: Array<
+    | {
+        href?: string
+        _type: 'link'
+        _key: string
+      }
+    | {
+        reference?: PageReference
+        _type: 'internalLink'
+        _key: string
+      }
+  >
+  level?: number
+  _type: 'block'
+  _key: string
+}>
 
 export type PtItalic = Array<{
   children?: Array<{
-    marks?: Array<string>;
-    text?: string;
-    _type: "span";
-    _key: string;
-  }>;
-  style?: "normal";
-  listItem?: never;
-  markDefs?: null;
-  level?: number;
-  _type: "block";
-  _key: string;
-}>;
+    marks?: Array<string>
+    text?: string
+    _type: 'span'
+    _key: string
+  }>
+  style?: 'normal'
+  listItem?: never
+  markDefs?: null
+  level?: number
+  _type: 'block'
+  _key: string
+}>
 
 export type PtBody = Array<{
   children?: Array<{
-    marks?: Array<string>;
-    text?: string;
-    _type: "span";
-    _key: string;
-  }>;
-  style?: "normal";
-  listItem?: "bullet" | "number";
-  markDefs?: null;
-  level?: number;
-  _type: "block";
-  _key: string;
-}>;
+    marks?: Array<string>
+    text?: string
+    _type: 'span'
+    _key: string
+  }>
+  style?: 'normal'
+  listItem?: 'bullet' | 'number'
+  markDefs?: null
+  level?: number
+  _type: 'block'
+  _key: string
+}>
 
 export type PtBasic = Array<{
   children?: Array<{
-    marks?: Array<string>;
-    text?: string;
-    _type: "span";
-    _key: string;
-  }>;
-  style?: "normal" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
-  listItem?: "bullet" | "number";
-  markDefs?: Array<{
-    href?: string;
-    _type: "link";
-    _key: string;
-  } | {
-    reference?: PageReference;
-    _type: "internalLink";
-    _key: string;
-  } | {
-    file?: FileLinkFile;
-    _type: "fileLink";
-    _key: string;
-  }>;
-  level?: number;
-  _type: "block";
-  _key: string;
-}>;
+    marks?: Array<string>
+    text?: string
+    _type: 'span'
+    _key: string
+  }>
+  style?: 'normal' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
+  listItem?: 'bullet' | 'number'
+  markDefs?: Array<
+    | {
+        href?: string
+        _type: 'link'
+        _key: string
+      }
+    | {
+        reference?: PageReference
+        _type: 'internalLink'
+        _key: string
+      }
+    | {
+        file?: FileLinkFile
+        _type: 'fileLink'
+        _key: string
+      }
+  >
+  level?: number
+  _type: 'block'
+  _key: string
+}>
 
 export type PbTitleSection = {
-  _type: "pbTitleSection";
-  sectionSettings?: PbSectionSettings;
-  titleMode?: "text" | "hero";
-  rowWidth?: 12 | 10 | 8 | 6;
-  title?: string;
-  subtitle?: string;
+  _type: 'pbTitleSection'
+  sectionSettings?: PbSectionSettings
+  titleMode?: 'text' | 'hero'
+  rowWidth?: 12 | 10 | 8 | 6
+  title?: string
+  subtitle?: string
   image?: {
-    asset?: SanityImageAssetReference;
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    _type: "image";
-  };
-  heroImageAltText?: string;
-};
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+  }
+  heroImageAltText?: string
+}
 
 export type PbSectionSettings = {
-  _type: "pbSectionSettings";
-  enableSection?: boolean;
-  sectionId?: string;
-  topOrnament?: boolean;
-  sectionBgColor?: ColorChoice;
-  marginTop?: 1 | 2 | 3 | 4 | 5;
-  marginBottom?: 1 | 2 | 3 | 4 | 5;
-};
+  _type: 'pbSectionSettings'
+  enableSection?: boolean
+  sectionId?: string
+  topOrnament?: boolean
+  sectionBgColor?: ColorChoice
+  marginTop?: 1 | 2 | 3 | 4 | 5
+  marginBottom?: 1 | 2 | 3 | 4 | 5
+}
 
-export type PbSections = Array<{
-  _key: string;
-} & PbTitleSection | {
-  _key: string;
-} & PbGridMulti | {
-  _key: string;
-} & PbGridSingle | {
-  _key: string;
-} & PbGridDouble | {
-  _key: string;
-} & PbBanner>;
+export type PbSections = Array<
+  | ({
+      _key: string
+    } & PbTitleSection)
+  | ({
+      _key: string
+    } & PbGridMulti)
+  | ({
+      _key: string
+    } & PbGridSingle)
+  | ({
+      _key: string
+    } & PbGridDouble)
+  | ({
+      _key: string
+    } & PbBanner)
+  | ({
+      _key: string
+    } & PbImageWithCard)
+>
+
+export type PbImageWithCard = {
+  _type: 'pbImageWithCard'
+  sectionSettings?: PbSectionSettings
+  sectionName?: string
+  size?: 6 | 8
+  cardColor?: ColorChoice
+  backgroundImage?: BackgroundImage
+  pbBlocks?: PbBlocks
+  spaceBetweenBlocks?:
+    | 'gap-0'
+    | 'gap-gut-25'
+    | 'gap-gut-50'
+    | 'gap-gut'
+    | 'gap-gut-150'
+    | 'gap-gut-200'
+}
 
 export type PbGridDouble = {
-  _type: "pbGridDouble";
-  sectionSettings?: PbSectionSettings;
-  sectionName?: string;
-  rowWidth?: 12 | 10 | 8 | 6;
-  columnProportions?: "50-50" | "60-40" | "40-60";
-  yAlignment?: "items-start" | "items-center" | "items-end";
-  columnOne?: Column;
-  columnTwo?: Column;
-};
+  _type: 'pbGridDouble'
+  sectionSettings?: PbSectionSettings
+  sectionName?: string
+  rowWidth?: 12 | 10 | 8 | 6
+  columnProportions?: '50-50' | '60-40' | '40-60'
+  yAlignment?: 'items-start' | 'items-center' | 'items-end'
+  columnOne?: Column
+  columnTwo?: Column
+}
 
 export type PbGridSingle = {
-  _type: "pbGridSingle";
-  sectionSettings?: PbSectionSettings;
-  sectionName?: string;
-  rowWidth?: 12 | 10 | 8 | 6;
-  bgLogoShape?: boolean;
-  cardMode?: boolean;
-  revealEffect?: "none" | "stagger" | "fade-up" | "fade-right";
-  pbBlocks?: PbBlocks;
-  spaceBetweenBlocks?: "gap-0" | "gap-gut-25" | "gap-gut-50" | "gap-gut" | "gap-gut-150" | "gap-gut-200";
-  blockWidths?: BlockWidths;
-};
+  _type: 'pbGridSingle'
+  sectionSettings?: PbSectionSettings
+  sectionName?: string
+  rowWidth?: 12 | 10 | 8 | 6
+  bgLogoShape?: boolean
+  revealEffect?: 'none' | 'stagger' | 'fade-up' | 'fade-right'
+  pbBlocks?: PbBlocks
+  spaceBetweenBlocks?:
+    | 'gap-0'
+    | 'gap-gut-25'
+    | 'gap-gut-50'
+    | 'gap-gut'
+    | 'gap-gut-150'
+    | 'gap-gut-200'
+  blockWidths?: BlockWidths
+}
 
 export type PbGridMulti = {
-  _type: "pbGridMulti";
-  sectionSettings?: PbSectionSettings;
-  sectionName?: string;
-  rowWidth: 12 | 10 | 8 | 6;
+  _type: 'pbGridMulti'
+  sectionSettings?: PbSectionSettings
+  sectionName?: string
+  rowWidth: 12 | 10 | 8 | 6
   columns?: Array<{
-    columnSettings?: PbColSettings;
-    yAlignment?: YAlignment;
-    cardMode?: boolean;
-    revealEffect?: "none" | "stagger" | "fade-up" | "fade-right";
-    pbBlocks?: PbBlocks;
-    spaceBetweenBlocks?: "gap-0" | "gap-gut-25" | "gap-gut-50" | "gap-gut" | "gap-gut-150" | "gap-gut-200";
-    blockWidths?: BlockWidths;
-    _key: string;
-  }>;
-};
+    columnSettings?: PbColSettings
+    yAlignment?: YAlignment
+    revealEffect?: 'none' | 'stagger' | 'fade-up' | 'fade-right'
+    pbBlocks?: PbBlocks
+    spaceBetweenBlocks?:
+      | 'gap-0'
+      | 'gap-gut-25'
+      | 'gap-gut-50'
+      | 'gap-gut'
+      | 'gap-gut-150'
+      | 'gap-gut-200'
+    blockWidths?: BlockWidths
+    _key: string
+  }>
+}
 
 export type PbColSettings = {
-  _type: "pbColSettings";
-  size?: Size;
-  start?: Start;
-  accordionMode?: boolean;
-  accordionTitle?: string;
-};
+  _type: 'pbColSettings'
+  size?: Size
+  start?: Start
+  accordionMode?: boolean
+  accordionTitle?: string
+}
 
 export type PbBlockVideoEmbed = {
-  _type: "pbBlockVideoEmbed";
-  videoEmbedUrl?: string;
-  videoAspectRatio?: VideoAspectRatio;
-};
+  _type: 'pbBlockVideoEmbed'
+  videoEmbedUrl?: string
+  videoAspectRatio?: VideoAspectRatio
+}
 
 export type PbBlockText = {
-  _type: "pbBlockText";
-  textContent?: PtBasic;
-};
+  _type: 'pbBlockText'
+  textContent?: PtBasic
+}
 
 export type PbBlockPlainText = {
-  _type: "pbBlockPlainText";
-  textStyle: "ts-body" | "ts-serif" | "ts-sans-tall" | "ts-sans-wide";
-  textSize?: "ts-p-lg" | "ts-p-md" | "ts-p-sm" | "ts-p-xs";
-  textSizeSerif?: "ts-h1" | "ts-h2" | "ts-h3" | "ts-h4";
-  textSizeSans?: "ts-h5" | "ts-h6";
-  textContent?: string;
-  textContentRich?: PtItalic;
-  textAlign?: "text-left" | "text-center" | "text-right";
-  textColor?: ColorChoice;
-  balanceLines?: boolean;
-};
+  _type: 'pbBlockPlainText'
+  textStyle: 'ts-body' | 'ts-serif' | 'ts-sans-tall' | 'ts-sans-wide'
+  textSize?: 'ts-p-lg' | 'ts-p-md' | 'ts-p-sm' | 'ts-p-xs'
+  textSizeSerif?: 'ts-h1' | 'ts-h2' | 'ts-h3' | 'ts-h4'
+  textSizeSans?: 'ts-h5' | 'ts-h6'
+  textContent?: string
+  textContentRich?: PtItalic
+  textAlign?: 'text-left' | 'text-center' | 'text-right'
+  textColor?: ColorChoice
+  balanceLines?: boolean
+}
 
 export type PbBlockMarquee = {
-  _type: "pbBlockMarquee";
-  settings?: PbBlockMarqueeSettings;
-  elements?: Array<{
-    text?: string;
-    style?: "ts-h1" | "ts-h2" | "ts-h3" | "ts-h4" | "ts-p-lg" | "ts-p-md" | "ts-p-sm" | "ts-p-xs" | "ts-h5" | "ts-h6";
-    _type: "textElement";
-    _key: string;
-  } | {
-    image?: ImageElementImage;
-    altText?: string;
-    imageCrop?: 0 | 1 | 0.8 | 0.6666666667 | 1.25 | 1.5 | 1.7777777778 | 2.5;
-    roundedCorners?: boolean;
-    invertColor?: boolean;
-    blendModeLighten?: boolean;
-    _type: "imageElement";
-    _key: string;
-  }>;
-};
+  _type: 'pbBlockMarquee'
+  settings?: PbBlockMarqueeSettings
+  elements?: Array<
+    | {
+        text?: string
+        style?:
+          | 'ts-h1'
+          | 'ts-h2'
+          | 'ts-h3'
+          | 'ts-h4'
+          | 'ts-p-lg'
+          | 'ts-p-md'
+          | 'ts-p-sm'
+          | 'ts-p-xs'
+          | 'ts-h5'
+          | 'ts-h6'
+        _type: 'textElement'
+        _key: string
+      }
+    | {
+        image?: ImageElementImage
+        altText?: string
+        imageCrop?: 0 | 1 | 0.8 | 0.6666666667 | 1.25 | 1.5 | 1.7777777778 | 2.5
+        roundedCorners?: boolean
+        invertColor?: boolean
+        blendModeLighten?: boolean
+        _type: 'imageElement'
+        _key: string
+      }
+  >
+}
 
 export type PbBlockDivider = {
-  _type: "pbBlockDivider";
-  showOnMobile?: boolean;
-  showOnTablet?: boolean;
-  showOnDesktop?: boolean;
-  showDividerLine?: boolean;
-  size?: 1 | 2 | 3 | 4 | 5;
-};
+  _type: 'pbBlockDivider'
+  showOnMobile?: boolean
+  showOnTablet?: boolean
+  showOnDesktop?: boolean
+  showDividerLine?: boolean
+  size?: 1 | 2 | 3 | 4 | 5
+}
 
-export type PbBlocks = Array<{
-  _key: string;
-} & PbBlockText | {
-  _key: string;
-} & PbBlockPlainText | {
-  _key: string;
-} & PbBlockImage | {
-  _key: string;
-} & PbBlockVideoEmbed | {
-  _key: string;
-} & PbBlockButton | {
-  _key: string;
-} & PbBlockDivider | {
-  _key: string;
-} & PbBlockMarquee>;
+export type PbBlocks = Array<
+  | ({
+      _key: string
+    } & PbBlockText)
+  | ({
+      _key: string
+    } & PbBlockPlainText)
+  | ({
+      _key: string
+    } & PbBlockImage)
+  | ({
+      _key: string
+    } & PbBlockVideoEmbed)
+  | ({
+      _key: string
+    } & PbBlockButton)
+  | ({
+      _key: string
+    } & PbBlockButtonMulti)
+  | ({
+      _key: string
+    } & PbBlockDivider)
+  | ({
+      _key: string
+    } & PbBlockMarquee)
+>
+
+export type PbBlockButtonMulti = {
+  _type: 'pbBlockButtonMulti'
+  buttons: Array<
+    {
+      _key: string
+    } & PbBlockButton
+  >
+}
 
 export type PbBlockButton = {
-  _type: "pbBlockButton";
-  linkType?: "sitePage" | "externalLink" | "file";
-  sitePage?: NavPage;
-  externalLink?: NavExternal;
-  fileLink?: FileLink;
-  icon?: "none" | "arrow" | "Facebook" | "Github" | "Instagram" | "Linkedin" | "Soundcloud" | "Spotify" | "Threads" | "Tiktok" | "Twitter" | "YouTube";
-  buttonStyle?: "default" | "outline";
-};
+  _type: 'pbBlockButton'
+  linkType?: 'sitePage' | 'externalLink' | 'file'
+  sitePage?: NavPage
+  externalLink?: NavExternal
+  fileLink?: FileLink
+  icon?:
+    | 'none'
+    | 'arrow'
+    | 'Facebook'
+    | 'Github'
+    | 'Instagram'
+    | 'Linkedin'
+    | 'Soundcloud'
+    | 'Spotify'
+    | 'Threads'
+    | 'Tiktok'
+    | 'Twitter'
+    | 'YouTube'
+  buttonStyle?: 'default' | 'outline'
+}
 
 export type PbBlockImage = {
-  _type: "pbBlockImage";
+  _type: 'pbBlockImage'
   image?: {
-    asset?: SanityImageAssetReference;
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    alt?: string;
-    _type: "image";
-  };
-  imageMaskType?: "none" | "notches" | "logoDB" | "archIK" | "archTT";
-  imageCrop?: 0 | 1 | 0.8 | 0.6666666667 | 1.25 | 1.5 | 1.7777777778 | 2.5;
-  imageWidth?: number;
-  caption?: string;
-  priority?: boolean;
-};
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    alt?: string
+    _type: 'image'
+  }
+  imageMaskType?: 'none' | 'notches' | 'logoDB' | 'archIK' | 'archTT'
+  imageCrop?: 0 | 1 | 0.8 | 0.6666666667 | 1.25 | 1.5 | 1.7777777778 | 2.5
+  imageWidth?: number
+  caption?: string
+  priority?: boolean
+}
 
 export type PbBanner = {
-  _type: "pbBanner";
-  sectionSettings?: PbSectionSettings;
-  sectionName?: string;
-  bannerDirection?: "ltr" | "rtl";
-  bgColor?: ColorChoice;
-  bannerImage?: BannerImage;
-  pbBlocks?: PbBlocks;
-  spaceBetweenBlocks?: "gap-0" | "gap-gut-25" | "gap-gut-50" | "gap-gut" | "gap-gut-150" | "gap-gut-200";
-};
+  _type: 'pbBanner'
+  sectionSettings?: PbSectionSettings
+  sectionName?: string
+  bannerDirection?: 'ltr' | 'rtl'
+  bgColor?: ColorChoice
+  bannerImage?: BannerImage
+  pbBlocks?: PbBlocks
+  spaceBetweenBlocks?:
+    | 'gap-0'
+    | 'gap-gut-25'
+    | 'gap-gut-50'
+    | 'gap-gut'
+    | 'gap-gut-150'
+    | 'gap-gut-200'
+}
 
 export type HomeReference = {
-  _ref: string;
-  _type: "reference";
-  _weak?: boolean;
-  [internalGroqTypeReferenceTo]?: "home";
-};
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'home'
+}
 
 export type NavPage = {
-  _type: "navPage";
-  title?: string;
-  page?: HomeReference | PageReference;
-  anchorLink?: string;
-};
+  _type: 'navPage'
+  title?: string
+  page?: HomeReference | PageReference
+  anchorLink?: string
+}
 
 export type NavLinks = {
-  _type: "navLinks";
-  navItems?: Array<{
-    _key: string;
-  } & NavPage | {
-    _key: string;
-  } & NavExternal>;
-};
+  _type: 'navLinks'
+  navItems?: Array<
+    | ({
+        _key: string
+      } & NavPage)
+    | ({
+        _key: string
+      } & NavExternal)
+  >
+}
 
 export type NavExternal = {
-  _type: "navExternal";
-  title?: string;
-  url?: string;
-};
+  _type: 'navExternal'
+  title?: string
+  url?: string
+}
 
 export type ColorChoice = {
-  _type: "colorChoice";
-  colorType?: "none" | "semitransparent" | "dark" | "light" | "custom";
-  colorDark?: "--color-blue-800" | "--color-blue-700" | "--color-blue-650" | "--color-teal" | "--color-logo-red" | "--color-ik-red" | "--color-tt-pink" | "--color-tt-teal" | "--color-saffron-600" | "--color-chili-600" | "--color-tumeric-600" | "--color-lime-600" | "--color-lotus-600";
-  colorLight?: "--color-offwhite" | "--color-blue-200" | "--color-saffron-200" | "--color-chili-200" | "--color-tumeric-200" | "--color-lime-200" | "--color-lotus-200";
-  colorCustom?: Color;
-};
+  _type: 'colorChoice'
+  colorType?: 'none' | 'semitransparent' | 'dark' | 'light' | 'custom'
+  colorDark?:
+    | '--color-blue-800'
+    | '--color-blue-700'
+    | '--color-blue-650'
+    | '--color-teal'
+    | '--color-logo-red'
+    | '--color-ik-red'
+    | '--color-tt-pink'
+    | '--color-tt-teal'
+    | '--color-saffron-600'
+    | '--color-chili-600'
+    | '--color-tumeric-600'
+    | '--color-lime-600'
+    | '--color-lotus-600'
+  colorLight?:
+    | '--color-offwhite'
+    | '--color-blue-200'
+    | '--color-saffron-200'
+    | '--color-chili-200'
+    | '--color-tumeric-200'
+    | '--color-lime-200'
+    | '--color-lotus-200'
+  colorCustom?: Color
+}
 
 export type Column = {
-  _type: "column";
-  cardMode?: boolean;
-  revealEffect?: "none" | "stagger" | "fade-up" | "fade-right";
-  pbBlocks?: PbBlocks;
-  spaceBetweenBlocks?: "gap-0" | "gap-gut-25" | "gap-gut-50" | "gap-gut" | "gap-gut-150" | "gap-gut-200";
-  blockWidths?: BlockWidths;
-};
+  _type: 'column'
+  revealEffect?: 'none' | 'stagger' | 'fade-up' | 'fade-right'
+  pbBlocks?: PbBlocks
+  spaceBetweenBlocks?:
+    | 'gap-0'
+    | 'gap-gut-25'
+    | 'gap-gut-50'
+    | 'gap-gut'
+    | 'gap-gut-150'
+    | 'gap-gut-200'
+  blockWidths?: BlockWidths
+}
 
 export type Redirect = {
-  _id: string;
-  _type: "redirect";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  deployNote?: Note;
-  fromPath: string;
-  toPath: string;
-  permanent?: boolean;
-};
+  _id: string
+  _type: 'redirect'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  deployNote?: Note
+  fromPath: string
+  toPath: string
+  permanent?: boolean
+}
 
-export type Note = string;
+export type Note = string
 
 export type Brands = {
-  _id: string;
-  _type: "brands";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  brandsNote?: Note;
-  title?: string;
-  websiteLink?: NavExternal;
-  socialIcons?: Array<{
-    _key: string;
-  } & SocialLink>;
+  _id: string
+  _type: 'brands'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  brandsNote?: Note
+  title?: string
+  websiteLink?: NavExternal
+  socialIcons?: Array<
+    {
+      _key: string
+    } & SocialLink
+  >
   logo?: {
-    asset?: SanityImageAssetReference;
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    _type: "image";
-  };
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+  }
   maskShape?: {
-    asset?: SanityImageAssetReference;
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    _type: "image";
-  };
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+  }
   bgShape?: {
-    asset?: SanityImageAssetReference;
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    _type: "image";
-  };
-};
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+  }
+}
 
 export type SanityImageCrop = {
-  _type: "sanity.imageCrop";
-  top: number;
-  bottom: number;
-  left: number;
-  right: number;
-};
+  _type: 'sanity.imageCrop'
+  top: number
+  bottom: number
+  left: number
+  right: number
+}
 
 export type SanityImageHotspot = {
-  _type: "sanity.imageHotspot";
-  x: number;
-  y: number;
-  height: number;
-  width: number;
-};
+  _type: 'sanity.imageHotspot'
+  x: number
+  y: number
+  height: number
+  width: number
+}
 
 export type BrandsReference = {
-  _ref: string;
-  _type: "reference";
-  _weak?: boolean;
-  [internalGroqTypeReferenceTo]?: "brands";
-};
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'brands'
+}
 
 export type Settings = {
-  _id: string;
-  _type: "settings";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  headerNav?: NavLinks;
-  contactEmail?: string;
-  socialIcons?: Array<{
-    _key: string;
-  } & SocialLink>;
+  _id: string
+  _type: 'settings'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  headerNav?: NavLinks
+  contactEmail?: string
+  socialIcons?: Array<
+    {
+      _key: string
+    } & SocialLink
+  >
   badges?: Array<{
-    asset?: SanityImageAssetReference;
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    alt?: string;
-    _type: "image";
-    _key: string;
-  }>;
-  footerNav?: NavLinks;
-  footerNav2?: NavLinks;
-  footerBrands?: Array<{
-    _key: string;
-  } & BrandsReference>;
-  seo?: Seo;
-  googletagmanagerID?: string;
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    alt?: string
+    _type: 'image'
+    _key: string
+  }>
+  footerNav?: NavLinks
+  footerNav2?: NavLinks
+  footerBrands?: Array<
+    {
+      _key: string
+    } & BrandsReference
+  >
+  seo?: Seo
+  googletagmanagerID?: string
   customScripts?: Array<{
-    name?: string;
-    script?: string;
-    category: "necessary" | "analytics" | "marketing";
-    _type: "customScript";
-    _key: string;
-  }>;
-};
+    name?: string
+    script?: string
+    category: 'necessary' | 'analytics' | 'marketing'
+    _type: 'customScript'
+    _key: string
+  }>
+}
 
 export type Home = {
-  _id: string;
-  _type: "home";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  title: string;
-  pbSections?: PbSections;
-};
+  _id: string
+  _type: 'home'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  title: string
+  pbSections?: PbSections
+}
 
 export type Page = {
-  _id: string;
-  _type: "page";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  title: string;
-  slug: Slug;
-  pbSections?: PbSections;
-  seo?: Seo;
-};
+  _id: string
+  _type: 'page'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  title: string
+  slug: Slug
+  pbSections?: PbSections
+  seo?: Seo
+}
 
 export type Slug = {
-  _type: "slug";
-  current: string;
-  source?: string;
-};
+  _type: 'slug'
+  current: string
+  source?: string
+}
 
 export type Color = {
-  _type: "color";
-  hex?: string;
-  alpha?: number;
-  hsl?: HslaColor;
-  hsv?: HsvaColor;
-  rgb?: RgbaColor;
-};
+  _type: 'color'
+  hex?: string
+  alpha?: number
+  hsl?: HslaColor
+  hsv?: HsvaColor
+  rgb?: RgbaColor
+}
 
 export type RgbaColor = {
-  _type: "rgbaColor";
-  r?: number;
-  g?: number;
-  b?: number;
-  a?: number;
-};
+  _type: 'rgbaColor'
+  r?: number
+  g?: number
+  b?: number
+  a?: number
+}
 
 export type HsvaColor = {
-  _type: "hsvaColor";
-  h?: number;
-  s?: number;
-  v?: number;
-  a?: number;
-};
+  _type: 'hsvaColor'
+  h?: number
+  s?: number
+  v?: number
+  a?: number
+}
 
 export type HslaColor = {
-  _type: "hslaColor";
-  h?: number;
-  s?: number;
-  l?: number;
-  a?: number;
-};
+  _type: 'hslaColor'
+  h?: number
+  s?: number
+  l?: number
+  a?: number
+}
 
 export type SanityImagePaletteSwatch = {
-  _type: "sanity.imagePaletteSwatch";
-  background?: string;
-  foreground?: string;
-  population?: number;
-  title?: string;
-};
+  _type: 'sanity.imagePaletteSwatch'
+  background?: string
+  foreground?: string
+  population?: number
+  title?: string
+}
 
 export type SanityImagePalette = {
-  _type: "sanity.imagePalette";
-  darkMuted?: SanityImagePaletteSwatch;
-  lightVibrant?: SanityImagePaletteSwatch;
-  darkVibrant?: SanityImagePaletteSwatch;
-  vibrant?: SanityImagePaletteSwatch;
-  dominant?: SanityImagePaletteSwatch;
-  lightMuted?: SanityImagePaletteSwatch;
-  muted?: SanityImagePaletteSwatch;
-};
+  _type: 'sanity.imagePalette'
+  darkMuted?: SanityImagePaletteSwatch
+  lightVibrant?: SanityImagePaletteSwatch
+  darkVibrant?: SanityImagePaletteSwatch
+  vibrant?: SanityImagePaletteSwatch
+  dominant?: SanityImagePaletteSwatch
+  lightMuted?: SanityImagePaletteSwatch
+  muted?: SanityImagePaletteSwatch
+}
 
 export type SanityImageDimensions = {
-  _type: "sanity.imageDimensions";
-  height: number;
-  width: number;
-  aspectRatio: number;
-};
+  _type: 'sanity.imageDimensions'
+  height: number
+  width: number
+  aspectRatio: number
+}
 
 export type SanityImageMetadata = {
-  _type: "sanity.imageMetadata";
-  location?: Geopoint;
-  dimensions?: SanityImageDimensions;
-  palette?: SanityImagePalette;
-  lqip?: string;
-  blurHash?: string;
-  thumbHash?: string;
-  hasAlpha?: boolean;
-  isOpaque?: boolean;
-};
+  _type: 'sanity.imageMetadata'
+  location?: Geopoint
+  dimensions?: SanityImageDimensions
+  palette?: SanityImagePalette
+  lqip?: string
+  blurHash?: string
+  thumbHash?: string
+  hasAlpha?: boolean
+  isOpaque?: boolean
+}
 
 export type SanityFileAsset = {
-  _id: string;
-  _type: "sanity.fileAsset";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  originalFilename?: string;
-  label?: string;
-  title?: string;
-  description?: string;
-  altText?: string;
-  sha1hash: string;
-  extension: string;
-  mimeType: string;
-  size: number;
-  assetId: string;
-  uploadId?: string;
-  path: string;
-  url: string;
-  source?: SanityAssetSourceData;
-};
+  _id: string
+  _type: 'sanity.fileAsset'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  originalFilename?: string
+  label?: string
+  title?: string
+  description?: string
+  altText?: string
+  sha1hash: string
+  extension: string
+  mimeType: string
+  size: number
+  assetId: string
+  uploadId?: string
+  path: string
+  url: string
+  source?: SanityAssetSourceData
+}
 
 export type SanityAssetSourceData = {
-  _type: "sanity.assetSourceData";
-  name?: string;
-  id?: string;
-  url?: string;
-};
+  _type: 'sanity.assetSourceData'
+  name?: string
+  id?: string
+  url?: string
+}
 
 export type SanityImageAsset = {
-  _id: string;
-  _type: "sanity.imageAsset";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  originalFilename?: string;
-  label?: string;
-  title?: string;
-  description?: string;
-  altText?: string;
-  sha1hash: string;
-  extension: string;
-  mimeType: string;
-  size: number;
-  assetId: string;
-  uploadId?: string;
-  path: string;
-  url: string;
-  metadata?: SanityImageMetadata;
-  source?: SanityAssetSourceData;
-};
+  _id: string
+  _type: 'sanity.imageAsset'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  originalFilename?: string
+  label?: string
+  title?: string
+  description?: string
+  altText?: string
+  sha1hash: string
+  extension: string
+  mimeType: string
+  size: number
+  assetId: string
+  uploadId?: string
+  path: string
+  url: string
+  metadata?: SanityImageMetadata
+  source?: SanityAssetSourceData
+}
 
 export type Geopoint = {
-  _type: "geopoint";
-  lat?: number;
-  lng?: number;
-  alt?: number;
-};
+  _type: 'geopoint'
+  lat?: number
+  lng?: number
+  alt?: number
+}
 
-export type AllSanitySchemaTypes = Size | Start | VideoAspectRatio | FileLink | PbBlockMarqueeSettings | BlockWidths | BannerImage | YAlignment | SanityFileAssetReference | FileLinkFile | PbBlockButtonFileLinkFile | SanityImageAssetReference | ImageElementImage | BannerImageImage | SocialLink | Seo | PageReference | PtSlim | PtSingle | PtItalic | PtBody | PtBasic | PbTitleSection | PbSectionSettings | PbSections | PbGridDouble | PbGridSingle | PbGridMulti | PbColSettings | PbBlockVideoEmbed | PbBlockText | PbBlockPlainText | PbBlockMarquee | PbBlockDivider | PbBlocks | PbBlockButton | PbBlockImage | PbBanner | HomeReference | NavPage | NavLinks | NavExternal | ColorChoice | Column | Redirect | Note | Brands | SanityImageCrop | SanityImageHotspot | BrandsReference | Settings | Home | Page | Slug | Color | RgbaColor | HsvaColor | HslaColor | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageMetadata | SanityFileAsset | SanityAssetSourceData | SanityImageAsset | Geopoint;
-
+export type AllSanitySchemaTypes =
+  | Size
+  | Start
+  | VideoAspectRatio
+  | FileLink
+  | PbBlockMarqueeSettings
+  | BlockWidths
+  | BannerImage
+  | BackgroundImage
+  | YAlignment
+  | SanityFileAssetReference
+  | FileLinkFile
+  | PbBlockButtonFileLinkFile
+  | SanityImageAssetReference
+  | ImageElementImage
+  | BannerImageImage
+  | BackgroundImageImage
+  | SocialLink
+  | Seo
+  | PageReference
+  | PtSlim
+  | PtSingle
+  | PtItalic
+  | PtBody
+  | PtBasic
+  | PbTitleSection
+  | PbSectionSettings
+  | PbSections
+  | PbImageWithCard
+  | PbGridDouble
+  | PbGridSingle
+  | PbGridMulti
+  | PbColSettings
+  | PbBlockVideoEmbed
+  | PbBlockText
+  | PbBlockPlainText
+  | PbBlockMarquee
+  | PbBlockDivider
+  | PbBlocks
+  | PbBlockButtonMulti
+  | PbBlockButton
+  | PbBlockImage
+  | PbBanner
+  | HomeReference
+  | NavPage
+  | NavLinks
+  | NavExternal
+  | ColorChoice
+  | Column
+  | Redirect
+  | Note
+  | Brands
+  | SanityImageCrop
+  | SanityImageHotspot
+  | BrandsReference
+  | Settings
+  | Home
+  | Page
+  | Slug
+  | Color
+  | RgbaColor
+  | HsvaColor
+  | HslaColor
+  | SanityImagePaletteSwatch
+  | SanityImagePalette
+  | SanityImageDimensions
+  | SanityImageMetadata
+  | SanityFileAsset
+  | SanityAssetSourceData
+  | SanityImageAsset
+  | Geopoint

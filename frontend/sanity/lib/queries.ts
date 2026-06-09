@@ -70,6 +70,12 @@ const pbBlocks = `
   _type == "pbBlockButton" => {
     ${pbButton}
   },
+  _type == "pbBlockButtonMulti" => {
+    ...,
+    buttons[]{
+      ${pbButton}
+    },
+  },
 `
 
 const pb = `
@@ -105,6 +111,12 @@ const pb = `
       }
     },
     _type == "pbBanner" => {
+      ...,
+      pbBlocks[]{
+        ${pbBlocks}
+      }
+    },
+    _type == "pbImageWithCard" => {
       ...,
       pbBlocks[]{
         ${pbBlocks}

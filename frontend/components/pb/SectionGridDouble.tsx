@@ -1,5 +1,5 @@
-import { getGridClasses, getOuterSettings } from '@/lib/utils'
-import { PbColSettings, PbGridDouble } from '@/sanity.types'
+import {getGridClasses, getOuterSettings} from '@/lib/utils'
+import {PbColSettings, PbGridDouble} from '@/sanity.types'
 
 import SiteGrid from '../shared/SiteGrid'
 import SiteWidth from '../shared/SiteWidth'
@@ -12,13 +12,7 @@ export default function SectionGridDouble({
   section: PbGridDouble
   sectionKey: string
 }) {
-  const {
-    rowWidth,
-    columnOne,
-    columnTwo,
-    columnProportions,
-    yAlignment = 'items-center',
-  } = section
+  const {rowWidth, columnOne, columnTwo, columnProportions, yAlignment = 'items-center'} = section
   const columnOneBlocks = columnOne?.pbBlocks || []
   const columnTwoBlocks = columnTwo?.pbBlocks || []
   // Skip if no blocks yet
@@ -75,7 +69,6 @@ export default function SectionGridDouble({
                   columnSettings: columnOneSettings,
                 }}
                 outerSettings={outerSettings}
-                cardMode={columnOne.cardMode}
               />
             )}
             {columnTwo && columnTwoBlocks.length > 0 && (
@@ -88,7 +81,6 @@ export default function SectionGridDouble({
                   columnSettings: columnTwoSettings,
                 }}
                 outerSettings={outerSettings}
-                cardMode={columnTwo.cardMode}
               />
             )}
           </SiteGrid>
@@ -103,9 +95,7 @@ type ColSizes = {
   colTwo: 6 | 7 | 5
 }
 
-export const getColSizes = (
-  proportions: '50-50' | '60-40' | '40-60'
-): ColSizes => {
+export const getColSizes = (proportions: '50-50' | '60-40' | '40-60'): ColSizes => {
   if (proportions === '60-40') {
     return {
       colOne: 7,

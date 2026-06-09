@@ -1,17 +1,15 @@
-import { cn, getAlignClasses, getGridClasses, getTrueSizes } from '@/lib/utils'
-import { PbColSettings, PbGridMulti } from '@/sanity.types'
+import {cn, getAlignClasses, getGridClasses, getTrueSizes} from '@/lib/utils'
+import {PbColSettings, PbGridMulti} from '@/sanity.types'
 
-import { PbBlocksQueryResult } from '@/types'
-import { AccordionSection } from '../shared/AccordionSection'
-import Card from '../shared/Card'
+import {PbBlocksQueryResult} from '@/types'
+import {AccordionSection} from '../shared/AccordionSection'
 import Revealer from '../shared/Revealer'
 import PbBlocks from './PbBlocks'
-import { useSanityDataAttribute } from './SanityVisualEditingContext'
+import {useSanityDataAttribute} from './SanityVisualEditingContext'
 
 export interface GridColProps {
   col: NonNullable<PbGridMulti['columns']>[number]
   outerSettings: PbColSettings
-  cardMode?: boolean
   sticky?: boolean
   blockWidths?: {
     mobile?: string
@@ -20,29 +18,16 @@ export interface GridColProps {
   }
 }
 
-export default function GridCol({
-  col,
-  outerSettings,
-  cardMode = false,
-  blockWidths,
-}: GridColProps) {
-  const {
-    _key,
-    columnSettings,
-    pbBlocks,
-    yAlignment,
-    revealEffect,
-    spaceBetweenBlocks,
-  } = col
-  const { getDataAttribute } = useSanityDataAttribute()
+export default function GridCol({col, outerSettings, blockWidths}: GridColProps) {
+  const {_key, columnSettings, pbBlocks, yAlignment, revealEffect, spaceBetweenBlocks} = col
+  const {getDataAttribute} = useSanityDataAttribute()
 
   // Skip if no blocks yet
   if (!pbBlocks || pbBlocks.length === 0) {
     return null
   }
   // Prep attributes
-  const { accordionMode = false, accordionTitle = 'More' } =
-    columnSettings || {}
+  const {accordionMode = false, accordionTitle = 'More'} = columnSettings || {}
   const colClasses = columnSettings ? getGridClasses(columnSettings) : ''
   const yClasses = yAlignment ? getAlignClasses(yAlignment, 'y') : ''
   const trueSizes = columnSettings?.size
@@ -59,8 +44,6 @@ export default function GridCol({
     />
   )
 
-  const colInner = cardMode ? <Card>{colBlocks}</Card> : colBlocks
-
   return (
     <Revealer
       className={cn(colClasses, yClasses, 'corner-container')}
@@ -69,11 +52,11 @@ export default function GridCol({
     >
       {accordionMode && pbBlocks.length > 0 && (
         <AccordionSection accordionTitle={accordionTitle} innerId={innerId}>
-          {colInner}
+          {colBlocks}
         </AccordionSection>
       )}
 
-      {!accordionMode && pbBlocks.length > 0 && colInner}
+      {!accordionMode && pbBlocks.length > 0 && colBlocks}
     </Revealer>
   )
 }

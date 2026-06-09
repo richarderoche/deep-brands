@@ -98,6 +98,20 @@ export default function PbBlocks({
                 </div>
               )
 
+            // Button Group Block
+            case 'pbBlockButtonMulti':
+              return (
+                <div
+                  key={_key}
+                  data-sanity={blockDataSanity}
+                  className="flex flex-wrap items-center gap-gut-50"
+                >
+                  {block.buttons?.map((button) => (
+                    <ButtonBlock key={button._key} block={button} />
+                  ))}
+                </div>
+              )
+
             // Divider Block
             case 'pbBlockDivider':
               return (
@@ -134,6 +148,7 @@ export function PlainTextBlock({block}) {
   return (
     <div
       className={cn(
+        'max-w-max-ch',
         block.textStyle || 'ts-p-md',
         block.textSize,
         block.textAlign,

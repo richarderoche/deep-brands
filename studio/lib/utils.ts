@@ -43,6 +43,8 @@ export const getTypeTitles = (types: string[]) => {
         return 'Divider/Spacer'
       case 'pbBlockButton':
         return 'Button'
+      case 'pbBlockButtonMulti':
+        return 'Button Group'
       case 'pbBlockMarquee':
         return 'Marquee'
       default:

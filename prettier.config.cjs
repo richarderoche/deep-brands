@@ -1,6 +1,6 @@
-import preset from '@sanity/prettier-config'
+const preset = require('@sanity/prettier-config')
 
-export default {
+module.exports = {
   ...preset,
   plugins: [...preset.plugins, '@ianvs/prettier-plugin-sort-imports'],
 }

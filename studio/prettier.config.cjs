@@ -1,4 +1,4 @@
-const preset = require('@sanity/eslint-config-studio')
+const preset = require('@sanity/prettier-config')
 
 module.exports = {
   ...preset,

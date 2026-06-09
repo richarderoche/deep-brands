@@ -1,4 +1,4 @@
-import { CircleArrowRight } from 'lucide-react'
+import { SquareArrowRight } from 'lucide-react'
 import { defineField, defineType } from 'sanity'
 import { socialIconOptions } from '../objects/socialLink'
 
@@ -12,7 +12,7 @@ export default defineType({
   title: 'Button',
   name: 'pbBlockButton',
   type: 'object',
-  icon: CircleArrowRight,
+  icon: SquareArrowRight,
   fields: [
     defineField({
       title: 'Link type',
@@ -126,7 +126,7 @@ export default defineType({
       return {
         title: `Button: ${typeLabel}`,
         subtitle,
-        media: CircleArrowRight,
+        media: SquareArrowRight,
       }
     },
   },

@@ -2,6 +2,7 @@ import '@/app/globals.css'
 import DraftModeToast from '@/components/DraftModeToast'
 import Footer from '@/components/Footer'
 import IconMasks from '@/components/icons/IconMasks'
+import Navbar from '@/components/Navbar'
 import GlobalScripts from '@/components/shared/GlobalScripts'
 import {GSAP} from '@/components/shared/GSAP'
 import {Lenis} from '@/components/shared/Lenis'
@@ -123,7 +124,7 @@ export default async function RootLayout({children}: LayoutProps<'/'>) {
         <Lenis />
         <GSAP />
         <div className="flex min-h-screen flex-col justify-start ts-body ts-p-md overflow-x-hidden max-w-full">
-          {/* <Navbar /> */}
+          <Navbar />
           <main className="grow" id="main-content">
             {children}
           </main>

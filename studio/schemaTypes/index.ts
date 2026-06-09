@@ -14,6 +14,7 @@ import seo from './objects/seo'
 import socialLink from './objects/socialLink'
 import pbBlocks from './pbBlocks'
 import pbBlockButton from './pbBlocks/pbBlockButton'
+import pbBlockButtonMulti from './pbBlocks/pbBlockButtonMulti'
 import pbBlockDivider from './pbBlocks/pbBlockDivider'
 import pbBlockImage from './pbBlocks/pbBlockImage'
 import pbBlockMarquee from './pbBlocks/pbBlockMarquee'
@@ -27,6 +28,7 @@ import pbColSettings from './pbSections/pbColSettings'
 import pbGridDouble from './pbSections/pbGridDouble'
 import pbGridMulti from './pbSections/pbGridMulti'
 import pbGridSingle from './pbSections/pbGridSingle'
+import pbImageWithCard from './pbSections/pbImageWithCard'
 import pbSectionSettings from './pbSections/pbSectionSettings'
 import pbTitleSection from './pbSections/pbTitle'
 import home from './singletons/home'
@@ -51,6 +53,7 @@ export const schemaTypes = [
   pbBanner,
   pbBlockImage,
   pbBlockButton,
+  pbBlockButtonMulti,
   pbBlocks,
   pbBlockDivider,
   pbBlockMarquee,
@@ -61,6 +64,7 @@ export const schemaTypes = [
   pbGridMulti,
   pbGridSingle,
   pbGridDouble,
+  pbImageWithCard,
   pbSections,
   pbSectionSettings,
   pbTitleSection,

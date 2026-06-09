@@ -47,12 +47,14 @@
   --spacing-gut-1000: calc(var(--gut) * 10);
   --spacing-outdent: -0.065em;
   --spacing-max-ch: 55ch;
-  --spacing-header: calc(var(--gut) * 2);
+  --spacing-header: calc(var(--gut) * 1.75);
   --spacing-ornament: calc(var(--gut) * 1.25);
   --spacing-btn: 1.75em;
 
   --radius-btn: 3px;
   --radius-banner: var(--gut);
+  --radius-card-top: calc(var(--gut) * 0.5);
+  --radius-card-bottom: var(--gut);
   /* Use .corner-container > .corner or .corner-sm
   for container-relative rounded corners */
   --radius-xs: 0.4rem;

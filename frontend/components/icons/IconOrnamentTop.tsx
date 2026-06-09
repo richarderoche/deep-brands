@@ -3,7 +3,7 @@ import {cn} from '@/lib/utils'
 // use className to override height and color
 
 export default function IconOrnamentTop({
-  className = 'h-ornament text-bg',
+  className = 'h-ornament w-auto text-bg',
   ...props
 }: React.SVGProps<SVGSVGElement>) {
   return (
@@ -15,7 +15,7 @@ export default function IconOrnamentTop({
         fill="none"
         viewBox="0 0 661 108"
         className={cn(
-          'w-auto absolute top-[.6px] left-1/2 -translate-x-1/2 -translate-y-full z-1',
+          'absolute top-[.6px] left-1/2 -translate-x-1/2 -translate-y-full z-1',
           className,
         )}
         {...props}

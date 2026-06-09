@@ -1,14 +1,15 @@
-import { defineType } from 'sanity'
+import {defineType} from 'sanity'
 
 export default defineType({
   title: 'Sections',
   name: 'pbSections',
   type: 'array',
   of: [
-    { type: 'pbTitleSection' },
-    { type: 'pbGridMulti' },
-    { type: 'pbGridSingle' },
-    { type: 'pbGridDouble' },
-    { type: 'pbBanner' },
+    {type: 'pbTitleSection'},
+    {type: 'pbGridMulti'},
+    {type: 'pbGridSingle'},
+    {type: 'pbGridDouble'},
+    {type: 'pbBanner'},
+    {type: 'pbImageWithCard'},
   ],
 })
