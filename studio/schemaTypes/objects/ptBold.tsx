@@ -1,17 +1,18 @@
-import {defineArrayMember, defineType} from 'sanity'
+import {defineType} from 'sanity'
 
 export default defineType({
-  name: 'ptBody',
+  name: 'ptBold',
   title: 'RTE',
   type: 'array',
   of: [
-    defineArrayMember({
+    {
       type: 'block',
       marks: {
         decorators: [{title: 'Strong', value: 'strong'}],
         annotations: [],
       },
       styles: [],
-    }),
+      lists: [],
+    },
   ],
 })

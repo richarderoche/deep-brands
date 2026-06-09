@@ -7,6 +7,7 @@ import navLinks from './objects/navLinks'
 import navPage from './objects/navPage'
 import ptBasic from './objects/ptBasic'
 import ptBody from './objects/ptBody'
+import ptBold from './objects/ptBold'
 import ptItalic from './objects/ptItalic'
 import ptSingle from './objects/ptSingle'
 import ptSlim from './objects/ptSlim'
@@ -30,6 +31,7 @@ import pbGridMulti from './pbSections/pbGridMulti'
 import pbGridSingle from './pbSections/pbGridSingle'
 import pbImageWithCard from './pbSections/pbImageWithCard'
 import pbSectionSettings from './pbSections/pbSectionSettings'
+import pbTimeline from './pbSections/pbTimeline'
 import pbTitleSection from './pbSections/pbTitle'
 import home from './singletons/home'
 import settings from './singletons/settings'
@@ -68,8 +70,10 @@ export const schemaTypes = [
   pbSections,
   pbSectionSettings,
   pbTitleSection,
+  pbTimeline,
   ptBasic,
   ptBody,
+  ptBold,
   ptItalic,
   ptSingle,
   ptSlim,

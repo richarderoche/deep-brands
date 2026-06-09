@@ -11,5 +11,6 @@ export default defineType({
     {type: 'pbGridDouble'},
     {type: 'pbBanner'},
     {type: 'pbImageWithCard'},
+    {type: 'pbTimeline'},
   ],
 })

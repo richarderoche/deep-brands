@@ -123,6 +123,16 @@ export type BackgroundImageImage = {
   _type: 'image'
 }
 
+export type ObjectImage = {
+  asset?: SanityImageAssetReference
+  media?: unknown // Unable to locate the referenced type "object.image.media" in schema
+  hotspot?: SanityImageHotspot
+  crop?: SanityImageCrop
+  alt?: string
+  notchFrame?: boolean
+  _type: 'image'
+}
+
 export type SocialLink = {
   _type: 'socialLink'
   icon?:
@@ -273,6 +283,21 @@ export type PtBasic = Array<{
   _key: string
 }>
 
+export type PbTimeline = {
+  _type: 'pbTimeline'
+  sectionSettings?: PbSectionSettings
+  rowWidth?: 12 | 10
+  preheading?: string
+  title?: string
+  events?: Array<{
+    year?: string
+    heading?: string
+    description?: PtBody
+    image?: ObjectImage
+    _key: string
+  }>
+}
+
 export type PbTitleSection = {
   _type: 'pbTitleSection'
   sectionSettings?: PbSectionSettings
@@ -319,6 +344,9 @@ export type PbSections = Array<
   | ({
       _key: string
     } & PbImageWithCard)
+  | ({
+      _key: string
+    } & PbTimeline)
 >
 
 export type PbImageWithCard = {
@@ -918,6 +946,7 @@ export type AllSanitySchemaTypes =
   | ImageElementImage
   | BannerImageImage
   | BackgroundImageImage
+  | ObjectImage
   | SocialLink
   | Seo
   | PageReference
@@ -926,6 +955,7 @@ export type AllSanitySchemaTypes =
   | PtItalic
   | PtBody
   | PtBasic
+  | PbTimeline
   | PbTitleSection
   | PbSectionSettings
   | PbSections
@@ -2427,6 +2457,21 @@ export type HomePageQueryResult = {
       }
     | {
         _key: string
+        _type: 'pbTimeline'
+        sectionSettings?: PbSectionSettings
+        rowWidth?: 10 | 12
+        preheading?: string
+        title?: string
+        events?: Array<{
+          year?: string
+          heading?: string
+          description?: PtBody
+          image?: ObjectImage
+          _key: string
+        }>
+      }
+    | {
+        _key: string
         _type: 'pbTitleSection'
         sectionSettings?: PbSectionSettings
         titleMode?: 'hero' | 'text'
@@ -3897,6 +3942,21 @@ export type PagesBySlugQueryResult = {
           | 'gap-gut-25'
           | 'gap-gut-50'
           | 'gap-gut'
+      }
+    | {
+        _key: string
+        _type: 'pbTimeline'
+        sectionSettings?: PbSectionSettings
+        rowWidth?: 10 | 12
+        preheading?: string
+        title?: string
+        events?: Array<{
+          year?: string
+          heading?: string
+          description?: PtBody
+          image?: ObjectImage
+          _key: string
+        }>
       }
     | {
         _key: string

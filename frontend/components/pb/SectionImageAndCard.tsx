@@ -1,6 +1,6 @@
 'use client'
 import {colorValue} from '@/lib/colorValue'
-import {cn} from '@/lib/utils'
+import {cn, imgSizesFormat} from '@/lib/utils'
 import {PbImageWithCard} from '@/sanity.types'
 import {PbBlocksQueryResult} from '@/types'
 import Card from '../shared/Card'
@@ -14,6 +14,7 @@ export default function SectionImageAndCard({section}: {section: PbImageWithCard
   const hasBlocks = pbBlocks && pbBlocks.length > 0
   const hasImage = backgroundImage && backgroundImage.image
   const bgColor = colorValue(cardColor)
+  const imgSizes = imgSizesFormat(90, 80, size === 8 ? 66 : 50)
 
   if (!hasBlocks && !hasImage) {
     return null
@@ -31,7 +32,7 @@ export default function SectionImageAndCard({section}: {section: PbImageWithCard
           <Revealer direction="fade-up">
             {hasImage && (
               <div className="-mx-gut-50 relative top-gut-75">
-                <ImageBlock block={backgroundImage} trueSizes="40vw" />
+                <ImageBlock block={backgroundImage} trueSizes={imgSizes} />
               </div>
             )}
             {hasBlocks && (
@@ -40,7 +41,7 @@ export default function SectionImageAndCard({section}: {section: PbImageWithCard
                   <Card bgColor={bgColor}>
                     <PbBlocks
                       columnBlocks={pbBlocks as PbBlocksQueryResult}
-                      trueSizes="66vw"
+                      trueSizes={imgSizes}
                       spaceBetweenBlocks={spaceBetweenBlocks || 'gap-gut'}
                     />
                   </Card>
