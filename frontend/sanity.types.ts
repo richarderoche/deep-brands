@@ -65,6 +65,12 @@ export type BackgroundImage = {
   priority?: boolean
 }
 
+export type Preheading = {
+  color?: ColorChoice
+  left?: string
+  right?: string
+}
+
 export type YAlignment = {
   mobile: 'self-start' | 'self-center' | 'self-end'
   tablet: 'inherit' | 'self-start' | 'self-center' | 'self-end'
@@ -80,13 +86,13 @@ export type SanityFileAssetReference = {
 
 export type FileLinkFile = {
   asset?: SanityFileAssetReference
-  media?: unknown // Unable to locate the referenced type "file.media" in schema
+  media?: unknown // Unable to locate the referenced type "media" in schema
   _type: 'file'
 }
 
 export type PbBlockButtonFileLinkFile = {
   asset?: SanityFileAssetReference
-  media?: unknown // Unable to locate the referenced type "fileLink.file.media" in schema
+  media?: unknown // Unable to locate the referenced type "file.media" in schema
   _type: 'file'
 }
 
@@ -237,6 +243,21 @@ export type PtItalic = Array<{
   _key: string
 }>
 
+export type PtBold = Array<{
+  children?: Array<{
+    marks?: Array<string>
+    text?: string
+    _type: 'span'
+    _key: string
+  }>
+  style?: 'normal'
+  listItem?: never
+  markDefs?: null
+  level?: number
+  _type: 'block'
+  _key: string
+}>
+
 export type PtBody = Array<{
   children?: Array<{
     marks?: Array<string>
@@ -292,27 +313,17 @@ export type PbTimeline = {
   events?: Array<{
     year?: string
     heading?: string
-    description?: PtBody
+    description?: PtBold
     image?: ObjectImage
     _key: string
   }>
 }
 
-export type PbTitleSection = {
-  _type: 'pbTitleSection'
-  sectionSettings?: PbSectionSettings
-  titleMode?: 'text' | 'hero'
-  rowWidth?: 12 | 10 | 8 | 6
-  title?: string
-  subtitle?: string
-  image?: {
-    asset?: SanityImageAssetReference
-    media?: unknown
-    hotspot?: SanityImageHotspot
-    crop?: SanityImageCrop
-    _type: 'image'
-  }
-  heroImageAltText?: string
+export type PbSectionSettingsHero = {
+  _type: 'pbSectionSettingsHero'
+  enableSection?: boolean
+  sectionId?: string
+  sectionBgColor?: ColorChoice
 }
 
 export type PbSectionSettings = {
@@ -328,9 +339,6 @@ export type PbSectionSettings = {
 export type PbSections = Array<
   | ({
       _key: string
-    } & PbTitleSection)
-  | ({
-      _key: string
     } & PbGridMulti)
   | ({
       _key: string
@@ -344,6 +352,9 @@ export type PbSections = Array<
   | ({
       _key: string
     } & PbImageWithCard)
+  | ({
+      _key: string
+    } & PbHeroShape)
   | ({
       _key: string
     } & PbTimeline)
@@ -413,6 +424,37 @@ export type PbGridMulti = {
       | 'gap-gut-150'
       | 'gap-gut-200'
     blockWidths?: BlockWidths
+    _key: string
+  }>
+}
+
+export type PbHeroShape = {
+  _type: 'pbHeroShape'
+  sectionSettings?: PbSectionSettingsHero
+  showPreheading?: boolean
+  preheading?: Preheading
+  backdropType?: 'image' | 'video' | 'color'
+  backdropColor?: ColorChoice
+  backdropImage?: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+  }
+  backdropVideo?: {
+    asset?: SanityFileAssetReference
+    media?: unknown
+    _type: 'file'
+  }
+  contentOverlay?: 'none' | 'headingLogos' | 'stickyLogo'
+  heading?: PtItalic
+  subbrandLogos?: Array<{
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
     _key: string
   }>
 }
@@ -938,6 +980,7 @@ export type AllSanitySchemaTypes =
   | BlockWidths
   | BannerImage
   | BackgroundImage
+  | Preheading
   | YAlignment
   | SanityFileAssetReference
   | FileLinkFile
@@ -953,16 +996,18 @@ export type AllSanitySchemaTypes =
   | PtSlim
   | PtSingle
   | PtItalic
+  | PtBold
   | PtBody
   | PtBasic
   | PbTimeline
-  | PbTitleSection
+  | PbSectionSettingsHero
   | PbSectionSettings
   | PbSections
   | PbImageWithCard
   | PbGridDouble
   | PbGridSingle
   | PbGridMulti
+  | PbHeroShape
   | PbColSettings
   | PbBlockVideoEmbed
   | PbBlockText
@@ -2218,6 +2263,37 @@ export type HomePageQueryResult = {
       }
     | {
         _key: string
+        _type: 'pbHeroShape'
+        sectionSettings?: PbSectionSettingsHero
+        showPreheading?: boolean
+        preheading?: Preheading
+        backdropType?: 'color' | 'image' | 'video'
+        backdropColor?: ColorChoice
+        backdropImage?: {
+          asset?: SanityImageAssetReference
+          media?: unknown
+          hotspot?: SanityImageHotspot
+          crop?: SanityImageCrop
+          _type: 'image'
+        }
+        backdropVideo?: {
+          asset?: SanityFileAssetReference
+          media?: unknown
+          _type: 'file'
+        }
+        contentOverlay?: 'headingLogos' | 'none' | 'stickyLogo'
+        heading?: PtItalic
+        subbrandLogos?: Array<{
+          asset?: SanityImageAssetReference
+          media?: unknown
+          hotspot?: SanityImageHotspot
+          crop?: SanityImageCrop
+          _type: 'image'
+          _key: string
+        }>
+      }
+    | {
+        _key: string
         _type: 'pbImageWithCard'
         sectionSettings?: PbSectionSettings
         sectionName?: string
@@ -2465,27 +2541,10 @@ export type HomePageQueryResult = {
         events?: Array<{
           year?: string
           heading?: string
-          description?: PtBody
+          description?: PtBold
           image?: ObjectImage
           _key: string
         }>
-      }
-    | {
-        _key: string
-        _type: 'pbTitleSection'
-        sectionSettings?: PbSectionSettings
-        titleMode?: 'hero' | 'text'
-        rowWidth?: 10 | 12 | 6 | 8
-        title?: string
-        subtitle?: string
-        image?: {
-          asset?: SanityImageAssetReference
-          media?: unknown
-          hotspot?: SanityImageHotspot
-          crop?: SanityImageCrop
-          _type: 'image'
-        }
-        heroImageAltText?: string
       }
   > | null
 } | null
@@ -3706,6 +3765,37 @@ export type PagesBySlugQueryResult = {
       }
     | {
         _key: string
+        _type: 'pbHeroShape'
+        sectionSettings?: PbSectionSettingsHero
+        showPreheading?: boolean
+        preheading?: Preheading
+        backdropType?: 'color' | 'image' | 'video'
+        backdropColor?: ColorChoice
+        backdropImage?: {
+          asset?: SanityImageAssetReference
+          media?: unknown
+          hotspot?: SanityImageHotspot
+          crop?: SanityImageCrop
+          _type: 'image'
+        }
+        backdropVideo?: {
+          asset?: SanityFileAssetReference
+          media?: unknown
+          _type: 'file'
+        }
+        contentOverlay?: 'headingLogos' | 'none' | 'stickyLogo'
+        heading?: PtItalic
+        subbrandLogos?: Array<{
+          asset?: SanityImageAssetReference
+          media?: unknown
+          hotspot?: SanityImageHotspot
+          crop?: SanityImageCrop
+          _type: 'image'
+          _key: string
+        }>
+      }
+    | {
+        _key: string
         _type: 'pbImageWithCard'
         sectionSettings?: PbSectionSettings
         sectionName?: string
@@ -3953,27 +4043,10 @@ export type PagesBySlugQueryResult = {
         events?: Array<{
           year?: string
           heading?: string
-          description?: PtBody
+          description?: PtBold
           image?: ObjectImage
           _key: string
         }>
-      }
-    | {
-        _key: string
-        _type: 'pbTitleSection'
-        sectionSettings?: PbSectionSettings
-        titleMode?: 'hero' | 'text'
-        rowWidth?: 10 | 12 | 6 | 8
-        title?: string
-        subtitle?: string
-        image?: {
-          asset?: SanityImageAssetReference
-          media?: unknown
-          hotspot?: SanityImageHotspot
-          crop?: SanityImageCrop
-          _type: 'image'
-        }
-        heroImageAltText?: string
       }
   > | null
   seo?: Seo

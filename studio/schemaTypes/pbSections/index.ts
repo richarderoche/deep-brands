@@ -5,12 +5,12 @@ export default defineType({
   name: 'pbSections',
   type: 'array',
   of: [
-    {type: 'pbTitleSection'},
     {type: 'pbGridMulti'},
     {type: 'pbGridSingle'},
     {type: 'pbGridDouble'},
     {type: 'pbBanner'},
     {type: 'pbImageWithCard'},
+    {type: 'pbHeroShape'},
     {type: 'pbTimeline'},
   ],
 })

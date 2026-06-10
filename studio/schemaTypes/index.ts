@@ -29,10 +29,11 @@ import pbColSettings from './pbSections/pbColSettings'
 import pbGridDouble from './pbSections/pbGridDouble'
 import pbGridMulti from './pbSections/pbGridMulti'
 import pbGridSingle from './pbSections/pbGridSingle'
+import pbHeroShape from './pbSections/pbHeroShape'
 import pbImageWithCard from './pbSections/pbImageWithCard'
 import pbSectionSettings from './pbSections/pbSectionSettings'
+import pbSectionSettingsHero from './pbSections/pbSectionSettingsHero'
 import pbTimeline from './pbSections/pbTimeline'
-import pbTitleSection from './pbSections/pbTitle'
 import home from './singletons/home'
 import settings from './singletons/settings'
 
@@ -63,13 +64,14 @@ export const schemaTypes = [
   pbBlockText,
   pbBlockVideoEmbed,
   pbColSettings,
+  pbHeroShape,
   pbGridMulti,
   pbGridSingle,
   pbGridDouble,
   pbImageWithCard,
   pbSections,
   pbSectionSettings,
-  pbTitleSection,
+  pbSectionSettingsHero,
   pbTimeline,
   ptBasic,
   ptBody,
