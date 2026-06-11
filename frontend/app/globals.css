@@ -49,6 +49,8 @@
   --spacing-max-ch: 55ch;
   --spacing-header: calc(var(--gut) * 1.75);
   --spacing-ornament: calc(var(--gut) * 1.25);
+  --spacing-hero-ornament-t: 13vw;
+  --spacing-hero-ornament-b: 6vw;
   --spacing-btn: 1.75em;
 
   --radius-btn: 3px;

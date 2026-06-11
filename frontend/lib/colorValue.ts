@@ -16,6 +16,8 @@ export function colorValue(color?: ColorChoice | null): string | undefined {
       return color.colorLight ? `var(${color.colorLight})` : undefined
     case 'custom':
       return color.colorCustom?.hex ?? undefined
+    case 'gradient':
+      return undefined
     default:
       return undefined
   }

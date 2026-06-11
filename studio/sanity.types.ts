@@ -323,7 +323,10 @@ export type PbSectionSettingsHero = {
   _type: 'pbSectionSettingsHero'
   enableSection?: boolean
   sectionId?: string
+  topOrnament?: boolean
   sectionBgColor?: ColorChoice
+  marginTop?: 1 | 2 | 3 | 4 | 5
+  marginBottom?: 1 | 2 | 3 | 4 | 5
 }
 
 export type PbSectionSettings = {
@@ -659,7 +662,8 @@ export type NavExternal = {
 
 export type ColorChoice = {
   _type: 'colorChoice'
-  colorType?: 'none' | 'semitransparent' | 'dark' | 'light' | 'custom'
+  colorType?: 'none' | 'semitransparent' | 'dark' | 'light' | 'gradient' | 'custom'
+  gradientNote?: Note
   colorDark?:
     | '--color-blue-800'
     | '--color-blue-700'

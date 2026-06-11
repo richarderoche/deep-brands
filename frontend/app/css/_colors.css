@@ -108,3 +108,10 @@ body,
 .light-theme:not(.theme-vars-only) {
   @apply bg-bg text-body;
 }
+
+.db-gradient {
+  background:
+    linear-gradient(76deg, rgba(255, 255, 255, 0.8) 25%, rgba(255, 255, 255, 0.8) 100%),
+    linear-gradient(180deg, var(--color-blue-200) 0%, var(--color-tumeric-200) 100%);
+  background-blend-mode: soft-light, normal, normal;
+}

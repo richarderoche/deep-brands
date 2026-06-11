@@ -54,11 +54,11 @@ export default function TimelineRow({
         {
           opacity: 1,
           y: 0,
-          duration: 0.8,
+          duration: 0.7,
           ease: 'power2.out',
-          stagger: 0.15,
+          stagger: 0.1,
         },
-        '-=0.2',
+        '-=0.4',
       )
     },
     {scope: ref, dependencies: [row, reducedMotion]},

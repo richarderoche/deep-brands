@@ -15,9 +15,9 @@ import SectionBanner from './SectionBanner'
 import SectionGridDouble from './SectionGridDouble'
 import SectionGridMulti from './SectionGridMulti'
 import SectionGridSingle from './SectionGridSingle'
+import SectionHeroShape from './SectionHeroShape'
 import SectionImageAndCard from './SectionImageAndCard'
 import SectionTimeline from './SectionTimeline'
-import SectionTitleHero from './SectionTitleHero'
 
 export interface PageBuilderContentProps {
   data: PageBuilderData
@@ -61,7 +61,11 @@ export default function PageBuilderSections({
           <section
             id={sectionId ? sectionId : 'section-' + _key}
             key={_key}
-            className={cn('group', isDarkBgColor && 'dark-theme theme-vars-only text-body')}
+            className={cn(
+              'group',
+              isDarkBgColor && 'dark-theme theme-vars-only text-body',
+              sectionBgColor?.colorType === 'gradient' && 'db-gradient',
+            )}
             data-sanity={getDataAttribute(sectionPath)}
             style={{backgroundColor: bgColor}}
           >
@@ -90,8 +94,8 @@ export default function PageBuilderSections({
                   {section._type === 'pbGridDouble' && (
                     <SectionGridDouble section={section} sectionKey={_key} />
                   )}
-                  {section._type === 'pbTitleSection' && (
-                    <SectionTitleHero section={section} isFirst={_key === firstPbSectionKey} />
+                  {section._type === 'pbHeroShape' && (
+                    <SectionHeroShape section={section} isDarkBgColor={isDarkBgColor} />
                   )}
                   {section._type === 'pbBanner' && <SectionBanner section={section} />}
                   {section._type === 'pbImageWithCard' && <SectionImageAndCard section={section} />}

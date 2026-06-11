@@ -42,6 +42,10 @@ Example: ts-size-24/36 → font-size = var(--gut) × (24÷36)
   @apply ts-size-20/24 md:ts-size-42/36;
 }
 
+.ts-h1-h3 {
+  @apply ts-size-46/24 md:ts-size-76/36 lg:ts-size-58/36;
+}
+
 /* Labels */
 .ts-h5 {
   @apply ts-size-16/24 md:ts-size-36/36;

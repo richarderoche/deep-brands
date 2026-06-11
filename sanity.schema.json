@@ -2495,11 +2495,76 @@
           },
           "optional": true
         },
+        "topOrnament": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "boolean"
+          },
+          "optional": true
+        },
         "sectionBgColor": {
           "type": "objectAttribute",
           "value": {
             "type": "inline",
             "name": "colorChoice"
+          },
+          "optional": true
+        },
+        "marginTop": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "union",
+            "of": [
+              {
+                "type": "number",
+                "value": 1
+              },
+              {
+                "type": "number",
+                "value": 2
+              },
+              {
+                "type": "number",
+                "value": 3
+              },
+              {
+                "type": "number",
+                "value": 4
+              },
+              {
+                "type": "number",
+                "value": 5
+              }
+            ]
+          },
+          "optional": true
+        },
+        "marginBottom": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "union",
+            "of": [
+              {
+                "type": "number",
+                "value": 1
+              },
+              {
+                "type": "number",
+                "value": 2
+              },
+              {
+                "type": "number",
+                "value": 3
+              },
+              {
+                "type": "number",
+                "value": 4
+              },
+              {
+                "type": "number",
+                "value": 5
+              }
+            ]
           },
           "optional": true
         }
@@ -4807,9 +4872,21 @@
               },
               {
                 "type": "string",
+                "value": "gradient"
+              },
+              {
+                "type": "string",
                 "value": "custom"
               }
             ]
+          },
+          "optional": true
+        },
+        "gradientNote": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "inline",
+            "name": "note"
           },
           "optional": true
         },

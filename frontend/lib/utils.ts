@@ -130,8 +130,7 @@ export function getFirstSectionInfo(data: PageBuilderData) {
   )
   const firstPbSectionKey = firstPbSection?._key
   const firstPbSectionType = firstPbSection?._type
-  const firstIsHero =
-    firstPbSectionType === 'pbTitleSection' && firstPbSection?.titleMode === 'hero'
+  const firstIsHero = firstPbSectionType === 'pbHeroShape'
   return {firstIsHero, firstPbSectionKey}
 }
 
