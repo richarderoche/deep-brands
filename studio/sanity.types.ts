@@ -139,6 +139,15 @@ export type ObjectImage = {
   _type: 'image'
 }
 
+export type NewsPostImage = {
+  asset?: SanityImageAssetReference
+  media?: unknown // Unable to locate the referenced type "newsPost.image.media" in schema
+  hotspot?: SanityImageHotspot
+  crop?: SanityImageCrop
+  alt?: string
+  _type: 'image'
+}
+
 export type SocialLink = {
   _type: 'socialLink'
   icon?:
@@ -304,6 +313,22 @@ export type PtBasic = Array<{
   _key: string
 }>
 
+export type PbNews = {
+  _type: 'pbNews'
+  sectionSettings?: PbSectionSettings
+  title?: string
+  colorSteps?: number
+  newsPosts?: Array<{
+    title?: string
+    caption?: string
+    image?: NewsPostImage
+    url?: string
+    _type: 'newsPost'
+    _key: string
+  }>
+  ctaButton?: PbBlockButton
+}
+
 export type PbTimeline = {
   _type: 'pbTimeline'
   sectionSettings?: PbSectionSettings
@@ -361,6 +386,9 @@ export type PbSections = Array<
   | ({
       _key: string
     } & PbTimeline)
+  | ({
+      _key: string
+    } & PbNews)
 >
 
 export type PbImageWithCard = {
@@ -994,6 +1022,7 @@ export type AllSanitySchemaTypes =
   | BannerImageImage
   | BackgroundImageImage
   | ObjectImage
+  | NewsPostImage
   | SocialLink
   | Seo
   | PageReference
@@ -1003,6 +1032,7 @@ export type AllSanitySchemaTypes =
   | PtBold
   | PtBody
   | PtBasic
+  | PbNews
   | PbTimeline
   | PbSectionSettingsHero
   | PbSectionSettings

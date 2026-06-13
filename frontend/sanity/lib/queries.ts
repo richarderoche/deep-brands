@@ -122,6 +122,12 @@ const pb = `
         ${pbBlocks}
       }
     },
+    _type == "pbNews" => {
+      ...,
+      ctaButton {
+        ${pbButton}
+      }
+    },
   }
 `
 

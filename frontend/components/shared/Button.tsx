@@ -16,6 +16,7 @@ type ButtonOwnProps = {
   download?: boolean
   icon?: ButtonIcon
   outline?: boolean
+  subtle?: boolean
 }
 
 /**
@@ -41,6 +42,7 @@ export default function Button(props: ButtonProps) {
     icon = 'arrow',
     disabled = false,
     outline = false,
+    subtle = false,
     ...rest
   } = props
   let href: string | undefined = ''
@@ -57,8 +59,12 @@ export default function Button(props: ButtonProps) {
 
   const isExternal = href?.startsWith('http')
   const buttonClasses = cn(
-    'flex w-fit items-center h-btn px-[.5em] rounded-btn ts-btn border transition-all hover:scale-105',
-    outline ? '' : 'border-transparent bg-body text-btn-fg',
+    'flex w-fit items-center h-btn px-[.5em] rounded-btn ts-btn border transition-all hover:scale-105 will-change-transform',
+    outline
+      ? ''
+      : subtle
+        ? 'border-transparent bg-white/35 hover:bg-white/70 text-btn-fg'
+        : 'border-transparent bg-body text-btn-fg',
     disabled && 'opacity-50 pointer-events-none',
     className,
   )

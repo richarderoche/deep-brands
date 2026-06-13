@@ -115,3 +115,57 @@ body,
     linear-gradient(180deg, var(--color-blue-200) 0%, var(--color-tumeric-200) 100%);
   background-blend-mode: soft-light, normal, normal;
 }
+
+.rainbow-light-wrap-6 {
+  & > .rainbow-light-var:nth-child(6n + 1) {
+    --rainbow-light: var(--color-blue-200);
+  }
+  & > .rainbow-light-var:nth-child(6n + 2) {
+    --rainbow-light: var(--color-lotus-200);
+  }
+  & > .rainbow-light-var:nth-child(6n + 3) {
+    --rainbow-light: var(--color-saffron-200);
+  }
+  & > .rainbow-light-var:nth-child(6n + 4) {
+    --rainbow-light: var(--color-chili-200);
+  }
+  & > .rainbow-light-var:nth-child(6n + 5) {
+    --rainbow-light: var(--color-tumeric-200);
+  }
+  & > .rainbow-light-var:nth-child(6n + 6) {
+    --rainbow-light: var(--color-lime-200);
+  }
+}
+
+.rainbow-light-wrap-5 {
+  & > .rainbow-light-var:nth-child(5n + 1) {
+    --rainbow-light: var(--color-blue-200);
+  }
+  & > .rainbow-light-var:nth-child(5n + 2) {
+    --rainbow-light: var(--color-lotus-200);
+  }
+  & > .rainbow-light-var:nth-child(5n + 3) {
+    --rainbow-light: var(--color-saffron-200);
+  }
+  & > .rainbow-light-var:nth-child(5n + 4) {
+    --rainbow-light: var(--color-tumeric-200);
+  }
+  & > .rainbow-light-var:nth-child(5n + 5) {
+    --rainbow-light: var(--color-lime-200);
+  }
+}
+
+.rainbow-light-wrap-4 {
+  & > .rainbow-light-var:nth-child(4n + 1) {
+    --rainbow-light: var(--color-blue-200);
+  }
+  & > .rainbow-light-var:nth-child(4n + 2) {
+    --rainbow-light: var(--color-lotus-200);
+  }
+  & > .rainbow-light-var:nth-child(4n + 3) {
+    --rainbow-light: var(--color-saffron-200);
+  }
+  & > .rainbow-light-var:nth-child(4n + 4) {
+    --rainbow-light: var(--color-lime-200);
+  }
+}

@@ -12,5 +12,6 @@ export default defineType({
     {type: 'pbImageWithCard'},
     {type: 'pbHeroShape'},
     {type: 'pbTimeline'},
+    {type: 'pbNews'},
   ],
 })

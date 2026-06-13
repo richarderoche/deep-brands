@@ -17,6 +17,7 @@ import SectionGridMulti from './SectionGridMulti'
 import SectionGridSingle from './SectionGridSingle'
 import SectionHeroShape from './SectionHeroShape'
 import SectionImageAndCard from './SectionImageAndCard'
+import SectionNews from './SectionNews'
 import SectionTimeline from './SectionTimeline'
 
 export interface PageBuilderContentProps {
@@ -100,6 +101,7 @@ export default function PageBuilderSections({
                   {section._type === 'pbBanner' && <SectionBanner section={section} />}
                   {section._type === 'pbImageWithCard' && <SectionImageAndCard section={section} />}
                   {section._type === 'pbTimeline' && <SectionTimeline section={section} />}
+                  {section._type === 'pbNews' && <SectionNews section={section} />}
                 </SanityVisualEditingPath>
               </div>
             </div>

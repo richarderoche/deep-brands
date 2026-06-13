@@ -167,3 +167,15 @@ export function getClipPath(imageMaskType: string, cropRatio: number) {
       return undefined
   }
 }
+
+export function getColorStepClass(colorSteps?: number) {
+  if (!colorSteps) return 'rainbow-light-wrap-6'
+  switch (colorSteps) {
+    case 4:
+      return 'rainbow-light-wrap-4'
+    case 5:
+      return 'rainbow-light-wrap-5'
+    default:
+      return 'rainbow-light-wrap-6'
+  }
+}
