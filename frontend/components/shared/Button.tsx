@@ -112,7 +112,7 @@ const ButtonContent = ({
       {isSocialIcon(icon) && (
         <span
           className={cn(
-            'rounded-full  flex justify-center items-center ml-[.5em] p-[.45em] aspect-square text-[.6em] text-center',
+            'rounded-full flex justify-center items-center ml-[.5em] p-[.45em] aspect-square text-[.6em] text-center',
             outline ? 'bg-body text-btn-fg' : 'bg-btn-fg text-body',
           )}
         >

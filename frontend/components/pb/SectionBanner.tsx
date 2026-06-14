@@ -11,6 +11,7 @@ import {ScrollTrigger} from 'gsap/all'
 import {useRef} from 'react'
 import IconOrnamentRight from '../icons/IconOrnamentRight'
 import PbBlocks, {ImageBlock} from './PbBlocks'
+import {useSanityDataAttribute} from './SanityVisualEditingContext'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -24,6 +25,7 @@ const STAGGER = 0.15
 const BLOCKS_OVERLAP = 0.3
 
 export default function SectionGridSingle({section}: {section: PbBanner}) {
+  const {getDataAttribute} = useSanityDataAttribute()
   const {pbBlocks, spaceBetweenBlocks, bgColor, bannerImage, bannerDirection} = section
   const hasBlocks = pbBlocks && pbBlocks.length > 0
   const hasBannerImage = bannerImage && bannerImage.image
@@ -88,6 +90,7 @@ export default function SectionGridSingle({section}: {section: PbBanner}) {
         )}
       >
         <div
+          data-sanity={getDataAttribute(['bannerImage'])}
           className={cn(
             'relative z-1 shadow-md max-lg:top-gut-150',
             isOffset ? 'md:w-[75vw] lg:w-[40vw]' : 'w-[35vw] lg:w-[30vw]',

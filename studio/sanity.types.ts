@@ -522,6 +522,25 @@ export type PbBlockPlainText = {
   balanceLines?: boolean
 }
 
+export type BrandsReference = {
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'brands'
+}
+
+export type PbBlockJobs = {
+  _type: 'pbBlockJobs'
+  jobs?: Array<{
+    title?: string
+    subtitle?: string
+    company?: BrandsReference
+    url?: string
+    _type: 'job'
+    _key: string
+  }>
+}
+
 export type PbBlockMarquee = {
   _type: 'pbBlockMarquee'
   settings?: PbBlockMarqueeSettings
@@ -586,6 +605,9 @@ export type PbBlocks = Array<
   | ({
       _key: string
     } & PbBlockDivider)
+  | ({
+      _key: string
+    } & PbBlockJobs)
   | ({
       _key: string
     } & PbBlockMarquee)
@@ -745,66 +767,6 @@ export type Redirect = {
 
 export type Note = string
 
-export type Brands = {
-  _id: string
-  _type: 'brands'
-  _createdAt: string
-  _updatedAt: string
-  _rev: string
-  brandsNote?: Note
-  title?: string
-  websiteLink?: NavExternal
-  socialIcons?: Array<
-    {
-      _key: string
-    } & SocialLink
-  >
-  logo?: {
-    asset?: SanityImageAssetReference
-    media?: unknown
-    hotspot?: SanityImageHotspot
-    crop?: SanityImageCrop
-    _type: 'image'
-  }
-  maskShape?: {
-    asset?: SanityImageAssetReference
-    media?: unknown
-    hotspot?: SanityImageHotspot
-    crop?: SanityImageCrop
-    _type: 'image'
-  }
-  bgShape?: {
-    asset?: SanityImageAssetReference
-    media?: unknown
-    hotspot?: SanityImageHotspot
-    crop?: SanityImageCrop
-    _type: 'image'
-  }
-}
-
-export type SanityImageCrop = {
-  _type: 'sanity.imageCrop'
-  top: number
-  bottom: number
-  left: number
-  right: number
-}
-
-export type SanityImageHotspot = {
-  _type: 'sanity.imageHotspot'
-  x: number
-  y: number
-  height: number
-  width: number
-}
-
-export type BrandsReference = {
-  _ref: string
-  _type: 'reference'
-  _weak?: boolean
-  [internalGroqTypeReferenceTo]?: 'brands'
-}
-
 export type Settings = {
   _id: string
   _type: 'settings'
@@ -845,6 +807,22 @@ export type Settings = {
   }>
 }
 
+export type SanityImageCrop = {
+  _type: 'sanity.imageCrop'
+  top: number
+  bottom: number
+  left: number
+  right: number
+}
+
+export type SanityImageHotspot = {
+  _type: 'sanity.imageHotspot'
+  x: number
+  y: number
+  height: number
+  width: number
+}
+
 export type Home = {
   _id: string
   _type: 'home'
@@ -865,6 +843,43 @@ export type Page = {
   slug: Slug
   pbSections?: PbSections
   seo?: Seo
+}
+
+export type Brands = {
+  _id: string
+  _type: 'brands'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  brandsNote?: Note
+  title?: string
+  websiteLink?: NavExternal
+  socialIcons?: Array<
+    {
+      _key: string
+    } & SocialLink
+  >
+  logo?: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+  }
+  maskShape?: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+  }
+  bgShape?: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+  }
 }
 
 export type Slug = {
@@ -1046,6 +1061,8 @@ export type AllSanitySchemaTypes =
   | PbBlockVideoEmbed
   | PbBlockText
   | PbBlockPlainText
+  | BrandsReference
+  | PbBlockJobs
   | PbBlockMarquee
   | PbBlockDivider
   | PbBlocks
@@ -1061,13 +1078,12 @@ export type AllSanitySchemaTypes =
   | Column
   | Redirect
   | Note
-  | Brands
+  | Settings
   | SanityImageCrop
   | SanityImageHotspot
-  | BrandsReference
-  | Settings
   | Home
   | Page
+  | Brands
   | Slug
   | Color
   | RgbaColor

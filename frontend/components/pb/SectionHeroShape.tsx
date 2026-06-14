@@ -9,6 +9,7 @@ import IconOrnamentTop from '../icons/IconOrnamentTop'
 import ImageBasic from '../shared/ImageBasic'
 import SiteGrid from '../shared/SiteGrid'
 import SiteWidth from '../shared/SiteWidth'
+import {useSanityDataAttribute} from './SanityVisualEditingContext'
 
 export default function SectionHeroShape({
   section,
@@ -17,6 +18,7 @@ export default function SectionHeroShape({
   section: PbHeroShape
   isDarkBgColor: boolean
 }) {
+  const {getDataAttribute} = useSanityDataAttribute()
   const {
     showPreheading,
     preheading,
@@ -41,13 +43,24 @@ export default function SectionHeroShape({
         <div className="col-span-12 lg:col-span-10 lg:col-start-2 relative">
           {hasPreheading && (
             <div
+              data-sanity={getDataAttribute(['preheading'])}
               className={cn(
-                'absolute max-md:-top-em lg:top-[2em] left-0 w-full flex justify-between ts-h6 ts-sans-wide text-balance',
+                'absolute max-md:-top-em lg:top-[2em] left-0 w-full flex justify-between ts-h6 ts-sans-wide text-balance z-1',
                 isDarkBgColor ? 'text-offwhite' : 'text-blue-600',
               )}
             >
-              <div className="max-lg:max-w-[15vw]">{preheading?.left}</div>
-              <div className="text-right max-lg:max-w-[15vw]">{preheading?.right}</div>
+              <div
+                data-sanity={getDataAttribute(['preheading', 'left'])}
+                className="max-lg:max-w-[15vw]"
+              >
+                {preheading?.left}
+              </div>
+              <div
+                data-sanity={getDataAttribute(['preheading', 'right'])}
+                className="text-right max-lg:max-w-[15vw]"
+              >
+                {preheading?.right}
+              </div>
             </div>
           )}
           <div
@@ -77,14 +90,18 @@ export default function SectionHeroShape({
                 style={{background: shapeColor}}
               >
                 {heading && (
-                  <h2 className="ts-h1-h3 ts-serif">
+                  <h2 data-sanity={getDataAttribute(['heading'])} className="ts-h1-h3 ts-serif">
                     <PortableText value={heading} />
                   </h2>
                 )}
                 {subbrandLogos && (
-                  <div className="flex items-center justify-center gap-gut">
+                  <div
+                    data-sanity={getDataAttribute(['subbrandLogos'])}
+                    className="flex items-center justify-center gap-gut"
+                  >
                     {subbrandLogos.map((logo) => (
                       <div
+                        data-sanity={getDataAttribute(['subbrandLogos', {_key: logo._key}])}
                         key={logo._key}
                         className="w-1/3 lg:w-1/5 aspect-3/2 items-center justify-center flex"
                       >

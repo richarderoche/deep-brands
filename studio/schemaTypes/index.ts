@@ -18,6 +18,7 @@ import pbBlockButton from './pbBlocks/pbBlockButton'
 import pbBlockButtonMulti from './pbBlocks/pbBlockButtonMulti'
 import pbBlockDivider from './pbBlocks/pbBlockDivider'
 import pbBlockImage from './pbBlocks/pbBlockImage'
+import pbBlockJobs from './pbBlocks/pbBlockJobs'
 import pbBlockMarquee from './pbBlocks/pbBlockMarquee'
 import pbBlockPlainText from './pbBlocks/pbBlockPlainText'
 import pbBlockText from './pbBlocks/pbBlockText'
@@ -61,6 +62,7 @@ export const schemaTypes = [
   pbBlocks,
   pbBlockDivider,
   pbBlockMarquee,
+  pbBlockJobs,
   pbBlockPlainText,
   pbBlockText,
   pbBlockVideoEmbed,

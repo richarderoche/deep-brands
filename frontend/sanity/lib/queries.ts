@@ -76,6 +76,13 @@ const pbBlocks = `
       ${pbButton}
     },
   },
+  _type == "pbBlockJobs" => {
+    ...,
+    jobs[]{
+      ...,
+      "company": company->title,
+    },
+  },
 `
 
 const pb = `

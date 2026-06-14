@@ -13,9 +13,11 @@ import Card from '../shared/Card'
 import SiteGrid from '../shared/SiteGrid'
 import SiteWidth from '../shared/SiteWidth'
 import {ButtonBlock, ImageBlock} from './PbBlocks'
+import {useSanityDataAttribute} from './SanityVisualEditingContext'
 
 export default function SectionNews({section}: {section: PbNews}) {
   const {title, colorSteps, ctaButton, newsPosts} = section
+  const {getDataAttribute} = useSanityDataAttribute()
   const hasPosts = newsPosts && newsPosts.length > 0
   const [emblaRef, emblaApi] = useEmblaCarousel({loop: true, align: 'start'}, [
     Accessibility({
@@ -49,17 +51,21 @@ export default function SectionNews({section}: {section: PbNews}) {
       </SiteWidth>
 
       {hasPosts && (
-        <div ref={emblaRef} className="embla__viewport mt-gut">
+        <div ref={emblaRef} className="embla__viewport mt-gut lg:mt-gut-150">
           <div className={cn('embla__container text-blue-800', getColorStepClass(colorSteps))}>
             {newsPosts.map((post) => {
               const {_key, image, title, caption, url} = post
               return (
                 <div
                   key={_key}
+                  data-sanity={getDataAttribute(['newsPosts', {_key}])}
                   className="embla__slide basis-4/5 md:basis-6/10 lg:basis-3/10 pl-gut-200 rainbow-light-var"
                 >
                   <div className="h-full flex flex-col">
-                    <div className="-ml-gut">
+                    <div
+                      data-sanity={getDataAttribute(['newsPosts', {_key}, 'image'])}
+                      className="-ml-gut"
+                    >
                       <ImageBlock
                         block={{
                           image: image,

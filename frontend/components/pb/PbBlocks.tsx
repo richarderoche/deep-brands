@@ -5,7 +5,9 @@ import {cn, getClipPath} from '@/lib/utils'
 import type {PbBlockVideoEmbed} from '@/sanity.types'
 import {PbBlocksQueryResult} from '@/types'
 import {PortableText, PortableTextBlock} from 'next-sanity'
+import Link from 'next/link'
 import type {Image as SanityImageType} from 'sanity'
+import IconCarat from '../icons/IconCarat'
 import Button from '../shared/Button'
 import {CustomPortableText} from '../shared/CustomPortableText'
 import Divider from '../shared/Divider'
@@ -13,7 +15,7 @@ import ImageBasic from '../shared/ImageBasic'
 import RichTextWrap from '../shared/RichTextWrap'
 import VideoEmbed from '../shared/VideoEmbed'
 import MarqueeBlock from './MarqueeBlock'
-import {useSanityDataAttribute} from './SanityVisualEditingContext'
+import {SanityVisualEditingPath, useSanityDataAttribute} from './SanityVisualEditingContext'
 
 export interface PbBlocksProps {
   columnBlocks: PbBlocksQueryResult
@@ -38,7 +40,7 @@ export default function PbBlocks({
   },
   className,
 }: PbBlocksProps) {
-  const {getDataAttribute} = useSanityDataAttribute()
+  const {getDataAttribute, path} = useSanityDataAttribute()
   return (
     <div
       className={cn(
@@ -135,6 +137,16 @@ export default function PbBlocks({
                 </div>
               )
 
+            // Jobs Listing Block
+            case 'pbBlockJobs':
+              return (
+                <SanityVisualEditingPath key={_key} path={[...path, 'pbBlocks', {_key}]}>
+                  <div data-sanity={blockDataSanity}>
+                    <JobsBlock block={block} />
+                  </div>
+                </SanityVisualEditingPath>
+              )
+
             default:
               return null
           }
@@ -220,6 +232,45 @@ export function ButtonBlock({block}) {
       icon={block.icon}
       outline={block.buttonStyle === 'outline'}
     />
+  )
+}
+
+export function JobsBlock({block}) {
+  const {getDataAttribute} = useSanityDataAttribute()
+
+  return (
+    <div className="flex flex-col gap-4">
+      {block.jobs?.map((job) => {
+        const {_key, title, subtitle, company, url} = job
+        return (
+          <div
+            key={_key}
+            data-sanity={getDataAttribute(['jobs', {_key}])}
+            className="border-t last:border-b border-body/50"
+          >
+            <Link
+              href={url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex gap-gut items-center justify-between p-gut-50"
+            >
+              <div className="flex flex-col gap-gut-25">
+                <h3 className="ts-h6 ts-sans-wide text-balance">{title}</h3>
+                <div className="flex items-center gap-gut-33">
+                  <p className="ts-meta ts-sans-tall flex w-fit items-center h-btn px-[.5em] rounded-btn bg-white/20 whitespace-nowrap">
+                    {company ? (company as string) : 'Deep Brands'}
+                  </p>
+                  <p className="ts-p-xs line-clamp-1">{subtitle}</p>
+                </div>
+              </div>
+              <div className="rounded-full border ts-btn size-btn p-[.5em] flex items-center justify-center">
+                <IconCarat className="h-full w-auto mr-[-.2em]" />
+              </div>
+            </Link>
+          </div>
+        )
+      })}
+    </div>
   )
 }
 

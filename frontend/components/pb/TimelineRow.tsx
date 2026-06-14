@@ -9,6 +9,7 @@ import {PortableText, PortableTextBlock} from 'next-sanity'
 import {useRef} from 'react'
 import IconArrow from '../icons/IconArrow'
 import {ImageBlock} from './PbBlocks'
+import {useSanityDataAttribute} from './SanityVisualEditingContext'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -23,6 +24,7 @@ export default function TimelineRow({
   row?: NonNullable<PbTimeline['events']>[number]
   rowWidth?: 12 | 10
 }) {
+  const {getDataAttribute} = useSanityDataAttribute()
   const {year, heading, description, image} = row || {}
   const ref = useRef<HTMLDivElement>(null)
   const reducedMotion = usePrefersReducedMotion()
@@ -77,7 +79,10 @@ export default function TimelineRow({
 
       <div className="flex-1">
         {row && (
-          <div className="timeline-event grid grid-cols-5 gap-gut md:max-lg:gap-gut-66 py-gut">
+          <div
+            data-sanity={getDataAttribute(['events', {_key: row._key}])}
+            className="timeline-event grid grid-cols-5 gap-gut md:max-lg:gap-gut-66 py-gut"
+          >
             <div
               className={cn(
                 'flex flex-col gap-y-gut-33 col-span-3 md:max-lg:col-span-5',

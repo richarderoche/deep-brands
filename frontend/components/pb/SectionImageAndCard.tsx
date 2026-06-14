@@ -8,8 +8,10 @@ import Revealer from '../shared/Revealer'
 import SiteGrid from '../shared/SiteGrid'
 import SiteWidth from '../shared/SiteWidth'
 import PbBlocks, {ImageBlock} from './PbBlocks'
+import {useSanityDataAttribute} from './SanityVisualEditingContext'
 
 export default function SectionImageAndCard({section}: {section: PbImageWithCard}) {
+  const {getDataAttribute} = useSanityDataAttribute()
   const {pbBlocks, spaceBetweenBlocks, cardColor, backgroundImage, size} = section
   const hasBlocks = pbBlocks && pbBlocks.length > 0
   const hasImage = backgroundImage && backgroundImage.image
@@ -31,7 +33,10 @@ export default function SectionImageAndCard({section}: {section: PbImageWithCard
         >
           <Revealer direction="fade-up">
             {hasImage && (
-              <div className="-mx-gut-50 relative top-gut-75">
+              <div
+                data-sanity={getDataAttribute(['backgroundImage'])}
+                className="-mx-gut-50 relative top-gut-75"
+              >
                 <ImageBlock block={backgroundImage} trueSizes={imgSizes} />
               </div>
             )}

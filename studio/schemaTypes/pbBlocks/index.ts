@@ -1,18 +1,19 @@
-import { defineType } from 'sanity'
+import {defineType} from 'sanity'
 
 export default defineType({
   title: 'Content Blocks',
   name: 'pbBlocks',
   type: 'array',
   of: [
-    { title: 'Rich Text', type: 'pbBlockText' },
-    { title: 'Plain Text', type: 'pbBlockPlainText' },
-    { title: 'Image', type: 'pbBlockImage' },
-    { title: 'Video Embed', type: 'pbBlockVideoEmbed' },
-    { title: 'Button', type: 'pbBlockButton' },
-    { title: 'Button Group', type: 'pbBlockButtonMulti' },
-    { title: 'Divider/Spacer', type: 'pbBlockDivider' },
-    { title: 'Scrolling Marquee', type: 'pbBlockMarquee' },
+    {title: 'Rich Text', type: 'pbBlockText'},
+    {title: 'Plain Text', type: 'pbBlockPlainText'},
+    {title: 'Image', type: 'pbBlockImage'},
+    {title: 'Video Embed', type: 'pbBlockVideoEmbed'},
+    {title: 'Button', type: 'pbBlockButton'},
+    {title: 'Button Group', type: 'pbBlockButtonMulti'},
+    {title: 'Divider/Spacer', type: 'pbBlockDivider'},
+    {title: 'Jobs Listing', type: 'pbBlockJobs'},
+    {title: 'Scrolling Marquee', type: 'pbBlockMarquee'},
   ],
   options: {
     insertMenu: {
@@ -33,7 +34,7 @@ export default defineType({
         {
           name: 'specialty',
           title: 'Specialty',
-          of: ['pbBlockMarquee'],
+          of: ['pbBlockJobs', 'pbBlockMarquee'],
         },
       ],
     },
