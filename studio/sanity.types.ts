@@ -316,12 +316,27 @@ export type PtBasic = Array<{
 export type PbValues = {
   _type: 'pbValues'
   sectionSettings?: PbSectionSettings
-  title?: string
   colorSteps?: number
   values?: Array<{
     title?: string
     caption?: string
     _type: 'value'
+    _key: string
+  }>
+}
+
+export type PbTriptych = {
+  _type: 'pbTriptych'
+  sectionSettings?: PbSectionSettings
+  sectionName?: string
+  triptychType?: 'still' | 'carouselGroups' | 'carouselSingles'
+  images?: Array<{
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    alt?: string
+    _type: 'image'
     _key: string
   }>
 }
@@ -393,6 +408,9 @@ export type PbSections = Array<
   | ({
       _key: string
     } & PbImageWithCard)
+  | ({
+      _key: string
+    } & PbTriptych)
   | ({
       _key: string
     } & PbHeroShape)
@@ -1064,6 +1082,7 @@ export type AllSanitySchemaTypes =
   | PtBody
   | PtBasic
   | PbValues
+  | PbTriptych
   | PbNews
   | PbTimeline
   | PbSectionSettingsHero

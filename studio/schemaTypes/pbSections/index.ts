@@ -10,6 +10,7 @@ export default defineType({
     {type: 'pbGridDouble'},
     {type: 'pbBanner'},
     {type: 'pbImageWithCard'},
+    {type: 'pbTriptych'},
     {type: 'pbHeroShape'},
     {type: 'pbTimeline'},
     {type: 'pbNews'},

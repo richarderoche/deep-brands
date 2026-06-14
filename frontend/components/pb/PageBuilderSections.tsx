@@ -19,6 +19,7 @@ import SectionHeroShape from './SectionHeroShape'
 import SectionImageAndCard from './SectionImageAndCard'
 import SectionNews from './SectionNews'
 import SectionTimeline from './SectionTimeline'
+import SectionTriptych from './SectionTriptych'
 import SectionValues from './SectionValues'
 
 export interface PageBuilderContentProps {
@@ -104,6 +105,9 @@ export default function PageBuilderSections({
                   {_type === 'pbTimeline' && <SectionTimeline section={section} />}
                   {_type === 'pbNews' && <SectionNews section={section} />}
                   {_type === 'pbValues' && <SectionValues section={section} />}
+                  {_type === 'pbTriptych' && (
+                    <SectionTriptych section={section} isFirst={_key === firstPbSectionKey} />
+                  )}
                 </SanityVisualEditingPath>
               </div>
             </div>

@@ -36,6 +36,7 @@ import pbNews from './pbSections/pbNews'
 import pbSectionSettings from './pbSections/pbSectionSettings'
 import pbSectionSettingsHero from './pbSections/pbSectionSettingsHero'
 import pbTimeline from './pbSections/pbTimeline'
+import pbTriptych from './pbSections/pbTriptych'
 import pbValues from './pbSections/pbValues'
 import home from './singletons/home'
 import settings from './singletons/settings'
@@ -78,6 +79,7 @@ export const schemaTypes = [
   pbSectionSettingsHero,
   pbTimeline,
   pbNews,
+  pbTriptych,
   pbValues,
   ptBasic,
   ptBody,
