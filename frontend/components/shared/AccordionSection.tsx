@@ -1,11 +1,11 @@
 'use client'
-import { useGSAP } from '@gsap/react'
+import {useGSAP} from '@gsap/react'
 import gsap from 'gsap'
-import { useRef, useState } from 'react'
+import {useRef, useState} from 'react'
 
-import { cn } from '@/lib/utils'
+import {cn} from '@/lib/utils'
 
-import { AddIcon } from '@sanity/icons'
+import IconCarat from '../icons/IconCarat'
 
 gsap.registerPlugin(useGSAP)
 
@@ -14,6 +14,7 @@ export interface AccordionSectionProps {
   accordionTitle?: string
   innerId: string
   size?: 'small' | 'big'
+  headingColor?: string
 }
 
 export function AccordionSection({
@@ -21,6 +22,7 @@ export function AccordionSection({
   accordionTitle = 'Show/Hide',
   innerId,
   size = 'small',
+  headingColor = 'var(--theme-body)',
 }: AccordionSectionProps) {
   const [expanded, setExpanded] = useState(false)
   const ref = useRef<HTMLDivElement>(null)
@@ -33,28 +35,38 @@ export function AccordionSection({
         ease: 'expo.out',
       })
     },
-    { dependencies: [expanded] }
+    {dependencies: [expanded]},
   )
   return (
     <>
-      <h3 className={size === 'big' ? 'border-t-2 ts-h2' : 'border-t ts-h3'}>
+      <h3
+        className={cn(
+          size === 'big' ? 'border-t-2' : 'border-t',
+          'border-body/15 first:border-t-0',
+        )}
+      >
         <button
           className={cn(
-            'flex items-center justify-between gap-x-8 py-8 w-full'
+            'flex items-center text-left justify-between gap-x-gut py-gut-50 w-full',
+            size === 'big' ? 'ts-h4' : 'ts-h5',
+            'ts-sans-wide',
           )}
+          style={{color: headingColor}}
           onClick={() => setExpanded(!expanded)}
           aria-expanded={expanded}
           aria-controls={innerId}
           id={headerId}
         >
-          <span>{accordionTitle}</span>
-          <AddIcon
+          <span className="text-balance">{accordionTitle}</span>
+          <div
             className={cn(
-              'size-[.666667em] transition-transform',
-              expanded && 'rotate-45'
+              'rounded-full border ts-btn size-btn p-[.5em] flex items-center justify-center transition-transform will-change-transform',
+              expanded ? '-rotate-90' : 'rotate-90',
             )}
             aria-hidden={true}
-          />
+          >
+            <IconCarat className="h-full w-auto mr-[-.2em]" />
+          </div>
           <span className="sr-only">{expanded ? 'Collapse' : 'Expand'}</span>
         </button>
       </h3>
@@ -66,9 +78,7 @@ export function AccordionSection({
         role="region"
         aria-labelledby={headerId}
       >
-        <div className={size === 'big' ? 'py-gut' : 'py-gut-50'}>
-          {children}
-        </div>
+        <div className={size === 'big' ? 'pb-gut' : 'pb-gut-50'}>{children}</div>
       </div>
     </>
   )

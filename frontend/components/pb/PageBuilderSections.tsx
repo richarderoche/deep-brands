@@ -19,6 +19,7 @@ import SectionHeroShape from './SectionHeroShape'
 import SectionImageAndCard from './SectionImageAndCard'
 import SectionNews from './SectionNews'
 import SectionTimeline from './SectionTimeline'
+import SectionValues from './SectionValues'
 
 export interface PageBuilderContentProps {
   data: PageBuilderData
@@ -39,7 +40,7 @@ export default function PageBuilderSections({
   return (
     <div className="flex flex-col">
       {pbSections.map((section) => {
-        const {_key, sectionSettings} = section
+        const {_key, _type, sectionSettings} = section
         const {
           enableSection = true,
           sectionId,
@@ -84,24 +85,25 @@ export default function PageBuilderSections({
                 }}
               >
                 <SanityVisualEditingPath path={[...sectionPath]}>
-                  {section._type === 'pbGridMulti' && <SectionGridMulti section={section} />}
-                  {section._type === 'pbGridSingle' && (
+                  {_type === 'pbGridMulti' && <SectionGridMulti section={section} />}
+                  {_type === 'pbGridSingle' && (
                     <SectionGridSingle
                       section={section}
                       sectionKey={_key}
                       isDarkBgColor={isDarkBgColor}
                     />
                   )}
-                  {section._type === 'pbGridDouble' && (
+                  {_type === 'pbGridDouble' && (
                     <SectionGridDouble section={section} sectionKey={_key} />
                   )}
-                  {section._type === 'pbHeroShape' && (
+                  {_type === 'pbHeroShape' && (
                     <SectionHeroShape section={section} isDarkBgColor={isDarkBgColor} />
                   )}
-                  {section._type === 'pbBanner' && <SectionBanner section={section} />}
-                  {section._type === 'pbImageWithCard' && <SectionImageAndCard section={section} />}
-                  {section._type === 'pbTimeline' && <SectionTimeline section={section} />}
-                  {section._type === 'pbNews' && <SectionNews section={section} />}
+                  {_type === 'pbBanner' && <SectionBanner section={section} />}
+                  {_type === 'pbImageWithCard' && <SectionImageAndCard section={section} />}
+                  {_type === 'pbTimeline' && <SectionTimeline section={section} />}
+                  {_type === 'pbNews' && <SectionNews section={section} />}
+                  {_type === 'pbValues' && <SectionValues section={section} />}
                 </SanityVisualEditingPath>
               </div>
             </div>

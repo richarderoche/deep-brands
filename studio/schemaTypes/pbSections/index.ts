@@ -13,5 +13,6 @@ export default defineType({
     {type: 'pbHeroShape'},
     {type: 'pbTimeline'},
     {type: 'pbNews'},
+    {type: 'pbValues'},
   ],
 })

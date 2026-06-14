@@ -412,7 +412,7 @@
           "type": "objectAttribute",
           "value": {
             "type": "inline",
-            "name": "pbBlockButton.fileLink.file"
+            "name": "fileLink.file"
           },
           "optional": true
         },
@@ -935,7 +935,7 @@
           "type": "objectAttribute",
           "value": {
             "type": "inline",
-            "name": "media"
+            "name": "file.media"
           },
           "optional": true
         },
@@ -951,7 +951,7 @@
   },
   {
     "type": "type",
-    "name": "pbBlockButton.fileLink.file",
+    "name": "markDefs.fileLink.file",
     "value": {
       "type": "object",
       "attributes": {
@@ -967,7 +967,7 @@
           "type": "objectAttribute",
           "value": {
             "type": "inline",
-            "name": "file.media"
+            "name": "fileLink.file.media"
           },
           "optional": true
         },
@@ -1029,7 +1029,7 @@
           "type": "objectAttribute",
           "value": {
             "type": "inline",
-            "name": "imageElement.image.media"
+            "name": "image.media"
           },
           "optional": true
         },
@@ -2357,7 +2357,7 @@
                         "type": "objectAttribute",
                         "value": {
                           "type": "inline",
-                          "name": "fileLink.file"
+                          "name": "markDefs.fileLink.file"
                         },
                         "optional": true
                       },
@@ -2411,6 +2411,88 @@
               }
             }
           }
+        }
+      }
+    }
+  },
+  {
+    "name": "pbValues",
+    "type": "type",
+    "value": {
+      "type": "object",
+      "attributes": {
+        "_type": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string",
+            "value": "pbValues"
+          }
+        },
+        "sectionSettings": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "inline",
+            "name": "pbSectionSettings"
+          },
+          "optional": true
+        },
+        "title": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
+          },
+          "optional": true
+        },
+        "colorSteps": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "number"
+          },
+          "optional": true
+        },
+        "values": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "array",
+            "of": {
+              "type": "object",
+              "attributes": {
+                "title": {
+                  "type": "objectAttribute",
+                  "value": {
+                    "type": "string"
+                  },
+                  "optional": true
+                },
+                "caption": {
+                  "type": "objectAttribute",
+                  "value": {
+                    "type": "string"
+                  },
+                  "optional": true
+                },
+                "_type": {
+                  "type": "objectAttribute",
+                  "value": {
+                    "type": "string",
+                    "value": "value"
+                  }
+                }
+              },
+              "rest": {
+                "type": "object",
+                "attributes": {
+                  "_key": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "optional": true
         }
       }
     }
@@ -2960,6 +3042,21 @@
             "rest": {
               "type": "inline",
               "name": "pbNews"
+            }
+          },
+          {
+            "type": "object",
+            "attributes": {
+              "_key": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "string"
+                }
+              }
+            },
+            "rest": {
+              "type": "inline",
+              "name": "pbValues"
             }
           }
         ]
@@ -4400,21 +4497,6 @@
             },
             "rest": {
               "type": "inline",
-              "name": "pbBlockText"
-            }
-          },
-          {
-            "type": "object",
-            "attributes": {
-              "_key": {
-                "type": "objectAttribute",
-                "value": {
-                  "type": "string"
-                }
-              }
-            },
-            "rest": {
-              "type": "inline",
               "name": "pbBlockPlainText"
             }
           },
@@ -4491,6 +4573,21 @@
             "rest": {
               "type": "inline",
               "name": "pbBlockDivider"
+            }
+          },
+          {
+            "type": "object",
+            "attributes": {
+              "_key": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "string"
+                }
+              }
+            },
+            "rest": {
+              "type": "inline",
+              "name": "pbBlockText"
             }
           },
           {

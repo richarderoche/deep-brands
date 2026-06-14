@@ -33,7 +33,7 @@ export type VideoAspectRatio = {
 }
 
 export type FileLink = {
-  file?: PbBlockButtonFileLinkFile
+  file?: FileLinkFile
   buttonText?: string
 }
 
@@ -86,13 +86,13 @@ export type SanityFileAssetReference = {
 
 export type FileLinkFile = {
   asset?: SanityFileAssetReference
-  media?: unknown // Unable to locate the referenced type "media" in schema
+  media?: unknown // Unable to locate the referenced type "file.media" in schema
   _type: 'file'
 }
 
-export type PbBlockButtonFileLinkFile = {
+export type MarkDefsFileLinkFile = {
   asset?: SanityFileAssetReference
-  media?: unknown // Unable to locate the referenced type "file.media" in schema
+  media?: unknown // Unable to locate the referenced type "fileLink.file.media" in schema
   _type: 'file'
 }
 
@@ -105,7 +105,7 @@ export type SanityImageAssetReference = {
 
 export type ImageElementImage = {
   asset?: SanityImageAssetReference
-  media?: unknown // Unable to locate the referenced type "imageElement.image.media" in schema
+  media?: unknown // Unable to locate the referenced type "image.media" in schema
   hotspot?: SanityImageHotspot
   crop?: SanityImageCrop
   _type: 'image'
@@ -303,7 +303,7 @@ export type PtBasic = Array<{
         _key: string
       }
     | {
-        file?: FileLinkFile
+        file?: MarkDefsFileLinkFile
         _type: 'fileLink'
         _key: string
       }
@@ -312,6 +312,19 @@ export type PtBasic = Array<{
   _type: 'block'
   _key: string
 }>
+
+export type PbValues = {
+  _type: 'pbValues'
+  sectionSettings?: PbSectionSettings
+  title?: string
+  colorSteps?: number
+  values?: Array<{
+    title?: string
+    caption?: string
+    _type: 'value'
+    _key: string
+  }>
+}
 
 export type PbNews = {
   _type: 'pbNews'
@@ -389,6 +402,9 @@ export type PbSections = Array<
   | ({
       _key: string
     } & PbNews)
+  | ({
+      _key: string
+    } & PbValues)
 >
 
 export type PbImageWithCard = {
@@ -586,9 +602,6 @@ export type PbBlockDivider = {
 export type PbBlocks = Array<
   | ({
       _key: string
-    } & PbBlockText)
-  | ({
-      _key: string
     } & PbBlockPlainText)
   | ({
       _key: string
@@ -605,6 +618,9 @@ export type PbBlocks = Array<
   | ({
       _key: string
     } & PbBlockDivider)
+  | ({
+      _key: string
+    } & PbBlockText)
   | ({
       _key: string
     } & PbBlockJobs)
@@ -1031,7 +1047,7 @@ export type AllSanitySchemaTypes =
   | YAlignment
   | SanityFileAssetReference
   | FileLinkFile
-  | PbBlockButtonFileLinkFile
+  | MarkDefsFileLinkFile
   | SanityImageAssetReference
   | ImageElementImage
   | BannerImageImage
@@ -1047,6 +1063,7 @@ export type AllSanitySchemaTypes =
   | PtBold
   | PtBody
   | PtBasic
+  | PbValues
   | PbNews
   | PbTimeline
   | PbSectionSettingsHero
@@ -1146,7 +1163,7 @@ export type HomePageQueryResult = {
                 page: null
               } | null
               fileLink: {
-                file?: PbBlockButtonFileLinkFile
+                file?: FileLinkFile
                 buttonText?: string
                 url: string | null
               } | null
@@ -1196,7 +1213,7 @@ export type HomePageQueryResult = {
                   page: null
                 } | null
                 fileLink: {
-                  file?: PbBlockButtonFileLinkFile
+                  file?: FileLinkFile
                   buttonText?: string
                   url: string | null
                 } | null
@@ -1323,7 +1340,7 @@ export type HomePageQueryResult = {
                 listItem?: 'bullet' | 'number'
                 markDefs: Array<
                   | {
-                      file?: FileLinkFile
+                      file?: MarkDefsFileLinkFile
                       _type: 'fileLink'
                       _key: string
                     }
@@ -1400,7 +1417,7 @@ export type HomePageQueryResult = {
                   page: null
                 } | null
                 fileLink: {
-                  file?: PbBlockButtonFileLinkFile
+                  file?: FileLinkFile
                   buttonText?: string
                   url: string | null
                 } | null
@@ -1450,7 +1467,7 @@ export type HomePageQueryResult = {
                     page: null
                   } | null
                   fileLink: {
-                    file?: PbBlockButtonFileLinkFile
+                    file?: FileLinkFile
                     buttonText?: string
                     url: string | null
                   } | null
@@ -1577,7 +1594,7 @@ export type HomePageQueryResult = {
                   listItem?: 'bullet' | 'number'
                   markDefs: Array<
                     | {
-                        file?: FileLinkFile
+                        file?: MarkDefsFileLinkFile
                         _type: 'fileLink'
                         _key: string
                       }
@@ -1647,7 +1664,7 @@ export type HomePageQueryResult = {
                   page: null
                 } | null
                 fileLink: {
-                  file?: PbBlockButtonFileLinkFile
+                  file?: FileLinkFile
                   buttonText?: string
                   url: string | null
                 } | null
@@ -1697,7 +1714,7 @@ export type HomePageQueryResult = {
                     page: null
                   } | null
                   fileLink: {
-                    file?: PbBlockButtonFileLinkFile
+                    file?: FileLinkFile
                     buttonText?: string
                     url: string | null
                   } | null
@@ -1824,7 +1841,7 @@ export type HomePageQueryResult = {
                   listItem?: 'bullet' | 'number'
                   markDefs: Array<
                     | {
-                        file?: FileLinkFile
+                        file?: MarkDefsFileLinkFile
                         _type: 'fileLink'
                         _key: string
                       }
@@ -1902,7 +1919,7 @@ export type HomePageQueryResult = {
                   page: null
                 } | null
                 fileLink: {
-                  file?: PbBlockButtonFileLinkFile
+                  file?: FileLinkFile
                   buttonText?: string
                   url: string | null
                 } | null
@@ -1952,7 +1969,7 @@ export type HomePageQueryResult = {
                     page: null
                   } | null
                   fileLink: {
-                    file?: PbBlockButtonFileLinkFile
+                    file?: FileLinkFile
                     buttonText?: string
                     url: string | null
                   } | null
@@ -2079,7 +2096,7 @@ export type HomePageQueryResult = {
                   listItem?: 'bullet' | 'number'
                   markDefs: Array<
                     | {
-                        file?: FileLinkFile
+                        file?: MarkDefsFileLinkFile
                         _type: 'fileLink'
                         _key: string
                       }
@@ -2156,7 +2173,7 @@ export type HomePageQueryResult = {
                 page: null
               } | null
               fileLink: {
-                file?: PbBlockButtonFileLinkFile
+                file?: FileLinkFile
                 buttonText?: string
                 url: string | null
               } | null
@@ -2206,7 +2223,7 @@ export type HomePageQueryResult = {
                   page: null
                 } | null
                 fileLink: {
-                  file?: PbBlockButtonFileLinkFile
+                  file?: FileLinkFile
                   buttonText?: string
                   url: string | null
                 } | null
@@ -2333,7 +2350,7 @@ export type HomePageQueryResult = {
                 listItem?: 'bullet' | 'number'
                 markDefs: Array<
                   | {
-                      file?: FileLinkFile
+                      file?: MarkDefsFileLinkFile
                       _type: 'fileLink'
                       _key: string
                     }
@@ -2439,7 +2456,7 @@ export type HomePageQueryResult = {
                 page: null
               } | null
               fileLink: {
-                file?: PbBlockButtonFileLinkFile
+                file?: FileLinkFile
                 buttonText?: string
                 url: string | null
               } | null
@@ -2489,7 +2506,7 @@ export type HomePageQueryResult = {
                   page: null
                 } | null
                 fileLink: {
-                  file?: PbBlockButtonFileLinkFile
+                  file?: FileLinkFile
                   buttonText?: string
                   url: string | null
                 } | null
@@ -2616,7 +2633,7 @@ export type HomePageQueryResult = {
                 listItem?: 'bullet' | 'number'
                 markDefs: Array<
                   | {
-                      file?: FileLinkFile
+                      file?: MarkDefsFileLinkFile
                       _type: 'fileLink'
                       _key: string
                     }
@@ -2694,7 +2711,7 @@ export type HomePageQueryResult = {
             page: null
           } | null
           fileLink: {
-            file?: PbBlockButtonFileLinkFile
+            file?: FileLinkFile
             buttonText?: string
             url: string | null
           } | null
@@ -2726,6 +2743,19 @@ export type HomePageQueryResult = {
           heading?: string
           description?: PtBold
           image?: ObjectImage
+          _key: string
+        }>
+      }
+    | {
+        _key: string
+        _type: 'pbValues'
+        sectionSettings?: PbSectionSettings
+        title?: string
+        colorSteps?: number
+        values?: Array<{
+          title?: string
+          caption?: string
+          _type: 'value'
           _key: string
         }>
       }
@@ -2781,7 +2811,7 @@ export type PagesBySlugQueryResult = {
                 page: null
               } | null
               fileLink: {
-                file?: PbBlockButtonFileLinkFile
+                file?: FileLinkFile
                 buttonText?: string
                 url: string | null
               } | null
@@ -2831,7 +2861,7 @@ export type PagesBySlugQueryResult = {
                   page: null
                 } | null
                 fileLink: {
-                  file?: PbBlockButtonFileLinkFile
+                  file?: FileLinkFile
                   buttonText?: string
                   url: string | null
                 } | null
@@ -2958,7 +2988,7 @@ export type PagesBySlugQueryResult = {
                 listItem?: 'bullet' | 'number'
                 markDefs: Array<
                   | {
-                      file?: FileLinkFile
+                      file?: MarkDefsFileLinkFile
                       _type: 'fileLink'
                       _key: string
                     }
@@ -3035,7 +3065,7 @@ export type PagesBySlugQueryResult = {
                   page: null
                 } | null
                 fileLink: {
-                  file?: PbBlockButtonFileLinkFile
+                  file?: FileLinkFile
                   buttonText?: string
                   url: string | null
                 } | null
@@ -3085,7 +3115,7 @@ export type PagesBySlugQueryResult = {
                     page: null
                   } | null
                   fileLink: {
-                    file?: PbBlockButtonFileLinkFile
+                    file?: FileLinkFile
                     buttonText?: string
                     url: string | null
                   } | null
@@ -3212,7 +3242,7 @@ export type PagesBySlugQueryResult = {
                   listItem?: 'bullet' | 'number'
                   markDefs: Array<
                     | {
-                        file?: FileLinkFile
+                        file?: MarkDefsFileLinkFile
                         _type: 'fileLink'
                         _key: string
                       }
@@ -3282,7 +3312,7 @@ export type PagesBySlugQueryResult = {
                   page: null
                 } | null
                 fileLink: {
-                  file?: PbBlockButtonFileLinkFile
+                  file?: FileLinkFile
                   buttonText?: string
                   url: string | null
                 } | null
@@ -3332,7 +3362,7 @@ export type PagesBySlugQueryResult = {
                     page: null
                   } | null
                   fileLink: {
-                    file?: PbBlockButtonFileLinkFile
+                    file?: FileLinkFile
                     buttonText?: string
                     url: string | null
                   } | null
@@ -3459,7 +3489,7 @@ export type PagesBySlugQueryResult = {
                   listItem?: 'bullet' | 'number'
                   markDefs: Array<
                     | {
-                        file?: FileLinkFile
+                        file?: MarkDefsFileLinkFile
                         _type: 'fileLink'
                         _key: string
                       }
@@ -3537,7 +3567,7 @@ export type PagesBySlugQueryResult = {
                   page: null
                 } | null
                 fileLink: {
-                  file?: PbBlockButtonFileLinkFile
+                  file?: FileLinkFile
                   buttonText?: string
                   url: string | null
                 } | null
@@ -3587,7 +3617,7 @@ export type PagesBySlugQueryResult = {
                     page: null
                   } | null
                   fileLink: {
-                    file?: PbBlockButtonFileLinkFile
+                    file?: FileLinkFile
                     buttonText?: string
                     url: string | null
                   } | null
@@ -3714,7 +3744,7 @@ export type PagesBySlugQueryResult = {
                   listItem?: 'bullet' | 'number'
                   markDefs: Array<
                     | {
-                        file?: FileLinkFile
+                        file?: MarkDefsFileLinkFile
                         _type: 'fileLink'
                         _key: string
                       }
@@ -3791,7 +3821,7 @@ export type PagesBySlugQueryResult = {
                 page: null
               } | null
               fileLink: {
-                file?: PbBlockButtonFileLinkFile
+                file?: FileLinkFile
                 buttonText?: string
                 url: string | null
               } | null
@@ -3841,7 +3871,7 @@ export type PagesBySlugQueryResult = {
                   page: null
                 } | null
                 fileLink: {
-                  file?: PbBlockButtonFileLinkFile
+                  file?: FileLinkFile
                   buttonText?: string
                   url: string | null
                 } | null
@@ -3968,7 +3998,7 @@ export type PagesBySlugQueryResult = {
                 listItem?: 'bullet' | 'number'
                 markDefs: Array<
                   | {
-                      file?: FileLinkFile
+                      file?: MarkDefsFileLinkFile
                       _type: 'fileLink'
                       _key: string
                     }
@@ -4074,7 +4104,7 @@ export type PagesBySlugQueryResult = {
                 page: null
               } | null
               fileLink: {
-                file?: PbBlockButtonFileLinkFile
+                file?: FileLinkFile
                 buttonText?: string
                 url: string | null
               } | null
@@ -4124,7 +4154,7 @@ export type PagesBySlugQueryResult = {
                   page: null
                 } | null
                 fileLink: {
-                  file?: PbBlockButtonFileLinkFile
+                  file?: FileLinkFile
                   buttonText?: string
                   url: string | null
                 } | null
@@ -4251,7 +4281,7 @@ export type PagesBySlugQueryResult = {
                 listItem?: 'bullet' | 'number'
                 markDefs: Array<
                   | {
-                      file?: FileLinkFile
+                      file?: MarkDefsFileLinkFile
                       _type: 'fileLink'
                       _key: string
                     }
@@ -4329,7 +4359,7 @@ export type PagesBySlugQueryResult = {
             page: null
           } | null
           fileLink: {
-            file?: PbBlockButtonFileLinkFile
+            file?: FileLinkFile
             buttonText?: string
             url: string | null
           } | null
@@ -4361,6 +4391,19 @@ export type PagesBySlugQueryResult = {
           heading?: string
           description?: PtBold
           image?: ObjectImage
+          _key: string
+        }>
+      }
+    | {
+        _key: string
+        _type: 'pbValues'
+        sectionSettings?: PbSectionSettings
+        title?: string
+        colorSteps?: number
+        values?: Array<{
+          title?: string
+          caption?: string
+          _type: 'value'
           _key: string
         }>
       }
