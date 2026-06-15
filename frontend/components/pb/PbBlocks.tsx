@@ -160,7 +160,7 @@ export function PlainTextBlock({block}) {
   return (
     <div
       className={cn(
-        'max-w-max-ch',
+        'max-w-max-ch mx-auto',
         block.textStyle || 'ts-p-md',
         block.textSize,
         block.textAlign,

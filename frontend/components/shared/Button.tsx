@@ -63,7 +63,7 @@ export default function Button(props: ButtonProps) {
     outline
       ? ''
       : subtle
-        ? 'border-transparent bg-white/35 hover:bg-white/70 text-btn-fg'
+        ? 'border-transparent bg-white/35 hover:bg-white/70 text-btn-fg-subtle'
         : 'border-transparent bg-body text-btn-fg',
     disabled && 'opacity-50 pointer-events-none',
     className,

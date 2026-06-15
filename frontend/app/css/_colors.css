@@ -41,6 +41,7 @@
 
   --theme-divider: var(--theme-body);
   --theme-btn-fg: oklch(var(--offwhite-oklch));
+  --theme-btn-fg-subtle: oklch(var(--white-oklch));
 
   --theme-current-bg: var(--theme-bg);
   .bg-bg-subtle {
@@ -55,7 +56,8 @@
   --theme-bg: oklch(var(--blue-900-oklch));
   --theme-bg-subtle: oklch(var(--blue-800-oklch));
 
-  --theme-btn-fg: oklch(var(--blue-800-oklch));
+  --theme-btn-fg: oklch(var(--blue-650-oklch));
+  --theme-btn-fg-subtle: oklch(var(--blue-800-oklch));
 
   --theme-current-bg: var(--theme-bg);
   .bg-bg-subtle {

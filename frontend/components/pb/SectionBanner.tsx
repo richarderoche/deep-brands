@@ -85,7 +85,7 @@ export default function SectionGridSingle({section}: {section: PbBanner}) {
         className={cn(
           'flex max-lg:flex-col lg:items-center',
           isRTL ? 'flex-row-reverse max-lg:pl-gut-200' : 'max-lg:pr-gut-200',
-          isOffset && 'pt-gut-200',
+          isOffset && 'lg:pt-gut-200',
           !isOffset && isRTL && 'max-lg:items-end',
         )}
       >
