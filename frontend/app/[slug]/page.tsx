@@ -63,8 +63,12 @@ export default async function PageSlugRoute(props: PageProps<'/[slug]'>) {
   const {firstIsHero, firstPbSectionKey} = getFirstSectionInfo(data)
 
   return (
-    <PageWrapper className={firstIsHero ? '' : 'pt-header'}>
-      <PageBuilder data={data} firstPbSectionKey={firstPbSectionKey ?? ''} />
+    <PageWrapper>
+      <PageBuilder
+        data={data}
+        firstIsHero={firstIsHero}
+        firstPbSectionKey={firstPbSectionKey ?? ''}
+      />
     </PageWrapper>
   )
 }

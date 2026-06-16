@@ -85,7 +85,7 @@ const pbBlocks = `
   },
 `
 
-const pb = `
+const pb = defineQuery(`
   pbSections[]{
     ...,
     _type == "pbGridMulti" => {
@@ -135,8 +135,14 @@ const pb = `
         ${pbButton}
       }
     },
+    _type == "pbHeroBrand" => {
+      ...,
+      brand->{
+        ...,
+      },
+    },
   }
-`
+`)
 
 // QUERIES
 export const homePageQuery = defineQuery(`

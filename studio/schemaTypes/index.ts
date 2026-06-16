@@ -30,6 +30,7 @@ import pbColSettings from './pbSections/pbColSettings'
 import pbGridDouble from './pbSections/pbGridDouble'
 import pbGridMulti from './pbSections/pbGridMulti'
 import pbGridSingle from './pbSections/pbGridSingle'
+import pbHeroBrand from './pbSections/pbHeroBrand'
 import pbHeroShape from './pbSections/pbHeroShape'
 import pbImageWithCard from './pbSections/pbImageWithCard'
 import pbNews from './pbSections/pbNews'
@@ -70,6 +71,7 @@ export const schemaTypes = [
   pbBlockVideoEmbed,
   pbColSettings,
   pbHeroShape,
+  pbHeroBrand,
   pbGridMulti,
   pbGridSingle,
   pbGridDouble,

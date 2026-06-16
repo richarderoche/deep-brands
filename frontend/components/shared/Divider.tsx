@@ -1,10 +1,12 @@
-import { cn } from '@/lib/utils'
+import {cn} from '@/lib/utils'
+import IconArrow from '../icons/IconArrow'
 
 export interface DividerProps extends React.HTMLAttributes<HTMLDivElement> {
   showOnMobile?: boolean
   showOnTablet?: boolean
   showOnDesktop?: boolean
   showDividerLine?: boolean
+  showOrnament?: boolean
   size?: number
 }
 
@@ -13,6 +15,7 @@ export default function Divider({
   showOnTablet,
   showOnDesktop,
   showDividerLine,
+  showOrnament,
   size = 1,
   className,
   ...props
@@ -20,12 +23,11 @@ export default function Divider({
   return (
     <div
       className={cn(
-        'h-1 w-full hidden',
-        !showDividerLine && 'opacity-0',
-        showOnMobile ? 'max-md:block' : '',
-        showOnTablet ? 'max-lg:block' : '',
-        showOnDesktop ? 'lg:block' : '',
-        className ? className : 'bg-divider',
+        'w-full hidden relative items-center justify-center gap-5',
+        showOnMobile ? 'max-md:flex' : '',
+        showOnTablet ? 'max-lg:flex' : '',
+        showOnDesktop ? 'lg:flex' : '',
+        className && className,
         size === 2
           ? 'my-gut-50'
           : size === 3
@@ -34,9 +36,17 @@ export default function Divider({
               ? 'my-gut-150'
               : size === 5
                 ? 'my-gut-200'
-                : ''
+                : '',
       )}
       {...props}
-    />
+    >
+      {showDividerLine && <DividerLine />}
+      {showOrnament && <IconArrow className="w-gut-75 h-auto rotate-90" />}
+      {showDividerLine && showOrnament && <DividerLine />}
+    </div>
   )
+}
+
+export function DividerLine() {
+  return <div className="h-1 grow bg-current/25" />
 }

@@ -1,5 +1,5 @@
-import { AlignVerticalSpaceAround } from 'lucide-react'
-import { defineField, defineType } from 'sanity'
+import {AlignVerticalSpaceAround} from 'lucide-react'
+import {defineField, defineType} from 'sanity'
 
 export default defineType({
   name: 'pbBlockDivider',
@@ -32,6 +32,12 @@ export default defineType({
       initialValue: true,
     }),
     defineField({
+      title: 'Show Ornament?',
+      name: 'showOrnament',
+      type: 'boolean',
+      initialValue: false,
+    }),
+    defineField({
       title: 'Spacing Size',
       name: 'size',
       type: 'number',
@@ -49,13 +55,7 @@ export default defineType({
       showDividerLine: 'showDividerLine',
       size: 'size',
     },
-    prepare({
-      showOnMobile,
-      showOnTablet,
-      showOnDesktop,
-      showDividerLine,
-      size,
-    }) {
+    prepare({showOnMobile, showOnTablet, showOnDesktop, showDividerLine, size}) {
       const shownOn = []
       if (showOnMobile) shownOn.push('Mobile')
       if (showOnTablet) shownOn.push('Tablet')

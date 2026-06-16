@@ -119,3 +119,25 @@ export const IconHeroShape = () => {
     </svg>
   )
 }
+
+export const IconHeroBrand = () => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+      strokeLinejoin="round"
+      strokeLinecap="round"
+      strokeWidth="2"
+    >
+      <path d="M12.014 3c.693 0 1.338.27 1.852.74.559.512 1.284.72 1.943.72.77 0 1.5.533 1.797 1.395.22.638.826 1.04 1.467 1.04.956 0 1.868.842 1.927 2.075V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V8.97c.059-1.233.972-2.074 1.927-2.074.641 0 1.246-.403 1.467-1.04C6.692 4.992 7.42 4.46 8.19 4.46c.67 0 1.408-.21 1.979-.729a2.75 2.75 0 0 1 1.588-.72z" />
+      <rect width="10" height="5" x="7" y="9" rx="2" />
+      <rect width="10" height="5" x="7" y="9" rx="2" />
+      <path d="M8 16.5a.5.5 0 1 1 0 1 .5.5 0 0 1 0-1M11 16.5a.5.5 0 1 1 0 1 .5.5 0 0 1 0-1" />
+      <path d="M14 17h2" />
+    </svg>
+  )
+}

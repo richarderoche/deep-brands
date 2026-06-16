@@ -5,6 +5,10 @@ If these change, make sure to update the respective values in the type styles.
 :root {
   --gut: 1.5rem; /* 24px - 390w */
 }
+.shape-width {
+  flex-shrink: 0;
+  width: var(--shape-width-mobile);
+}
 /* 400px */
 @media (min-width: 25rem) {
   :root {
@@ -28,11 +32,17 @@ If these change, make sure to update the respective values in the type styles.
   :root {
     --gut: 2rem; /* 32px */
   }
+  .shape-width {
+    width: var(--shape-width-tablet);
+  }
 }
 /* 1024px */
 @media (min-width: 64rem) {
   :root {
     --gut: 1.5625rem; /* 25px */
+  }
+  .shape-width {
+    width: var(--shape-width-desktop);
   }
 }
 /* 1280px */
@@ -57,6 +67,12 @@ If these change, make sure to update the respective values in the type styles.
 @media (min-width: 120rem) {
   :root {
     --gut: 3rem; /* 48px */
+  }
+}
+
+@media (min-width: 125rem) {
+  .shape-width {
+    width: var(--shape-width-max);
   }
 }
 

@@ -26,7 +26,7 @@ export default function StyleGuide() {
             {pStyles.map((style) => (
               <div key={style.name} className="col-span-12 lg:col-span-6">
                 <p className={`${style.style} max-w-max-ch text-pretty`}>
-                  {style.name} <span className="text-divider">•</span> {ipsum}
+                  {style.name} <span className="text-current/25">•</span> {ipsum}
                 </p>
               </div>
             ))}
@@ -59,7 +59,7 @@ export default function StyleGuide() {
         </div>
         <div className="col-span-12 lg:col-span-5 mt-gut-200">
           <h6 className="ts-h6 text-body-subtle mb-gut-200">Color Variables</h6>
-          <pre className="ts-p-xs overflow-x-auto whitespace-pre rounded-sm border border-divider p-gut-50">
+          <pre className="ts-p-xs overflow-x-auto whitespace-pre rounded-sm border border-current/25 p-gut-50">
             {colorCssVariables}
           </pre>
         </div>

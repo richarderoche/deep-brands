@@ -15,18 +15,6 @@
 export declare const internalGroqTypeReferenceTo: unique symbol
 
 // Source: ../sanity.schema.json
-export type Size = {
-  mobile: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12
-  tablet: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12
-  desktop: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12
-}
-
-export type Start = {
-  mobile: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12
-  tablet: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12
-  desktop: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12
-}
-
 export type VideoAspectRatio = {
   width: number
   height: number
@@ -50,6 +38,18 @@ export type BlockWidths = {
   desktop?: 'lg:grid-cols-1' | 'lg:grid-cols-2' | 'lg:grid-cols-3' | 'lg:grid-cols-4'
 }
 
+export type Size = {
+  mobile: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12
+  tablet: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12
+  desktop: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12
+}
+
+export type Start = {
+  mobile: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12
+  tablet: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12
+  desktop: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12
+}
+
 export type BannerImage = {
   position?: 'offsetXY' | 'offsetX' | 'edge'
   image?: BannerImageImage
@@ -71,10 +71,10 @@ export type Preheading = {
   right?: string
 }
 
-export type YAlignment = {
-  mobile: 'self-start' | 'self-center' | 'self-end'
-  tablet: 'inherit' | 'self-start' | 'self-center' | 'self-end'
-  desktop: 'inherit' | 'self-start' | 'self-center' | 'self-end'
+export type ShapeWidth = {
+  mobile?: number
+  tablet?: number
+  desktop?: number
 }
 
 export type SanityFileAssetReference = {
@@ -109,6 +109,12 @@ export type ImageElementImage = {
   hotspot?: SanityImageHotspot
   crop?: SanityImageCrop
   _type: 'image'
+}
+
+export type YAlignment = {
+  mobile: 'self-start' | 'self-center' | 'self-end'
+  tablet: 'inherit' | 'self-start' | 'self-center' | 'self-end'
+  desktop: 'inherit' | 'self-start' | 'self-center' | 'self-end'
 }
 
 export type BannerImageImage = {
@@ -395,13 +401,13 @@ export type PbSectionSettings = {
 export type PbSections = Array<
   | ({
       _key: string
-    } & PbGridMulti)
-  | ({
-      _key: string
     } & PbGridSingle)
   | ({
       _key: string
     } & PbGridDouble)
+  | ({
+      _key: string
+    } & PbGridMulti)
   | ({
       _key: string
     } & PbBanner)
@@ -414,6 +420,9 @@ export type PbSections = Array<
   | ({
       _key: string
     } & PbHeroShape)
+  | ({
+      _key: string
+    } & PbHeroBrand)
   | ({
       _key: string
     } & PbTimeline)
@@ -493,6 +502,32 @@ export type PbGridMulti = {
   }>
 }
 
+export type BrandsReference = {
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'brands'
+}
+
+export type PbHeroBrand = {
+  _type: 'pbHeroBrand'
+  sectionSettings?: PbSectionSettingsHero
+  brand: BrandsReference
+  shapeWidth?: ShapeWidth
+  introductionText?: string
+  bgImage?: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    alt?: string
+    _type: 'image'
+  }
+  fgColorTop?: ColorChoice
+  bgColorBottom?: ColorChoice
+  fgColorBottom?: ColorChoice
+}
+
 export type PbHeroShape = {
   _type: 'pbHeroShape'
   sectionSettings?: PbSectionSettingsHero
@@ -556,13 +591,6 @@ export type PbBlockPlainText = {
   balanceLines?: boolean
 }
 
-export type BrandsReference = {
-  _ref: string
-  _type: 'reference'
-  _weak?: boolean
-  [internalGroqTypeReferenceTo]?: 'brands'
-}
-
 export type PbBlockJobs = {
   _type: 'pbBlockJobs'
   jobs?: Array<{
@@ -614,6 +642,7 @@ export type PbBlockDivider = {
   showOnTablet?: boolean
   showOnDesktop?: boolean
   showDividerLine?: boolean
+  showOrnament?: boolean
   size?: 1 | 2 | 3 | 4 | 5
 }
 
@@ -1053,21 +1082,22 @@ export type Geopoint = {
 }
 
 export type AllSanitySchemaTypes =
-  | Size
-  | Start
   | VideoAspectRatio
   | FileLink
   | PbBlockMarqueeSettings
   | BlockWidths
+  | Size
+  | Start
   | BannerImage
   | BackgroundImage
   | Preheading
-  | YAlignment
+  | ShapeWidth
   | SanityFileAssetReference
   | FileLinkFile
   | MarkDefsFileLinkFile
   | SanityImageAssetReference
   | ImageElementImage
+  | YAlignment
   | BannerImageImage
   | BackgroundImageImage
   | ObjectImage
@@ -1092,12 +1122,13 @@ export type AllSanitySchemaTypes =
   | PbGridDouble
   | PbGridSingle
   | PbGridMulti
+  | BrandsReference
+  | PbHeroBrand
   | PbHeroShape
   | PbColSettings
   | PbBlockVideoEmbed
   | PbBlockText
   | PbBlockPlainText
-  | BrandsReference
   | PbBlockJobs
   | PbBlockMarquee
   | PbBlockDivider

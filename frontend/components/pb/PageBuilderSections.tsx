@@ -15,6 +15,7 @@ import SectionBanner from './SectionBanner'
 import SectionGridDouble from './SectionGridDouble'
 import SectionGridMulti from './SectionGridMulti'
 import SectionGridSingle from './SectionGridSingle'
+import SectionHeroBrand, {PbHeroBrandSection} from './SectionHeroBrand'
 import SectionHeroShape from './SectionHeroShape'
 import SectionImageAndCard from './SectionImageAndCard'
 import SectionNews from './SectionNews'
@@ -25,14 +26,17 @@ import SectionValues from './SectionValues'
 export interface PageBuilderContentProps {
   data: PageBuilderData
   baseUrl: string
+  firstIsHero: boolean
   firstPbSectionKey: string
 }
 
 export default function PageBuilderSections({
   pbSections,
+  firstIsHero,
   firstPbSectionKey,
 }: {
   pbSections: PbSections
+  firstIsHero: boolean
   firstPbSectionKey: string
 }) {
   const {getDataAttribute} = useSanityDataAttribute()
@@ -59,13 +63,15 @@ export default function PageBuilderSections({
         if (!enableSection) return null
 
         const sectionPath: SanityPathSegment[] = ['pbSections', {_key}]
-
+        const isFirst = _key === firstPbSectionKey
+        const needsHeaderSpace = !firstIsHero && isFirst
         return (
           <section
             id={sectionId ? sectionId : 'section-' + _key}
             key={_key}
             className={cn(
               'group',
+              needsHeaderSpace && 'pt-header',
               isDarkBgColor && 'dark-theme theme-vars-only text-body',
               sectionBgColor?.colorType === 'gradient' && 'db-gradient',
             )}
@@ -78,7 +84,12 @@ export default function PageBuilderSections({
                 className={cn('h-ornament w-auto', !bgColor && 'text-bg')}
               />
             )}
-            <div className={cn('py-gut-50 group-first:pt-0 group-last:pb-gut-500')}>
+            <div
+              className={cn(
+                _type !== 'pbHeroBrand' && 'py-gut-50',
+                'group-first:pt-0 group-last:pb-gut-500',
+              )}
+            >
               <div
                 style={{
                   paddingTop: marginTop ? `calc(var(--gut) * ${marginTop})` : undefined,
@@ -100,13 +111,16 @@ export default function PageBuilderSections({
                   {_type === 'pbHeroShape' && (
                     <SectionHeroShape section={section} isDarkBgColor={isDarkBgColor} />
                   )}
+                  {_type === 'pbHeroBrand' && (
+                    <SectionHeroBrand section={section as unknown as PbHeroBrandSection} />
+                  )}
                   {_type === 'pbBanner' && <SectionBanner section={section} />}
                   {_type === 'pbImageWithCard' && <SectionImageAndCard section={section} />}
                   {_type === 'pbTimeline' && <SectionTimeline section={section} />}
                   {_type === 'pbNews' && <SectionNews section={section} />}
                   {_type === 'pbValues' && <SectionValues section={section} />}
                   {_type === 'pbTriptych' && (
-                    <SectionTriptych section={section} isFirst={_key === firstPbSectionKey} />
+                    <SectionTriptych section={section} isFirst={isFirst} />
                   )}
                 </SanityVisualEditingPath>
               </div>

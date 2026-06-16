@@ -12,6 +12,7 @@ export default defineType({
     {type: 'pbImageWithCard'},
     {type: 'pbTriptych'},
     {type: 'pbHeroShape'},
+    {type: 'pbHeroBrand'},
     {type: 'pbTimeline'},
     {type: 'pbNews'},
     {type: 'pbValues'},

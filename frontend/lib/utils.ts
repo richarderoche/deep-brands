@@ -1,7 +1,8 @@
 import {SITE_MAX_WIDTH} from '@/components/shared/SiteWidth'
-import type {PbColSettings, Size, Start} from '@/sanity.types'
+import type {PbColSettings, ShapeWidth, Size, Start} from '@/sanity.types'
 import {PageBuilderData} from '@/types'
 import {type ClassValue, clsx} from 'clsx'
+import type {CSSProperties} from 'react'
 
 // ClassName helper
 export function cn(...inputs: ClassValue[]) {
@@ -95,6 +96,19 @@ export function getTrueSizes(outer: Size, inner?: Size) {
   return `${maxVw}${dVw ? dVw : ''}${tVw ? tVw : ''}${mVw}`
 }
 
+export function getShapeWidthStyle(width?: ShapeWidth): CSSProperties {
+  const mobile = width?.mobile ?? 95
+  const tablet = width?.tablet ?? 75
+  const desktop = width?.desktop ?? 50
+
+  return {
+    '--shape-width-mobile': `${mobile}vw`,
+    '--shape-width-tablet': `${tablet}vw`,
+    '--shape-width-desktop': `${desktop}vw`,
+    '--shape-width-max': `${SITE_MAX_WIDTH * (desktop / 100)}px`,
+  } as CSSProperties
+}
+
 /*
  * Helper to format image srcset sizes with max width
  * @param smWidth - Small width in viewport width percentage
@@ -123,6 +137,26 @@ export function imgSizesFormat(smWidth: number, mdWidth?: number | null, lgWidth
   return `${maxTier}, ${rest}`
 }
 
+/*
+ * Full-bleed background sizes: 100vw in landscape, scaling up to 200vw on tall
+ * portrait viewports (height >= 2× width). Portrait tiers use max-aspect-ratio
+ * so the first match wins from tallest ratio to widest.
+ */
+export function imgSizesOrientationBleed() {
+  const tiers: {query: string; vw: number}[] = [
+    {query: '(orientation: landscape)', vw: 100},
+    {query: '(orientation: portrait) and (max-aspect-ratio: 1/2)', vw: 200},
+    {query: '(orientation: portrait) and (max-aspect-ratio: 3/5)', vw: 180},
+    {query: '(orientation: portrait) and (max-aspect-ratio: 2/3)', vw: 167},
+    {query: '(orientation: portrait) and (max-aspect-ratio: 3/4)', vw: 150},
+    {query: '(orientation: portrait) and (max-aspect-ratio: 5/6)', vw: 133},
+    {query: '(orientation: portrait) and (max-aspect-ratio: 7/8)', vw: 125},
+    {query: '(orientation: portrait)', vw: 100},
+  ]
+
+  return tiers.map(({query, vw}) => `${query} ${vw}vw`).join(', ')
+}
+
 export function getFirstSectionInfo(data: PageBuilderData) {
   if (!data) return {firstIsHero: false, firstPbSectionKey: ''}
   const firstPbSection = data?.pbSections?.find(
@@ -130,7 +164,7 @@ export function getFirstSectionInfo(data: PageBuilderData) {
   )
   const firstPbSectionKey = firstPbSection?._key
   const firstPbSectionType = firstPbSection?._type
-  const firstIsHero = firstPbSectionType === 'pbHeroShape'
+  const firstIsHero = firstPbSectionType === 'pbHeroShape' || firstPbSectionType === 'pbHeroBrand'
   return {firstIsHero, firstPbSectionKey}
 }
 

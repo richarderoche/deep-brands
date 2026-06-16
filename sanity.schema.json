@@ -1,6 +1,194 @@
 [
   {
     "type": "type",
+    "name": "videoAspectRatio",
+    "value": {
+      "type": "object",
+      "attributes": {
+        "width": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "number"
+          },
+          "optional": false
+        },
+        "height": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "number"
+          },
+          "optional": false
+        }
+      }
+    }
+  },
+  {
+    "type": "type",
+    "name": "fileLink",
+    "value": {
+      "type": "object",
+      "attributes": {
+        "file": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "inline",
+            "name": "fileLink.file"
+          },
+          "optional": true
+        },
+        "buttonText": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
+          },
+          "optional": true
+        }
+      }
+    }
+  },
+  {
+    "type": "type",
+    "name": "pbBlockMarquee.settings",
+    "value": {
+      "type": "object",
+      "attributes": {
+        "speed": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "number"
+          },
+          "optional": false
+        },
+        "direction": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "union",
+            "of": [
+              {
+                "type": "string",
+                "value": "left"
+              },
+              {
+                "type": "string",
+                "value": "right"
+              }
+            ]
+          },
+          "optional": true
+        },
+        "color": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "union",
+            "of": [
+              {
+                "type": "string",
+                "value": "text-body"
+              },
+              {
+                "type": "string",
+                "value": "text-accent"
+              }
+            ]
+          },
+          "optional": true
+        },
+        "imageSize": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "number"
+          },
+          "optional": false
+        }
+      }
+    }
+  },
+  {
+    "type": "type",
+    "name": "blockWidths",
+    "value": {
+      "type": "object",
+      "attributes": {
+        "mobile": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "union",
+            "of": [
+              {
+                "type": "string",
+                "value": "grid-cols-1"
+              },
+              {
+                "type": "string",
+                "value": "grid-cols-2"
+              },
+              {
+                "type": "string",
+                "value": "grid-cols-3"
+              },
+              {
+                "type": "string",
+                "value": "grid-cols-4"
+              }
+            ]
+          },
+          "optional": true
+        },
+        "tablet": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "union",
+            "of": [
+              {
+                "type": "string",
+                "value": "md:grid-cols-1"
+              },
+              {
+                "type": "string",
+                "value": "md:grid-cols-2"
+              },
+              {
+                "type": "string",
+                "value": "md:grid-cols-3"
+              },
+              {
+                "type": "string",
+                "value": "md:grid-cols-4"
+              }
+            ]
+          },
+          "optional": true
+        },
+        "desktop": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "union",
+            "of": [
+              {
+                "type": "string",
+                "value": "lg:grid-cols-1"
+              },
+              {
+                "type": "string",
+                "value": "lg:grid-cols-2"
+              },
+              {
+                "type": "string",
+                "value": "lg:grid-cols-3"
+              },
+              {
+                "type": "string",
+                "value": "lg:grid-cols-4"
+              }
+            ]
+          },
+          "optional": true
+        }
+      }
+    }
+  },
+  {
+    "type": "type",
     "name": "size",
     "value": {
       "type": "object",
@@ -381,194 +569,6 @@
   },
   {
     "type": "type",
-    "name": "videoAspectRatio",
-    "value": {
-      "type": "object",
-      "attributes": {
-        "width": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "number"
-          },
-          "optional": false
-        },
-        "height": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "number"
-          },
-          "optional": false
-        }
-      }
-    }
-  },
-  {
-    "type": "type",
-    "name": "fileLink",
-    "value": {
-      "type": "object",
-      "attributes": {
-        "file": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "inline",
-            "name": "fileLink.file"
-          },
-          "optional": true
-        },
-        "buttonText": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "string"
-          },
-          "optional": true
-        }
-      }
-    }
-  },
-  {
-    "type": "type",
-    "name": "pbBlockMarquee.settings",
-    "value": {
-      "type": "object",
-      "attributes": {
-        "speed": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "number"
-          },
-          "optional": false
-        },
-        "direction": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "union",
-            "of": [
-              {
-                "type": "string",
-                "value": "left"
-              },
-              {
-                "type": "string",
-                "value": "right"
-              }
-            ]
-          },
-          "optional": true
-        },
-        "color": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "union",
-            "of": [
-              {
-                "type": "string",
-                "value": "text-body"
-              },
-              {
-                "type": "string",
-                "value": "text-accent"
-              }
-            ]
-          },
-          "optional": true
-        },
-        "imageSize": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "number"
-          },
-          "optional": false
-        }
-      }
-    }
-  },
-  {
-    "type": "type",
-    "name": "blockWidths",
-    "value": {
-      "type": "object",
-      "attributes": {
-        "mobile": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "union",
-            "of": [
-              {
-                "type": "string",
-                "value": "grid-cols-1"
-              },
-              {
-                "type": "string",
-                "value": "grid-cols-2"
-              },
-              {
-                "type": "string",
-                "value": "grid-cols-3"
-              },
-              {
-                "type": "string",
-                "value": "grid-cols-4"
-              }
-            ]
-          },
-          "optional": true
-        },
-        "tablet": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "union",
-            "of": [
-              {
-                "type": "string",
-                "value": "md:grid-cols-1"
-              },
-              {
-                "type": "string",
-                "value": "md:grid-cols-2"
-              },
-              {
-                "type": "string",
-                "value": "md:grid-cols-3"
-              },
-              {
-                "type": "string",
-                "value": "md:grid-cols-4"
-              }
-            ]
-          },
-          "optional": true
-        },
-        "desktop": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "union",
-            "of": [
-              {
-                "type": "string",
-                "value": "lg:grid-cols-1"
-              },
-              {
-                "type": "string",
-                "value": "lg:grid-cols-2"
-              },
-              {
-                "type": "string",
-                "value": "lg:grid-cols-3"
-              },
-              {
-                "type": "string",
-                "value": "lg:grid-cols-4"
-              }
-            ]
-          },
-          "optional": true
-        }
-      }
-    }
-  },
-  {
-    "type": "type",
     "name": "bannerImage",
     "value": {
       "type": "object",
@@ -809,80 +809,30 @@
   },
   {
     "type": "type",
-    "name": "yAlignment",
+    "name": "shapeWidth",
     "value": {
       "type": "object",
       "attributes": {
         "mobile": {
           "type": "objectAttribute",
           "value": {
-            "type": "union",
-            "of": [
-              {
-                "type": "string",
-                "value": "self-start"
-              },
-              {
-                "type": "string",
-                "value": "self-center"
-              },
-              {
-                "type": "string",
-                "value": "self-end"
-              }
-            ]
+            "type": "number"
           },
-          "optional": false
+          "optional": true
         },
         "tablet": {
           "type": "objectAttribute",
           "value": {
-            "type": "union",
-            "of": [
-              {
-                "type": "string",
-                "value": "inherit"
-              },
-              {
-                "type": "string",
-                "value": "self-start"
-              },
-              {
-                "type": "string",
-                "value": "self-center"
-              },
-              {
-                "type": "string",
-                "value": "self-end"
-              }
-            ]
+            "type": "number"
           },
-          "optional": false
+          "optional": true
         },
         "desktop": {
           "type": "objectAttribute",
           "value": {
-            "type": "union",
-            "of": [
-              {
-                "type": "string",
-                "value": "inherit"
-              },
-              {
-                "type": "string",
-                "value": "self-start"
-              },
-              {
-                "type": "string",
-                "value": "self-center"
-              },
-              {
-                "type": "string",
-                "value": "self-end"
-              }
-            ]
+            "type": "number"
           },
-          "optional": false
+          "optional": true
         }
       }
     }
@@ -1055,6 +1005,86 @@
             "type": "string",
             "value": "image"
           }
+        }
+      }
+    }
+  },
+  {
+    "type": "type",
+    "name": "yAlignment",
+    "value": {
+      "type": "object",
+      "attributes": {
+        "mobile": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "union",
+            "of": [
+              {
+                "type": "string",
+                "value": "self-start"
+              },
+              {
+                "type": "string",
+                "value": "self-center"
+              },
+              {
+                "type": "string",
+                "value": "self-end"
+              }
+            ]
+          },
+          "optional": false
+        },
+        "tablet": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "union",
+            "of": [
+              {
+                "type": "string",
+                "value": "inherit"
+              },
+              {
+                "type": "string",
+                "value": "self-start"
+              },
+              {
+                "type": "string",
+                "value": "self-center"
+              },
+              {
+                "type": "string",
+                "value": "self-end"
+              }
+            ]
+          },
+          "optional": false
+        },
+        "desktop": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "union",
+            "of": [
+              {
+                "type": "string",
+                "value": "inherit"
+              },
+              {
+                "type": "string",
+                "value": "self-start"
+              },
+              {
+                "type": "string",
+                "value": "self-center"
+              },
+              {
+                "type": "string",
+                "value": "self-end"
+              }
+            ]
+          },
+          "optional": false
         }
       }
     }
@@ -3049,21 +3079,6 @@
             },
             "rest": {
               "type": "inline",
-              "name": "pbGridMulti"
-            }
-          },
-          {
-            "type": "object",
-            "attributes": {
-              "_key": {
-                "type": "objectAttribute",
-                "value": {
-                  "type": "string"
-                }
-              }
-            },
-            "rest": {
-              "type": "inline",
               "name": "pbGridSingle"
             }
           },
@@ -3080,6 +3095,21 @@
             "rest": {
               "type": "inline",
               "name": "pbGridDouble"
+            }
+          },
+          {
+            "type": "object",
+            "attributes": {
+              "_key": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "string"
+                }
+              }
+            },
+            "rest": {
+              "type": "inline",
+              "name": "pbGridMulti"
             }
           },
           {
@@ -3140,6 +3170,21 @@
             "rest": {
               "type": "inline",
               "name": "pbHeroShape"
+            }
+          },
+          {
+            "type": "object",
+            "attributes": {
+              "_key": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "string"
+                }
+              }
+            },
+            "rest": {
+              "type": "inline",
+              "name": "pbHeroBrand"
             }
           },
           {
@@ -3717,6 +3762,161 @@
     }
   },
   {
+    "type": "type",
+    "name": "brands.reference",
+    "value": {
+      "type": "object",
+      "attributes": {
+        "_ref": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
+          }
+        },
+        "_type": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string",
+            "value": "reference"
+          }
+        },
+        "_weak": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "boolean"
+          },
+          "optional": true
+        }
+      },
+      "dereferencesTo": "brands"
+    }
+  },
+  {
+    "name": "pbHeroBrand",
+    "type": "type",
+    "value": {
+      "type": "object",
+      "attributes": {
+        "_type": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string",
+            "value": "pbHeroBrand"
+          }
+        },
+        "sectionSettings": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "inline",
+            "name": "pbSectionSettingsHero"
+          },
+          "optional": true
+        },
+        "brand": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "inline",
+            "name": "brands.reference"
+          },
+          "optional": false
+        },
+        "shapeWidth": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "inline",
+            "name": "shapeWidth"
+          },
+          "optional": true
+        },
+        "introductionText": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
+          },
+          "optional": true
+        },
+        "bgImage": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "object",
+            "attributes": {
+              "asset": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "inline",
+                  "name": "sanity.imageAsset.reference"
+                },
+                "optional": true
+              },
+              "media": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "unknown"
+                },
+                "optional": true
+              },
+              "hotspot": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "inline",
+                  "name": "sanity.imageHotspot"
+                },
+                "optional": true
+              },
+              "crop": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "inline",
+                  "name": "sanity.imageCrop"
+                },
+                "optional": true
+              },
+              "alt": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "string"
+                },
+                "optional": true
+              },
+              "_type": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "string",
+                  "value": "image"
+                }
+              }
+            }
+          },
+          "optional": true
+        },
+        "fgColorTop": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "inline",
+            "name": "colorChoice"
+          },
+          "optional": true
+        },
+        "bgColorBottom": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "inline",
+            "name": "colorChoice"
+          },
+          "optional": true
+        },
+        "fgColorBottom": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "inline",
+            "name": "colorChoice"
+          },
+          "optional": true
+        }
+      }
+    }
+  },
+  {
     "name": "pbHeroShape",
     "type": "type",
     "value": {
@@ -4213,36 +4413,6 @@
     }
   },
   {
-    "type": "type",
-    "name": "brands.reference",
-    "value": {
-      "type": "object",
-      "attributes": {
-        "_ref": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "string"
-          }
-        },
-        "_type": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "string",
-            "value": "reference"
-          }
-        },
-        "_weak": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "boolean"
-          },
-          "optional": true
-        }
-      },
-      "dereferencesTo": "brands"
-    }
-  },
-  {
     "name": "pbBlockJobs",
     "type": "type",
     "value": {
@@ -4567,6 +4737,13 @@
           "optional": true
         },
         "showDividerLine": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "boolean"
+          },
+          "optional": true
+        },
+        "showOrnament": {
           "type": "objectAttribute",
           "value": {
             "type": "boolean"
