@@ -5,9 +5,9 @@ export default defineType({
   name: 'pbSections',
   type: 'array',
   of: [
-    {type: 'pbGridMulti'},
     {type: 'pbGridSingle'},
     {type: 'pbGridDouble'},
+    {type: 'pbGridMulti'},
     {type: 'pbBanner'},
     {type: 'pbImageWithCard'},
     {type: 'pbTriptych'},

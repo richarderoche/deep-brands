@@ -1,10 +1,10 @@
-import type { PbColSettings } from '../../frontend/sanity.types'
+import type {PbColSettings} from '../../frontend/sanity.types'
 
 //
 // SCHEMA HELPERS
 
 export function getGridSettings(gridSettings: PbColSettings) {
-  const { size, start } = gridSettings
+  const {size, start} = gridSettings
   if (!start || !size) {
     return ''
   }
@@ -47,6 +47,8 @@ export const getTypeTitles = (types: string[]) => {
         return 'Button Group'
       case 'pbBlockMarquee':
         return 'Marquee'
+      case 'pbBlockJobs':
+        return 'Jobs Listing'
       default:
         return null
     }
@@ -70,4 +72,4 @@ export const getRowWidthTitle = (rowWidth: number) => {
 
 const capitalize = (str: string) => str.charAt(0).toUpperCase() + str.slice(1)
 
-export { capitalize }
+export {capitalize}

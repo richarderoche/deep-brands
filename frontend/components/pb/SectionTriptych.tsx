@@ -16,7 +16,17 @@ import {ImageBlock} from './PbBlocks'
 type TriptychImage = NonNullable<NonNullable<PbTriptych['images']>[number]>
 type TriptychCarouselMode = 'carouselSingles' | 'carouselGroups'
 
-function TriptychImage({image, priority = false}: {image: TriptychImage; priority?: boolean}) {
+function TriptychImage({
+  image,
+  priority = false,
+  fetchPriority,
+  loading,
+}: {
+  image: TriptychImage
+  priority?: boolean
+  fetchPriority?: 'high' | 'low' | 'auto'
+  loading?: 'eager' | 'lazy'
+}) {
   return (
     <ImageBlock
       block={{
@@ -26,6 +36,8 @@ function TriptychImage({image, priority = false}: {image: TriptychImage; priorit
         imageWidth: 100,
         imageCrop: 0.8,
         priority,
+        fetchPriority,
+        loading,
       }}
       trueSizes={imgSizesFormat(48, 30)}
     />
@@ -123,7 +135,11 @@ function TriptychCarousel({
                   !useFade && 'transition-transform duration-250',
                 )}
               >
-                <TriptychImage image={image} priority={isFirst && index < 3} />
+                <TriptychImage
+                  image={image}
+                  loading="eager"
+                  fetchPriority={isFirst && index < 3 ? 'high' : 'low'}
+                />
               </div>
             </div>
           ))}

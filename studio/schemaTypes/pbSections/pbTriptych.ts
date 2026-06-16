@@ -2,6 +2,12 @@ import {GalleryHorizontal} from 'lucide-react'
 import {defineField, defineType} from 'sanity'
 import {imgAltField, sectionNameField} from '../fields'
 
+const triptychTypeOptions = [
+  {title: 'Still', value: 'still'},
+  {title: 'Carousel - Singles', value: 'carouselSingles'},
+  {title: 'Carousel - Groups', value: 'carouselGroups'},
+]
+
 export default defineType({
   name: 'pbTriptych',
   title: 'Triptych Section',
@@ -19,11 +25,7 @@ export default defineType({
       name: 'triptychType',
       type: 'string',
       options: {
-        list: [
-          {title: 'Still', value: 'still'},
-          {title: 'Carousel - Singles', value: 'carouselSingles'},
-          {title: 'Carousel - Groups', value: 'carouselGroups'},
-        ],
+        list: triptychTypeOptions,
       },
     }),
     defineField({
@@ -77,4 +79,21 @@ export default defineType({
         }),
     }),
   ],
+  preview: {
+    select: {
+      title: 'sectionSettings.name',
+      subtitle: 'triptychType',
+      media: 'images.1',
+    },
+    prepare({title, subtitle, media}) {
+      const subtitleText = subtitle
+        ? `Type: ${triptychTypeOptions.find((o) => o.value === subtitle)?.title}`
+        : 'Triptych Section'
+      return {
+        title: title ? `Triptych: ${title}` : 'Triptych Section',
+        subtitle: subtitleText,
+        media: media ? media : GalleryHorizontal,
+      }
+    },
+  },
 })

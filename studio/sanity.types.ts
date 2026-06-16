@@ -329,7 +329,7 @@ export type PbTriptych = {
   _type: 'pbTriptych'
   sectionSettings?: PbSectionSettings
   sectionName?: string
-  triptychType?: 'still' | 'carouselGroups' | 'carouselSingles'
+  triptychType?: 'still' | 'carouselSingles' | 'carouselGroups'
   images?: Array<{
     asset?: SanityImageAssetReference
     media?: unknown

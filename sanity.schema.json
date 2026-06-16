@@ -2529,11 +2529,11 @@
               },
               {
                 "type": "string",
-                "value": "carouselGroups"
+                "value": "carouselSingles"
               },
               {
                 "type": "string",
-                "value": "carouselSingles"
+                "value": "carouselGroups"
               }
             ]
           },

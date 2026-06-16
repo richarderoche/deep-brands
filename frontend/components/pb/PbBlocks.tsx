@@ -177,7 +177,8 @@ export function PlainTextBlock({block}) {
 }
 
 export function ImageBlock({block, trueSizes}) {
-  const {image, imageMaskType, disableCorners, imageWidth, imageCrop, priority, caption} = block
+  const {image, imageMaskType, disableCorners, imageWidth, imageCrop, priority, fetchPriority, loading, caption} =
+    block
   const roundCorners = !disableCorners && imageMaskType === 'none'
   const cropRatio = (() => {
     switch (imageMaskType) {
@@ -205,6 +206,8 @@ export function ImageBlock({block, trueSizes}) {
           sizes={trueSizes}
           ratio={cropRatio}
           priority={priority ?? false}
+          fetchPriority={fetchPriority}
+          loading={loading}
         />
       </div>
       {caption && <div className="ts-p-sm text-pretty text-body-subtle mt-gut-50">{caption}</div>}

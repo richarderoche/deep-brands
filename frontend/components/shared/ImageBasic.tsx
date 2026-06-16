@@ -12,6 +12,8 @@ interface ImageBasicProps {
   fitTo?: 'width' | 'height' | 'manual'
   image: SanityImageType
   priority?: boolean
+  fetchPriority?: 'high' | 'low' | 'auto'
+  loading?: 'eager' | 'lazy'
   sizes?: string
   mode?: 'contain' | 'cover'
   style?: React.CSSProperties
@@ -25,6 +27,8 @@ export default function ImageBasic({
   fitTo = 'width',
   image,
   priority = false,
+  fetchPriority,
+  loading,
   sizes = '100vw',
   mode,
   style,
@@ -60,7 +64,8 @@ export default function ImageBasic({
       height={newH || height}
       mode={mode}
       sizes={sizes}
-      loading={priority ? 'eager' : 'lazy'}
+      loading={loading ?? (priority ? 'eager' : 'lazy')}
+      {...(fetchPriority && {fetchPriority})}
       maxDimension={maxDimension}
       {...(hotspot && { hotspot })}
       {...(cropArea && { crop: cropArea })}
