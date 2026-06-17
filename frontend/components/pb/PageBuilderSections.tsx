@@ -75,20 +75,21 @@ function PageBuilderSectionList({
           hasStickyImages={hasStickyImages}
         >
           {hasStickyImages ? (
-            <div className="grid w-full *:col-start-1 *:row-start-1">
-              <PbStickyImages images={stickyImages as StickyImages} />
-              <div className="relative z-1 w-full">
-                <SanityVisualEditingPath path={[...sectionPath]}>
-                  <PageBuilderSectionList
-                    sections={group.pbGroupSections ?? []}
-                    pathPrefix={[...sectionPath, 'pbGroupSections']}
-                    firstIsHero={false}
-                    firstPbSectionKey=""
-                    isNested
-                  />
-                </SanityVisualEditingPath>
-              </div>
-            </div>
+            <PbStickyImages
+              images={stickyImages as StickyImages}
+              marginTop={sectionSettings?.marginTop}
+              marginBottom={sectionSettings?.marginBottom}
+            >
+              <SanityVisualEditingPath path={[...sectionPath]}>
+                <PageBuilderSectionList
+                  sections={group.pbGroupSections ?? []}
+                  pathPrefix={[...sectionPath, 'pbGroupSections']}
+                  firstIsHero={false}
+                  firstPbSectionKey=""
+                  isNested
+                />
+              </SanityVisualEditingPath>
+            </PbStickyImages>
           ) : (
             <SanityVisualEditingPath path={[...sectionPath]}>
               <PageBuilderSectionList

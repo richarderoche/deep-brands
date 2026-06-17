@@ -1,33 +1,53 @@
 'use client'
 
 import {cn} from '@/lib/utils'
-import {StickyImages} from '@/sanity.types'
+import {PbSectionSettings, StickyImages} from '@/sanity.types'
 import {useGSAP} from '@gsap/react'
 import gsap from 'gsap'
 import {ScrollTrigger} from 'gsap/all'
-import {useRef} from 'react'
+import {type ReactNode, useRef} from 'react'
 import {Image} from 'sanity'
 import ImageBasic from '../shared/ImageBasic'
 
 gsap.registerPlugin(ScrollTrigger)
 
-export default function PbStickyImages({images: _images}: {images?: StickyImages}) {
+type SectionMargin = PbSectionSettings['marginTop']
+
+function sectionMarginHeight(multiplier?: SectionMargin) {
+  return multiplier ? `calc(var(--gut) * ${multiplier})` : undefined
+}
+
+export default function PbStickyImages({
+  images,
+  marginTop,
+  marginBottom,
+  children,
+}: {
+  images?: StickyImages
+  marginTop?: SectionMargin
+  marginBottom?: SectionMargin
+  children: ReactNode
+}) {
+  const scrollRangeRef = useRef<HTMLDivElement>(null)
   const pinRef = useRef<HTMLDivElement>(null)
 
   useGSAP(
     () => {
+      const scrollRange = scrollRangeRef.current
       const pinEl = pinRef.current
-      const triggerEl = pinEl?.closest('section[data-pb-section="pbSectionGroup"]') as HTMLElement
-      if (!pinEl || !triggerEl) return
+      if (!scrollRange || !pinEl) return
 
       const syncPinWidth = () => {
-        gsap.set(pinEl, {width: triggerEl.offsetWidth})
+        const section = scrollRange.closest(
+          'section[data-pb-section="pbSectionGroup"]',
+        ) as HTMLElement | null
+        if (section) gsap.set(pinEl, {width: section.offsetWidth})
       }
 
       syncPinWidth()
 
       ScrollTrigger.create({
-        trigger: triggerEl,
+        trigger: scrollRange,
         start: 'top top',
         end: 'bottom bottom',
         pin: pinEl,
@@ -37,18 +57,37 @@ export default function PbStickyImages({images: _images}: {images?: StickyImages
         markers: false,
       })
     },
-    {scope: pinRef},
+    {scope: scrollRangeRef, dependencies: [marginTop, marginBottom]},
   )
 
   return (
-    <div ref={pinRef} className="pointer-events-none z-0 h-svh w-full min-w-full" aria-hidden>
-      <div className="relative h-full w-full">
-        {_images?.topLeft && <StickyImage img={_images.topLeft} x="left" y="top" />}
-        {_images?.topRight && <StickyImage img={_images.topRight} x="right" y="top" />}
-        {_images?.bottomLeft && <StickyImage img={_images.bottomLeft} x="left" y="bottom" />}
-        {_images?.bottomRight && <StickyImage img={_images.bottomRight} x="right" y="bottom" />}
+    <>
+      {marginTop ? (
+        <div aria-hidden className="w-full" style={{height: sectionMarginHeight(marginTop)}} />
+      ) : null}
+      <div ref={scrollRangeRef} className="w-full">
+        <div className="grid w-full *:col-start-1 *:row-start-1">
+          <div ref={pinRef} className="pointer-events-none z-0 h-svh w-full min-w-full" aria-hidden>
+            <div className="relative h-full w-full">
+              {images?.topLeft && <StickyImage img={images.topLeft} x="left" y="top" />}
+              {images?.topRight && <StickyImage img={images.topRight} x="right" y="top" />}
+              {images?.bottomLeft && <StickyImage img={images.bottomLeft} x="left" y="bottom" />}
+              {images?.bottomRight && (
+                <StickyImage img={images.bottomRight} x="right" y="bottom" />
+              )}
+            </div>
+          </div>
+          <div className="relative z-1 w-full">{children}</div>
+        </div>
+        {marginBottom ? (
+          <div
+            aria-hidden
+            className="w-full"
+            style={{height: sectionMarginHeight(marginBottom)}}
+          />
+        ) : null}
       </div>
-    </div>
+    </>
   )
 }
 

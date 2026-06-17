@@ -66,12 +66,12 @@ export default function PbSectionShell({
       >
         <div
           style={
-            !hasStickyImages
-              ? {
+            hasStickyImages
+              ? undefined
+              : {
                   paddingTop: marginTop ? `calc(var(--gut) * ${marginTop})` : undefined,
                   paddingBottom: marginBottom ? `calc(var(--gut) * ${marginBottom})` : undefined,
                 }
-              : undefined
           }
         >
           {children}

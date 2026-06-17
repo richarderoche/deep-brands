@@ -1,0 +1,13 @@
+---
+description: GSAP ScrollTrigger — keep markers off unless the user asks for them
+globs: frontend/**/*.{ts,tsx}
+alwaysApply: false
+---
+
+# GSAP ScrollTrigger
+
+When adding or editing ScrollTrigger config (`ScrollTrigger.create`, `scrollTrigger: { ... }`):
+
+- Do not remove existing `markers: false` when editing ScrollTrigger code.
+
+Only set `markers: true` (or omit `markers: false`) when the user explicitly requests visible ScrollTrigger markers for debugging.
