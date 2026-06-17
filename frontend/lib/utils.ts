@@ -197,6 +197,10 @@ export function getClipPath(imageMaskType: string, cropRatio: number) {
       return 'url(#mask-archTT)'
     case 'notches':
       return getNotchMask(cropRatio)
+    case 'featureWide':
+      return 'url(#notches-feature-wide)'
+    case 'featureTall':
+      return 'url(#notches-feature-tall)'
     default:
       return undefined
   }

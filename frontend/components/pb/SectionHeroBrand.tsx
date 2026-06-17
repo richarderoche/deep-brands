@@ -24,16 +24,13 @@ export default function SectionHeroBrand({section}: SectionHeroBrandProps) {
   const {getDataAttribute} = useSanityDataAttribute()
   const {brand, shapeWidth, introductionText, bgImage, fgColorTop, bgColorBottom, fgColorBottom} =
     section
-  const {title, websiteLink, socialIcons, logo, bgShape} = brand
+  const {websiteLink, socialIcons, logo, bgShape} = brand
 
   const topFgColor = colorValue(fgColorTop)
   const bottomBgColor = colorValue(bgColorBottom)
   const isDarkTopFgColor =
     (fgColorTop?.colorType === 'custom' && !!topFgColor && isDark(topFgColor)) ||
     (fgColorTop?.colorType === 'dark' && !!topFgColor)
-  const isDarkBottomBgColor =
-    (bgColorBottom?.colorType === 'custom' && !!bottomBgColor && isDark(bottomBgColor)) ||
-    (bgColorBottom?.colorType === 'dark' && !!bottomBgColor)
   const socialIconColor = isDarkTopFgColor ? 'var(--color-offwhite)' : bottomBgColor
   const socialButtonClassName =
     'rounded-full ts-btn size-btn p-[.4em] flex items-center justify-center hover:opacity-50 [&_svg]:block [&_svg]:h-full [&_svg]:w-auto'
@@ -147,7 +144,12 @@ export default function SectionHeroBrand({section}: SectionHeroBrandProps) {
           <SiteWidth className="md:hidden">
             <SiteGrid>
               <div className="col-span-12" style={{color: colorValue(fgColorBottom)}}>
-                <p className="text-center text-balance my-gut-200">{introductionText}</p>
+                <p
+                  data-sanity={getDataAttribute(['introductionText'])}
+                  className="text-center text-balance my-gut-200"
+                >
+                  {introductionText}
+                </p>
                 <Divider showDividerLine showOrnament showOnMobile size={1} />
               </div>
             </SiteGrid>

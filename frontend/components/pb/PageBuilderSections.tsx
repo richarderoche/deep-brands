@@ -12,6 +12,7 @@ import {
   useSanityDataAttribute,
 } from './SanityVisualEditingContext'
 import SectionBanner from './SectionBanner'
+import SectionFeature from './SectionFeature'
 import SectionGridDouble from './SectionGridDouble'
 import SectionGridMulti from './SectionGridMulti'
 import SectionGridSingle from './SectionGridSingle'
@@ -116,6 +117,7 @@ export default function PageBuilderSections({
                   )}
                   {_type === 'pbBanner' && <SectionBanner section={section} />}
                   {_type === 'pbImageWithCard' && <SectionImageAndCard section={section} />}
+                  {_type === 'pbFeature' && <SectionFeature section={section} />}
                   {_type === 'pbTimeline' && <SectionTimeline section={section} />}
                   {_type === 'pbNews' && <SectionNews section={section} />}
                   {_type === 'pbValues' && <SectionValues section={section} />}

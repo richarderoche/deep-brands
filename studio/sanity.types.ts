@@ -65,6 +65,14 @@ export type BackgroundImage = {
   priority?: boolean
 }
 
+export type FeaturedImage = {
+  image?: FeaturedImageImage
+  imageMaskType?: 'none' | 'notches' | 'logoDB' | 'archIK' | 'archTT'
+  imageCrop?: 0 | 1 | 0.8 | 0.6666666667 | 1.25 | 1.5 | 1.7777777778 | 2.5
+  priority?: boolean
+  bottomAlign?: boolean
+}
+
 export type Preheading = {
   color?: ColorChoice
   left?: string
@@ -129,6 +137,15 @@ export type BannerImageImage = {
 export type BackgroundImageImage = {
   asset?: SanityImageAssetReference
   media?: unknown // Unable to locate the referenced type "backgroundImage.image.media" in schema
+  hotspot?: SanityImageHotspot
+  crop?: SanityImageCrop
+  alt?: string
+  _type: 'image'
+}
+
+export type FeaturedImageImage = {
+  asset?: SanityImageAssetReference
+  media?: unknown // Unable to locate the referenced type "featuredImage.image.media" in schema
   hotspot?: SanityImageHotspot
   crop?: SanityImageCrop
   alt?: string
@@ -416,6 +433,9 @@ export type PbSections = Array<
     } & PbImageWithCard)
   | ({
       _key: string
+    } & PbFeature)
+  | ({
+      _key: string
     } & PbTriptych)
   | ({
       _key: string
@@ -557,6 +577,23 @@ export type PbHeroShape = {
     _type: 'image'
     _key: string
   }>
+}
+
+export type PbFeature = {
+  _type: 'pbFeature'
+  sectionSettings?: PbSectionSettings
+  sectionName?: string
+  rowWidth?: 12 | 10
+  cardColor?: ColorChoice
+  featuredImage?: FeaturedImage
+  pbBlocks?: PbBlocks
+  spaceBetweenBlocks?:
+    | 'gap-0'
+    | 'gap-gut-25'
+    | 'gap-gut-50'
+    | 'gap-gut'
+    | 'gap-gut-150'
+    | 'gap-gut-200'
 }
 
 export type PbColSettings = {
@@ -929,13 +966,6 @@ export type Brands = {
     crop?: SanityImageCrop
     _type: 'image'
   }
-  maskShape?: {
-    asset?: SanityImageAssetReference
-    media?: unknown
-    hotspot?: SanityImageHotspot
-    crop?: SanityImageCrop
-    _type: 'image'
-  }
   bgShape?: {
     asset?: SanityImageAssetReference
     media?: unknown
@@ -1090,6 +1120,7 @@ export type AllSanitySchemaTypes =
   | Start
   | BannerImage
   | BackgroundImage
+  | FeaturedImage
   | Preheading
   | ShapeWidth
   | SanityFileAssetReference
@@ -1100,6 +1131,7 @@ export type AllSanitySchemaTypes =
   | YAlignment
   | BannerImageImage
   | BackgroundImageImage
+  | FeaturedImageImage
   | ObjectImage
   | NewsPostImage
   | SocialLink
@@ -1125,6 +1157,7 @@ export type AllSanitySchemaTypes =
   | BrandsReference
   | PbHeroBrand
   | PbHeroShape
+  | PbFeature
   | PbColSettings
   | PbBlockVideoEmbed
   | PbBlockText

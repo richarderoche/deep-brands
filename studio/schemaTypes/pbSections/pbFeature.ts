@@ -1,14 +1,19 @@
-import {PanelBottom} from 'lucide-react'
 import {defineField, defineType} from 'sanity'
+import {IconFeature} from '../../lib/customIcons'
 import {getTypeTitles} from '../../lib/utils'
-import {imgAltField, sectionNameField, spaceBetweenBlocksField} from '../fields'
+import {
+  imgAltField,
+  rowWidthFieldLimited,
+  sectionNameField,
+  spaceBetweenBlocksField,
+} from '../fields'
 import {crops, hotspotPreviews, imageMaskTypes} from '../pbBlocks/pbBlockImage'
 
 export default defineType({
-  title: 'Image + Card',
-  name: 'pbImageWithCard',
+  title: 'Feature',
+  name: 'pbFeature',
   type: 'object',
-  icon: PanelBottom,
+  icon: IconFeature,
   fields: [
     defineField({
       title: 'Section Settings',
@@ -16,26 +21,15 @@ export default defineType({
       type: 'pbSectionSettings',
     }),
     defineField(sectionNameField),
-    defineField({
-      title: 'Size (Desktop)',
-      name: 'size',
-      type: 'number',
-      initialValue: 6,
-      options: {
-        list: [
-          {title: 'Small', value: 6},
-          {title: 'Large', value: 8},
-        ],
-      },
-    }),
+    defineField(rowWidthFieldLimited),
     defineField({
       title: 'Card Color',
       name: 'cardColor',
       type: 'colorChoice',
     }),
     defineField({
-      title: 'Background Image',
-      name: 'backgroundImage',
+      title: 'Featured Image',
+      name: 'featuredImage',
       type: 'object',
       fields: [
         defineField({
@@ -77,10 +71,16 @@ export default defineType({
           description: 'Enable for images above the fold to improve loading performance',
           initialValue: false,
         }),
+        defineField({
+          name: 'bottomAlign',
+          title: 'Bottom Align Image?',
+          type: 'boolean',
+          initialValue: true,
+        }),
       ],
     }),
     defineField({
-      title: 'Blocks',
+      title: 'Content Blocks',
       name: 'pbBlocks',
       type: 'pbBlocks',
     }),
@@ -90,15 +90,15 @@ export default defineType({
     select: {
       sectionName: 'sectionName',
       blocks: 'pbBlocks',
-      image: 'backgroundImage.image',
+      image: 'featuredImage.image',
     },
     prepare({sectionName, blocks, image}) {
       const blockList = blocks ? blocks.map((block: any) => block._type) : []
       const blockTitles = getTypeTitles(blockList)
       return {
-        title: sectionName ? `Image + Card: ${sectionName}` : 'Image + Card Section',
+        title: sectionName ? `Feature: ${sectionName}` : 'Feature Section',
         subtitle: `Blocks: ${blockTitles || 'None'}`,
-        media: image ? image : PanelBottom,
+        media: image ? image : IconFeature,
       }
     },
   },

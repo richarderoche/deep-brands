@@ -27,6 +27,7 @@ import pbSections from './pbSections'
 import column from './pbSections/column'
 import pbBanner from './pbSections/pbBanner'
 import pbColSettings from './pbSections/pbColSettings'
+import pbFeature from './pbSections/pbFeature'
 import pbGridDouble from './pbSections/pbGridDouble'
 import pbGridMulti from './pbSections/pbGridMulti'
 import pbGridSingle from './pbSections/pbGridSingle'
@@ -70,6 +71,7 @@ export const schemaTypes = [
   pbBlockText,
   pbBlockVideoEmbed,
   pbColSettings,
+  pbFeature,
   pbHeroShape,
   pbHeroBrand,
   pbGridMulti,

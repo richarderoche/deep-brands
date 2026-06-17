@@ -26,6 +26,7 @@ export interface PbBlocksProps {
     tablet?: string
     desktop?: string
   }
+  contentAlign?: 'start' | 'center'
   className?: string
 }
 
@@ -38,6 +39,7 @@ export default function PbBlocks({
     tablet: 'md:grid-cols-1',
     desktop: 'lg:grid-cols-1',
   },
+  contentAlign = 'start',
   className,
 }: PbBlocksProps) {
   const {getDataAttribute, path} = useSanityDataAttribute()
@@ -49,6 +51,7 @@ export default function PbBlocks({
         blockWidths.tablet,
         blockWidths.desktop,
         spaceBetweenBlocks,
+        contentAlign === 'center' && 'justify-items-center',
         className,
       )}
     >
@@ -77,7 +80,7 @@ export default function PbBlocks({
             // Image Block
             case 'pbBlockImage':
               return (
-                <div key={_key} data-sanity={blockDataSanity} className="corner-container">
+                <div key={_key} data-sanity={blockDataSanity} className="corner-container w-full">
                   <ImageBlock block={block} trueSizes={trueSizes} />
                 </div>
               )
@@ -177,14 +180,15 @@ export function PlainTextBlock({block}) {
 }
 
 export function ImageBlock({block, trueSizes}) {
-  const {image, imageMaskType, disableCorners, imageWidth, imageCrop, priority, fetchPriority, loading, caption} =
+  const {image, imageMaskType, imageWidth, imageCrop, priority, fetchPriority, loading, caption} =
     block
-  const roundCorners = !disableCorners && imageMaskType === 'none'
+  const roundCorners = false
   const cropRatio = (() => {
     switch (imageMaskType) {
       case 'logoDB':
         return 1.6411287988
       case 'archIK':
+        return 1
       case 'archTT':
         return 1
       default:
@@ -194,9 +198,13 @@ export function ImageBlock({block, trueSizes}) {
   return (
     <>
       <div
-        className={cn('relative group', roundCorners ? 'corner' : '')}
+        className={cn(
+          'relative group',
+          imageWidth ? 'mx-auto' : 'w-full',
+          roundCorners ? 'corner' : '',
+        )}
         style={{
-          width: imageWidth ? imageWidth + '%' : 'auto',
+          ...(imageWidth && {width: `${imageWidth}%`}),
           clipPath: getClipPath(imageMaskType, cropRatio),
         }}
       >

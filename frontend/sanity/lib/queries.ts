@@ -129,6 +129,12 @@ const pb = defineQuery(`
         ${pbBlocks}
       }
     },
+    _type == "pbFeature" => {
+      ...,
+      pbBlocks[]{
+        ${pbBlocks}
+      }
+    },
     _type == "pbNews" => {
       ...,
       ctaButton {

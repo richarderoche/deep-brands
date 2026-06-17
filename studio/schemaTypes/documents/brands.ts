@@ -40,11 +40,6 @@ export default defineType({
       type: 'image',
     }),
     defineField({
-      name: 'maskShape',
-      title: 'Mask Shape (Black SVG, Square Ratio)',
-      type: 'image',
-    }),
-    defineField({
       name: 'bgShape',
       title: 'Background Shape (Colored SVG or PNG)',
       type: 'image',
