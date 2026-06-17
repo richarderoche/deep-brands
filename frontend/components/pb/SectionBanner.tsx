@@ -2,6 +2,7 @@
 import {isDark} from '@/lib/checkColor'
 import {colorValue} from '@/lib/colorValue'
 import {usePrefersReducedMotion} from '@/lib/hooks'
+import {getVisibleColumnBlocks} from '@/lib/gsapUtils'
 import {cn} from '@/lib/utils'
 import {PbBanner} from '@/sanity.types'
 import {PbBlocksQueryResult} from '@/types'
@@ -59,18 +60,21 @@ export default function SectionGridSingle({section}: {section: PbBanner}) {
         )
       }
 
-      tl.fromTo(
-        '.column-blocks > *',
-        {y: blockDistance, opacity: 0},
-        {
-          y: 0,
-          opacity: 1,
-          duration: BLOCKS_DURATION,
-          ease: BLOCKS_EASE,
-          stagger: STAGGER,
-        },
-        reducedMotion ? 0 : `-=${BACKDROP_DURATION * BLOCKS_OVERLAP}`,
-      )
+      const blockTargets = getVisibleColumnBlocks(el)
+      if (blockTargets.length) {
+        tl.fromTo(
+          blockTargets,
+          {y: blockDistance, opacity: 0},
+          {
+            y: 0,
+            opacity: 1,
+            duration: BLOCKS_DURATION,
+            ease: BLOCKS_EASE,
+            stagger: STAGGER,
+          },
+          reducedMotion ? 0 : `-=${BACKDROP_DURATION * BLOCKS_OVERLAP}`,
+        )
+      }
     },
     {scope: bannerContainerRef, dependencies: [isRTL, reducedMotion, hasBlocks]},
   )

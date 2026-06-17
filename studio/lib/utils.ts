@@ -1,4 +1,5 @@
 import type {PbColSettings} from '../../frontend/sanity.types'
+import {pbSectionTypes} from '../schemaTypes/pbSections'
 
 //
 // SCHEMA HELPERS
@@ -73,3 +74,32 @@ export const getRowWidthTitle = (rowWidth: number) => {
 const capitalize = (str: string) => str.charAt(0).toUpperCase() + str.slice(1)
 
 export {capitalize}
+
+//
+// PAGE BUILDER SECTIONS
+
+export type PbSectionTypeName = (typeof pbSectionTypes)[number]['type']
+
+export const pbSectionTitles = Object.fromEntries(
+  pbSectionTypes.map(({type, title}) => [type, title]),
+) as Record<PbSectionTypeName, string>
+
+export function getPbSectionTitle(type: string | undefined) {
+  if (!type) return 'Section'
+  return pbSectionTitles[type as PbSectionTypeName] ?? 'Section'
+}
+
+export function formatPbSectionGroupPreview(
+  sections: Array<{_type?: string; sectionName?: string}> | undefined,
+  limit = 3,
+) {
+  const labels = (sections ?? [])
+    .slice(0, limit)
+    .map((section) => section.sectionName?.trim() || getPbSectionTitle(section._type))
+
+  const extra = Math.max(0, (sections?.length ?? 0) - limit)
+
+  if (!labels.length) return 'No sections'
+
+  return extra ? `${labels.join(', ')} +${extra} more` : labels.join(', ')
+}

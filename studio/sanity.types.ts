@@ -85,6 +85,13 @@ export type ShapeWidth = {
   desktop?: number
 }
 
+export type StickyImages = {
+  topLeft?: TopLeft
+  topRight?: TopRight
+  bottomLeft?: BottomLeft
+  bottomRight?: BottomRight
+}
+
 export type SanityFileAssetReference = {
   _ref: string
   _type: 'reference'
@@ -168,6 +175,38 @@ export type NewsPostImage = {
   hotspot?: SanityImageHotspot
   crop?: SanityImageCrop
   alt?: string
+  _type: 'image'
+}
+
+export type TopLeft = {
+  asset?: SanityImageAssetReference
+  media?: unknown // Unable to locate the referenced type "topLeft.media" in schema
+  hotspot?: SanityImageHotspot
+  crop?: SanityImageCrop
+  _type: 'image'
+}
+
+export type TopRight = {
+  asset?: SanityImageAssetReference
+  media?: unknown // Unable to locate the referenced type "topRight.media" in schema
+  hotspot?: SanityImageHotspot
+  crop?: SanityImageCrop
+  _type: 'image'
+}
+
+export type BottomLeft = {
+  asset?: SanityImageAssetReference
+  media?: unknown // Unable to locate the referenced type "bottomLeft.media" in schema
+  hotspot?: SanityImageHotspot
+  crop?: SanityImageCrop
+  _type: 'image'
+}
+
+export type BottomRight = {
+  asset?: SanityImageAssetReference
+  media?: unknown // Unable to locate the referenced type "bottomRight.media" in schema
+  hotspot?: SanityImageHotspot
+  crop?: SanityImageCrop
   _type: 'image'
 }
 
@@ -415,6 +454,52 @@ export type PbSectionSettings = {
   marginBottom?: 1 | 2 | 3 | 4 | 5
 }
 
+export type PbSectionGroup = {
+  _type: 'pbSectionGroup'
+  sectionSettings?: PbSectionSettings
+  sectionName?: string
+  stickyBackgroundImages?: boolean
+  stickyImages?: StickyImages
+  pbGroupSections?: Array<
+    | ({
+        _key: string
+      } & PbGridSingle)
+    | ({
+        _key: string
+      } & PbGridDouble)
+    | ({
+        _key: string
+      } & PbGridMulti)
+    | ({
+        _key: string
+      } & PbBanner)
+    | ({
+        _key: string
+      } & PbImageWithCard)
+    | ({
+        _key: string
+      } & PbFeature)
+    | ({
+        _key: string
+      } & PbTriptych)
+    | ({
+        _key: string
+      } & PbHeroShape)
+    | ({
+        _key: string
+      } & PbHeroBrand)
+    | ({
+        _key: string
+      } & PbTimeline)
+    | ({
+        _key: string
+      } & PbNews)
+    | ({
+        _key: string
+      } & PbValues)
+  >
+}
+
 export type PbSections = Array<
   | ({
       _key: string
@@ -452,6 +537,9 @@ export type PbSections = Array<
   | ({
       _key: string
     } & PbValues)
+  | ({
+      _key: string
+    } & PbSectionGroup)
 >
 
 export type PbImageWithCard = {
@@ -1123,6 +1211,7 @@ export type AllSanitySchemaTypes =
   | FeaturedImage
   | Preheading
   | ShapeWidth
+  | StickyImages
   | SanityFileAssetReference
   | FileLinkFile
   | MarkDefsFileLinkFile
@@ -1134,6 +1223,10 @@ export type AllSanitySchemaTypes =
   | FeaturedImageImage
   | ObjectImage
   | NewsPostImage
+  | TopLeft
+  | TopRight
+  | BottomLeft
+  | BottomRight
   | SocialLink
   | Seo
   | PageReference
@@ -1149,6 +1242,7 @@ export type AllSanitySchemaTypes =
   | PbTimeline
   | PbSectionSettingsHero
   | PbSectionSettings
+  | PbSectionGroup
   | PbSections
   | PbImageWithCard
   | PbGridDouble

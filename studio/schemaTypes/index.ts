@@ -35,6 +35,7 @@ import pbHeroBrand from './pbSections/pbHeroBrand'
 import pbHeroShape from './pbSections/pbHeroShape'
 import pbImageWithCard from './pbSections/pbImageWithCard'
 import pbNews from './pbSections/pbNews'
+import pbSectionGroup from './pbSections/pbSectionGroup'
 import pbSectionSettings from './pbSections/pbSectionSettings'
 import pbSectionSettingsHero from './pbSections/pbSectionSettingsHero'
 import pbTimeline from './pbSections/pbTimeline'
@@ -79,6 +80,7 @@ export const schemaTypes = [
   pbGridDouble,
   pbImageWithCard,
   pbSections,
+  pbSectionGroup,
   pbSectionSettings,
   pbSectionSettingsHero,
   pbTimeline,

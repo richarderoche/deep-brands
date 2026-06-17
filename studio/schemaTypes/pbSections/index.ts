@@ -1,21 +1,24 @@
 import {defineType} from 'sanity'
 
+/** Single source of truth for insert-menu labels and preview subtitles. */
+export const pbSectionTypes = [
+  {type: 'pbGridSingle', title: 'Grid: Single Column'},
+  {type: 'pbGridDouble', title: 'Grid: Two Column'},
+  {type: 'pbGridMulti', title: 'Multicolumn Grid'},
+  {type: 'pbBanner', title: 'Banner Section'},
+  {type: 'pbImageWithCard', title: 'Image + Card'},
+  {type: 'pbFeature', title: 'Feature'},
+  {type: 'pbTriptych', title: 'Triptych Section'},
+  {type: 'pbHeroShape', title: 'Hero - Shape'},
+  {type: 'pbHeroBrand', title: 'Hero - Brand'},
+  {type: 'pbTimeline', title: 'Timeline'},
+  {type: 'pbNews', title: 'News Section'},
+  {type: 'pbValues', title: 'Values Section'},
+] as const
+
 export default defineType({
   title: 'Sections',
   name: 'pbSections',
   type: 'array',
-  of: [
-    {type: 'pbGridSingle'},
-    {type: 'pbGridDouble'},
-    {type: 'pbGridMulti'},
-    {type: 'pbBanner'},
-    {type: 'pbImageWithCard'},
-    {type: 'pbFeature'},
-    {type: 'pbTriptych'},
-    {type: 'pbHeroShape'},
-    {type: 'pbHeroBrand'},
-    {type: 'pbTimeline'},
-    {type: 'pbNews'},
-    {type: 'pbValues'},
-  ],
+  of: [...pbSectionTypes, {type: 'pbSectionGroup'}],
 })

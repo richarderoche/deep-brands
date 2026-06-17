@@ -34,7 +34,8 @@ export default function SectionFeature({section}: {section: PbFeature}) {
         <div className={cn(outerClasses, 'shadow-md')}>
           <div
             className={cn(
-              'grid grid-cols-1 lg:grid-cols-2 items-center gap-gut-150 lg:gap-gut p-gut',
+              'grid grid-cols-1 lg:grid-cols-2 items-center   p-gut',
+              !featuredImage?.bottomAlign ? 'gap-gut-150 lg:gap-gut' : 'gap-gut',
               isDarkCardColor
                 ? 'dark-theme theme-vars-only text-body'
                 : 'light-theme theme-vars-only text-body',

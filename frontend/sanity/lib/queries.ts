@@ -85,70 +85,80 @@ const pbBlocks = `
   },
 `
 
-const pb = defineQuery(`
-  pbSections[]{
+const pbSections = `
+  ...,
+  _type == "pbGridMulti" => {
+    columns[]{
+      ...,
+      pbBlocks[]{
+        ${pbBlocks}
+      }
+    }
+  },
+  _type == "pbGridSingle" => {
     ...,
-    _type == "pbGridMulti" => {
-      columns[]{
-        ...,
-        pbBlocks[]{
-          ${pbBlocks}
-        }
-      }
-    },
-    _type == "pbGridSingle" => {
+    pbBlocks[]{
+      ${pbBlocks}
+    }
+  },
+  _type == "pbGridDouble" => {
+    ...,
+    columnOne {
       ...,
       pbBlocks[]{
         ${pbBlocks}
       }
     },
-    _type == "pbGridDouble" => {
-      ...,
-      columnOne {
-        ...,
-        pbBlocks[]{
-          ${pbBlocks}
-        }
-      },
-      columnTwo {
-        ...,
-        pbBlocks[]{
-          ${pbBlocks}
-        }
-      }
-    },
-    _type == "pbBanner" => {
+    columnTwo {
       ...,
       pbBlocks[]{
         ${pbBlocks}
       }
-    },
-    _type == "pbImageWithCard" => {
+    }
+  },
+  _type == "pbBanner" => {
+    ...,
+    pbBlocks[]{
+      ${pbBlocks}
+    }
+  },
+  _type == "pbImageWithCard" => {
+    ...,
+    pbBlocks[]{
+      ${pbBlocks}
+    }
+  },
+  _type == "pbFeature" => {
+    ...,
+    pbBlocks[]{
+      ${pbBlocks}
+    }
+  },
+  _type == "pbNews" => {
+    ...,
+    ctaButton {
+      ${pbButton}
+    }
+  },
+  _type == "pbHeroBrand" => {
+    ...,
+    brand->{
       ...,
-      pbBlocks[]{
-        ${pbBlocks}
+    },
+  },
+`
+
+const pb = `
+  pbSections[]{
+    ${pbSections}
+    _type == "pbSectionGroup" => {
+      ...,
+      pbGroupSections[]{
+        ${pbSections}
       }
-    },
-    _type == "pbFeature" => {
-      ...,
-      pbBlocks[]{
-        ${pbBlocks}
-      }
-    },
-    _type == "pbNews" => {
-      ...,
-      ctaButton {
-        ${pbButton}
-      }
-    },
-    _type == "pbHeroBrand" => {
-      ...,
-      brand->{
-        ...,
-      },
-    },
+    }
   }
-`)
+`
 
 // QUERIES
 export const homePageQuery = defineQuery(`

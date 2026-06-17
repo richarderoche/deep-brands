@@ -1,6 +1,7 @@
 'use client'
 
 import {usePrefersReducedMotion} from '@/lib/hooks'
+import {getVisibleColumnBlocks} from '@/lib/gsapUtils'
 import {useGSAP} from '@gsap/react'
 import gsap from 'gsap'
 import {ScrollTrigger} from 'gsap/all'
@@ -34,8 +35,11 @@ export default function Revealer({children, direction = 'fade-up', ...props}: Re
       const toMove = direction === 'fade-right' ? {x: 0} : {y: 0}
 
       if (direction === 'stagger') {
+        const targets = getVisibleColumnBlocks(el)
+        if (!targets.length) return
+
         gsap.fromTo(
-          '.column-blocks > *',
+          targets,
           {y: distance, opacity: 0},
           {
             y: 0,

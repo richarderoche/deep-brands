@@ -1,34 +1,133 @@
 'use client'
 
-import {isDark} from '@/lib/checkColor'
-import {colorValue} from '@/lib/colorValue'
-import {cn} from '@/lib/utils'
-import {PbSections} from '@/sanity.types'
-import {PageBuilderData} from '@/types'
-import IconOrnamentTop from '../icons/IconOrnamentTop'
-import {
-  SanityPathSegment,
-  SanityVisualEditingPath,
-  useSanityDataAttribute,
-} from './SanityVisualEditingContext'
-import SectionBanner from './SectionBanner'
-import SectionFeature from './SectionFeature'
-import SectionGridDouble from './SectionGridDouble'
-import SectionGridMulti from './SectionGridMulti'
-import SectionGridSingle from './SectionGridSingle'
-import SectionHeroBrand, {PbHeroBrandSection} from './SectionHeroBrand'
-import SectionHeroShape from './SectionHeroShape'
-import SectionImageAndCard from './SectionImageAndCard'
-import SectionNews from './SectionNews'
-import SectionTimeline from './SectionTimeline'
-import SectionTriptych from './SectionTriptych'
-import SectionValues from './SectionValues'
+import {PbSections, StickyImages} from '@/sanity.types'
+import {Image} from 'sanity'
+import PbSectionContent from './PbSectionContent'
+import PbSectionShell, {getPbSectionDarkBg} from './PbSectionShell'
+import PbStickyImages from './PbStickyImages'
+import {SanityPathSegment, SanityVisualEditingPath} from './SanityVisualEditingContext'
+
+type PbSectionGroup = {
+  _key: string
+  _type: 'pbSectionGroup'
+  sectionSettings?: PbSections[number]['sectionSettings']
+  stickyBackgroundImages?: boolean
+  stickyImages?: {
+    topLeft?: Image
+    topRight?: Image
+    bottomLeft?: Image
+    bottomRight?: Image
+  }
+  pbGroupSections?: PbSections
+}
+
+type PbSectionItem = PbSections[number] | PbSectionGroup
 
 export interface PageBuilderContentProps {
-  data: PageBuilderData
-  baseUrl: string
   firstIsHero: boolean
   firstPbSectionKey: string
+}
+
+interface PageBuilderSectionListProps extends PageBuilderContentProps {
+  sections: PbSectionItem[]
+  pathPrefix: SanityPathSegment[]
+  /** Nested lists skip page-level header offset and first-section tracking. */
+  isNested?: boolean
+}
+
+function PageBuilderSectionList({
+  sections,
+  pathPrefix,
+  firstIsHero,
+  firstPbSectionKey,
+  isNested = false,
+}: PageBuilderSectionListProps) {
+  if (!sections?.length) return null
+
+  const items = sections.flatMap((section) => {
+    const {_key, _type, sectionSettings} = section
+    const {enableSection = true} = sectionSettings || {}
+
+    if (!enableSection) return []
+
+    const sectionPath: SanityPathSegment[] = [...pathPrefix, {_key}]
+    const isFirst = !isNested && _key === firstPbSectionKey
+    const needsHeaderSpace = isFirst && !firstIsHero
+
+    if (_type === 'pbSectionGroup') {
+      const group = section as PbSectionGroup
+      const {stickyBackgroundImages, stickyImages} = group
+      const hasStickyImages = Boolean(
+        stickyBackgroundImages &&
+        (stickyImages?.topLeft ||
+          stickyImages?.topRight ||
+          stickyImages?.bottomLeft ||
+          stickyImages?.bottomRight),
+      )
+      return (
+        <PbSectionShell
+          key={_key}
+          sectionKey={_key}
+          sectionType={_type}
+          sectionSettings={sectionSettings}
+          sectionPath={sectionPath}
+          needsHeaderSpace={needsHeaderSpace}
+          hasStickyImages={hasStickyImages}
+        >
+          {hasStickyImages ? (
+            <div className="grid w-full *:col-start-1 *:row-start-1">
+              <PbStickyImages images={stickyImages as StickyImages} />
+              <div className="relative z-1 w-full">
+                <SanityVisualEditingPath path={[...sectionPath]}>
+                  <PageBuilderSectionList
+                    sections={group.pbGroupSections ?? []}
+                    pathPrefix={[...sectionPath, 'pbGroupSections']}
+                    firstIsHero={false}
+                    firstPbSectionKey=""
+                    isNested
+                  />
+                </SanityVisualEditingPath>
+              </div>
+            </div>
+          ) : (
+            <SanityVisualEditingPath path={[...sectionPath]}>
+              <PageBuilderSectionList
+                sections={group.pbGroupSections ?? []}
+                pathPrefix={[...sectionPath, 'pbGroupSections']}
+                firstIsHero={false}
+                firstPbSectionKey=""
+                isNested
+              />
+            </SanityVisualEditingPath>
+          )}
+        </PbSectionShell>
+      )
+    }
+
+    const isDarkBgColor = getPbSectionDarkBg(sectionSettings)
+
+    return (
+      <PbSectionShell
+        key={_key}
+        sectionKey={_key}
+        sectionType={_type}
+        sectionSettings={sectionSettings}
+        sectionPath={sectionPath}
+        needsHeaderSpace={needsHeaderSpace}
+      >
+        <SanityVisualEditingPath path={[...sectionPath]}>
+          <PbSectionContent
+            section={section as PbSections[number]}
+            sectionKey={_key}
+            isFirst={isFirst}
+            isDarkBgColor={isDarkBgColor}
+          />
+        </SanityVisualEditingPath>
+      </PbSectionShell>
+    )
+  })
+
+  return <div className="flex flex-col">{items}</div>
 }
 
 export default function PageBuilderSections({
@@ -40,96 +139,12 @@ export default function PageBuilderSections({
   firstIsHero: boolean
   firstPbSectionKey: string
 }) {
-  const {getDataAttribute} = useSanityDataAttribute()
-  if (!pbSections?.length) return null
-
   return (
-    <div className="flex flex-col">
-      {pbSections.map((section) => {
-        const {_key, _type, sectionSettings} = section
-        const {
-          enableSection = true,
-          sectionId,
-          marginTop,
-          marginBottom,
-          sectionBgColor,
-          topOrnament,
-        } = sectionSettings || {}
-
-        const bgColor = colorValue(sectionBgColor)
-        const isDarkBgColor =
-          (sectionBgColor?.colorType === 'custom' && !!bgColor && isDark(bgColor)) ||
-          (sectionBgColor?.colorType === 'dark' && !!bgColor)
-
-        if (!enableSection) return null
-
-        const sectionPath: SanityPathSegment[] = ['pbSections', {_key}]
-        const isFirst = _key === firstPbSectionKey
-        const needsHeaderSpace = !firstIsHero && isFirst
-        return (
-          <section
-            id={sectionId ? sectionId : 'section-' + _key}
-            key={_key}
-            className={cn(
-              'group',
-              needsHeaderSpace && 'pt-header',
-              isDarkBgColor && 'dark-theme theme-vars-only text-body',
-              sectionBgColor?.colorType === 'gradient' && 'db-gradient',
-            )}
-            data-sanity={getDataAttribute(sectionPath)}
-            style={{backgroundColor: bgColor}}
-          >
-            {topOrnament && (
-              <IconOrnamentTop
-                style={{color: bgColor}}
-                className={cn('h-ornament w-auto', !bgColor && 'text-bg')}
-              />
-            )}
-            <div
-              className={cn(
-                _type !== 'pbHeroBrand' && 'py-gut-50',
-                'group-first:pt-0 group-last:pb-gut-500',
-              )}
-            >
-              <div
-                style={{
-                  paddingTop: marginTop ? `calc(var(--gut) * ${marginTop})` : undefined,
-                  paddingBottom: marginBottom ? `calc(var(--gut) * ${marginBottom})` : undefined,
-                }}
-              >
-                <SanityVisualEditingPath path={[...sectionPath]}>
-                  {_type === 'pbGridMulti' && <SectionGridMulti section={section} />}
-                  {_type === 'pbGridSingle' && (
-                    <SectionGridSingle
-                      section={section}
-                      sectionKey={_key}
-                      isDarkBgColor={isDarkBgColor}
-                    />
-                  )}
-                  {_type === 'pbGridDouble' && (
-                    <SectionGridDouble section={section} sectionKey={_key} />
-                  )}
-                  {_type === 'pbHeroShape' && (
-                    <SectionHeroShape section={section} isDarkBgColor={isDarkBgColor} />
-                  )}
-                  {_type === 'pbHeroBrand' && (
-                    <SectionHeroBrand section={section as unknown as PbHeroBrandSection} />
-                  )}
-                  {_type === 'pbBanner' && <SectionBanner section={section} />}
-                  {_type === 'pbImageWithCard' && <SectionImageAndCard section={section} />}
-                  {_type === 'pbFeature' && <SectionFeature section={section} />}
-                  {_type === 'pbTimeline' && <SectionTimeline section={section} />}
-                  {_type === 'pbNews' && <SectionNews section={section} />}
-                  {_type === 'pbValues' && <SectionValues section={section} />}
-                  {_type === 'pbTriptych' && (
-                    <SectionTriptych section={section} isFirst={isFirst} />
-                  )}
-                </SanityVisualEditingPath>
-              </div>
-            </div>
-          </section>
-        )
-      })}
-    </div>
+    <PageBuilderSectionList
+      sections={pbSections as PbSectionItem[]}
+      pathPrefix={['pbSections']}
+      firstIsHero={firstIsHero}
+      firstPbSectionKey={firstPbSectionKey}
+    />
   )
 }
