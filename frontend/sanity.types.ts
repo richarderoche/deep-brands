@@ -578,6 +578,7 @@ export type PbGridSingle = {
   bgLogoShape?: boolean
   revealEffect?: 'none' | 'stagger' | 'fade-up' | 'fade-right'
   pbBlocks?: PbBlocks
+  centerBlocks?: boolean
   spaceBetweenBlocks?:
     | 'gap-0'
     | 'gap-gut-25'
@@ -598,6 +599,7 @@ export type PbGridMulti = {
     yAlignment?: YAlignment
     revealEffect?: 'none' | 'stagger' | 'fade-up' | 'fade-right'
     pbBlocks?: PbBlocks
+    centerBlocks?: boolean
     spaceBetweenBlocks?:
       | 'gap-0'
       | 'gap-gut-25'
@@ -829,7 +831,9 @@ export type PbBlockButton = {
     | 'Tiktok'
     | 'Twitter'
     | 'YouTube'
-  buttonStyle?: 'default' | 'outline'
+  arrowDirection?: 'up' | 'right' | 'down' | 'left'
+  buttonStyle?: 'default' | 'outline' | 'no-bg'
+  buttonColor?: ColorChoice
 }
 
 export type PbBlockImage = {
@@ -931,6 +935,7 @@ export type Column = {
   _type: 'column'
   revealEffect?: 'none' | 'stagger' | 'fade-up' | 'fade-right'
   pbBlocks?: PbBlocks
+  centerBlocks?: boolean
   spaceBetweenBlocks?:
     | 'gap-0'
     | 'gap-gut-25'
@@ -1357,7 +1362,9 @@ export type HomePageQueryResult = {
                 | 'Tiktok'
                 | 'Twitter'
                 | 'YouTube'
-              buttonStyle?: 'default' | 'outline'
+              arrowDirection?: 'down' | 'left' | 'right' | 'up'
+              buttonStyle?: 'default' | 'no-bg' | 'outline'
+              buttonColor?: ColorChoice
             }
           | {
               _key: string
@@ -1407,7 +1414,9 @@ export type HomePageQueryResult = {
                   | 'Tiktok'
                   | 'Twitter'
                   | 'YouTube'
-                buttonStyle?: 'default' | 'outline'
+                arrowDirection?: 'down' | 'left' | 'right' | 'up'
+                buttonStyle?: 'default' | 'no-bg' | 'outline'
+                buttonColor?: ColorChoice
               }>
             }
           | {
@@ -1609,7 +1618,9 @@ export type HomePageQueryResult = {
                 | 'Tiktok'
                 | 'Twitter'
                 | 'YouTube'
-              buttonStyle?: 'default' | 'outline'
+              arrowDirection?: 'down' | 'left' | 'right' | 'up'
+              buttonStyle?: 'default' | 'no-bg' | 'outline'
+              buttonColor?: ColorChoice
             }
           | {
               _key: string
@@ -1659,7 +1670,9 @@ export type HomePageQueryResult = {
                   | 'Tiktok'
                   | 'Twitter'
                   | 'YouTube'
-                buttonStyle?: 'default' | 'outline'
+                arrowDirection?: 'down' | 'left' | 'right' | 'up'
+                buttonStyle?: 'default' | 'no-bg' | 'outline'
+                buttonColor?: ColorChoice
               }>
             }
           | {
@@ -1864,7 +1877,9 @@ export type HomePageQueryResult = {
                   | 'Tiktok'
                   | 'Twitter'
                   | 'YouTube'
-                buttonStyle?: 'default' | 'outline'
+                arrowDirection?: 'down' | 'left' | 'right' | 'up'
+                buttonStyle?: 'default' | 'no-bg' | 'outline'
+                buttonColor?: ColorChoice
               }
             | {
                 _key: string
@@ -1914,7 +1929,9 @@ export type HomePageQueryResult = {
                     | 'Tiktok'
                     | 'Twitter'
                     | 'YouTube'
-                  buttonStyle?: 'default' | 'outline'
+                  arrowDirection?: 'down' | 'left' | 'right' | 'up'
+                  buttonStyle?: 'default' | 'no-bg' | 'outline'
+                  buttonColor?: ColorChoice
                 }>
               }
             | {
@@ -2054,6 +2071,7 @@ export type HomePageQueryResult = {
                 videoAspectRatio?: VideoAspectRatio
               }
           > | null
+          centerBlocks?: boolean
           spaceBetweenBlocks?:
             | 'gap-0'
             | 'gap-gut-150'
@@ -2112,7 +2130,9 @@ export type HomePageQueryResult = {
                   | 'Tiktok'
                   | 'Twitter'
                   | 'YouTube'
-                buttonStyle?: 'default' | 'outline'
+                arrowDirection?: 'down' | 'left' | 'right' | 'up'
+                buttonStyle?: 'default' | 'no-bg' | 'outline'
+                buttonColor?: ColorChoice
               }
             | {
                 _key: string
@@ -2162,7 +2182,9 @@ export type HomePageQueryResult = {
                     | 'Tiktok'
                     | 'Twitter'
                     | 'YouTube'
-                  buttonStyle?: 'default' | 'outline'
+                  arrowDirection?: 'down' | 'left' | 'right' | 'up'
+                  buttonStyle?: 'default' | 'no-bg' | 'outline'
+                  buttonColor?: ColorChoice
                 }>
               }
             | {
@@ -2302,6 +2324,7 @@ export type HomePageQueryResult = {
                 videoAspectRatio?: VideoAspectRatio
               }
           > | null
+          centerBlocks?: boolean
           spaceBetweenBlocks?:
             | 'gap-0'
             | 'gap-gut-150'
@@ -2368,7 +2391,9 @@ export type HomePageQueryResult = {
                   | 'Tiktok'
                   | 'Twitter'
                   | 'YouTube'
-                buttonStyle?: 'default' | 'outline'
+                arrowDirection?: 'down' | 'left' | 'right' | 'up'
+                buttonStyle?: 'default' | 'no-bg' | 'outline'
+                buttonColor?: ColorChoice
               }
             | {
                 _key: string
@@ -2418,7 +2443,9 @@ export type HomePageQueryResult = {
                     | 'Tiktok'
                     | 'Twitter'
                     | 'YouTube'
-                  buttonStyle?: 'default' | 'outline'
+                  arrowDirection?: 'down' | 'left' | 'right' | 'up'
+                  buttonStyle?: 'default' | 'no-bg' | 'outline'
+                  buttonColor?: ColorChoice
                 }>
               }
             | {
@@ -2558,6 +2585,7 @@ export type HomePageQueryResult = {
                 videoAspectRatio?: VideoAspectRatio
               }
           > | null
+          centerBlocks?: boolean
           spaceBetweenBlocks?:
             | 'gap-0'
             | 'gap-gut-150'
@@ -2623,7 +2651,9 @@ export type HomePageQueryResult = {
                 | 'Tiktok'
                 | 'Twitter'
                 | 'YouTube'
-              buttonStyle?: 'default' | 'outline'
+              arrowDirection?: 'down' | 'left' | 'right' | 'up'
+              buttonStyle?: 'default' | 'no-bg' | 'outline'
+              buttonColor?: ColorChoice
             }
           | {
               _key: string
@@ -2673,7 +2703,9 @@ export type HomePageQueryResult = {
                   | 'Tiktok'
                   | 'Twitter'
                   | 'YouTube'
-                buttonStyle?: 'default' | 'outline'
+                arrowDirection?: 'down' | 'left' | 'right' | 'up'
+                buttonStyle?: 'default' | 'no-bg' | 'outline'
+                buttonColor?: ColorChoice
               }>
             }
           | {
@@ -2813,6 +2845,7 @@ export type HomePageQueryResult = {
               videoAspectRatio?: VideoAspectRatio
             }
         > | null
+        centerBlocks?: boolean
         spaceBetweenBlocks?:
           | 'gap-0'
           | 'gap-gut-150'
@@ -2954,7 +2987,9 @@ export type HomePageQueryResult = {
                 | 'Tiktok'
                 | 'Twitter'
                 | 'YouTube'
-              buttonStyle?: 'default' | 'outline'
+              arrowDirection?: 'down' | 'left' | 'right' | 'up'
+              buttonStyle?: 'default' | 'no-bg' | 'outline'
+              buttonColor?: ColorChoice
             }
           | {
               _key: string
@@ -3004,7 +3039,9 @@ export type HomePageQueryResult = {
                   | 'Tiktok'
                   | 'Twitter'
                   | 'YouTube'
-                buttonStyle?: 'default' | 'outline'
+                arrowDirection?: 'down' | 'left' | 'right' | 'up'
+                buttonStyle?: 'default' | 'no-bg' | 'outline'
+                buttonColor?: ColorChoice
               }>
             }
           | {
@@ -3210,7 +3247,9 @@ export type HomePageQueryResult = {
             | 'Tiktok'
             | 'Twitter'
             | 'YouTube'
-          buttonStyle?: 'default' | 'outline'
+          arrowDirection?: 'down' | 'left' | 'right' | 'up'
+          buttonStyle?: 'default' | 'no-bg' | 'outline'
+          buttonColor?: ColorChoice
         } | null
       }
     | {
@@ -3275,7 +3314,9 @@ export type HomePageQueryResult = {
                       | 'Tiktok'
                       | 'Twitter'
                       | 'YouTube'
-                    buttonStyle?: 'default' | 'outline'
+                    arrowDirection?: 'down' | 'left' | 'right' | 'up'
+                    buttonStyle?: 'default' | 'no-bg' | 'outline'
+                    buttonColor?: ColorChoice
                   }
                 | {
                     _key: string
@@ -3325,7 +3366,9 @@ export type HomePageQueryResult = {
                         | 'Tiktok'
                         | 'Twitter'
                         | 'YouTube'
-                      buttonStyle?: 'default' | 'outline'
+                      arrowDirection?: 'down' | 'left' | 'right' | 'up'
+                      buttonStyle?: 'default' | 'no-bg' | 'outline'
+                      buttonColor?: ColorChoice
                     }>
                   }
                 | {
@@ -3527,7 +3570,9 @@ export type HomePageQueryResult = {
                       | 'Tiktok'
                       | 'Twitter'
                       | 'YouTube'
-                    buttonStyle?: 'default' | 'outline'
+                    arrowDirection?: 'down' | 'left' | 'right' | 'up'
+                    buttonStyle?: 'default' | 'no-bg' | 'outline'
+                    buttonColor?: ColorChoice
                   }
                 | {
                     _key: string
@@ -3577,7 +3622,9 @@ export type HomePageQueryResult = {
                         | 'Tiktok'
                         | 'Twitter'
                         | 'YouTube'
-                      buttonStyle?: 'default' | 'outline'
+                      arrowDirection?: 'down' | 'left' | 'right' | 'up'
+                      buttonStyle?: 'default' | 'no-bg' | 'outline'
+                      buttonColor?: ColorChoice
                     }>
                   }
                 | {
@@ -3782,7 +3829,9 @@ export type HomePageQueryResult = {
                         | 'Tiktok'
                         | 'Twitter'
                         | 'YouTube'
-                      buttonStyle?: 'default' | 'outline'
+                      arrowDirection?: 'down' | 'left' | 'right' | 'up'
+                      buttonStyle?: 'default' | 'no-bg' | 'outline'
+                      buttonColor?: ColorChoice
                     }
                   | {
                       _key: string
@@ -3832,7 +3881,9 @@ export type HomePageQueryResult = {
                           | 'Tiktok'
                           | 'Twitter'
                           | 'YouTube'
-                        buttonStyle?: 'default' | 'outline'
+                        arrowDirection?: 'down' | 'left' | 'right' | 'up'
+                        buttonStyle?: 'default' | 'no-bg' | 'outline'
+                        buttonColor?: ColorChoice
                       }>
                     }
                   | {
@@ -3972,6 +4023,7 @@ export type HomePageQueryResult = {
                       videoAspectRatio?: VideoAspectRatio
                     }
                 > | null
+                centerBlocks?: boolean
                 spaceBetweenBlocks?:
                   | 'gap-0'
                   | 'gap-gut-150'
@@ -4030,7 +4082,9 @@ export type HomePageQueryResult = {
                         | 'Tiktok'
                         | 'Twitter'
                         | 'YouTube'
-                      buttonStyle?: 'default' | 'outline'
+                      arrowDirection?: 'down' | 'left' | 'right' | 'up'
+                      buttonStyle?: 'default' | 'no-bg' | 'outline'
+                      buttonColor?: ColorChoice
                     }
                   | {
                       _key: string
@@ -4080,7 +4134,9 @@ export type HomePageQueryResult = {
                           | 'Tiktok'
                           | 'Twitter'
                           | 'YouTube'
-                        buttonStyle?: 'default' | 'outline'
+                        arrowDirection?: 'down' | 'left' | 'right' | 'up'
+                        buttonStyle?: 'default' | 'no-bg' | 'outline'
+                        buttonColor?: ColorChoice
                       }>
                     }
                   | {
@@ -4220,6 +4276,7 @@ export type HomePageQueryResult = {
                       videoAspectRatio?: VideoAspectRatio
                     }
                 > | null
+                centerBlocks?: boolean
                 spaceBetweenBlocks?:
                   | 'gap-0'
                   | 'gap-gut-150'
@@ -4286,7 +4343,9 @@ export type HomePageQueryResult = {
                         | 'Tiktok'
                         | 'Twitter'
                         | 'YouTube'
-                      buttonStyle?: 'default' | 'outline'
+                      arrowDirection?: 'down' | 'left' | 'right' | 'up'
+                      buttonStyle?: 'default' | 'no-bg' | 'outline'
+                      buttonColor?: ColorChoice
                     }
                   | {
                       _key: string
@@ -4336,7 +4395,9 @@ export type HomePageQueryResult = {
                           | 'Tiktok'
                           | 'Twitter'
                           | 'YouTube'
-                        buttonStyle?: 'default' | 'outline'
+                        arrowDirection?: 'down' | 'left' | 'right' | 'up'
+                        buttonStyle?: 'default' | 'no-bg' | 'outline'
+                        buttonColor?: ColorChoice
                       }>
                     }
                   | {
@@ -4476,6 +4537,7 @@ export type HomePageQueryResult = {
                       videoAspectRatio?: VideoAspectRatio
                     }
                 > | null
+                centerBlocks?: boolean
                 spaceBetweenBlocks?:
                   | 'gap-0'
                   | 'gap-gut-150'
@@ -4541,7 +4603,9 @@ export type HomePageQueryResult = {
                       | 'Tiktok'
                       | 'Twitter'
                       | 'YouTube'
-                    buttonStyle?: 'default' | 'outline'
+                    arrowDirection?: 'down' | 'left' | 'right' | 'up'
+                    buttonStyle?: 'default' | 'no-bg' | 'outline'
+                    buttonColor?: ColorChoice
                   }
                 | {
                     _key: string
@@ -4591,7 +4655,9 @@ export type HomePageQueryResult = {
                         | 'Tiktok'
                         | 'Twitter'
                         | 'YouTube'
-                      buttonStyle?: 'default' | 'outline'
+                      arrowDirection?: 'down' | 'left' | 'right' | 'up'
+                      buttonStyle?: 'default' | 'no-bg' | 'outline'
+                      buttonColor?: ColorChoice
                     }>
                   }
                 | {
@@ -4731,6 +4797,7 @@ export type HomePageQueryResult = {
                     videoAspectRatio?: VideoAspectRatio
                   }
               > | null
+              centerBlocks?: boolean
               spaceBetweenBlocks?:
                 | 'gap-0'
                 | 'gap-gut-150'
@@ -4872,7 +4939,9 @@ export type HomePageQueryResult = {
                       | 'Tiktok'
                       | 'Twitter'
                       | 'YouTube'
-                    buttonStyle?: 'default' | 'outline'
+                    arrowDirection?: 'down' | 'left' | 'right' | 'up'
+                    buttonStyle?: 'default' | 'no-bg' | 'outline'
+                    buttonColor?: ColorChoice
                   }
                 | {
                     _key: string
@@ -4922,7 +4991,9 @@ export type HomePageQueryResult = {
                         | 'Tiktok'
                         | 'Twitter'
                         | 'YouTube'
-                      buttonStyle?: 'default' | 'outline'
+                      arrowDirection?: 'down' | 'left' | 'right' | 'up'
+                      buttonStyle?: 'default' | 'no-bg' | 'outline'
+                      buttonColor?: ColorChoice
                     }>
                   }
                 | {
@@ -5128,7 +5199,9 @@ export type HomePageQueryResult = {
                   | 'Tiktok'
                   | 'Twitter'
                   | 'YouTube'
-                buttonStyle?: 'default' | 'outline'
+                arrowDirection?: 'down' | 'left' | 'right' | 'up'
+                buttonStyle?: 'default' | 'no-bg' | 'outline'
+                buttonColor?: ColorChoice
               } | null
             }
           | {
@@ -5288,7 +5361,9 @@ export type PagesBySlugQueryResult = {
                 | 'Tiktok'
                 | 'Twitter'
                 | 'YouTube'
-              buttonStyle?: 'default' | 'outline'
+              arrowDirection?: 'down' | 'left' | 'right' | 'up'
+              buttonStyle?: 'default' | 'no-bg' | 'outline'
+              buttonColor?: ColorChoice
             }
           | {
               _key: string
@@ -5338,7 +5413,9 @@ export type PagesBySlugQueryResult = {
                   | 'Tiktok'
                   | 'Twitter'
                   | 'YouTube'
-                buttonStyle?: 'default' | 'outline'
+                arrowDirection?: 'down' | 'left' | 'right' | 'up'
+                buttonStyle?: 'default' | 'no-bg' | 'outline'
+                buttonColor?: ColorChoice
               }>
             }
           | {
@@ -5540,7 +5617,9 @@ export type PagesBySlugQueryResult = {
                 | 'Tiktok'
                 | 'Twitter'
                 | 'YouTube'
-              buttonStyle?: 'default' | 'outline'
+              arrowDirection?: 'down' | 'left' | 'right' | 'up'
+              buttonStyle?: 'default' | 'no-bg' | 'outline'
+              buttonColor?: ColorChoice
             }
           | {
               _key: string
@@ -5590,7 +5669,9 @@ export type PagesBySlugQueryResult = {
                   | 'Tiktok'
                   | 'Twitter'
                   | 'YouTube'
-                buttonStyle?: 'default' | 'outline'
+                arrowDirection?: 'down' | 'left' | 'right' | 'up'
+                buttonStyle?: 'default' | 'no-bg' | 'outline'
+                buttonColor?: ColorChoice
               }>
             }
           | {
@@ -5795,7 +5876,9 @@ export type PagesBySlugQueryResult = {
                   | 'Tiktok'
                   | 'Twitter'
                   | 'YouTube'
-                buttonStyle?: 'default' | 'outline'
+                arrowDirection?: 'down' | 'left' | 'right' | 'up'
+                buttonStyle?: 'default' | 'no-bg' | 'outline'
+                buttonColor?: ColorChoice
               }
             | {
                 _key: string
@@ -5845,7 +5928,9 @@ export type PagesBySlugQueryResult = {
                     | 'Tiktok'
                     | 'Twitter'
                     | 'YouTube'
-                  buttonStyle?: 'default' | 'outline'
+                  arrowDirection?: 'down' | 'left' | 'right' | 'up'
+                  buttonStyle?: 'default' | 'no-bg' | 'outline'
+                  buttonColor?: ColorChoice
                 }>
               }
             | {
@@ -5985,6 +6070,7 @@ export type PagesBySlugQueryResult = {
                 videoAspectRatio?: VideoAspectRatio
               }
           > | null
+          centerBlocks?: boolean
           spaceBetweenBlocks?:
             | 'gap-0'
             | 'gap-gut-150'
@@ -6043,7 +6129,9 @@ export type PagesBySlugQueryResult = {
                   | 'Tiktok'
                   | 'Twitter'
                   | 'YouTube'
-                buttonStyle?: 'default' | 'outline'
+                arrowDirection?: 'down' | 'left' | 'right' | 'up'
+                buttonStyle?: 'default' | 'no-bg' | 'outline'
+                buttonColor?: ColorChoice
               }
             | {
                 _key: string
@@ -6093,7 +6181,9 @@ export type PagesBySlugQueryResult = {
                     | 'Tiktok'
                     | 'Twitter'
                     | 'YouTube'
-                  buttonStyle?: 'default' | 'outline'
+                  arrowDirection?: 'down' | 'left' | 'right' | 'up'
+                  buttonStyle?: 'default' | 'no-bg' | 'outline'
+                  buttonColor?: ColorChoice
                 }>
               }
             | {
@@ -6233,6 +6323,7 @@ export type PagesBySlugQueryResult = {
                 videoAspectRatio?: VideoAspectRatio
               }
           > | null
+          centerBlocks?: boolean
           spaceBetweenBlocks?:
             | 'gap-0'
             | 'gap-gut-150'
@@ -6299,7 +6390,9 @@ export type PagesBySlugQueryResult = {
                   | 'Tiktok'
                   | 'Twitter'
                   | 'YouTube'
-                buttonStyle?: 'default' | 'outline'
+                arrowDirection?: 'down' | 'left' | 'right' | 'up'
+                buttonStyle?: 'default' | 'no-bg' | 'outline'
+                buttonColor?: ColorChoice
               }
             | {
                 _key: string
@@ -6349,7 +6442,9 @@ export type PagesBySlugQueryResult = {
                     | 'Tiktok'
                     | 'Twitter'
                     | 'YouTube'
-                  buttonStyle?: 'default' | 'outline'
+                  arrowDirection?: 'down' | 'left' | 'right' | 'up'
+                  buttonStyle?: 'default' | 'no-bg' | 'outline'
+                  buttonColor?: ColorChoice
                 }>
               }
             | {
@@ -6489,6 +6584,7 @@ export type PagesBySlugQueryResult = {
                 videoAspectRatio?: VideoAspectRatio
               }
           > | null
+          centerBlocks?: boolean
           spaceBetweenBlocks?:
             | 'gap-0'
             | 'gap-gut-150'
@@ -6554,7 +6650,9 @@ export type PagesBySlugQueryResult = {
                 | 'Tiktok'
                 | 'Twitter'
                 | 'YouTube'
-              buttonStyle?: 'default' | 'outline'
+              arrowDirection?: 'down' | 'left' | 'right' | 'up'
+              buttonStyle?: 'default' | 'no-bg' | 'outline'
+              buttonColor?: ColorChoice
             }
           | {
               _key: string
@@ -6604,7 +6702,9 @@ export type PagesBySlugQueryResult = {
                   | 'Tiktok'
                   | 'Twitter'
                   | 'YouTube'
-                buttonStyle?: 'default' | 'outline'
+                arrowDirection?: 'down' | 'left' | 'right' | 'up'
+                buttonStyle?: 'default' | 'no-bg' | 'outline'
+                buttonColor?: ColorChoice
               }>
             }
           | {
@@ -6744,6 +6844,7 @@ export type PagesBySlugQueryResult = {
               videoAspectRatio?: VideoAspectRatio
             }
         > | null
+        centerBlocks?: boolean
         spaceBetweenBlocks?:
           | 'gap-0'
           | 'gap-gut-150'
@@ -6885,7 +6986,9 @@ export type PagesBySlugQueryResult = {
                 | 'Tiktok'
                 | 'Twitter'
                 | 'YouTube'
-              buttonStyle?: 'default' | 'outline'
+              arrowDirection?: 'down' | 'left' | 'right' | 'up'
+              buttonStyle?: 'default' | 'no-bg' | 'outline'
+              buttonColor?: ColorChoice
             }
           | {
               _key: string
@@ -6935,7 +7038,9 @@ export type PagesBySlugQueryResult = {
                   | 'Tiktok'
                   | 'Twitter'
                   | 'YouTube'
-                buttonStyle?: 'default' | 'outline'
+                arrowDirection?: 'down' | 'left' | 'right' | 'up'
+                buttonStyle?: 'default' | 'no-bg' | 'outline'
+                buttonColor?: ColorChoice
               }>
             }
           | {
@@ -7141,7 +7246,9 @@ export type PagesBySlugQueryResult = {
             | 'Tiktok'
             | 'Twitter'
             | 'YouTube'
-          buttonStyle?: 'default' | 'outline'
+          arrowDirection?: 'down' | 'left' | 'right' | 'up'
+          buttonStyle?: 'default' | 'no-bg' | 'outline'
+          buttonColor?: ColorChoice
         } | null
       }
     | {
@@ -7206,7 +7313,9 @@ export type PagesBySlugQueryResult = {
                       | 'Tiktok'
                       | 'Twitter'
                       | 'YouTube'
-                    buttonStyle?: 'default' | 'outline'
+                    arrowDirection?: 'down' | 'left' | 'right' | 'up'
+                    buttonStyle?: 'default' | 'no-bg' | 'outline'
+                    buttonColor?: ColorChoice
                   }
                 | {
                     _key: string
@@ -7256,7 +7365,9 @@ export type PagesBySlugQueryResult = {
                         | 'Tiktok'
                         | 'Twitter'
                         | 'YouTube'
-                      buttonStyle?: 'default' | 'outline'
+                      arrowDirection?: 'down' | 'left' | 'right' | 'up'
+                      buttonStyle?: 'default' | 'no-bg' | 'outline'
+                      buttonColor?: ColorChoice
                     }>
                   }
                 | {
@@ -7458,7 +7569,9 @@ export type PagesBySlugQueryResult = {
                       | 'Tiktok'
                       | 'Twitter'
                       | 'YouTube'
-                    buttonStyle?: 'default' | 'outline'
+                    arrowDirection?: 'down' | 'left' | 'right' | 'up'
+                    buttonStyle?: 'default' | 'no-bg' | 'outline'
+                    buttonColor?: ColorChoice
                   }
                 | {
                     _key: string
@@ -7508,7 +7621,9 @@ export type PagesBySlugQueryResult = {
                         | 'Tiktok'
                         | 'Twitter'
                         | 'YouTube'
-                      buttonStyle?: 'default' | 'outline'
+                      arrowDirection?: 'down' | 'left' | 'right' | 'up'
+                      buttonStyle?: 'default' | 'no-bg' | 'outline'
+                      buttonColor?: ColorChoice
                     }>
                   }
                 | {
@@ -7713,7 +7828,9 @@ export type PagesBySlugQueryResult = {
                         | 'Tiktok'
                         | 'Twitter'
                         | 'YouTube'
-                      buttonStyle?: 'default' | 'outline'
+                      arrowDirection?: 'down' | 'left' | 'right' | 'up'
+                      buttonStyle?: 'default' | 'no-bg' | 'outline'
+                      buttonColor?: ColorChoice
                     }
                   | {
                       _key: string
@@ -7763,7 +7880,9 @@ export type PagesBySlugQueryResult = {
                           | 'Tiktok'
                           | 'Twitter'
                           | 'YouTube'
-                        buttonStyle?: 'default' | 'outline'
+                        arrowDirection?: 'down' | 'left' | 'right' | 'up'
+                        buttonStyle?: 'default' | 'no-bg' | 'outline'
+                        buttonColor?: ColorChoice
                       }>
                     }
                   | {
@@ -7903,6 +8022,7 @@ export type PagesBySlugQueryResult = {
                       videoAspectRatio?: VideoAspectRatio
                     }
                 > | null
+                centerBlocks?: boolean
                 spaceBetweenBlocks?:
                   | 'gap-0'
                   | 'gap-gut-150'
@@ -7961,7 +8081,9 @@ export type PagesBySlugQueryResult = {
                         | 'Tiktok'
                         | 'Twitter'
                         | 'YouTube'
-                      buttonStyle?: 'default' | 'outline'
+                      arrowDirection?: 'down' | 'left' | 'right' | 'up'
+                      buttonStyle?: 'default' | 'no-bg' | 'outline'
+                      buttonColor?: ColorChoice
                     }
                   | {
                       _key: string
@@ -8011,7 +8133,9 @@ export type PagesBySlugQueryResult = {
                           | 'Tiktok'
                           | 'Twitter'
                           | 'YouTube'
-                        buttonStyle?: 'default' | 'outline'
+                        arrowDirection?: 'down' | 'left' | 'right' | 'up'
+                        buttonStyle?: 'default' | 'no-bg' | 'outline'
+                        buttonColor?: ColorChoice
                       }>
                     }
                   | {
@@ -8151,6 +8275,7 @@ export type PagesBySlugQueryResult = {
                       videoAspectRatio?: VideoAspectRatio
                     }
                 > | null
+                centerBlocks?: boolean
                 spaceBetweenBlocks?:
                   | 'gap-0'
                   | 'gap-gut-150'
@@ -8217,7 +8342,9 @@ export type PagesBySlugQueryResult = {
                         | 'Tiktok'
                         | 'Twitter'
                         | 'YouTube'
-                      buttonStyle?: 'default' | 'outline'
+                      arrowDirection?: 'down' | 'left' | 'right' | 'up'
+                      buttonStyle?: 'default' | 'no-bg' | 'outline'
+                      buttonColor?: ColorChoice
                     }
                   | {
                       _key: string
@@ -8267,7 +8394,9 @@ export type PagesBySlugQueryResult = {
                           | 'Tiktok'
                           | 'Twitter'
                           | 'YouTube'
-                        buttonStyle?: 'default' | 'outline'
+                        arrowDirection?: 'down' | 'left' | 'right' | 'up'
+                        buttonStyle?: 'default' | 'no-bg' | 'outline'
+                        buttonColor?: ColorChoice
                       }>
                     }
                   | {
@@ -8407,6 +8536,7 @@ export type PagesBySlugQueryResult = {
                       videoAspectRatio?: VideoAspectRatio
                     }
                 > | null
+                centerBlocks?: boolean
                 spaceBetweenBlocks?:
                   | 'gap-0'
                   | 'gap-gut-150'
@@ -8472,7 +8602,9 @@ export type PagesBySlugQueryResult = {
                       | 'Tiktok'
                       | 'Twitter'
                       | 'YouTube'
-                    buttonStyle?: 'default' | 'outline'
+                    arrowDirection?: 'down' | 'left' | 'right' | 'up'
+                    buttonStyle?: 'default' | 'no-bg' | 'outline'
+                    buttonColor?: ColorChoice
                   }
                 | {
                     _key: string
@@ -8522,7 +8654,9 @@ export type PagesBySlugQueryResult = {
                         | 'Tiktok'
                         | 'Twitter'
                         | 'YouTube'
-                      buttonStyle?: 'default' | 'outline'
+                      arrowDirection?: 'down' | 'left' | 'right' | 'up'
+                      buttonStyle?: 'default' | 'no-bg' | 'outline'
+                      buttonColor?: ColorChoice
                     }>
                   }
                 | {
@@ -8662,6 +8796,7 @@ export type PagesBySlugQueryResult = {
                     videoAspectRatio?: VideoAspectRatio
                   }
               > | null
+              centerBlocks?: boolean
               spaceBetweenBlocks?:
                 | 'gap-0'
                 | 'gap-gut-150'
@@ -8803,7 +8938,9 @@ export type PagesBySlugQueryResult = {
                       | 'Tiktok'
                       | 'Twitter'
                       | 'YouTube'
-                    buttonStyle?: 'default' | 'outline'
+                    arrowDirection?: 'down' | 'left' | 'right' | 'up'
+                    buttonStyle?: 'default' | 'no-bg' | 'outline'
+                    buttonColor?: ColorChoice
                   }
                 | {
                     _key: string
@@ -8853,7 +8990,9 @@ export type PagesBySlugQueryResult = {
                         | 'Tiktok'
                         | 'Twitter'
                         | 'YouTube'
-                      buttonStyle?: 'default' | 'outline'
+                      arrowDirection?: 'down' | 'left' | 'right' | 'up'
+                      buttonStyle?: 'default' | 'no-bg' | 'outline'
+                      buttonColor?: ColorChoice
                     }>
                   }
                 | {
@@ -9059,7 +9198,9 @@ export type PagesBySlugQueryResult = {
                   | 'Tiktok'
                   | 'Twitter'
                   | 'YouTube'
-                buttonStyle?: 'default' | 'outline'
+                arrowDirection?: 'down' | 'left' | 'right' | 'up'
+                buttonStyle?: 'default' | 'no-bg' | 'outline'
+                buttonColor?: ColorChoice
               } | null
             }
           | {

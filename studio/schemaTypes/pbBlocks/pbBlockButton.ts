@@ -1,11 +1,11 @@
-import { SquareArrowRight } from 'lucide-react'
-import { defineField, defineType } from 'sanity'
-import { socialIconOptions } from '../objects/socialLink'
+import {SquareArrowRight} from 'lucide-react'
+import {defineField, defineType} from 'sanity'
+import {socialIconOptions} from '../objects/socialLink'
 
-const BUTTON_TYPE_OPTIONS: { title: string; value: string }[] = [
-  { title: 'Internal', value: 'sitePage' },
-  { title: 'External', value: 'externalLink' },
-  { title: 'File', value: 'file' },
+const BUTTON_TYPE_OPTIONS: {title: string; value: string}[] = [
+  {title: 'Internal', value: 'sitePage'},
+  {title: 'External', value: 'externalLink'},
+  {title: 'File', value: 'file'},
 ]
 
 export default defineType({
@@ -28,19 +28,19 @@ export default defineType({
       title: 'Site Page',
       name: 'sitePage',
       type: 'navPage',
-      hidden: ({ parent }) => parent?.linkType !== 'sitePage',
+      hidden: ({parent}) => parent?.linkType !== 'sitePage',
     }),
     defineField({
       title: 'External Link',
       name: 'externalLink',
       type: 'navExternal',
-      hidden: ({ parent }) => parent?.linkType !== 'externalLink',
+      hidden: ({parent}) => parent?.linkType !== 'externalLink',
     }),
     defineField({
       title: 'File',
       name: 'fileLink',
       type: 'object',
-      hidden: ({ parent }) => parent?.linkType !== 'file',
+      hidden: ({parent}) => parent?.linkType !== 'file',
       fields: [
         defineField({
           title: 'File',
@@ -64,12 +64,29 @@ export default defineType({
       type: 'string',
       options: {
         list: [
-          { title: 'None', value: 'none' },
-          { title: 'Arrow', value: 'arrow' },
-          ...socialIconOptions
+          {title: 'None', value: 'none'},
+          {title: 'Arrow', value: 'arrow'},
+          ...socialIconOptions,
         ],
       },
       initialValue: 'arrow',
+    }),
+    defineField({
+      title: 'Arrow direction',
+      name: 'arrowDirection',
+      type: 'string',
+      options: {
+        list: [
+          {title: 'Up', value: 'up'},
+          {title: 'Right', value: 'right'},
+          {title: 'Down', value: 'down'},
+          {title: 'Left', value: 'left'},
+        ],
+        layout: 'radio',
+        direction: 'horizontal',
+      },
+      initialValue: 'right',
+      hidden: ({parent}) => parent?.icon !== 'arrow',
     }),
     defineField({
       title: 'Style',
@@ -77,21 +94,26 @@ export default defineType({
       type: 'string',
       options: {
         list: [
-          { title: 'Default', value: 'default' },
-          { title: 'Outline', value: 'outline' },
+          {title: 'Fill', value: 'default'},
+          {title: 'Outline', value: 'outline'},
+          {title: 'No Background', value: 'no-bg'},
         ],
       },
       initialValue: 'default',
+    }),
+    defineField({
+      title: 'Color',
+      name: 'buttonColor',
+      type: 'colorChoice',
+      hidden: ({parent}) =>
+        parent?.buttonStyle !== 'outline' && parent?.buttonStyle !== 'no-bg',
     }),
   ],
   validation: (Rule) =>
     Rule.custom((block) => {
       if (!block || block.linkType !== 'file') return true
-      const fileLink = block.fileLink as
-        | { file?: unknown; buttonText?: string }
-        | undefined
-      if (!fileLink?.file)
-        return 'Please add a file when using File button type.'
+      const fileLink = block.fileLink as {file?: unknown; buttonText?: string} | undefined
+      if (!fileLink?.file) return 'Please add a file when using File button type.'
       if (!fileLink?.buttonText?.trim())
         return 'Please add button text when using File button type.'
       return true
@@ -105,16 +127,8 @@ export default defineType({
       externalUrl: 'externalLink.url',
       fileButtonText: 'fileLink.buttonText',
     },
-    prepare({
-      linkType,
-      sitePageTitle,
-      pageTitle,
-      externalTitle,
-      externalUrl,
-      fileButtonText,
-    }) {
-      const typeLabel =
-        BUTTON_TYPE_OPTIONS.find((o) => o.value === linkType)?.title ?? 'Button'
+    prepare({linkType, sitePageTitle, pageTitle, externalTitle, externalUrl, fileButtonText}) {
+      const typeLabel = BUTTON_TYPE_OPTIONS.find((o) => o.value === linkType)?.title ?? 'Button'
       let subtitle = ''
       if (linkType === 'sitePage') {
         subtitle = sitePageTitle || pageTitle || 'No page selected'

@@ -225,6 +225,7 @@ export function ImageBlock({block, trueSizes}) {
 
 export function ButtonBlock({block}) {
   const isPage = block.linkType === 'sitePage'
+  const isAnchorLink = block.sitePage?.anchorLink
   const isExternal = block.linkType === 'externalLink'
   const isFile = block.linkType === 'file'
   return (
@@ -238,11 +239,14 @@ export function ButtonBlock({block}) {
               ? block.fileLink
               : undefined
       }
+      anchorLink={isAnchorLink ? block.sitePage?.anchorLink : undefined}
       path={isFile ? block.fileLink?.url || '' : undefined}
       text={isFile ? block.fileLink?.buttonText || 'Download' : undefined}
       download={isFile ? true : false}
       icon={block.icon}
-      outline={block.buttonStyle === 'outline'}
+      arrowDirection={block.arrowDirection}
+      buttonStyle={block.buttonStyle}
+      buttonColor={block.buttonColor}
     />
   )
 }

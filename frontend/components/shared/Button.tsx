@@ -1,22 +1,29 @@
 import Link from 'next/link'
+import type {CSSProperties} from 'react'
 
+import {colorValue} from '@/lib/colorValue'
 import {cn} from '@/lib/utils'
-import type {PbBlockButton} from '@/sanity.types'
+import type {ColorChoice, PbBlockButton} from '@/sanity.types'
 import {resolveHref} from '@/sanity/lib/utils'
 import {NavItem} from '@/types'
 import IconArrow from '../icons/IconArrow'
 import SocialIcon, {type SocialIconName} from './SocialIcon'
 
 export type ButtonIcon = NonNullable<PbBlockButton['icon']>
+export type ArrowDirection = NonNullable<PbBlockButton['arrowDirection']>
 
 type ButtonOwnProps = {
   text?: string
   path?: string
   navItem?: NavItem
+  anchorLink?: string
   download?: boolean
   icon?: ButtonIcon
+  arrowDirection?: ArrowDirection
+  buttonStyle?: NonNullable<PbBlockButton['buttonStyle']>
   outline?: boolean
   subtle?: boolean
+  buttonColor?: ColorChoice
 }
 
 /**
@@ -36,21 +43,32 @@ export default function Button(props: ButtonProps) {
     text,
     path,
     navItem,
+    anchorLink,
     onClick,
     className,
     download,
     icon = 'arrow',
+    arrowDirection = 'right',
     disabled = false,
+    buttonStyle,
     outline = false,
     subtle = false,
+    buttonColor,
     ...rest
   } = props
+  const resolvedStyle = buttonStyle ?? (outline ? 'outline' : 'default')
+  const isOutline = resolvedStyle === 'outline'
+  const isNoBg = resolvedStyle === 'no-bg'
+  const fgColor = colorValue(buttonColor)
+  const themeStyle = fgColor ? ({'--theme-btn-fg': fgColor} as CSSProperties) : undefined
   let href: string | undefined = ''
   let buttonText: string | undefined = ''
 
   if (navItem) {
-    const {page, title, url} = navItem
+    const {page, title, url, anchorLink: navAnchorLink} = navItem
     href = page ? resolveHref(page.type, page.slug) : url
+    const hash = anchorLink ?? navAnchorLink
+    href = hash ? `${href}#${hash.replace(/^#/, '')}` : href
     buttonText = title || page?.title || ''
   } else {
     href = path || ''
@@ -58,13 +76,22 @@ export default function Button(props: ButtonProps) {
   }
 
   const isExternal = href?.startsWith('http')
+  const isVerticalArrow = icon === 'arrow' && (arrowDirection === 'up' || arrowDirection === 'down')
   const buttonClasses = cn(
-    'flex w-fit items-center h-btn px-[.5em] rounded-btn ts-btn border transition-all hover:scale-105 will-change-transform',
-    outline
-      ? ''
-      : subtle
-        ? 'border-transparent bg-white/35 hover:bg-white/70 text-btn-fg-subtle'
-        : 'border-transparent bg-body text-btn-fg',
+    'flex w-fit items-center h-btn px-[.5em] rounded-btn border transition-all hover:scale-105 will-change-transform',
+    isNoBg ? 'ts-h6 ts-sans-wide' : 'ts-btn',
+    isVerticalArrow && 'flex-col h-auto py-[.5em] gap-[.15em]',
+    isOutline
+      ? fgColor
+        ? 'border-btn-fg text-btn-fg bg-transparent'
+        : ''
+      : isNoBg
+        ? fgColor
+          ? 'border-transparent text-btn-fg bg-transparent'
+          : 'border-transparent bg-transparent'
+        : subtle
+          ? 'border-transparent bg-white/35 hover:bg-white/70 text-btn-fg-subtle'
+          : 'border-transparent bg-body text-btn-fg',
     disabled && 'opacity-50 pointer-events-none',
     className,
   )
@@ -76,18 +103,36 @@ export default function Button(props: ButtonProps) {
         target={isExternal ? '_blank' : undefined}
         rel={isExternal ? 'noopener noreferrer' : undefined}
         className={buttonClasses}
+        style={themeStyle}
         download={download}
         onClick={onClick}
         {...rest}
       >
-        <ButtonContent text={buttonText} icon={icon} outline={outline} />
+        <ButtonContent
+          text={buttonText}
+          icon={icon}
+          arrowDirection={arrowDirection}
+          buttonStyle={resolvedStyle}
+        />
       </Link>
     )
   }
 
   return (
-    <button type="button" className={buttonClasses} onClick={onClick} disabled={disabled} {...rest}>
-      <ButtonContent text={buttonText} icon={icon} outline={outline} />
+    <button
+      type="button"
+      className={buttonClasses}
+      style={themeStyle}
+      onClick={onClick}
+      disabled={disabled}
+      {...rest}
+    >
+      <ButtonContent
+        text={buttonText}
+        icon={icon}
+        arrowDirection={arrowDirection}
+        buttonStyle={resolvedStyle}
+      />
     </button>
   )
 }
@@ -96,24 +141,49 @@ function isSocialIcon(icon: ButtonIcon): icon is SocialIconName {
   return icon !== 'none' && icon !== 'arrow'
 }
 
+const ARROW_ROTATION: Record<ArrowDirection, string> = {
+  up: '-rotate-90',
+  right: '',
+  down: 'rotate-90',
+  left: 'rotate-180',
+}
+
 const ButtonContent = ({
   text,
   icon,
-  outline,
+  arrowDirection = 'right',
+  buttonStyle,
 }: {
   text: string
   icon: ButtonIcon
-  outline: boolean
+  arrowDirection?: ArrowDirection
+  buttonStyle: NonNullable<PbBlockButton['buttonStyle']>
 }) => {
+  const isVertical = arrowDirection === 'up' || arrowDirection === 'down'
+  const isArrowFirst = arrowDirection === 'left' || arrowDirection === 'up'
+
   return (
     <>
-      <span className="whitespace-nowrap">{text}</span>
-      {icon === 'arrow' && <IconArrow className="pl-[.35em] h-[.6em] w-auto" />}
+      <span className={cn('whitespace-nowrap', isArrowFirst ? 'order-2' : 'order-1')}>{text}</span>
+      {icon === 'arrow' && (
+        <IconArrow
+          className={cn(
+            'h-[.6em] w-auto shrink-0',
+            ARROW_ROTATION[arrowDirection],
+            isArrowFirst ? 'order-1' : 'order-2',
+            isVertical ? '' : isArrowFirst ? 'pr-[.35em]' : 'pl-[.35em]',
+          )}
+        />
+      )}
       {isSocialIcon(icon) && (
         <span
           className={cn(
-            'rounded-full flex justify-center items-center ml-[.5em] p-[.45em] aspect-square text-[.6em] text-center',
-            outline ? 'bg-body text-btn-fg' : 'bg-btn-fg text-body',
+            'rounded-full flex justify-center items-center ml-[.5em] p-[.45em] aspect-square text-[.6em] text-center order-3',
+            buttonStyle === 'outline'
+              ? 'bg-body text-btn-fg'
+              : buttonStyle === 'no-bg'
+                ? 'text-btn-fg'
+                : 'bg-btn-fg text-body',
           )}
         >
           <SocialIcon name={icon} />

@@ -19,7 +19,8 @@ export interface GridColProps {
 }
 
 export default function GridCol({col, outerSettings, blockWidths}: GridColProps) {
-  const {_key, columnSettings, pbBlocks, yAlignment, revealEffect, spaceBetweenBlocks} = col
+  const {_key, columnSettings, pbBlocks, yAlignment, revealEffect, spaceBetweenBlocks, centerBlocks} =
+    col
   const {getDataAttribute} = useSanityDataAttribute()
 
   // Skip if no blocks yet
@@ -41,6 +42,7 @@ export default function GridCol({col, outerSettings, blockWidths}: GridColProps)
       trueSizes={trueSizes}
       spaceBetweenBlocks={spaceBetweenBlocks || 'gap-gut'}
       blockWidths={blockWidths}
+      contentAlign={centerBlocks ? 'center' : 'start'}
     />
   )
 

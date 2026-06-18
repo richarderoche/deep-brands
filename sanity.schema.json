@@ -4205,6 +4205,13 @@
           },
           "optional": true
         },
+        "centerBlocks": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "boolean"
+          },
+          "optional": true
+        },
         "spaceBetweenBlocks": {
           "type": "objectAttribute",
           "value": {
@@ -4355,6 +4362,13 @@
                   "value": {
                     "type": "inline",
                     "name": "pbBlocks"
+                  },
+                  "optional": true
+                },
+                "centerBlocks": {
+                  "type": "objectAttribute",
+                  "value": {
+                    "type": "boolean"
                   },
                   "optional": true
                 },
@@ -5844,6 +5858,31 @@
           },
           "optional": true
         },
+        "arrowDirection": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "union",
+            "of": [
+              {
+                "type": "string",
+                "value": "up"
+              },
+              {
+                "type": "string",
+                "value": "right"
+              },
+              {
+                "type": "string",
+                "value": "down"
+              },
+              {
+                "type": "string",
+                "value": "left"
+              }
+            ]
+          },
+          "optional": true
+        },
         "buttonStyle": {
           "type": "objectAttribute",
           "value": {
@@ -5856,8 +5895,20 @@
               {
                 "type": "string",
                 "value": "outline"
+              },
+              {
+                "type": "string",
+                "value": "no-bg"
               }
             ]
+          },
+          "optional": true
+        },
+        "buttonColor": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "inline",
+            "name": "colorChoice"
           },
           "optional": true
         }
@@ -6501,6 +6552,13 @@
           "value": {
             "type": "inline",
             "name": "pbBlocks"
+          },
+          "optional": true
+        },
+        "centerBlocks": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "boolean"
           },
           "optional": true
         },

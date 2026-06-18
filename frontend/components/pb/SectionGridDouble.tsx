@@ -69,6 +69,7 @@ export default function SectionGridDouble({
                     pbBlocks: columnOneBlocks,
                     revealEffect: columnOne.revealEffect,
                     spaceBetweenBlocks: columnOne.spaceBetweenBlocks,
+                    centerBlocks: columnOne.centerBlocks,
                     columnSettings: columnOneSettings,
                   }}
                   outerSettings={outerSettings}
@@ -83,6 +84,7 @@ export default function SectionGridDouble({
                     pbBlocks: columnTwoBlocks,
                     revealEffect: columnTwo.revealEffect,
                     spaceBetweenBlocks: columnTwo.spaceBetweenBlocks,
+                    centerBlocks: columnTwo.centerBlocks,
                     columnSettings: columnTwoSettings,
                   }}
                   outerSettings={outerSettings}
