@@ -10,6 +10,7 @@ import ImageBasic from '../shared/ImageBasic'
 import SiteGrid from '../shared/SiteGrid'
 import SiteWidth from '../shared/SiteWidth'
 import HeroShapeBackdrop from './HeroShapeBackdrop'
+import HeroShapeStickyLogo from './HeroShapeStickyLogo'
 import {useSanityDataAttribute} from './SanityVisualEditingContext'
 
 export default function SectionHeroShape({
@@ -43,8 +44,12 @@ export default function SectionHeroShape({
     (backdropColor?.colorType === 'custom' && !!shapeColor && isDark(shapeColor)) ||
     (backdropColor?.colorType === 'dark' && !!shapeColor)
 
-  return (
-    <SiteWidth className="py-header">
+  const isStickyLogo = contentOverlay === 'stickyLogo' && (isMediaShape || isColorShape)
+
+  const content = (
+    <SiteWidth
+      className={cn('py-header', isStickyLogo && 'min-h-screen flex flex-col justify-center')}
+    >
       <SiteGrid className="pt-gut-200 lg:pt-gut">
         <div className="col-span-12 lg:col-span-10 lg:col-start-2 relative">
           {hasPreheading && (
@@ -70,6 +75,7 @@ export default function SectionHeroShape({
             </div>
           )}
           <div
+            data-hero-shape-mask={isStickyLogo ? '' : undefined}
             className={cn(
               (isColorShape || isMediaShape) && 'relative',
               isColorShape && 'max-lg:pt-hero-ornament-t max-lg:pb-hero-ornament-b',
@@ -142,4 +148,10 @@ export default function SectionHeroShape({
       </SiteGrid>
     </SiteWidth>
   )
+
+  if (isStickyLogo) {
+    return <HeroShapeStickyLogo>{content}</HeroShapeStickyLogo>
+  }
+
+  return content
 }

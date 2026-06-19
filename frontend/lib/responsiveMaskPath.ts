@@ -59,9 +59,21 @@ function isYArg(command: string, argIndex: number) {
   return false
 }
 
-export function offsetPathY(d: string, dy: number) {
-  if (dy === 0) return d
+function isXArg(command: string, argIndex: number) {
+  const c = command.toUpperCase()
+  if (c === 'H') return true
+  if (c === 'V') return false
+  if (c === 'C') return argIndex % 6 === 0 || argIndex % 6 === 2 || argIndex % 6 === 4
+  if (c === 'S' || c === 'Q') return argIndex % 4 === 0 || argIndex % 4 === 2
+  if (c === 'A') return argIndex % 7 === 5
+  if (c === 'M' || c === 'L' || c === 'T') return argIndex % 2 === 0
+  return false
+}
 
+function offsetPathAxis(d: string, delta: number, axis: 'x' | 'y') {
+  if (delta === 0) return d
+
+  const isAxisArg = axis === 'x' ? isXArg : isYArg
   const tokens = d.match(/[a-zA-Z]|-?\d*\.?\d+(?:e[-+]?\d+)?/g) ?? []
   const out: string[] = []
   let command = ''
@@ -77,12 +89,46 @@ export function offsetPathY(d: string, dy: number) {
     }
 
     let num = parseFloat(token)
-    if (isYArg(command, argIndex)) num += dy
+    if (isAxisArg(command, argIndex)) num += delta
     out.push(String(num))
     argIndex++
   }
 
   return out.join(' ')
+}
+
+export function offsetPathY(d: string, dy: number) {
+  return offsetPathAxis(d, dy, 'y')
+}
+
+export function offsetPathX(d: string, dx: number) {
+  return offsetPathAxis(d, dx, 'x')
+}
+
+function getPathXCenter(d: string) {
+  const tokens = d.match(/[a-zA-Z]|-?\d*\.?\d+(?:e[-+]?\d+)?/g) ?? []
+  let command = ''
+  let argIndex = 0
+  let min = Infinity
+  let max = -Infinity
+
+  for (let i = 0; i < tokens.length; i++) {
+    const token = tokens[i]
+    if (/^[a-zA-Z]$/.test(token)) {
+      command = token
+      argIndex = 0
+      continue
+    }
+
+    if (isXArg(command, argIndex)) {
+      const num = parseFloat(token)
+      min = Math.min(min, num)
+      max = Math.max(max, num)
+    }
+    argIndex++
+  }
+
+  return (min + max) / 2
 }
 
 export function buildResponsiveMaskPaths({
@@ -104,13 +150,14 @@ export function buildResponsiveMaskPaths({
   const middleHeight = Math.max(1, height - TOP_H - BOT_H + SEAM_OVERLAP * 2)
   const middlePath = roundedRectPath(0, middleY, width, middleHeight, rxTop, rxBottom)
   const bottomOrnamentOffsetY = height - REF_HEIGHT
+  const topOrnamentOffsetX = width / 2 - getPathXCenter(TOP_ORNAMENT_PATH)
 
   return {
     width,
     height,
     paths: [
       middlePath,
-      TOP_ORNAMENT_PATH,
+      offsetPathX(TOP_ORNAMENT_PATH, topOrnamentOffsetX),
       offsetPathY(BOTTOM_ORNAMENT_PATH, bottomOrnamentOffsetY),
     ],
   }
