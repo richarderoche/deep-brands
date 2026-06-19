@@ -578,6 +578,7 @@ export type PbGridSingle = {
   bgLogoShape?: boolean
   revealEffect?: 'none' | 'stagger' | 'fade-up' | 'fade-right'
   pbBlocks?: PbBlocks
+  centerBlocks?: boolean
   spaceBetweenBlocks?:
     | 'gap-0'
     | 'gap-gut-25'
@@ -598,6 +599,7 @@ export type PbGridMulti = {
     yAlignment?: YAlignment
     revealEffect?: 'none' | 'stagger' | 'fade-up' | 'fade-right'
     pbBlocks?: PbBlocks
+    centerBlocks?: boolean
     spaceBetweenBlocks?:
       | 'gap-0'
       | 'gap-gut-25'
@@ -650,11 +652,17 @@ export type PbHeroShape = {
     crop?: SanityImageCrop
     _type: 'image'
   }
-  backdropVideo?: {
-    asset?: SanityFileAssetReference
-    media?: unknown
-    _type: 'file'
-  }
+  backdropVideo?: MuxVideo
+  backdropPosition?:
+    | 'top left'
+    | 'top center'
+    | 'top right'
+    | 'center left'
+    | 'center center'
+    | 'center right'
+    | 'bottom left'
+    | 'bottom center'
+    | 'bottom right'
   contentOverlay?: 'none' | 'headingLogos' | 'stickyLogo'
   heading?: PtItalic
   subbrandLogos?: Array<{
@@ -829,7 +837,9 @@ export type PbBlockButton = {
     | 'Tiktok'
     | 'Twitter'
     | 'YouTube'
-  buttonStyle?: 'default' | 'outline'
+  arrowDirection?: 'up' | 'right' | 'down' | 'left'
+  buttonStyle?: 'default' | 'outline' | 'no-bg'
+  buttonColor?: ColorChoice
 }
 
 export type PbBlockImage = {
@@ -931,6 +941,7 @@ export type Column = {
   _type: 'column'
   revealEffect?: 'none' | 'stagger' | 'fade-up' | 'fade-right'
   pbBlocks?: PbBlocks
+  centerBlocks?: boolean
   spaceBetweenBlocks?:
     | 'gap-0'
     | 'gap-gut-25'
@@ -1033,6 +1044,18 @@ export type Page = {
   seo?: Seo
 }
 
+export type MuxVideoAssetReference = {
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'mux.videoAsset'
+}
+
+export type MuxVideo = {
+  _type: 'mux.video'
+  asset?: MuxVideoAssetReference
+}
+
 export type Brands = {
   _id: string
   _type: 'brands'
@@ -1100,6 +1123,97 @@ export type HslaColor = {
   s?: number
   l?: number
   a?: number
+}
+
+export type MuxVideoAsset = {
+  _id: string
+  _type: 'mux.videoAsset'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  status?: string
+  assetId?: string
+  playbackId?: string
+  filename?: string
+  thumbTime?: number
+  data?: MuxAssetData
+}
+
+export type MuxAssetData = {
+  _type: 'mux.assetData'
+  resolution_tier?: string
+  upload_id?: string
+  created_at?: string
+  id?: string
+  status?: string
+  max_stored_resolution?: string
+  passthrough?: string
+  encoding_tier?: string
+  video_quality?: string
+  master_access?: string
+  aspect_ratio?: string
+  duration?: number
+  max_stored_frame_rate?: number
+  mp4_support?: string
+  max_resolution_tier?: string
+  tracks?: Array<
+    {
+      _key: string
+    } & MuxTrack
+  >
+  playback_ids?: Array<
+    {
+      _key: string
+    } & MuxPlaybackId
+  >
+  static_renditions?: MuxStaticRenditions
+}
+
+export type MuxStaticRenditions = {
+  _type: 'mux.staticRenditions'
+  status?: string
+  files?: Array<
+    {
+      _key: string
+    } & MuxStaticRenditionFile
+  >
+}
+
+export type MuxStaticRenditionFile = {
+  _type: 'mux.staticRenditionFile'
+  name?: string
+  ext?: string
+  height?: number
+  width?: number
+  bitrate?: number
+  filesize?: string
+  type?: string
+  status?: string
+  resolution_tier?: string
+  resolution?: string
+  id?: string
+  passthrough?: string
+}
+
+export type MuxPlaybackId = {
+  _type: 'mux.playbackId'
+  id?: string
+  policy?: string
+}
+
+export type MuxTrack = {
+  _type: 'mux.track'
+  id?: string
+  type?: string
+  max_width?: number
+  max_frame_rate?: number
+  duration?: number
+  max_height?: number
+  language_code?: string
+  name?: string
+  status?: string
+  text_source?: string
+  text_type?: string
 }
 
 export type SanityImagePaletteSwatch = {
@@ -1277,12 +1391,20 @@ export type AllSanitySchemaTypes =
   | SanityImageHotspot
   | Home
   | Page
+  | MuxVideoAssetReference
+  | MuxVideo
   | Brands
   | Slug
   | Color
   | RgbaColor
   | HsvaColor
   | HslaColor
+  | MuxVideoAsset
+  | MuxAssetData
+  | MuxStaticRenditions
+  | MuxStaticRenditionFile
+  | MuxPlaybackId
+  | MuxTrack
   | SanityImagePaletteSwatch
   | SanityImagePalette
   | SanityImageDimensions

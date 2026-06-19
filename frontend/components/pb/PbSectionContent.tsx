@@ -8,6 +8,7 @@ import SectionGridMulti from './SectionGridMulti'
 import SectionGridSingle from './SectionGridSingle'
 import SectionHeroBrand, {PbHeroBrandSection} from './SectionHeroBrand'
 import SectionHeroShape from './SectionHeroShape'
+import {PbHeroShapeSection} from '@/types'
 import SectionImageAndCard from './SectionImageAndCard'
 import SectionNews from './SectionNews'
 import SectionTimeline from './SectionTimeline'
@@ -43,7 +44,12 @@ export default function PbSectionContent({
     case 'pbGridDouble':
       return <SectionGridDouble section={section} sectionKey={sectionKey} />
     case 'pbHeroShape':
-      return <SectionHeroShape section={section} isDarkBgColor={isDarkBgColor} />
+      return (
+        <SectionHeroShape
+          section={section as unknown as PbHeroShapeSection}
+          isDarkBgColor={isDarkBgColor}
+        />
+      )
     case 'pbHeroBrand':
       return <SectionHeroBrand section={section as unknown as PbHeroBrandSection} />
     case 'pbBanner':

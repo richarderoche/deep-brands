@@ -146,6 +146,15 @@ const pbSections = `
       ...,
     },
   },
+  _type == "pbHeroShape" => {
+    ...,
+    backdropVideo {
+      ...,
+      asset-> {
+        playbackId,
+      },
+    },
+  },
 `
 
 const pb = `

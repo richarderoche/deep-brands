@@ -1,4 +1,5 @@
 import {defineField, defineType} from 'sanity'
+import {BACKDROP_POSITIONS, DEFAULT_BACKDROP_POSITION} from '../../lib/backdropPosition'
 import {IconHeroShape} from '../../lib/customIcons'
 
 export default defineType({
@@ -66,12 +67,25 @@ export default defineType({
     }),
     defineField({
       title: 'Backdrop Video - MP4',
+      description: 'Max file size: 50 MB, Max duration: 10 minutes',
       name: 'backdropVideo',
-      type: 'file',
+      type: 'mux.video',
       options: {
-        accept: '.mp4',
+        maxAssetFileSize: 1024 * 1024 * 50, // 50 MB
+        maxAssetDuration: 60 * 10, // 10 minutes
       },
       hidden: ({parent}) => parent?.backdropType !== 'video',
+    }),
+    defineField({
+      title: 'Backdrop Position',
+      name: 'backdropPosition',
+      type: 'string',
+      description: 'How the image or video is anchored within the mask.',
+      options: {
+        list: [...BACKDROP_POSITIONS],
+      },
+      initialValue: DEFAULT_BACKDROP_POSITION,
+      hidden: ({parent}) => parent?.backdropType !== 'image' && parent?.backdropType !== 'video',
     }),
     defineField({
       title: 'Content Overlay',

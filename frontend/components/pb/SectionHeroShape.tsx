@@ -1,7 +1,7 @@
 import {isDark} from '@/lib/checkColor'
 import {colorValue} from '@/lib/colorValue'
 import {cn} from '@/lib/utils'
-import {PbHeroShape} from '@/sanity.types'
+import {PbHeroShapeSection} from '@/types'
 import {PortableText} from 'next-sanity'
 import IconLogoShape from '../icons/IconLogoShape'
 import IconOrnamentBottom from '../icons/IconOrnamentBottom'
@@ -9,13 +9,14 @@ import IconOrnamentTop from '../icons/IconOrnamentTop'
 import ImageBasic from '../shared/ImageBasic'
 import SiteGrid from '../shared/SiteGrid'
 import SiteWidth from '../shared/SiteWidth'
+import HeroShapeBackdrop from './HeroShapeBackdrop'
 import {useSanityDataAttribute} from './SanityVisualEditingContext'
 
 export default function SectionHeroShape({
   section,
   isDarkBgColor,
 }: {
-  section: PbHeroShape
+  section: PbHeroShapeSection
   isDarkBgColor: boolean
 }) {
   const {getDataAttribute} = useSanityDataAttribute()
@@ -26,12 +27,17 @@ export default function SectionHeroShape({
     backdropType,
     backdropImage,
     backdropVideo,
+    backdropPosition,
     contentOverlay,
     heading,
     subbrandLogos,
   } = section
   const hasPreheading = showPreheading && preheading?.left && preheading?.right
   const isColorShape = backdropType === 'color'
+  const isImageShape = backdropType === 'image' && !!backdropImage?.asset?._ref
+  const playbackId = backdropVideo?.asset?.playbackId
+  const isVideoShape = backdropType === 'video' && !!playbackId
+  const isMediaShape = isImageShape || isVideoShape
   const shapeColor = colorValue(backdropColor)
   const isDarkShapeColor =
     (backdropColor?.colorType === 'custom' && !!shapeColor && isDark(shapeColor)) ||
@@ -65,9 +71,19 @@ export default function SectionHeroShape({
           )}
           <div
             className={cn(
-              isColorShape && 'relative max-lg:pt-hero-ornament-t max-lg:pb-hero-ornament-b',
+              (isColorShape || isMediaShape) && 'relative',
+              isColorShape && 'max-lg:pt-hero-ornament-t max-lg:pb-hero-ornament-b',
             )}
           >
+            {isMediaShape && (
+              <HeroShapeBackdrop
+                image={isImageShape ? backdropImage : undefined}
+                playbackId={isVideoShape ? playbackId : undefined}
+                objectPosition={backdropPosition}
+                imageDataSanity={getDataAttribute(['backdropImage'])}
+                videoDataSanity={getDataAttribute(['backdropVideo'])}
+              />
+            )}
             {isColorShape && (
               <div>
                 <IconLogoShape
@@ -85,9 +101,12 @@ export default function SectionHeroShape({
                 className={cn(
                   'lg:absolute lg:w-full top-1/2 left-1/2 lg:-translate-x-1/2 lg:-translate-y-1/2 lg:bg-transparent!',
                   'text-center text-balance px-gut lg:px-gut-200 flex flex-col items-center justify-center gap-gut-150 max-lg:py-gut-200 max-lg:-mx-gut-50 lg:pt-gut-150 rounded-t-card-top rounded-b-card-bottom',
-                  isDarkShapeColor ? 'text-offwhite' : 'text-blue-800',
+                  isMediaShape && 'absolute inset-0 max-lg:mx-0',
+                  isDarkShapeColor || (isMediaShape && isDarkBgColor)
+                    ? 'text-offwhite'
+                    : 'text-blue-800',
                 )}
-                style={{background: shapeColor}}
+                style={isColorShape ? {background: shapeColor} : undefined}
               >
                 {heading && (
                   <h2 data-sanity={getDataAttribute(['heading'])} className="ts-h1-h3 ts-serif">

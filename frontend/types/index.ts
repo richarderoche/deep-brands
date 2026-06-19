@@ -29,3 +29,8 @@ export type PbBlocksQueryResult = NonNullable<
 >
 
 export type PageBuilderData = PagesBySlugQueryResult | HomePageQueryResult | undefined
+
+export type PbHeroShapeSection = Extract<
+  NonNullable<NonNullable<PageBuilderData>['pbSections']>[number],
+  {_type: 'pbHeroShape'}
+>

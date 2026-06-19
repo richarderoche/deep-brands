@@ -1,0 +1,37 @@
+---
+description: Never manually edit auto-generated files; fix types via schema, GROQ, and query Extract types
+alwaysApply: true
+---
+
+# Do not edit generated files
+
+Never manually edit a file whose header comments state it is **generated** or **will be overwritten** by a codegen step.
+
+Known generated files in this repo:
+
+- `frontend/sanity.types.ts` (Sanity TypeGen)
+- `studio/sanity.types.ts` (Sanity TypeGen)
+- `sanity.schema.json` (schema extract for typegen)
+- `next-env.d.ts` (Next.js)
+
+## When types are wrong
+
+1. Update **Sanity schema** in `studio/schemaTypes/`
+2. Update **GROQ projections** in `frontend/sanity/lib/queries.ts`
+3. Regenerate: `cd frontend && npm run sanity:typegen`
+4. In app code, derive component props from **query result types**, not raw schema types:
+
+```typescript
+// frontend/types/index.ts
+export type PbHeroShapeSection = Extract<
+  NonNullable<NonNullable<PageBuilderData>['pbSections']>[number],
+  {_type: 'pbHeroShape'}
+>
+```
+
+Use `Extract<QueryResult[...], {_type: '...'}>` for fields that GROQ dereferences (e.g. Mux `playbackId`), not `PbHeroShape` from schema-only types.
+
+## Manual types belong in
+
+- `frontend/types/index.ts` for shared query-derived or app types
+- Colocated exports in component files for section-specific query types (see `SectionHeroBrand`)
