@@ -1,6 +1,6 @@
 import {defineField, defineType} from 'sanity'
 import {timelineIcon} from '../../lib/customIcons'
-import {getRowWidthTitle} from '../../lib/utils'
+import {getRowWidthTitle, ptToText} from '../../lib/utils'
 import {imgAltField, rowWidthFieldLimited} from '../fields'
 
 export default defineType({
@@ -78,12 +78,10 @@ export default defineType({
               image: 'image',
             },
             prepare({year, heading, description, image}) {
+              const subtitle = description ? ptToText(description) : 'No Description'
               return {
                 title: year ? `${year} - ${heading}` : heading || 'No Heading',
-                subtitle:
-                  description && description.length > 0
-                    ? description[0].children[0]?.text
-                    : 'No Description',
+                subtitle: subtitle,
                 media: image ? image : timelineIcon,
               }
             },

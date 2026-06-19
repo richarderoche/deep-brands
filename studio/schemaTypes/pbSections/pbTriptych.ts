@@ -81,7 +81,7 @@ export default defineType({
   ],
   preview: {
     select: {
-      title: 'sectionSettings.name',
+      title: 'sectionName',
       subtitle: 'triptychType',
       media: 'images.1',
     },

@@ -490,6 +490,9 @@ export type PbSectionGroup = {
       } & PbHeroBrand)
     | ({
         _key: string
+      } & PbHeroHome)
+    | ({
+        _key: string
       } & PbTimeline)
     | ({
         _key: string
@@ -528,6 +531,9 @@ export type PbSections = Array<
   | ({
       _key: string
     } & PbHeroBrand)
+  | ({
+      _key: string
+    } & PbHeroHome)
   | ({
       _key: string
     } & PbTimeline)
@@ -610,6 +616,18 @@ export type PbGridMulti = {
     blockWidths?: BlockWidths
     _key: string
   }>
+}
+
+export type PbHeroHome = {
+  _type: 'pbHeroHome'
+  sectionSettings?: PbSectionSettingsHero
+  heading?: PtItalic
+  imagesPrepNote?: Note
+  imagesTop1?: ImageCycle
+  imagesTop2?: ImageCycle
+  imagesBottom1?: ImageCycle
+  imagesBottom2?: ImageCycle
+  imagesBottom3?: ImageCycle
 }
 
 export type BrandsReference = {
@@ -906,6 +924,19 @@ export type NavExternal = {
   _type: 'navExternal'
   title?: string
   url?: string
+}
+
+export type ImageCycle = {
+  _type: 'imageCycle'
+  images?: Array<{
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+    _key: string
+  }>
+  altText?: string
 }
 
 export type ColorChoice = {
@@ -1362,6 +1393,7 @@ export type AllSanitySchemaTypes =
   | PbGridDouble
   | PbGridSingle
   | PbGridMulti
+  | PbHeroHome
   | BrandsReference
   | PbHeroBrand
   | PbHeroShape
@@ -1382,6 +1414,7 @@ export type AllSanitySchemaTypes =
   | NavPage
   | NavLinks
   | NavExternal
+  | ImageCycle
   | ColorChoice
   | Column
   | Redirect

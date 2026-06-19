@@ -1,36 +1,37 @@
-import { CaseSensitive } from 'lucide-react'
-import { defineField, defineType } from 'sanity'
+import {CaseSensitive} from 'lucide-react'
+import {defineField, defineType} from 'sanity'
+import {ptToText} from '../../lib/utils'
 
 export const textStyleOptions = [
-  { title: 'Body', value: 'ts-body' },
-  { title: 'Serif', value: 'ts-serif' },
-  { title: 'Uppercase Narrow', value: 'ts-sans-tall' },
-  { title: 'Uppercase Wide', value: 'ts-sans-wide' },
+  {title: 'Body', value: 'ts-body'},
+  {title: 'Serif', value: 'ts-serif'},
+  {title: 'Uppercase Narrow', value: 'ts-sans-tall'},
+  {title: 'Uppercase Wide', value: 'ts-sans-wide'},
 ]
 
 export const textSizeOptionsAll = [
-  { title: 'H1', value: 'ts-h1', styleGroup: 'serif' },
-  { title: 'H2', value: 'ts-h2', styleGroup: 'serif' },
-  { title: 'H3', value: 'ts-h3', styleGroup: 'serif' },
-  { title: 'H4', value: 'ts-h4', styleGroup: 'serif' },
-  { title: 'Body Large', value: 'ts-p-lg', styleGroup: 'body' },
-  { title: 'Body Medium', value: 'ts-p-md', styleGroup: 'body' },
-  { title: 'Body Small', value: 'ts-p-sm', styleGroup: 'body' },
-  { title: 'Body XS', value: 'ts-p-xs', styleGroup: 'body' },
-  { title: 'Label', value: 'ts-h5', styleGroup: 'uppercase' },
-  { title: 'Label Small', value: 'ts-h6', styleGroup: 'uppercase' },
+  {title: 'H1', value: 'ts-h1', styleGroup: 'serif'},
+  {title: 'H2', value: 'ts-h2', styleGroup: 'serif'},
+  {title: 'H3', value: 'ts-h3', styleGroup: 'serif'},
+  {title: 'H4', value: 'ts-h4', styleGroup: 'serif'},
+  {title: 'Body Large', value: 'ts-p-lg', styleGroup: 'body'},
+  {title: 'Body Medium', value: 'ts-p-md', styleGroup: 'body'},
+  {title: 'Body Small', value: 'ts-p-sm', styleGroup: 'body'},
+  {title: 'Body XS', value: 'ts-p-xs', styleGroup: 'body'},
+  {title: 'Label', value: 'ts-h5', styleGroup: 'uppercase'},
+  {title: 'Label Small', value: 'ts-h6', styleGroup: 'uppercase'},
 ]
 
 // If adding options, add classes to frontend/safelist-classes.txt
 export const textColorOptions = [
-  { title: 'Body Normal', value: 'text-body' },
-  { title: 'Accent', value: 'text-accent' },
+  {title: 'Body Normal', value: 'text-body'},
+  {title: 'Accent', value: 'text-accent'},
 ]
 
 export const textAlignOptions = [
-  { title: 'Left', value: 'text-left' },
-  { title: 'Center', value: 'text-center' },
-  { title: 'Right', value: 'text-right' },
+  {title: 'Left', value: 'text-left'},
+  {title: 'Center', value: 'text-center'},
+  {title: 'Right', value: 'text-right'},
 ]
 
 export default defineType({
@@ -53,7 +54,7 @@ export default defineType({
       title: 'Text Size',
       name: 'textSize',
       type: 'string',
-      hidden: ({ parent }) => parent?.textStyle !== 'ts-body',
+      hidden: ({parent}) => parent?.textStyle !== 'ts-body',
       options: {
         list: getTextSizeOptions('body'),
       },
@@ -63,7 +64,7 @@ export default defineType({
       title: 'Text Size',
       name: 'textSizeSerif',
       type: 'string',
-      hidden: ({ parent }) => parent?.textStyle !== 'ts-serif',
+      hidden: ({parent}) => parent?.textStyle !== 'ts-serif',
       options: {
         list: getTextSizeOptions('serif'),
       },
@@ -73,7 +74,8 @@ export default defineType({
       title: 'Text Size',
       name: 'textSizeSans',
       type: 'string',
-      hidden: ({ parent }) => parent?.textStyle !== 'ts-sans-tall' && parent?.textStyle !== 'ts-sans-wide',
+      hidden: ({parent}) =>
+        parent?.textStyle !== 'ts-sans-tall' && parent?.textStyle !== 'ts-sans-wide',
       options: {
         list: getTextSizeOptions('uppercase'),
       },
@@ -84,13 +86,13 @@ export default defineType({
       title: 'Text',
       type: 'text',
       rows: 4,
-      hidden: ({ parent }) => parent?.textStyle === 'ts-serif',
+      hidden: ({parent}) => parent?.textStyle === 'ts-serif',
     }),
     defineField({
       title: 'Text Content',
       name: 'textContentRich',
       type: 'ptItalic',
-      hidden: ({ parent }) => parent?.textStyle !== 'ts-serif',
+      hidden: ({parent}) => parent?.textStyle !== 'ts-serif',
     }),
     defineField({
       title: 'Text Align',
@@ -116,13 +118,19 @@ export default defineType({
   preview: {
     select: {
       textContent: 'textContent',
+      textContentRich: 'textContentRich',
       textStyle: 'textStyle',
     },
-    prepare({ textContent, textStyle }) {
-      const textStyleText = textStyleOptions.find((o) => o.value === textStyle)?.title ?? 'Body';
+    prepare({textContent, textContentRich, textStyle}) {
+      const textStyleText = textStyleOptions.find((o) => o.value === textStyle)?.title ?? 'Body'
+      const subtitle = textContentRich
+        ? ptToText(textContentRich)
+        : textContent
+          ? textContent
+          : 'No Text'
       return {
         title: 'Text: ' + textStyleText,
-        subtitle: textContent ? textContent : 'No Text',
+        subtitle: subtitle,
         media: CaseSensitive,
       }
     },
@@ -130,5 +138,5 @@ export default defineType({
 })
 
 export function getTextSizeOptions(textStyle: string) {
-  return textSizeOptionsAll.filter((o) => o.styleGroup === textStyle);
+  return textSizeOptionsAll.filter((o) => o.styleGroup === textStyle)
 }

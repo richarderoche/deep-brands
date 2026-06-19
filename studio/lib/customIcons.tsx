@@ -161,3 +161,25 @@ export const IconFeature = () => {
     </svg>
   )
 }
+
+export const IconHeroHome = () => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <rect width="7" height="4" x="7.9" y="3.26" rx="1" transform="rotate(105 7.9 3.26)" />
+      <rect width="7" height="5" x="7.53" y="22.46" rx="1" transform="rotate(-150 7.53 22.46)" />
+      <rect width="7" height="5" x="22.53" y="18.96" rx="1" transform="rotate(150 22.53 18.96)" />
+      <rect width="7" height="4" x="20.09" y="2.22" rx="1" transform="rotate(75 20.09 2.22)" />
+      <path d="M10 10.25h4M10 13.25h4" />
+    </svg>
+  )
+}

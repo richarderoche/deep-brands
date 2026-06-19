@@ -1,3 +1,5 @@
+import {toPlainText} from '@portabletext/toolkit'
+import {PortableTextBlock} from 'sanity'
 import type {PbColSettings} from '../../frontend/sanity.types'
 import {pbSectionTypes} from '../schemaTypes/pbSections'
 
@@ -102,4 +104,8 @@ export function formatPbSectionGroupPreview(
   if (!labels.length) return 'No sections'
 
   return extra ? `${labels.join(', ')} +${extra} more` : labels.join(', ')
+}
+
+export function ptToText(pt: PortableTextBlock[]) {
+  return toPlainText(pt)
 }

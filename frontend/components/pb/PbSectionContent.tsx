@@ -1,14 +1,15 @@
 'use client'
 
 import {PbSections} from '@/sanity.types'
+import {PbHeroShapeSection} from '@/types'
 import SectionBanner from './SectionBanner'
 import SectionFeature from './SectionFeature'
 import SectionGridDouble from './SectionGridDouble'
 import SectionGridMulti from './SectionGridMulti'
 import SectionGridSingle from './SectionGridSingle'
 import SectionHeroBrand, {PbHeroBrandSection} from './SectionHeroBrand'
+import SectionHeroHome from './SectionHeroHome'
 import SectionHeroShape from './SectionHeroShape'
-import {PbHeroShapeSection} from '@/types'
 import SectionImageAndCard from './SectionImageAndCard'
 import SectionNews from './SectionNews'
 import SectionTimeline from './SectionTimeline'
@@ -52,6 +53,8 @@ export default function PbSectionContent({
       )
     case 'pbHeroBrand':
       return <SectionHeroBrand section={section as unknown as PbHeroBrandSection} />
+    case 'pbHeroHome':
+      return <SectionHeroHome section={section} />
     case 'pbBanner':
       return <SectionBanner section={section} />
     case 'pbImageWithCard':

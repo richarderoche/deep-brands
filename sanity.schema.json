@@ -3645,6 +3645,21 @@
                   },
                   "rest": {
                     "type": "inline",
+                    "name": "pbHeroHome"
+                  }
+                },
+                {
+                  "type": "object",
+                  "attributes": {
+                    "_key": {
+                      "type": "objectAttribute",
+                      "value": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "rest": {
+                    "type": "inline",
                     "name": "pbTimeline"
                   }
                 },
@@ -3827,6 +3842,21 @@
             "rest": {
               "type": "inline",
               "name": "pbHeroBrand"
+            }
+          },
+          {
+            "type": "object",
+            "attributes": {
+              "_key": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "string"
+                }
+              }
+            },
+            "rest": {
+              "type": "inline",
+              "name": "pbHeroHome"
             }
           },
           {
@@ -4426,6 +4456,86 @@
                 }
               }
             }
+          },
+          "optional": true
+        }
+      }
+    }
+  },
+  {
+    "name": "pbHeroHome",
+    "type": "type",
+    "value": {
+      "type": "object",
+      "attributes": {
+        "_type": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string",
+            "value": "pbHeroHome"
+          }
+        },
+        "sectionSettings": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "inline",
+            "name": "pbSectionSettingsHero"
+          },
+          "optional": true
+        },
+        "heading": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "inline",
+            "name": "ptItalic"
+          },
+          "optional": true
+        },
+        "imagesPrepNote": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "inline",
+            "name": "note"
+          },
+          "optional": true
+        },
+        "imagesTop1": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "inline",
+            "name": "imageCycle"
+          },
+          "optional": true
+        },
+        "imagesTop2": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "inline",
+            "name": "imageCycle"
+          },
+          "optional": true
+        },
+        "imagesBottom1": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "inline",
+            "name": "imageCycle"
+          },
+          "optional": true
+        },
+        "imagesBottom2": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "inline",
+            "name": "imageCycle"
+          },
+          "optional": true
+        },
+        "imagesBottom3": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "inline",
+            "name": "imageCycle"
           },
           "optional": true
         }
@@ -6359,6 +6469,90 @@
           "optional": true
         },
         "url": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
+          },
+          "optional": true
+        }
+      }
+    }
+  },
+  {
+    "name": "imageCycle",
+    "type": "type",
+    "value": {
+      "type": "object",
+      "attributes": {
+        "_type": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string",
+            "value": "imageCycle"
+          }
+        },
+        "images": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "array",
+            "of": {
+              "type": "object",
+              "attributes": {
+                "asset": {
+                  "type": "objectAttribute",
+                  "value": {
+                    "type": "inline",
+                    "name": "sanity.imageAsset.reference"
+                  },
+                  "optional": true
+                },
+                "media": {
+                  "type": "objectAttribute",
+                  "value": {
+                    "type": "unknown"
+                  },
+                  "optional": true
+                },
+                "hotspot": {
+                  "type": "objectAttribute",
+                  "value": {
+                    "type": "inline",
+                    "name": "sanity.imageHotspot"
+                  },
+                  "optional": true
+                },
+                "crop": {
+                  "type": "objectAttribute",
+                  "value": {
+                    "type": "inline",
+                    "name": "sanity.imageCrop"
+                  },
+                  "optional": true
+                },
+                "_type": {
+                  "type": "objectAttribute",
+                  "value": {
+                    "type": "string",
+                    "value": "image"
+                  }
+                }
+              },
+              "rest": {
+                "type": "object",
+                "attributes": {
+                  "_key": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "optional": true
+        },
+        "altText": {
           "type": "objectAttribute",
           "value": {
             "type": "string"

@@ -2,6 +2,7 @@ import brands from './documents/brands'
 import page from './documents/page'
 import redirect from './documents/redirect'
 import colorChoice from './objects/colorChoice'
+import imageCycle from './objects/imageCycle'
 import navExternal from './objects/navExternal'
 import navLinks from './objects/navLinks'
 import navPage from './objects/navPage'
@@ -32,6 +33,7 @@ import pbGridDouble from './pbSections/pbGridDouble'
 import pbGridMulti from './pbSections/pbGridMulti'
 import pbGridSingle from './pbSections/pbGridSingle'
 import pbHeroBrand from './pbSections/pbHeroBrand'
+import pbHeroHome from './pbSections/pbHeroHome'
 import pbHeroShape from './pbSections/pbHeroShape'
 import pbImageWithCard from './pbSections/pbImageWithCard'
 import pbNews from './pbSections/pbNews'
@@ -57,6 +59,7 @@ export const schemaTypes = [
   // Objects
   column,
   colorChoice,
+  imageCycle,
   navExternal,
   navLinks,
   navPage,
@@ -75,6 +78,7 @@ export const schemaTypes = [
   pbFeature,
   pbHeroShape,
   pbHeroBrand,
+  pbHeroHome,
   pbGridMulti,
   pbGridSingle,
   pbGridDouble,
