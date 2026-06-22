@@ -42,6 +42,7 @@ const nextConfig: NextConfig = {
   compress: true,
   experimental: {
     taint: true,
+    viewTransition: true,
     optimizePackageImports: [
       'gsap',
       'lenis',

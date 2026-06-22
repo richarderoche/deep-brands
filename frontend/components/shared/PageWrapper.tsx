@@ -1,33 +1,9 @@
-'use client'
+import {ViewTransition} from 'react'
 
-import { useRef } from 'react'
-
-import { useStore } from '@/lib/store'
-import { useGSAP } from '@gsap/react'
-import gsap from 'gsap'
-
-export default function PageWrapper({
-  children,
-  ...props
-}: React.HTMLAttributes<HTMLDivElement>) {
-  const { enablePageTransition, setEnablePageTransition } = useStore()
-  const pageWrapperRef = useRef<HTMLDivElement>(null)
-
-  useGSAP(() => {
-    if (enablePageTransition && pageWrapperRef.current) {
-      gsap.fromTo(
-        pageWrapperRef.current,
-        { opacity: 0 },
-        { opacity: 1, duration: 0.8, ease: 'power2.out' }
-      )
-    } else if (!enablePageTransition && pageWrapperRef.current) {
-      setEnablePageTransition(true)
-    }
-  })
-
+export default function PageWrapper({children}: {children: React.ReactNode}) {
   return (
-    <div ref={pageWrapperRef} {...props}>
+    <ViewTransition name="page-content" default="auto">
       {children}
-    </div>
+    </ViewTransition>
   )
 }

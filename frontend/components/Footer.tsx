@@ -23,7 +23,7 @@ export default async function Footer() {
   const hasFooterBrands = footerBrands && footerBrands?.length > 0
 
   return (
-    <footer className="dark-theme theme-vars-only flex flex-col">
+    <footer className="dark-theme theme-vars-only flex flex-col" style={{viewTransitionName: 'site-footer'}}>
       <IconOrnamentTop />
       <div className="bg-bg text-body">
         <SiteWidth className="pb-gut pt-gut-150 md:pt-gut-200">

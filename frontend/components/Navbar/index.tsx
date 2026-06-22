@@ -29,7 +29,7 @@ export default async function Navbar() {
     'flex w-fit items-center h-btn px-[.5em] rounded-btn border border-transparent transition-all hover:bg-blue-650 will-change-transform ts-btn'
 
   return (
-    <header className="h-header fixed top-0 left-0 w-full z-999">
+    <header className="h-header fixed top-0 left-0 w-full z-999" style={{viewTransitionName: 'site-header'}}>
       <SkipLink />
       <SiteWidth className="h-full pt-gut-66 lg:pt-gut-50 pb-gut-25">
         <div className="h-full flex items-center justify-between gap-x-gut bg-blue-600 relative rounded-xs xl:rounded-sm box-shadow-sm px-gut-50 max-md:-mx-gut-50">

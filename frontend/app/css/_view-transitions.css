@@ -1,0 +1,24 @@
+::view-transition-old(page-content) {
+  animation-duration: 150ms;
+  animation-timing-function: ease-out;
+}
+
+::view-transition-new(page-content) {
+  animation-duration: 600ms;
+  animation-timing-function: ease-out;
+}
+
+::view-transition-group(site-header),
+::view-transition-group(site-footer) {
+  animation: none;
+}
+
+::view-transition-old(site-header),
+::view-transition-old(site-footer) {
+  display: none;
+}
+
+::view-transition-new(site-header),
+::view-transition-new(site-footer) {
+  animation: none;
+}

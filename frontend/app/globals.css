@@ -5,6 +5,7 @@
 @import './css/_type.css';
 @import './css/_prose.css';
 @import './css/_lenis.css';
+@import './css/_view-transitions.css';
 @plugin "@tailwindcss/typography";
 @plugin "tw-easing-gradients";
 
