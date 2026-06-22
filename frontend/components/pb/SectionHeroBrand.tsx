@@ -112,12 +112,7 @@ export default function SectionHeroBrand({section}: SectionHeroBrandProps) {
                         </a>
                       )
                     }
-
-                    return (
-                      <span key={icon._key} className={socialButtonClassName} style={style}>
-                        <SocialIcon name={icon.icon} />
-                      </span>
-                    )
+                    return null
                   })}
                   {websiteLink && (
                     <Button

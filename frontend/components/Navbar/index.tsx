@@ -7,6 +7,8 @@ import {imgSizesFormat} from '@/lib/utils'
 import {SettingsQueryResult} from '@/sanity.types'
 import Image from 'next/image'
 import Link from 'next/link'
+import {ButtonBlock} from '../pb/PbBlocks'
+import SocialIcon from '../shared/SocialIcon'
 import MobileNav from './MobileNav'
 import SkipLink from './SkipLink'
 
@@ -15,10 +17,11 @@ export default async function Navbar() {
     query: settingsQuery,
     stega: false,
   })) as {data: SettingsQueryResult}
-
-  const mainNavLeft = data?.mainNavLeft
-  const mainNavRight = data?.mainNavRight
+  const {mainNavLeft, mainNavRight, socialIcons, showHeaderSocials, showHeaderCTAs, headerCTAs} =
+    data || {}
   const mainNavMobile = [...(mainNavLeft ?? []), ...(mainNavRight ?? [])]
+  const hasSocialIcons = showHeaderSocials && socialIcons && socialIcons.length > 0
+  const hasHeaderCTAs = showHeaderCTAs && headerCTAs && headerCTAs.length > 0
 
   const desktopUlClasses =
     'flex flex-wrap items-center gap-x-gut-50 text-offwhite h-full px-gut-25 rounded-btn'
@@ -40,7 +43,11 @@ export default async function Navbar() {
                 />
               </nav>
             )}
-            <MobileNav mainNavMobile={mainNavMobile} />
+            <MobileNav
+              mainNavMobile={mainNavMobile}
+              hasHeaderCTAs={hasHeaderCTAs}
+              headerCTAs={headerCTAs}
+            />
           </div>
           <div className="absolute left-1/2 -translate-x-1/2">
             <Link href="/" className="block">
@@ -54,7 +61,7 @@ export default async function Navbar() {
               />
             </Link>
           </div>
-          <div className="h-full w-full grow flex items-center justify-end">
+          <div className="h-full w-full grow flex items-center justify-end gap-gut-33 text-offwhite">
             {mainNavRight && (
               <nav role="navigation" className="h-full max-lg:hidden">
                 <NavLinks
@@ -63,6 +70,26 @@ export default async function Navbar() {
                   linkClasses={desktopLinkClasses}
                 />
               </nav>
+            )}
+            {hasSocialIcons && (
+              <div>
+                {socialIcons.map((icon) => (
+                  <Link
+                    href={icon.url || ''}
+                    key={icon._key}
+                    className="rounded-full ts-btn size-btn p-[.4em] flex items-center justify-center border border-offwhite [&_svg]:h-full [&_svg]:w-auto"
+                  >
+                    <SocialIcon name={icon.icon} />
+                  </Link>
+                ))}
+              </div>
+            )}
+            {hasHeaderCTAs && (
+              <div className="flex items-center gap-gut-33 max-lg:hidden">
+                {headerCTAs.map((cta) => (
+                  <ButtonBlock key={cta._key} block={cta} />
+                ))}
+              </div>
             )}
           </div>
         </div>
