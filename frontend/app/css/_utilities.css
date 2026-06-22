@@ -72,3 +72,9 @@ Example: ts-size-24/36 → font-size = var(--gut) × (24÷36)
 @utility shadow-sm {
   filter: drop-shadow(0 4px 6px rgba(17, 24, 52, 0.2)) drop-shadow(0 0 8px rgba(18, 22, 39, 0.2));
 }
+
+@utility box-shadow-sm {
+  box-shadow:
+    0 4px 6px rgba(17, 24, 52, 0.2),
+    0 0 8px rgba(18, 22, 39, 0.2);
+}

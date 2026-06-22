@@ -36,7 +36,7 @@ export default function SectionHeroHome({section}: {section: PbHeroHome}) {
           <div className="w-1/3 h-full">
             <ImageCycle imageCycle={imagesBottom2} sizes="25vw" className="" />
           </div>
-          <div className="w-1/3 h-full">
+          <div className="w-1/3 h-full portrait:hidden max-lg:hidden">
             <ImageCycle imageCycle={imagesBottom3} sizes="25vw" className="" />
           </div>
         </div>

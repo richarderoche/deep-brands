@@ -1,5 +1,5 @@
-import { CogIcon } from '@sanity/icons'
-import { defineField, defineType } from 'sanity'
+import {CogIcon} from '@sanity/icons'
+import {defineField, defineType} from 'sanity'
 
 export default defineType({
   name: 'settings',
@@ -26,10 +26,64 @@ export default defineType({
   ],
   fields: [
     defineField({
-      name: 'headerNav',
-      title: 'Header Navigation',
-      type: 'navLinks',
+      name: 'mainNavLeft',
+      title: 'Main Navigation - Left',
+      type: 'array',
+      of: [
+        {
+          type: 'navPage',
+        },
+        {
+          type: 'navExternal',
+        },
+        {
+          type: 'dropdown',
+        },
+      ],
       group: 'header',
+    }),
+    defineField({
+      name: 'mainNavRight',
+      title: 'Main Navigation - Right',
+      type: 'array',
+      of: [
+        {
+          type: 'navPage',
+        },
+        {
+          type: 'navExternal',
+        },
+        {
+          type: 'dropdown',
+        },
+      ],
+      group: 'header',
+    }),
+    defineField({
+      name: 'showHeaderSocials',
+      title: 'Include Social Links in Header?',
+      type: 'boolean',
+      group: 'header',
+      initialValue: true,
+    }),
+    defineField({
+      name: 'showHeaderCTAs',
+      title: 'Include CTA Buttons in Header?',
+      type: 'boolean',
+      group: 'header',
+      initialValue: true,
+    }),
+    defineField({
+      name: 'headerCTAs',
+      title: 'Header CTAs',
+      type: 'array',
+      group: 'header',
+      hidden: ({parent}) => !parent?.showHeaderCTAs,
+      of: [
+        {
+          type: 'pbBlockButton',
+        },
+      ],
     }),
     defineField({
       name: 'contactEmail',
@@ -86,7 +140,7 @@ export default defineType({
       of: [
         {
           type: 'reference',
-          to: [{ type: 'brands' }],
+          to: [{type: 'brands'}],
         },
       ],
     }),
@@ -143,7 +197,7 @@ export default defineType({
               name: 'name',
               category: 'category',
             },
-            prepare({ name = 'Custom Script', category }) {
+            prepare({name = 'Custom Script', category}) {
               return {
                 title: name,
                 subtitle: category,

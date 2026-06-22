@@ -92,6 +92,21 @@ export type StickyImages = {
   bottomRight?: BottomRight
 }
 
+export type SanityImageAssetReference = {
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+}
+
+export type DropdownThumbnail = {
+  asset?: SanityImageAssetReference
+  media?: unknown // Unable to locate the referenced type "dropdownThumbnail.media" in schema
+  hotspot?: SanityImageHotspot
+  crop?: SanityImageCrop
+  _type: 'image'
+}
+
 export type SanityFileAssetReference = {
   _ref: string
   _type: 'reference'
@@ -101,26 +116,19 @@ export type SanityFileAssetReference = {
 
 export type FileLinkFile = {
   asset?: SanityFileAssetReference
-  media?: unknown // Unable to locate the referenced type "file.media" in schema
+  media?: unknown // Unable to locate the referenced type "media" in schema
   _type: 'file'
 }
 
 export type MarkDefsFileLinkFile = {
   asset?: SanityFileAssetReference
-  media?: unknown // Unable to locate the referenced type "fileLink.file.media" in schema
+  media?: unknown // Unable to locate the referenced type "file.media" in schema
   _type: 'file'
-}
-
-export type SanityImageAssetReference = {
-  _ref: string
-  _type: 'reference'
-  _weak?: boolean
-  [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
 }
 
 export type ImageElementImage = {
   asset?: SanityImageAssetReference
-  media?: unknown // Unable to locate the referenced type "image.media" in schema
+  media?: unknown // Unable to locate the referenced type "imageElement.image.media" in schema
   hotspot?: SanityImageHotspot
   crop?: SanityImageCrop
   _type: 'image'
@@ -939,6 +947,30 @@ export type ImageCycle = {
   altText?: string
 }
 
+export type Dropdown = {
+  _type: 'dropdown'
+  title?: string
+  items?: Array<
+    | {
+        title?: string
+        page?: HomeReference | PageReference
+        anchorLink?: string
+        subtitle?: string
+        dropdownThumbnail?: DropdownThumbnail
+        _type: 'dropdownPage'
+        _key: string
+      }
+    | {
+        title?: string
+        url?: string
+        subtitle?: string
+        dropdownThumbnail?: DropdownThumbnail
+        _type: 'dropdownExternal'
+        _key: string
+      }
+  >
+}
+
 export type ColorChoice = {
   _type: 'colorChoice'
   colorType?: 'none' | 'semitransparent' | 'dark' | 'light' | 'gradient' | 'custom'
@@ -1003,7 +1035,35 @@ export type Settings = {
   _createdAt: string
   _updatedAt: string
   _rev: string
-  headerNav?: NavLinks
+  mainNavLeft?: Array<
+    | ({
+        _key: string
+      } & NavPage)
+    | ({
+        _key: string
+      } & NavExternal)
+    | ({
+        _key: string
+      } & Dropdown)
+  >
+  mainNavRight?: Array<
+    | ({
+        _key: string
+      } & NavPage)
+    | ({
+        _key: string
+      } & NavExternal)
+    | ({
+        _key: string
+      } & Dropdown)
+  >
+  showHeaderSocials?: boolean
+  showHeaderCTAs?: boolean
+  headerCTAs?: Array<
+    {
+      _key: string
+    } & PbBlockButton
+  >
   contactEmail?: string
   socialIcons?: Array<
     {
@@ -1357,10 +1417,11 @@ export type AllSanitySchemaTypes =
   | Preheading
   | ShapeWidth
   | StickyImages
+  | SanityImageAssetReference
+  | DropdownThumbnail
   | SanityFileAssetReference
   | FileLinkFile
   | MarkDefsFileLinkFile
-  | SanityImageAssetReference
   | ImageElementImage
   | YAlignment
   | BannerImageImage
@@ -1415,6 +1476,7 @@ export type AllSanitySchemaTypes =
   | NavLinks
   | NavExternal
   | ImageCycle
+  | Dropdown
   | ColorChoice
   | Column
   | Redirect

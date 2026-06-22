@@ -39,7 +39,7 @@ export default function PbSectionShell({
 
   return (
     <section
-      id={sectionId ? sectionId : 'section-' + sectionKey}
+      id={sectionId ? sectionId.replace(/^#/, '') : 'section-' + sectionKey}
       data-pb-section={sectionType}
       className={cn(
         'group',

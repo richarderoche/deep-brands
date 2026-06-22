@@ -1,21 +1,21 @@
 'use client'
 
-import { useGSAP } from '@gsap/react'
-import { CloseIcon, MenuIcon } from '@sanity/icons'
-import { FocusTrap } from 'focus-trap-react'
+import {useGSAP} from '@gsap/react'
+import {CloseIcon, MenuIcon} from '@sanity/icons'
+import {FocusTrap} from 'focus-trap-react'
 import gsap from 'gsap'
-import { useEffect, useRef } from 'react'
+import {useEffect, useRef} from 'react'
 
 import NavLinks from '@/components/shared/NavLinks'
-import { useStore } from '@/lib/store'
-import { NavItem } from '@/types'
+import {useStore} from '@/lib/store'
+import type {MainNavItem} from '@/types'
 
 interface NavbarProps {
-  headerNav: NavItem[]
+  headerNav?: MainNavItem[] | null
 }
 
 export default function MobileNav(props: NavbarProps) {
-  const { headerNav } = props
+  const {headerNav} = props
 
   const isMobileNavOpen = useStore((state) => state.isMobileNavOpen)
   const setIsMobileNavOpen = useStore((state) => state.setIsMobileNavOpen)
@@ -63,7 +63,7 @@ export default function MobileNav(props: NavbarProps) {
         ease: 'expo.out',
       })
     },
-    { dependencies: [isMobileNavOpen] }
+    {dependencies: [isMobileNavOpen]},
   )
 
   return (
@@ -76,9 +76,9 @@ export default function MobileNav(props: NavbarProps) {
           aria-label="Toggle Menu"
         >
           {isMobileNavOpen ? (
-            <CloseIcon style={{ fontSize: 40 }} />
+            <CloseIcon style={{fontSize: 40}} />
           ) : (
-            <MenuIcon style={{ fontSize: 40 }} />
+            <MenuIcon style={{fontSize: 40}} />
           )}
         </button>
 
@@ -93,10 +93,9 @@ export default function MobileNav(props: NavbarProps) {
         >
           <div>
             <NavLinks
-              navItems={headerNav}
+              navItems={headerNav ?? []}
               ulClasses="flex flex-col gap-y-4 mt-5 p-4 md:p-8"
               liClasses="text-3xl"
-              liActiveClasses="opacity-50"
               onClick={handleCloseMobileNav}
             />
           </div>

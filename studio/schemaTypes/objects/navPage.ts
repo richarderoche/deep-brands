@@ -1,43 +1,24 @@
-import { LinkIcon } from '@sanity/icons'
-import { defineField, defineType } from 'sanity'
-import { capitalize } from '../../lib/utils'
+import {LinkIcon} from '@sanity/icons'
+import {defineType} from 'sanity'
+import {navPageFields} from '../fields'
 
 export default defineType({
   title: 'Page',
   name: 'navPage',
   type: 'object',
   icon: LinkIcon,
-  fields: [
-    defineField({
-      title: 'Title Override',
-      name: 'title',
-      type: 'string',
-      description: 'Display Text',
-    }),
-    defineField({
-      title: 'Page',
-      name: 'page',
-      type: 'reference',
-      to: [{ type: 'home' }, { type: 'page' }],
-    }),
-    defineField({
-      name: 'anchorLink',
-      title: 'Anchor Link',
-      type: 'string',
-      description: 'Scroll to an anchor link (e.g. #about)',
-    }),
-  ],
+  fields: navPageFields,
   preview: {
     select: {
       title: 'title',
       pageTitle: 'page.title',
-      pageType: 'page._type',
       pageSlug: 'page.slug.current',
+      anchorLink: 'anchorLink',
     },
-    prepare({ title, pageType, pageSlug, pageTitle }) {
+    prepare({title, pageSlug, pageTitle, anchorLink}) {
       return {
         title: `${title || pageTitle}`,
-        subtitle: `${capitalize(pageType)} /${pageSlug ? pageSlug : ''}`,
+        subtitle: `/${pageSlug ? pageSlug : ''}${anchorLink ? `${anchorLink}` : ''}`,
         media: LinkIcon,
       }
     },

@@ -1,3 +1,5 @@
+import {defineField} from 'sanity'
+
 export const imgAltField = {
   title: 'Alt text',
   name: 'alt',
@@ -73,3 +75,72 @@ export const spaceBetweenBlocksField = {
     ],
   },
 }
+
+export const navExternalFields = [
+  defineField({
+    title: 'Title',
+    name: 'title',
+    type: 'string',
+    description: 'Display Text',
+  }),
+  defineField({
+    title: 'URL',
+    name: 'url',
+    type: 'url',
+    description: 'enter an external URL',
+    validation: (Rule) =>
+      Rule.uri({
+        scheme: ['http', 'https', 'mailto', 'tel'],
+      }),
+  }),
+]
+
+export const navPageFields = [
+  defineField({
+    title: 'Title Override',
+    name: 'title',
+    type: 'string',
+    description: 'Display Text',
+  }),
+  defineField({
+    title: 'Page',
+    name: 'page',
+    type: 'reference',
+    to: [{type: 'home'}, {type: 'page'}],
+  }),
+  defineField({
+    name: 'anchorLink',
+    title: 'Anchor Link',
+    type: 'string',
+    description: 'Scroll to an anchor link (e.g. #about)',
+    validation: (Rule) => [
+      Rule.regex(/^#?[a-z0-9-]+$/),
+      Rule.custom((value) =>
+        value && !value.startsWith('#') ? 'Anchor links should start with # (e.g. #about)' : true,
+      ).warning(),
+    ],
+  }),
+]
+
+export const dropdownNavFields = [
+  defineField({
+    title: 'Subtitle',
+    name: 'subtitle',
+    type: 'text',
+    rows: 1,
+  }),
+  defineField({
+    title: 'Thumbnail',
+    description: 'Defaults to SEO Image if not provided',
+    name: 'dropdownThumbnail',
+    type: 'image',
+    options: {
+      hotspot: {
+        previews: [
+          {title: 'Mobile', aspectRatio: 1.25},
+          {title: 'Desktop', aspectRatio: 1.6666666667},
+        ],
+      },
+    },
+  }),
+]

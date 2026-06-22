@@ -1,47 +1,51 @@
 'use client'
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
 
-import { cn } from '@/lib/utils'
-import { resolveHref } from '@/sanity/lib/utils'
-import type { NavItem } from '@/types'
+import {cn} from '@/lib/utils'
+import {resolveHref} from '@/sanity/lib/utils'
+import type {MainNavItem} from '@/types'
+import MainNavDropdown from '../Navbar/MainNavDropdown'
 
 interface NavLinkProps {
-  navItems: NavItem[]
+  navItems: MainNavItem[]
   ulClasses?: string
   liClasses?: string
-  liActiveClasses?: string
   linkClasses?: string
   sep?: boolean
   onClick?: () => void
 }
 
 export default function NavLinks(props: NavLinkProps) {
-  const {
-    navItems,
-    ulClasses,
-    liClasses,
-    liActiveClasses,
-    linkClasses,
-    sep = false,
-    onClick,
-  } = props
-
-  const pathname = usePathname()
+  const {navItems, ulClasses, liClasses, linkClasses, sep = false, onClick} = props
 
   return (
     <ul className={ulClasses}>
       {navItems &&
-        navItems.map((navItem: NavItem, i) => {
-          const { page, _key, title, url } = navItem
-          const href = page ? resolveHref(page.type, page.slug) : url
-          const isActive = pathname === href
+        navItems.map((navItem: MainNavItem, i) => {
+          if (navItem._type === 'dropdown') {
+            return (
+              <MainNavDropdown
+                key={navItem._key}
+                navItem={navItem}
+                linkClasses={linkClasses}
+                liClasses={liClasses}
+              />
+            )
+          }
+
+          const {_key, title} = navItem
+          const path =
+            navItem._type === 'navPage' && navItem.page
+              ? resolveHref(navItem.page.type, navItem.page.slug)
+              : navItem._type === 'navExternal'
+                ? navItem.url
+                : undefined
+          const anchorLink = navItem._type === 'navPage' ? navItem.anchorLink : undefined
+          const page = navItem._type === 'navPage' ? navItem.page : null
+          const href = anchorLink ? `${path}#${anchorLink.replace(/^#/, '')}` : path
 
           return (
-            <li
-              key={_key}
-              className={cn(liClasses, isActive && liActiveClasses)}
-            >
+            <li key={_key} className={cn(liClasses)}>
               {i > 0 && sep && <Sep />}
               <Link
                 href={href || '/'}

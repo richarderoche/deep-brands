@@ -78,6 +78,10 @@ Example: ts-size-24/36 → font-size = var(--gut) × (24÷36)
   @apply font-sans font-black uppercase leading-none ts-size-15/24 md:ts-size-18/36;
 }
 
+.ts-btn-nav {
+  @apply font-sans-extended font-black uppercase leading-none ts-size-13/24 md:ts-size-13/36;
+}
+
 .ts-meta {
   @apply ts-size-9/24 md:ts-size-10/36;
 }

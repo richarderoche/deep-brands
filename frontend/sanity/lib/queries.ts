@@ -21,6 +21,14 @@ const link = `
   }
 `
 
+const dropdownLink = `
+  ...,
+  "page": page->{
+    ${page},
+  },
+  "thumbnail": coalesce(dropdownThumbnail, page->seo.image),
+`
+
 const portableText = `
   ...,
   markDefs[]{
@@ -197,8 +205,27 @@ export const sitemapByTypeQuery = defineQuery(`
 export const settingsQuery = defineQuery(`
   *[_type == "settings"][0]{
     ...,
-    "headerNav": headerNav.navItems[]{
-      ${link},
+    "mainNavLeft": mainNavLeft[]{
+      _type != "dropdown" => {
+        ${link}
+      },
+      _type == "dropdown" => {
+        ...,
+        items[]{
+          ${dropdownLink}
+        }
+      },
+    },
+    "mainNavRight": mainNavRight[]{
+      _type != "dropdown" => {
+        ${link}
+      },
+      _type == "dropdown" => {
+        ...,
+        items[]{
+          ${dropdownLink}
+        }
+      },
     },
     "footerNav": footerNav.navItems[]{
       ${link},

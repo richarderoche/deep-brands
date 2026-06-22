@@ -2,7 +2,7 @@
 // Only reusable types should be here
 // Put one-off types in the component file
 
-import {HomePageQueryResult, PagesBySlugQueryResult} from '@/sanity.types'
+import {HomePageQueryResult, PagesBySlugQueryResult, SettingsQueryResult} from '@/sanity.types'
 
 export interface NavPage {
   type: string
@@ -18,6 +18,14 @@ export interface NavItem {
   page?: NavPage | null
   anchorLink?: string | null
 }
+
+export type MainNavItem = NonNullable<
+  NonNullable<NonNullable<SettingsQueryResult>['mainNavLeft']>[number]
+>
+
+export type MainNavDropdownLinkItem = NonNullable<
+  NonNullable<Extract<MainNavItem, {_type: 'dropdown'}>['items']>[number]
+>
 
 // extract pbGridMulti from the pbGridSection union for the pbBlocks query result below
 type PbGridSection = Extract<

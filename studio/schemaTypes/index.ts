@@ -2,6 +2,7 @@ import brands from './documents/brands'
 import page from './documents/page'
 import redirect from './documents/redirect'
 import colorChoice from './objects/colorChoice'
+import dropdown from './objects/dropdown'
 import imageCycle from './objects/imageCycle'
 import navExternal from './objects/navExternal'
 import navLinks from './objects/navLinks'
@@ -59,6 +60,7 @@ export const schemaTypes = [
   // Objects
   column,
   colorChoice,
+  dropdown,
   imageCycle,
   navExternal,
   navLinks,
