@@ -124,42 +124,51 @@ export default function MainNavDropdown({
   useGSAP(
     () => {
       const panel = panelRef.current
+      const backdropStart = {scale: 0.96, autoAlpha: 0}
+      const ulStart = {y: 8, opacity: 0}
       if (!panel) return
 
-      gsap.killTweensOf(panel)
+      gsap.killTweensOf([panel, '.panel-backdrop', 'ul'])
 
       if (isOpen) {
         hasOpenedRef.current = true
-        gsap.fromTo(
-          panel,
-          {y: 10, scale: 0.98, autoAlpha: 0},
-          {
-            y: 0,
-            scale: 1,
-            autoAlpha: 1,
-            pointerEvents: 'auto',
-            duration: 0.4,
-            ease: 'expo.out',
-          },
-        )
+
+        gsap.set(panel, {autoAlpha: 1, pointerEvents: 'auto'})
+
+        gsap.fromTo('.panel-backdrop', backdropStart, {
+          scale: 1,
+          autoAlpha: 1,
+          duration: 0.5,
+          ease: 'back.out(2)',
+        })
+        gsap.fromTo('ul', ulStart, {
+          y: 0,
+          opacity: 1,
+          duration: 0.6,
+          ease: 'back.out(2)',
+        })
         return
       }
 
       if (!hasOpenedRef.current) {
-        gsap.set(panel, {y: 10, scale: 0.98, autoAlpha: 0, pointerEvents: 'none'})
+        gsap.set(panel, {autoAlpha: 0, pointerEvents: 'none'})
+        gsap.set('.panel-backdrop', backdropStart)
+        gsap.set('ul', ulStart)
         return
       }
 
       gsap.to(panel, {
-        y: 10,
-        scale: 0.98,
         autoAlpha: 0,
         pointerEvents: 'none',
-        duration: 0.4,
-        ease: 'expo.out',
+        duration: 0.25,
+        ease: 'power3.out',
+        onComplete: () => {
+          gsap.set('.panel-backdrop', backdropStart)
+          gsap.set('ul', ulStart)
+        },
       })
     },
-    {dependencies: [isOpen], scope: dropdownRef},
+    {dependencies: [isOpen], scope: dropdownRef, revertOnUpdate: false},
   )
 
   if (!title || !items || items.length === 0) return null
@@ -167,7 +176,7 @@ export default function MainNavDropdown({
   return (
     <li
       ref={dropdownRef}
-      className={cn(liClasses)}
+      className={cn(liClasses, 'relative')}
       onMouseLeave={handleLiMouseLeave}
       onFocus={handleLiFocus}
       onBlur={handleLiBlur}
@@ -184,12 +193,17 @@ export default function MainNavDropdown({
         className={cn(linkClasses, isOpen && 'bg-blue-650')}
       >
         {title}
-        <IconCarat className="h-[.5em] w-auto rotate-90 ml-[.5em] text-blue-200/60" />
+        <IconCarat
+          className={cn(
+            'h-[.5em] w-auto ml-[.5em] text-blue-200 transition-all',
+            isOpen ? '-rotate-90 opacity-100' : 'rotate-90 opacity-60',
+          )}
+        />
       </button>
       <span
         aria-hidden="true"
         className={cn(
-          'fixed inset-x-0 top-header h-header -translate-y-full',
+          'absolute -inset-x-gut-25 ts-btn top-btn h-header',
           isOpen ? 'pointer-events-auto' : 'pointer-events-none',
         )}
         onMouseEnter={open}
@@ -205,54 +219,58 @@ export default function MainNavDropdown({
         className="panel fixed top-header left-0 w-full invisible"
       >
         <SiteWidth>
-          <ul className="px-gut-75 py-gut-75 grid grid-cols-3 gap-gut-75 bg-blue-600 rounded-xs xl:rounded-sm">
-            {items.map((item: MainNavDropdownLinkItem) => {
-              const {_key, title, subtitle, thumbnail} = item
-              const path =
-                item._type === 'dropdownPage' && item.page
-                  ? resolveHref(item.page.type, item.page.slug)
-                  : item._type === 'dropdownExternal'
-                    ? item.url
-                    : undefined
-              const anchorLink = item._type === 'dropdownPage' ? item.anchorLink : undefined
-              const href = anchorLink ? `${path}#${anchorLink.replace(/^#/, '')}` : path
-              const page = item._type === 'dropdownPage' ? item.page : null
-              return (
-                <li key={_key} onClick={close}>
-                  <Link
-                    href={href || '/'}
-                    target={!page ? '_blank' : undefined}
-                    rel={!page ? 'noopener noreferrer' : undefined}
-                    className="rounded-btn overflow-hidden block relative"
-                  >
-                    {thumbnail && (
-                      <ImageBasic
-                        image={thumbnail}
-                        alt={title || page?.title}
-                        ratio={5 / 3}
-                        fetchPriority="low"
-                        sizes={imgSizesFormat(30)}
-                      />
-                    )}
-                    <div className="flex gap-gut-50 items-end text-pretty absolute top-1/2 left-0 right-0 bottom-0 bg-ease-in-out-to-t from-black/85 to-transparent p-gut-25">
-                      <div className="flex flex-col grow">
-                        <span className="ts-h6 ts-sans-wide">{title || page?.title}</span>
-                        {subtitle && <span className="ts-p-xs">{subtitle}</span>}
+          <div className="relative">
+            <div className="panel-backdrop bg-blue-600 rounded-xs xl:rounded-sm absolute inset-0"></div>
+            <ul className="px-gut-75 py-gut-75 grid grid-cols-3 gap-gut-75">
+              {items.map((item: MainNavDropdownLinkItem) => {
+                const {_key, title, subtitle, thumbnail} = item
+                const path =
+                  item._type === 'dropdownPage' && item.page
+                    ? resolveHref(item.page.type, item.page.slug)
+                    : item._type === 'dropdownExternal'
+                      ? item.url
+                      : undefined
+                const anchorLink = item._type === 'dropdownPage' ? item.anchorLink : undefined
+                const href = anchorLink ? `${path}#${anchorLink.replace(/^#/, '')}` : path
+                const page = item._type === 'dropdownPage' ? item.page : null
+                return (
+                  <li key={_key} onClick={close}>
+                    <Link
+                      href={href || '/'}
+                      target={!page ? '_blank' : undefined}
+                      rel={!page ? 'noopener noreferrer' : undefined}
+                      className="rounded-btn overflow-hidden block relative group"
+                    >
+                      {thumbnail && (
+                        <ImageBasic
+                          image={thumbnail}
+                          alt={title || page?.title}
+                          ratio={5 / 3}
+                          fetchPriority="low"
+                          sizes={imgSizesFormat(30)}
+                          className="group-hover:scale-103 transition-transform will-change-transform duration-300 ease-in-out"
+                        />
+                      )}
+                      <div className="flex gap-gut-50 items-end text-pretty absolute top-1/2 left-0 right-0 bottom-0 bg-ease-in-out-to-t from-black/85 to-transparent p-gut-25">
+                        <div className="flex flex-col grow">
+                          <span className="ts-h6 ts-sans-wide">{title || page?.title}</span>
+                          {subtitle && <span className="ts-p-xs">{subtitle}</span>}
+                        </div>
+                        <div
+                          className={cn(
+                            'rounded-full border ts-btn size-btn p-[.5em] flex items-center justify-center transition-transform will-change-transform',
+                          )}
+                          aria-hidden={true}
+                        >
+                          <IconCarat className="h-full w-auto mr-[-.2em]" />
+                        </div>
                       </div>
-                      <div
-                        className={cn(
-                          'rounded-full border ts-btn size-btn p-[.5em] flex items-center justify-center transition-transform will-change-transform',
-                        )}
-                        aria-hidden={true}
-                      >
-                        <IconCarat className="h-full w-auto mr-[-.2em]" />
-                      </div>
-                    </div>
-                  </Link>
-                </li>
-              )
-            })}
-          </ul>
+                    </Link>
+                  </li>
+                )
+              })}
+            </ul>
+          </div>
         </SiteWidth>
       </div>
     </li>
