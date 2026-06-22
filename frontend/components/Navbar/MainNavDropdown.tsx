@@ -224,15 +224,7 @@ export default function MainNavDropdown({
             <ul className="px-gut-75 py-gut-75 grid grid-cols-3 gap-gut-75">
               {items.map((item: MainNavDropdownLinkItem) => {
                 const {_key, title, subtitle, thumbnail} = item
-                const path =
-                  item._type === 'dropdownPage' && item.page
-                    ? resolveHref(item.page.type, item.page.slug)
-                    : item._type === 'dropdownExternal'
-                      ? item.url
-                      : undefined
-                const anchorLink = item._type === 'dropdownPage' ? item.anchorLink : undefined
-                const href = anchorLink ? `${path}#${anchorLink.replace(/^#/, '')}` : path
-                const page = item._type === 'dropdownPage' ? item.page : null
+                const {href, page} = GetDropdownLinkVars(item)
                 return (
                   <li key={_key} onClick={close}>
                     <Link
@@ -247,7 +239,7 @@ export default function MainNavDropdown({
                           alt={title || page?.title}
                           ratio={5 / 3}
                           fetchPriority="low"
-                          sizes={imgSizesFormat(30)}
+                          sizes={imgSizesFormat(0, 0, 30)}
                           className="group-hover:scale-103 transition-transform will-change-transform duration-300 ease-in-out"
                         />
                       )}
@@ -275,4 +267,20 @@ export default function MainNavDropdown({
       </div>
     </li>
   )
+}
+
+export function GetDropdownLinkVars(item) {
+  const path =
+    item._type === 'dropdownPage' && item.page
+      ? resolveHref(item.page.type, item.page.slug)
+      : item._type === 'dropdownExternal'
+        ? item.url
+        : undefined
+  const anchorLink = item._type === 'dropdownPage' ? item.anchorLink : undefined
+  const href = anchorLink ? `${path}#${anchorLink.replace(/^#/, '')}` : path
+  const page = item._type === 'dropdownPage' ? item.page : null
+  return {
+    href,
+    page,
+  }
 }

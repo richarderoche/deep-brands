@@ -1,10 +1,13 @@
 'use client'
 import Link from 'next/link'
 
-import {cn} from '@/lib/utils'
+import {cn, imgSizesFormat} from '@/lib/utils'
 import {resolveHref} from '@/sanity/lib/utils'
-import type {MainNavItem} from '@/types'
-import MainNavDropdown from '../Navbar/MainNavDropdown'
+import type {MainNavDropdownLinkItem, MainNavItem} from '@/types'
+import MainNavDropdown, {GetDropdownLinkVars} from '../Navbar/MainNavDropdown'
+import {MobileNavAccordion} from '../Navbar/MobileNavAccordion'
+import IconCarat from '../icons/IconCarat'
+import ImageBasic from './ImageBasic'
 
 interface NavLinkProps {
   navItems: MainNavItem[]
@@ -13,16 +16,25 @@ interface NavLinkProps {
   linkClasses?: string
   sep?: boolean
   onClick?: () => void
+  isMobileNav?: boolean
 }
 
 export default function NavLinks(props: NavLinkProps) {
-  const {navItems, ulClasses, liClasses, linkClasses, sep = false, onClick} = props
+  const {
+    navItems,
+    ulClasses,
+    liClasses,
+    linkClasses,
+    sep = false,
+    onClick,
+    isMobileNav = false,
+  } = props
 
   return (
     <ul className={ulClasses}>
       {navItems &&
         navItems.map((navItem: MainNavItem, i) => {
-          if (navItem._type === 'dropdown') {
+          if (!isMobileNav && navItem._type === 'dropdown') {
             return (
               <MainNavDropdown
                 key={navItem._key}
@@ -44,6 +56,54 @@ export default function NavLinks(props: NavLinkProps) {
           const page = navItem._type === 'navPage' ? navItem.page : null
           const href = anchorLink ? `${path}#${anchorLink.replace(/^#/, '')}` : path
 
+          if (isMobileNav && navItem._type === 'dropdown') {
+            const {items} = navItem
+            if (!items || items.length === 0) return null
+            return (
+              <MobileNavAccordion
+                key={navItem._key}
+                innerId={`mobile-nav-accordion-${navItem._key}`}
+                accordionTitle={navItem.title}
+                liClasses={liClasses}
+                linkClasses={linkClasses}
+              >
+                {items.map((item: MainNavDropdownLinkItem) => {
+                  const {_key, title, subtitle, thumbnail} = item
+                  const {href, page} = GetDropdownLinkVars(item)
+                  return (
+                    <div
+                      key={_key}
+                      onClick={onClick}
+                      className="border-b border-blue-650 last:border-b-0 md:mx-gut"
+                    >
+                      <Link
+                        href={href || '/'}
+                        target={!page ? '_blank' : undefined}
+                        rel={!page ? 'noopener noreferrer' : undefined}
+                        className="grid grid-cols-6 items-center py-gut-50"
+                      >
+                        {thumbnail && (
+                          <ImageBasic
+                            image={thumbnail}
+                            alt={title || page?.title}
+                            ratio={1.6}
+                            fetchPriority="low"
+                            sizes={imgSizesFormat(30, 30, 0)}
+                            className="rounded-[2px] col-span-2"
+                          />
+                        )}
+                        <div className="col-span-4 pl-gut-50 flex flex-col text-pretty">
+                          <span className="ts-h6 ts-h5 ts-sans-wide">{title || page?.title}</span>
+                          {subtitle && <span className="ts-p-xs pt-[.2em]">{subtitle}</span>}
+                        </div>
+                      </Link>
+                    </div>
+                  )
+                })}
+              </MobileNavAccordion>
+            )
+          }
+
           return (
             <li key={_key} className={cn(liClasses)}>
               {i > 0 && sep && <Sep />}
@@ -54,7 +114,21 @@ export default function NavLinks(props: NavLinkProps) {
                 onClick={onClick}
                 className={linkClasses}
               >
-                {title || page?.title}
+                {isMobileNav ? (
+                  <>
+                    <span className="">{title || page?.title}</span>
+                    <div
+                      className={cn(
+                        'rounded-full border ts-btn size-btn md:size-[2.2em] p-[.5em] flex items-center justify-center transition-transform will-change-transform',
+                      )}
+                      aria-hidden={true}
+                    >
+                      <IconCarat className="h-full w-auto mr-[-.2em]" />
+                    </div>
+                  </>
+                ) : (
+                  title || page?.title
+                )}
               </Link>
             </li>
           )

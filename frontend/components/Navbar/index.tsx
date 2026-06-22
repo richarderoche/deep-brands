@@ -18,6 +18,7 @@ export default async function Navbar() {
 
   const mainNavLeft = data?.mainNavLeft
   const mainNavRight = data?.mainNavRight
+  const mainNavMobile = [...(mainNavLeft ?? []), ...(mainNavRight ?? [])]
 
   const desktopUlClasses =
     'flex flex-wrap items-center gap-x-gut-50 text-offwhite h-full px-gut-25 rounded-btn'
@@ -39,7 +40,7 @@ export default async function Navbar() {
                 />
               </nav>
             )}
-            <MobileNav headerNav={mainNavLeft} />
+            <MobileNav mainNavMobile={mainNavMobile} />
           </div>
           <div className="absolute left-1/2 -translate-x-1/2">
             <Link href="/" className="block">

@@ -70,12 +70,16 @@ Example: ts-size-24/36 → font-size = var(--gut) × (24÷36)
 }
 
 .ts-p-xs {
-  @apply ts-size-13/24 md:ts-size-15/36;
+  @apply ts-size-13/24 md:ts-size-15/36 -tracking-1;
 }
 
 /* Misc */
 .ts-btn {
   @apply font-sans font-black uppercase leading-none ts-size-15/24 md:ts-size-18/36;
+}
+
+.ts-btn-size-only {
+  @apply ts-size-15/24 md:ts-size-18/36;
 }
 
 .ts-btn-nav {

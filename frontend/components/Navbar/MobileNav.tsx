@@ -1,7 +1,6 @@
 'use client'
 
 import {useGSAP} from '@gsap/react'
-import {CloseIcon, MenuIcon} from '@sanity/icons'
 import {FocusTrap} from 'focus-trap-react'
 import gsap from 'gsap'
 import {useEffect, useRef} from 'react'
@@ -9,13 +8,15 @@ import {useEffect, useRef} from 'react'
 import NavLinks from '@/components/shared/NavLinks'
 import {useStore} from '@/lib/store'
 import type {MainNavItem} from '@/types'
+import IconNavClose from '../icons/IconNavClose'
+import IconNavOpen from '../icons/IconNavOpen'
 
 interface NavbarProps {
-  headerNav?: MainNavItem[] | null
+  mainNavMobile?: MainNavItem[] | null
 }
 
 export default function MobileNav(props: NavbarProps) {
-  const {headerNav} = props
+  const {mainNavMobile} = props
 
   const isMobileNavOpen = useStore((state) => state.isMobileNavOpen)
   const setIsMobileNavOpen = useStore((state) => state.setIsMobileNavOpen)
@@ -68,24 +69,25 @@ export default function MobileNav(props: NavbarProps) {
 
   return (
     <FocusTrap active={isMobileNavOpen}>
-      <div className="lg:hidden">
+      <div className="lg:hidden ts-btn-size-only size-btn">
         <button
           onClick={handleToggleMobileNav}
           aria-expanded={isMobileNavOpen}
           aria-controls="mobile-nav"
           aria-label="Toggle Menu"
+          className="z-50 relative bg-white text-blue-800 h-full rounded-[2px]"
         >
           {isMobileNavOpen ? (
-            <CloseIcon style={{fontSize: 40}} />
+            <IconNavClose className="h-full w-auto" />
           ) : (
-            <MenuIcon style={{fontSize: 40}} />
+            <IconNavOpen className="h-full w-auto" />
           )}
         </button>
 
         <nav
           id="mobile-nav"
           ref={navRef}
-          className="fixed top-0 bottom-0 left-0 w-9/12 bg-white z-10 overflow-auto -translate-x-full"
+          className="fixed top-0 bottom-0 left-0 w-full pt-header bg-blue-600 text-offwhite z-10 overflow-auto -translate-x-full px-gut md:px-gut-150"
           data-lenis-prevent
           role="navigation"
           aria-label="Mobile Navigation"
@@ -93,10 +95,12 @@ export default function MobileNav(props: NavbarProps) {
         >
           <div>
             <NavLinks
-              navItems={headerNav ?? []}
-              ulClasses="flex flex-col gap-y-4 mt-5 p-4 md:p-8"
-              liClasses="text-3xl"
+              navItems={mainNavMobile ?? []}
+              ulClasses="flex flex-col mt-gut pb-gut-200"
+              liClasses="border-b-2 border-blue-650 last:border-b-0"
+              linkClasses="ts-h1 ts-serif py-gut-50 flex items-center justify-between"
               onClick={handleCloseMobileNav}
+              isMobileNav={true}
             />
           </div>
         </nav>
