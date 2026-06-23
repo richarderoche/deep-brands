@@ -12,7 +12,7 @@ export default function SectionHeroHome({section}: {section: PbHeroHome}) {
     <div className="h-[185vw] md:h-[150vw] lg:h-[66vw] flex flex-col gap-gut-25 lg:gap-[8vw] justify-center max-md:pt-gut-200 lg:pb-gut">
       {hasTopRow && (
         <div className="flex justify-around w-full h-[40vw] lg:h-[25vw]">
-          <div className="w-22/100 lg:w-1/3 h-full">
+          <div className="w-22/100 lg:w-1/3 h-full shadow-hero">
             <ImageCycle imageCycle={imagesTop1} sizes="25vw" className="rotate-35" />
           </div>
           <div className="w-1/3 h-full max-lg:hidden">
@@ -31,7 +31,7 @@ export default function SectionHeroHome({section}: {section: PbHeroHome}) {
               )}
             </div>
           </div>
-          <div className="w-22/100 lg:w-1/3 h-full">
+          <div className="w-22/100 lg:w-1/3 h-full shadow-hero">
             <ImageCycle imageCycle={imagesTop2} sizes="25vw" className="-rotate-35" />
           </div>
         </div>
@@ -51,7 +51,7 @@ export default function SectionHeroHome({section}: {section: PbHeroHome}) {
         )}
       </div>
       {hasBottomRow && (
-        <div className="flex justify-around w-full h-[40vw] lg:h-[25vw]">
+        <div className="flex justify-around w-full h-[40vw] lg:h-[25vw] shadow-hero">
           <div className="w-1/3 lg:w-1/4 h-full">
             <ImageCycle
               imageCycle={imagesBottom1}
