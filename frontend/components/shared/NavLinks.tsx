@@ -1,5 +1,5 @@
 'use client'
-import Link from 'next/link'
+import HashAwareLink from './HashAwareLink'
 
 import {cn, imgSizesFormat} from '@/lib/utils'
 import {resolveHref} from '@/sanity/lib/utils'
@@ -76,7 +76,7 @@ export default function NavLinks(props: NavLinkProps) {
                       onClick={onClick}
                       className="border-b border-blue-650 last:border-b-0 md:mx-gut"
                     >
-                      <Link
+                      <HashAwareLink
                         href={href || '/'}
                         target={!page ? '_blank' : undefined}
                         rel={!page ? 'noopener noreferrer' : undefined}
@@ -96,7 +96,7 @@ export default function NavLinks(props: NavLinkProps) {
                           <span className="ts-h6 ts-h5 ts-sans-wide">{title || page?.title}</span>
                           {subtitle && <span className="ts-p-xs pt-[.2em]">{subtitle}</span>}
                         </div>
-                      </Link>
+                      </HashAwareLink>
                     </div>
                   )
                 })}
@@ -107,7 +107,7 @@ export default function NavLinks(props: NavLinkProps) {
           return (
             <li key={_key} className={cn(liClasses)}>
               {i > 0 && sep && <Sep />}
-              <Link
+              <HashAwareLink
                 href={href || '/'}
                 target={!page ? '_blank' : undefined}
                 rel={!page ? 'noopener noreferrer' : undefined}
@@ -129,7 +129,7 @@ export default function NavLinks(props: NavLinkProps) {
                 ) : (
                   title || page?.title
                 )}
-              </Link>
+              </HashAwareLink>
             </li>
           )
         })}

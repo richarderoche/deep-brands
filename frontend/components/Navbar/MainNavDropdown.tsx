@@ -5,7 +5,7 @@ import {resolveHref} from '@/sanity/lib/utils'
 import type {MainNavDropdownLinkItem, MainNavItem} from '@/types'
 import {useGSAP} from '@gsap/react'
 import gsap from 'gsap'
-import Link from 'next/link'
+import HashAwareLink from '../shared/HashAwareLink'
 import {useEffect, useId, useRef, useState} from 'react'
 import IconCarat from '../icons/IconCarat'
 import ImageBasic from '../shared/ImageBasic'
@@ -227,7 +227,7 @@ export default function MainNavDropdown({
                 const {href, page} = GetDropdownLinkVars(item)
                 return (
                   <li key={_key} onClick={close}>
-                    <Link
+                    <HashAwareLink
                       href={href || '/'}
                       target={!page ? '_blank' : undefined}
                       rel={!page ? 'noopener noreferrer' : undefined}
@@ -257,7 +257,7 @@ export default function MainNavDropdown({
                           <IconCarat className="h-full w-auto mr-[-.2em]" />
                         </div>
                       </div>
-                    </Link>
+                    </HashAwareLink>
                   </li>
                 )
               })}

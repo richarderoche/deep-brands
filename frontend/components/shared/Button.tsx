@@ -1,4 +1,4 @@
-import Link from 'next/link'
+import HashAwareLink from './HashAwareLink'
 import type {CSSProperties} from 'react'
 
 import {colorValue} from '@/lib/colorValue'
@@ -98,7 +98,7 @@ export default function Button(props: ButtonProps) {
 
   if (href) {
     return (
-      <Link
+      <HashAwareLink
         href={href || ''}
         target={isExternal ? '_blank' : undefined}
         rel={isExternal ? 'noopener noreferrer' : undefined}
@@ -114,7 +114,7 @@ export default function Button(props: ButtonProps) {
           arrowDirection={arrowDirection}
           buttonStyle={resolvedStyle}
         />
-      </Link>
+      </HashAwareLink>
     )
   }
 
