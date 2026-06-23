@@ -13,11 +13,13 @@ export default function ImageCycle({
   sizes,
   startDelay = 0,
   className = '',
+  imgClassName = '',
 }: {
   imageCycle: ImageCycleType
   sizes: string
   startDelay?: number
   className?: string
+  imgClassName?: string
 }) {
   const containerRef = useRef<HTMLDivElement>(null)
   const reducedMotion = usePrefersReducedMotion()
@@ -105,7 +107,7 @@ export default function ImageCycle({
             alt=""
             fitTo="manual"
             mode="contain"
-            className="h-full w-full object-contain"
+            className={cn('h-full w-full object-contain', imgClassName)}
             sizes={sizes}
             fetchPriority={index === 0 ? 'high' : 'low'}
           />
