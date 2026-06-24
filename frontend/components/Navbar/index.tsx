@@ -3,7 +3,6 @@ import {settingsQuery} from '@/sanity/lib/queries'
 import NavLinks from '../shared/NavLinks'
 import SiteWidth from '../shared/SiteWidth'
 //import MobileNav from './MobileNav'
-import {imgSizesFormat} from '@/lib/utils'
 import {SettingsQueryResult} from '@/sanity.types'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -29,7 +28,10 @@ export default async function Navbar() {
     'flex w-fit items-center h-btn px-[.5em] rounded-btn border border-transparent transition-all hover:bg-blue-650 will-change-transform ts-btn'
 
   return (
-    <header className="h-header fixed top-0 left-0 w-full z-999" style={{viewTransitionName: 'site-header'}}>
+    <header
+      className="h-header fixed top-0 left-0 w-full z-999"
+      style={{viewTransitionName: 'site-header'}}
+    >
       <SkipLink />
       <SiteWidth className="h-full pt-gut-66 lg:pt-gut-50 pb-gut-25">
         <div className="h-full flex items-center justify-between gap-x-gut bg-blue-600 relative rounded-xs xl:rounded-sm box-shadow-sm px-gut-50 max-md:-mx-gut-50">
@@ -57,7 +59,7 @@ export default async function Navbar() {
                 width={513}
                 height={312}
                 className="h-header w-auto scale-95 -translate-y-1/40  lg:scale-90 lg:-translate-y-1/30 shadow-sm"
-                sizes={imgSizesFormat(30, 18, 9)}
+                priority
               />
             </Link>
           </div>
@@ -77,6 +79,7 @@ export default async function Navbar() {
                   <Link
                     href={icon.url || ''}
                     key={icon._key}
+                    aria-label={icon.icon}
                     className="rounded-full ts-btn size-btn p-[.4em] flex items-center justify-center border border-offwhite [&_svg]:h-full [&_svg]:w-auto"
                   >
                     <SocialIcon name={icon.icon} />

@@ -110,6 +110,8 @@ export default function ImageCycle({
             className={cn('h-full w-full object-contain', imgClassName)}
             sizes={sizes}
             fetchPriority={index === 0 ? 'high' : 'low'}
+            maxDimension={400}
+            priority={index === 0 ? true : false}
           />
         </div>
       ))}

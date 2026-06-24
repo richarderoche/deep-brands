@@ -23,6 +23,7 @@ export default function SectionHeroHome({section}: {section: PbHeroHome}) {
                 className="block h-[20vw] w-auto"
                 width={513}
                 height={312}
+                priority
               />
               {heading && (
                 <h2 className="ts-h4 ts-serif text-center text-balance">
