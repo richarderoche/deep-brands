@@ -1075,6 +1075,7 @@ export type Settings = {
     media?: unknown
     hotspot?: SanityImageHotspot
     crop?: SanityImageCrop
+    link?: string
     alt?: string
     _type: 'image'
     _key: string
@@ -9805,6 +9806,7 @@ export type SettingsQueryResult = {
     media?: unknown
     hotspot?: SanityImageHotspot
     crop?: SanityImageCrop
+    link?: string
     alt?: string
     _type: 'image'
     _key: string

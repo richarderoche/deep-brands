@@ -23,7 +23,10 @@ export default async function Footer() {
   const hasFooterBrands = footerBrands && footerBrands?.length > 0
 
   return (
-    <footer className="dark-theme theme-vars-only flex flex-col" style={{viewTransitionName: 'site-footer'}}>
+    <footer
+      className="dark-theme theme-vars-only flex flex-col"
+      style={{viewTransitionName: 'site-footer'}}
+    >
       <IconOrnamentTop />
       <div className="bg-bg text-body">
         <SiteWidth className="pb-gut pt-gut-150 md:pt-gut-200">
@@ -47,13 +50,29 @@ export default async function Footer() {
                 {hasBadges && (
                   <div className="flex items-center gap-gut-50">
                     {badges.map((badge, key) => {
+                      const {link} = badge
+                      const hasLink = link && link.length > 0
+                      const image = (
+                        <ImageBasic
+                          image={badge}
+                          alt={badge.alt}
+                          sizes={imgSizesFormat(15, 10, 6.5)}
+                        />
+                      )
                       return (
                         <div className="w-[15vw] md:w-[10vw] lg:w-[6.5vw]" key={key}>
-                          <ImageBasic
-                            image={badge}
-                            alt={badge.alt}
-                            sizes={imgSizesFormat(15, 10, 6.5)}
-                          />
+                          {hasLink ? (
+                            <Link
+                              href={link}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="block hover:scale-105 transition-all"
+                            >
+                              {image}
+                            </Link>
+                          ) : (
+                            image
+                          )}
                         </div>
                       )
                     })}

@@ -111,6 +111,7 @@ export default defineType({
         {
           type: 'image',
           fields: [
+            defineField({name: 'link', title: 'Link (Optional)', type: 'url'}),
             defineField({
               name: 'alt',
               title: 'Alt Text',
