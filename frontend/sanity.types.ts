@@ -126,6 +126,12 @@ export type MarkDefsFileLinkFile = {
   _type: 'file'
 }
 
+export type JobFile = {
+  asset?: SanityFileAssetReference
+  media?: unknown // Unable to locate the referenced type "job.file.media" in schema
+  _type: 'file'
+}
+
 export type ImageElementImage = {
   asset?: SanityImageAssetReference
   media?: unknown // Unable to locate the referenced type "imageElement.image.media" in schema
@@ -756,7 +762,9 @@ export type PbBlockJobs = {
     title?: string
     subtitle?: string
     company?: BrandsReference
+    linkType?: 'externalLink' | 'file'
     url?: string
+    file?: JobFile
     _type: 'job'
     _key: string
   }>
@@ -1423,6 +1431,7 @@ export type AllSanitySchemaTypes =
   | SanityFileAssetReference
   | FileLinkFile
   | MarkDefsFileLinkFile
+  | JobFile
   | ImageElementImage
   | YAlignment
   | BannerImageImage
@@ -1666,7 +1675,9 @@ export type HomePageQueryResult = {
                 title?: string
                 subtitle?: string
                 company: string | null
+                linkType?: 'externalLink' | 'file'
                 url?: string
+                file?: JobFile
                 _type: 'job'
                 _key: string
               }> | null
@@ -1922,7 +1933,9 @@ export type HomePageQueryResult = {
                 title?: string
                 subtitle?: string
                 company: string | null
+                linkType?: 'externalLink' | 'file'
                 url?: string
+                file?: JobFile
                 _type: 'job'
                 _key: string
               }> | null
@@ -2181,7 +2194,9 @@ export type HomePageQueryResult = {
                   title?: string
                   subtitle?: string
                   company: string | null
+                  linkType?: 'externalLink' | 'file'
                   url?: string
+                  file?: JobFile
                   _type: 'job'
                   _key: string
                 }> | null
@@ -2434,7 +2449,9 @@ export type HomePageQueryResult = {
                   title?: string
                   subtitle?: string
                   company: string | null
+                  linkType?: 'externalLink' | 'file'
                   url?: string
+                  file?: JobFile
                   _type: 'job'
                   _key: string
                 }> | null
@@ -2695,7 +2712,9 @@ export type HomePageQueryResult = {
                   title?: string
                   subtitle?: string
                   company: string | null
+                  linkType?: 'externalLink' | 'file'
                   url?: string
+                  file?: JobFile
                   _type: 'job'
                   _key: string
                 }> | null
@@ -2955,7 +2974,9 @@ export type HomePageQueryResult = {
                 title?: string
                 subtitle?: string
                 company: string | null
+                linkType?: 'externalLink' | 'file'
                 url?: string
+                file?: JobFile
                 _type: 'job'
                 _key: string
               }> | null
@@ -3314,7 +3335,9 @@ export type HomePageQueryResult = {
                 title?: string
                 subtitle?: string
                 company: string | null
+                linkType?: 'externalLink' | 'file'
                 url?: string
+                file?: JobFile
                 _type: 'job'
                 _key: string
               }> | null
@@ -3641,7 +3664,9 @@ export type HomePageQueryResult = {
                       title?: string
                       subtitle?: string
                       company: string | null
+                      linkType?: 'externalLink' | 'file'
                       url?: string
+                      file?: JobFile
                       _type: 'job'
                       _key: string
                     }> | null
@@ -3897,7 +3922,9 @@ export type HomePageQueryResult = {
                       title?: string
                       subtitle?: string
                       company: string | null
+                      linkType?: 'externalLink' | 'file'
                       url?: string
+                      file?: JobFile
                       _type: 'job'
                       _key: string
                     }> | null
@@ -4156,7 +4183,9 @@ export type HomePageQueryResult = {
                         title?: string
                         subtitle?: string
                         company: string | null
+                        linkType?: 'externalLink' | 'file'
                         url?: string
+                        file?: JobFile
                         _type: 'job'
                         _key: string
                       }> | null
@@ -4409,7 +4438,9 @@ export type HomePageQueryResult = {
                         title?: string
                         subtitle?: string
                         company: string | null
+                        linkType?: 'externalLink' | 'file'
                         url?: string
+                        file?: JobFile
                         _type: 'job'
                         _key: string
                       }> | null
@@ -4670,7 +4701,9 @@ export type HomePageQueryResult = {
                         title?: string
                         subtitle?: string
                         company: string | null
+                        linkType?: 'externalLink' | 'file'
                         url?: string
+                        file?: JobFile
                         _type: 'job'
                         _key: string
                       }> | null
@@ -4930,7 +4963,9 @@ export type HomePageQueryResult = {
                       title?: string
                       subtitle?: string
                       company: string | null
+                      linkType?: 'externalLink' | 'file'
                       url?: string
+                      file?: JobFile
                       _type: 'job'
                       _key: string
                     }> | null
@@ -5289,7 +5324,9 @@ export type HomePageQueryResult = {
                       title?: string
                       subtitle?: string
                       company: string | null
+                      linkType?: 'externalLink' | 'file'
                       url?: string
+                      file?: JobFile
                       _type: 'job'
                       _key: string
                     }> | null
@@ -5711,7 +5748,9 @@ export type PagesBySlugQueryResult = {
                 title?: string
                 subtitle?: string
                 company: string | null
+                linkType?: 'externalLink' | 'file'
                 url?: string
+                file?: JobFile
                 _type: 'job'
                 _key: string
               }> | null
@@ -5967,7 +6006,9 @@ export type PagesBySlugQueryResult = {
                 title?: string
                 subtitle?: string
                 company: string | null
+                linkType?: 'externalLink' | 'file'
                 url?: string
+                file?: JobFile
                 _type: 'job'
                 _key: string
               }> | null
@@ -6226,7 +6267,9 @@ export type PagesBySlugQueryResult = {
                   title?: string
                   subtitle?: string
                   company: string | null
+                  linkType?: 'externalLink' | 'file'
                   url?: string
+                  file?: JobFile
                   _type: 'job'
                   _key: string
                 }> | null
@@ -6479,7 +6522,9 @@ export type PagesBySlugQueryResult = {
                   title?: string
                   subtitle?: string
                   company: string | null
+                  linkType?: 'externalLink' | 'file'
                   url?: string
+                  file?: JobFile
                   _type: 'job'
                   _key: string
                 }> | null
@@ -6740,7 +6785,9 @@ export type PagesBySlugQueryResult = {
                   title?: string
                   subtitle?: string
                   company: string | null
+                  linkType?: 'externalLink' | 'file'
                   url?: string
+                  file?: JobFile
                   _type: 'job'
                   _key: string
                 }> | null
@@ -7000,7 +7047,9 @@ export type PagesBySlugQueryResult = {
                 title?: string
                 subtitle?: string
                 company: string | null
+                linkType?: 'externalLink' | 'file'
                 url?: string
+                file?: JobFile
                 _type: 'job'
                 _key: string
               }> | null
@@ -7359,7 +7408,9 @@ export type PagesBySlugQueryResult = {
                 title?: string
                 subtitle?: string
                 company: string | null
+                linkType?: 'externalLink' | 'file'
                 url?: string
+                file?: JobFile
                 _type: 'job'
                 _key: string
               }> | null
@@ -7686,7 +7737,9 @@ export type PagesBySlugQueryResult = {
                       title?: string
                       subtitle?: string
                       company: string | null
+                      linkType?: 'externalLink' | 'file'
                       url?: string
+                      file?: JobFile
                       _type: 'job'
                       _key: string
                     }> | null
@@ -7942,7 +7995,9 @@ export type PagesBySlugQueryResult = {
                       title?: string
                       subtitle?: string
                       company: string | null
+                      linkType?: 'externalLink' | 'file'
                       url?: string
+                      file?: JobFile
                       _type: 'job'
                       _key: string
                     }> | null
@@ -8201,7 +8256,9 @@ export type PagesBySlugQueryResult = {
                         title?: string
                         subtitle?: string
                         company: string | null
+                        linkType?: 'externalLink' | 'file'
                         url?: string
+                        file?: JobFile
                         _type: 'job'
                         _key: string
                       }> | null
@@ -8454,7 +8511,9 @@ export type PagesBySlugQueryResult = {
                         title?: string
                         subtitle?: string
                         company: string | null
+                        linkType?: 'externalLink' | 'file'
                         url?: string
+                        file?: JobFile
                         _type: 'job'
                         _key: string
                       }> | null
@@ -8715,7 +8774,9 @@ export type PagesBySlugQueryResult = {
                         title?: string
                         subtitle?: string
                         company: string | null
+                        linkType?: 'externalLink' | 'file'
                         url?: string
+                        file?: JobFile
                         _type: 'job'
                         _key: string
                       }> | null
@@ -8975,7 +9036,9 @@ export type PagesBySlugQueryResult = {
                       title?: string
                       subtitle?: string
                       company: string | null
+                      linkType?: 'externalLink' | 'file'
                       url?: string
+                      file?: JobFile
                       _type: 'job'
                       _key: string
                     }> | null
@@ -9334,7 +9397,9 @@ export type PagesBySlugQueryResult = {
                       title?: string
                       subtitle?: string
                       company: string | null
+                      linkType?: 'externalLink' | 'file'
                       url?: string
+                      file?: JobFile
                       _type: 'job'
                       _key: string
                     }> | null

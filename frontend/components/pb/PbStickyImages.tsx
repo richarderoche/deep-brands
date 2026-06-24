@@ -37,15 +37,6 @@ export default function PbStickyImages({
       const pinEl = pinRef.current
       if (!scrollRange || !pinEl) return
 
-      const syncPinWidth = () => {
-        const section = scrollRange.closest(
-          'section[data-pb-section="pbSectionGroup"]',
-        ) as HTMLElement | null
-        if (section) gsap.set(pinEl, {width: section.offsetWidth})
-      }
-
-      syncPinWidth()
-
       ScrollTrigger.create({
         trigger: scrollRange,
         start: 'top top',
@@ -53,7 +44,6 @@ export default function PbStickyImages({
         pin: pinEl,
         pinSpacing: false,
         invalidateOnRefresh: true,
-        onRefresh: syncPinWidth,
         markers: false,
       })
     },
@@ -72,19 +62,13 @@ export default function PbStickyImages({
               {images?.topLeft && <StickyImage img={images.topLeft} x="left" y="top" />}
               {images?.topRight && <StickyImage img={images.topRight} x="right" y="top" />}
               {images?.bottomLeft && <StickyImage img={images.bottomLeft} x="left" y="bottom" />}
-              {images?.bottomRight && (
-                <StickyImage img={images.bottomRight} x="right" y="bottom" />
-              )}
+              {images?.bottomRight && <StickyImage img={images.bottomRight} x="right" y="bottom" />}
             </div>
           </div>
           <div className="relative z-1 w-full">{children}</div>
         </div>
         {marginBottom ? (
-          <div
-            aria-hidden
-            className="w-full"
-            style={{height: sectionMarginHeight(marginBottom)}}
-          />
+          <div aria-hidden className="w-full" style={{height: sectionMarginHeight(marginBottom)}} />
         ) : null}
       </div>
     </>

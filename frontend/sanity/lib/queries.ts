@@ -89,6 +89,10 @@ const pbBlocks = `
     jobs[]{
       ...,
       "company": company->title,
+      "url": select(
+        linkType == "file" => file.asset->url,
+        url
+      ),
     },
   },
 `

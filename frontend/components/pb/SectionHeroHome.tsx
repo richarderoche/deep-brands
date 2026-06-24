@@ -13,7 +13,7 @@ export default function SectionHeroHome({section}: {section: PbHeroHome}) {
       {hasTopRow && (
         <div className="flex justify-around w-full h-[40vw] lg:h-[22vw]">
           <div className="w-22/100 lg:w-1/3 h-full shadow-hero">
-            <ImageCycle imageCycle={imagesTop1} sizes="25vw" className="rotate-35" />
+            <ImageCycle imageCycle={imagesTop1} sizes="20vw" className="rotate-35" />
           </div>
           <div className="w-1/3 h-full max-lg:hidden">
             <div className="h-full flex flex-col items-center justify-center gap-gut-33 translate-y-[4vw]">
@@ -33,7 +33,7 @@ export default function SectionHeroHome({section}: {section: PbHeroHome}) {
             </div>
           </div>
           <div className="w-22/100 lg:w-1/3 h-full shadow-hero">
-            <ImageCycle imageCycle={imagesTop2} sizes="25vw" className="-rotate-35" />
+            <ImageCycle imageCycle={imagesTop2} sizes="20vw" className="-rotate-35" />
           </div>
         </div>
       )}
@@ -56,19 +56,19 @@ export default function SectionHeroHome({section}: {section: PbHeroHome}) {
           <div className="w-1/3 lg:w-[23vw] h-full">
             <ImageCycle
               imageCycle={imagesBottom1}
-              sizes="25vw"
+              sizes="20vw"
               className="rotate-15 lg:-rotate-15"
             />
           </div>
           <div className="w-1/3 lg:w-[23vw] h-full">
             <ImageCycle
               imageCycle={imagesBottom2}
-              sizes="25vw"
+              sizes="20vw"
               imgClassName="lg:object-bottom max-lg:-rotate-15"
             />
           </div>
           <div className="w-[23vw] h-full portrait:hidden max-lg:hidden">
-            <ImageCycle imageCycle={imagesBottom3} sizes="25vw" className="rotate-15" />
+            <ImageCycle imageCycle={imagesBottom3} sizes="20vw" className="rotate-15" />
           </div>
         </div>
       )}

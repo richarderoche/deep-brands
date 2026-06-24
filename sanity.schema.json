@@ -1153,6 +1153,38 @@
   },
   {
     "type": "type",
+    "name": "job.file",
+    "value": {
+      "type": "object",
+      "attributes": {
+        "asset": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "inline",
+            "name": "sanity.fileAsset.reference"
+          },
+          "optional": true
+        },
+        "media": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "inline",
+            "name": "job.file.media"
+          },
+          "optional": true
+        },
+        "_type": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string",
+            "value": "file"
+          }
+        }
+      }
+    }
+  },
+  {
+    "type": "type",
     "name": "imageElement.image",
     "value": {
       "type": "object",
@@ -5410,10 +5442,35 @@
                   },
                   "optional": true
                 },
+                "linkType": {
+                  "type": "objectAttribute",
+                  "value": {
+                    "type": "union",
+                    "of": [
+                      {
+                        "type": "string",
+                        "value": "externalLink"
+                      },
+                      {
+                        "type": "string",
+                        "value": "file"
+                      }
+                    ]
+                  },
+                  "optional": true
+                },
                 "url": {
                   "type": "objectAttribute",
                   "value": {
                     "type": "string"
+                  },
+                  "optional": true
+                },
+                "file": {
+                  "type": "objectAttribute",
+                  "value": {
+                    "type": "inline",
+                    "name": "job.file"
                   },
                   "optional": true
                 },
