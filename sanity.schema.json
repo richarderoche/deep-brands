@@ -5427,6 +5427,14 @@
                   },
                   "optional": true
                 },
+                "company": {
+                  "type": "objectAttribute",
+                  "value": {
+                    "type": "inline",
+                    "name": "brands.reference"
+                  },
+                  "optional": true
+                },
                 "subtitle": {
                   "type": "objectAttribute",
                   "value": {
@@ -5434,11 +5442,10 @@
                   },
                   "optional": true
                 },
-                "company": {
+                "description": {
                   "type": "objectAttribute",
                   "value": {
-                    "type": "inline",
-                    "name": "brands.reference"
+                    "type": "string"
                   },
                   "optional": true
                 },

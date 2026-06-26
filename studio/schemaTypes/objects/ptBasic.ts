@@ -1,5 +1,5 @@
-import { DocumentPdfIcon, DocumentSheetIcon } from '@sanity/icons'
-import { defineField, defineType } from 'sanity'
+import {DocumentPdfIcon, DocumentSheetIcon} from '@sanity/icons'
+import {defineField, defineType} from 'sanity'
 
 export default defineType({
   name: 'ptBasic',
@@ -10,8 +10,9 @@ export default defineType({
       type: 'block',
       marks: {
         decorators: [
-          { title: 'Strong', value: 'strong' },
-          { title: 'Emphasis', value: 'em' },
+          {title: 'Strong', value: 'strong'},
+          {title: 'Emphasis', value: 'em'},
+          {title: 'Underline', value: 'underline'},
         ],
         annotations: [
           {
@@ -40,7 +41,7 @@ export default defineType({
                 name: 'reference',
                 type: 'reference',
                 title: 'Reference',
-                to: [{ type: 'page' }],
+                to: [{type: 'page'}],
               }),
             ],
           },
@@ -63,13 +64,13 @@ export default defineType({
         ],
       },
       styles: [
-        { title: 'Normal', value: 'normal' },
-        { title: 'Heading 1', value: 'h1' },
-        { title: 'Heading 2', value: 'h2' },
-        { title: 'Heading 3', value: 'h3' },
-        { title: 'Heading 4', value: 'h4' },
-        { title: 'Label', value: 'h5' },
-        { title: 'Label Small', value: 'h6' },
+        {title: 'Normal', value: 'normal'},
+        {title: 'Heading 1', value: 'h1'},
+        {title: 'Heading 2', value: 'h2'},
+        {title: 'Heading 3', value: 'h3'},
+        {title: 'Heading 4', value: 'h4'},
+        {title: 'Label', value: 'h5'},
+        {title: 'Label Small', value: 'h6'},
       ],
     },
   ],

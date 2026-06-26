@@ -760,8 +760,9 @@ export type PbBlockJobs = {
   _type: 'pbBlockJobs'
   jobs?: Array<{
     title?: string
-    subtitle?: string
     company?: BrandsReference
+    subtitle?: string
+    description?: string
     linkType?: 'externalLink' | 'file'
     url?: string
     file?: JobFile

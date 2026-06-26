@@ -24,17 +24,23 @@ export default defineType({
               type: 'string',
             }),
             defineField({
+              name: 'company',
+              title: 'Company',
+              description: 'Leave blank for Deep Brands',
+              type: 'reference',
+              to: [{type: 'brands'}],
+            }),
+            defineField({
               name: 'subtitle',
               title: 'Subtitle',
               description: 'e.g."Remote / New York"',
               type: 'string',
             }),
             defineField({
-              name: 'company',
-              title: 'Company',
-              description: 'Leave blank for Deep Brands',
-              type: 'reference',
-              to: [{type: 'brands'}],
+              name: 'description',
+              title: 'Short Description',
+              type: 'text',
+              rows: 2,
             }),
             defineField({
               title: 'Link Type',
