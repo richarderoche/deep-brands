@@ -243,6 +243,9 @@ export const settingsQuery = defineQuery(`
       websiteLink,
       socialIcons,
     },
+    "headerCTAs": headerCTAs[]{
+      ${pbButton}
+    },
     ${seo},
   }
 `)

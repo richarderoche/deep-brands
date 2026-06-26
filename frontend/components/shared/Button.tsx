@@ -68,7 +68,10 @@ export default function Button(props: ButtonProps) {
     const {page, title, url, anchorLink: navAnchorLink} = navItem
     href = page ? resolveHref(page.type, page.slug) : url
     const hash = anchorLink ?? navAnchorLink
-    href = hash ? `${href}#${hash.replace(/^#/, '')}` : href
+    if (hash) {
+      const normalizedHash = hash.replace(/^#/, '')
+      href = href ? `${href}#${normalizedHash}` : `#${normalizedHash}`
+    }
     buttonText = title || page?.title || ''
   } else {
     href = path || ''
