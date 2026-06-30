@@ -1,4 +1,3 @@
-import {HERO_SHAPE_MASK_IDS} from '@/components/icons/HeroShapeMasks'
 import BackgroundVideoPlayer, {muxPlaybackHlsUrl} from '@/components/shared/BackgroundVideoPlayer'
 import ImageBasic from '@/components/shared/ImageBasic'
 import ResponsiveMask from '@/components/shared/ResponsiveMask'
@@ -7,6 +6,8 @@ import {
   HERO_SHAPE_LANDSCAPE_RATIO,
   HERO_SHAPE_MID_RATIO,
   HERO_SHAPE_PORTRAIT_RATIO,
+  HERO_SHAPE_RX_BOTTOM,
+  HERO_SHAPE_RX_TOP,
 } from '@/lib/responsiveMaskPath'
 import {imgSizesFormat} from '@/lib/utils'
 import type {Image as SanityImageType} from 'sanity'
@@ -35,7 +36,8 @@ export default function HeroShapeBackdrop({
         mid: HERO_SHAPE_MID_RATIO,
         tall: HERO_SHAPE_PORTRAIT_RATIO,
       }}
-      maskIds={HERO_SHAPE_MASK_IDS}
+      rxTop={HERO_SHAPE_RX_TOP}
+      rxBottom={HERO_SHAPE_RX_BOTTOM}
       className="w-full"
     >
       {image ? (
