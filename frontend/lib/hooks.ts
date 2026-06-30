@@ -1,4 +1,12 @@
+import { isWebKit } from '@/lib/browser'
 import { useMediaQuery } from 'hamo'
+import { useEffect } from 'react'
+
+export function useWebKitClass() {
+  useEffect(() => {
+    document.documentElement.classList.add(isWebKit() ? 'is-webkit' : 'not-webkit')
+  }, [])
+}
 
 export function useOrientation() {
   const isPortrait = useMediaQuery('(orientation: portrait)')

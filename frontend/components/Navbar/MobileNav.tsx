@@ -7,8 +7,7 @@ import {useEffect, useRef} from 'react'
 
 import NavLinks from '@/components/shared/NavLinks'
 import {useStore} from '@/lib/store'
-import {PbBlockButton} from '@/sanity.types'
-import type {MainNavItem} from '@/types'
+import type {HeaderCTA, MainNavItem} from '@/types'
 import IconNavClose from '../icons/IconNavClose'
 import IconNavOpen from '../icons/IconNavOpen'
 import {ButtonBlock} from '../pb/PbBlocks'
@@ -16,7 +15,7 @@ import {ButtonBlock} from '../pb/PbBlocks'
 interface NavbarProps {
   mainNavMobile?: MainNavItem[] | null
   hasHeaderCTAs?: boolean
-  headerCTAs?: Array<{_key: string} & PbBlockButton>
+  headerCTAs?: HeaderCTA[]
 }
 
 export default function MobileNav(props: NavbarProps) {

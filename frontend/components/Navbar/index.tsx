@@ -20,7 +20,8 @@ export default async function Navbar() {
     data || {}
   const mainNavMobile = [...(mainNavLeft ?? []), ...(mainNavRight ?? [])]
   const hasSocialIcons = showHeaderSocials && socialIcons && socialIcons.length > 0
-  const hasHeaderCTAs = showHeaderCTAs && headerCTAs && headerCTAs.length > 0
+  const headerCTAsList = headerCTAs ?? []
+  const hasHeaderCTAs = Boolean(showHeaderCTAs && headerCTAsList.length > 0)
 
   const desktopUlClasses =
     'flex flex-wrap items-center gap-x-gut-50 text-offwhite h-full px-gut-25 rounded-btn'
@@ -48,7 +49,7 @@ export default async function Navbar() {
             <MobileNav
               mainNavMobile={mainNavMobile}
               hasHeaderCTAs={hasHeaderCTAs}
-              headerCTAs={headerCTAs}
+              headerCTAs={hasHeaderCTAs ? headerCTAsList : undefined}
             />
           </div>
           <div className="absolute left-1/2 -translate-x-1/2">
@@ -89,7 +90,7 @@ export default async function Navbar() {
             )}
             {hasHeaderCTAs && (
               <div className="flex items-center gap-gut-33 max-lg:hidden">
-                {headerCTAs.map((cta) => (
+                {headerCTAsList.map((cta) => (
                   <ButtonBlock key={cta._key} block={cta} />
                 ))}
               </div>

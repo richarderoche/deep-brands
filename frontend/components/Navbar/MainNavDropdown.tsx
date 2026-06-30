@@ -5,9 +5,9 @@ import {resolveHref} from '@/sanity/lib/utils'
 import type {MainNavDropdownLinkItem, MainNavItem} from '@/types'
 import {useGSAP} from '@gsap/react'
 import gsap from 'gsap'
-import HashAwareLink from '../shared/HashAwareLink'
 import {useEffect, useId, useRef, useState} from 'react'
 import IconCarat from '../icons/IconCarat'
+import HashAwareLink from '../shared/HashAwareLink'
 import ImageBasic from '../shared/ImageBasic'
 import SiteWidth from '../shared/SiteWidth'
 
@@ -220,7 +220,7 @@ export default function MainNavDropdown({
       >
         <SiteWidth>
           <div className="relative">
-            <div className="panel-backdrop bg-blue-600 rounded-xs xl:rounded-sm absolute inset-0"></div>
+            <div className="panel-backdrop bg-blue-600 rounded-xs xl:rounded-sm absolute inset-0 box-shadow-sm will-change-transform"></div>
             <ul className="px-gut-75 py-gut-75 grid grid-cols-3 gap-gut-75">
               {items.map((item: MainNavDropdownLinkItem) => {
                 const {_key, title, subtitle, thumbnail} = item

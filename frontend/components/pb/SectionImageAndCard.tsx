@@ -42,8 +42,8 @@ export default function SectionImageAndCard({section}: {section: PbImageWithCard
             )}
             {hasBlocks && (
               <Revealer direction="stagger">
-                <div className="md:px-gut-50 relative z-1 -top-gut-75">
-                  <Card bgColor={bgColor}>
+                <div className="md:px-gut-50 relative z-1 -top-gut-250">
+                  <Card outerClassName="" bgColor={bgColor}>
                     <PbBlocks
                       columnBlocks={pbBlocks as PbBlocksQueryResult}
                       trueSizes={imgSizes}

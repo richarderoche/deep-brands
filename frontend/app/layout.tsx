@@ -6,6 +6,7 @@ import Navbar from '@/components/Navbar'
 import GlobalScripts from '@/components/shared/GlobalScripts'
 import {GSAP} from '@/components/shared/GSAP'
 import {Lenis} from '@/components/shared/Lenis'
+import {WebKitClass} from '@/components/shared/WebKitClass'
 import {sanityFetch, SanityLive} from '@/sanity/lib/live'
 import {settingsQuery} from '@/sanity/lib/queries'
 import {urlForOpenGraphImage} from '@/sanity/lib/utils'
@@ -120,6 +121,7 @@ export default async function RootLayout({children}: LayoutProps<'/'>) {
       data-scroll-behavior="smooth"
     >
       <body>
+        <WebKitClass />
         <IconMasks />
         <Lenis />
         <GSAP />

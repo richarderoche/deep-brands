@@ -90,3 +90,7 @@ for container-relative rounded corners
 .paused-by-button [data-marqy] > [data-marqy-inner] > [data-marqy-content] {
   animation-play-state: paused;
 }
+
+html.is-webkit :is(.shadow-md, .shadow-sm, .shadow-hero) {
+  will-change: transform;
+}

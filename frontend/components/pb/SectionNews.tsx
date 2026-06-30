@@ -76,9 +76,9 @@ export default function SectionNews({section}: {section: PbNews}) {
                         trueSizes={imgSizesFormat(80, 60, 30)}
                       />
                     </div>
-                    <div className="-mt-gut -mx-gut-50 pb-gut grow">
+                    <div className="-mt-gut-250 -mx-gut-50 pb-gut grow ">
                       <Card
-                        outerClassName="shadow-sm h-full"
+                        outerClassName="h-full relative "
                         innerClassName="h-full flex flex-col gap-gut-33"
                         bgColor="var(--rainbow-light)"
                       >

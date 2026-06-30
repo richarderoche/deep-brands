@@ -27,6 +27,10 @@ export type MainNavDropdownLinkItem = NonNullable<
   NonNullable<Extract<MainNavItem, {_type: 'dropdown'}>['items']>[number]
 >
 
+export type HeaderCTA = NonNullable<
+  NonNullable<SettingsQueryResult>['headerCTAs']
+>[number]
+
 // extract pbGridMulti from the pbGridSection union for the pbBlocks query result below
 type PbGridSection = Extract<
   NonNullable<NonNullable<PagesBySlugQueryResult>['pbSections']>[number],
