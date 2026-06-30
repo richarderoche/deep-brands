@@ -14,13 +14,20 @@ export function useOrientation() {
   return { isPortrait, isLandscape }
 }
 
-export function useViewportMaskRatio(ratios: { wide: number; mid: number; tall: number }) {
+export type ViewportMaskBreakpoint = 'wide' | 'mid' | 'tall'
+
+export function useViewportMaskBreakpoint(): ViewportMaskBreakpoint {
   const isWide = useMediaQuery('(min-aspect-ratio: 5/4)')
   const isTall = useMediaQuery('(max-aspect-ratio: 4/5)')
 
-  if (isWide) return ratios.wide
-  if (isTall) return ratios.tall
-  return ratios.mid
+  if (isWide) return 'wide'
+  if (isTall) return 'tall'
+  return 'mid'
+}
+
+export function useViewportMaskRatio(ratios: { wide: number; mid: number; tall: number }) {
+  const breakpoint = useViewportMaskBreakpoint()
+  return ratios[breakpoint]
 }
 
 export function usePrefersReducedMotion() {
