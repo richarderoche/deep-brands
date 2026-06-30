@@ -1,6 +1,8 @@
 import {create} from 'zustand'
 
 type Store = {
+  enablePageTransition: boolean
+  setEnablePageTransition: (value: boolean) => void
   isMobileNavOpen: boolean
   setIsMobileNavOpen: (value: boolean) => void
   pauseLenis: boolean
@@ -8,6 +10,8 @@ type Store = {
 }
 
 export const useStore = create<Store>((set) => ({
+  enablePageTransition: true,
+  setEnablePageTransition: (value: boolean) => set({enablePageTransition: value}),
   isMobileNavOpen: false,
   setIsMobileNavOpen: (value: boolean) => set({isMobileNavOpen: value}),
   pauseLenis: false,

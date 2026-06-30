@@ -1,13 +1,13 @@
 import {HERO_SHAPE_MASK_IDS} from '@/components/icons/HeroShapeMasks'
-import ResponsiveMask from '@/components/shared/ResponsiveMask'
-import ImageBasic from '@/components/shared/ImageBasic'
 import BackgroundVideoPlayer, {muxPlaybackHlsUrl} from '@/components/shared/BackgroundVideoPlayer'
+import ImageBasic from '@/components/shared/ImageBasic'
+import ResponsiveMask from '@/components/shared/ResponsiveMask'
+import {backdropPositionStyle} from '@/lib/objectPosition'
 import {
   HERO_SHAPE_LANDSCAPE_RATIO,
   HERO_SHAPE_MID_RATIO,
   HERO_SHAPE_PORTRAIT_RATIO,
 } from '@/lib/responsiveMaskPath'
-import {backdropPositionStyle} from '@/lib/objectPosition'
 import {imgSizesFormat} from '@/lib/utils'
 import type {Image as SanityImageType} from 'sanity'
 
