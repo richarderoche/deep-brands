@@ -45,7 +45,12 @@ export default async function Footer() {
                       {contactEmail}
                     </Link>
                   )}
-                  {socialIcons && <SocialIcons socialIcons={socialIcons} />}
+                  {socialIcons && (
+                    <SocialIcons
+                      socialIcons={socialIcons}
+                      linkClasses="rounded-full size-btn p-[.4em] flex items-center justify-center border border-offwhite [&_svg]:h-full [&_svg]:w-auto"
+                    />
+                  )}
                 </div>
                 {hasBadges && (
                   <div className="flex items-center gap-gut-50">
@@ -153,7 +158,13 @@ export const FooterHeading = ({
   )
 }
 
-export const SocialIcons = ({socialIcons}: {socialIcons: SocialLink[]}) => {
+export const SocialIcons = ({
+  socialIcons,
+  linkClasses,
+}: {
+  socialIcons: SocialLink[]
+  linkClasses?: string
+}) => {
   return (
     <div className="flex gap-gut-50">
       {socialIcons.map((link, key) => {
@@ -163,7 +174,7 @@ export const SocialIcons = ({socialIcons}: {socialIcons: SocialLink[]}) => {
             href={link.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="ts-btn hover:opacity-50"
+            className={cn('ts-btn hover:opacity-50', linkClasses)}
             aria-label={link.icon}
           >
             <SocialIcon name={link.icon} />
