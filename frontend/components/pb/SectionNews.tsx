@@ -51,8 +51,13 @@ export default function SectionNews({section}: {section: PbNews}) {
       </SiteWidth>
 
       {hasPosts && (
-        <div ref={emblaRef} className="embla__viewport mt-gut lg:mt-gut-150">
-          <div className={cn('embla__container text-blue-800', getColorStepClass(colorSteps))}>
+        <div ref={emblaRef} className="embla__viewport mt-gut">
+          <div
+            className={cn(
+              'embla__container text-blue-800 cursor-grab active:cursor-grabbing select-none',
+              getColorStepClass(colorSteps),
+            )}
+          >
             {newsPosts.map((post) => {
               const {_key, image, title, caption, url} = post
               return (
