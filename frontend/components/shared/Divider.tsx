@@ -25,7 +25,7 @@ export default function Divider({
       className={cn(
         'w-full hidden relative items-center justify-center gap-5',
         showOnMobile ? 'max-md:flex' : '',
-        showOnTablet ? 'max-lg:flex' : '',
+        showOnTablet ? 'md:max-lg:flex' : '',
         showOnDesktop ? 'lg:flex' : '',
         className && className,
         size === 2
