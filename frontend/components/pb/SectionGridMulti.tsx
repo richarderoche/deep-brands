@@ -28,7 +28,7 @@ export default function SectionGridMulti({section}: {section: PbGridMulti}) {
                 key={col._key}
                 path={[...sectionPath, 'columns', {_key: col._key}]}
               >
-                <GridCol col={col} outerSettings={outerSettings} blockWidths={col.blockWidths} />
+                <GridCol col={col} outerSettings={outerSettings} />
               </SanityVisualEditingPath>
             ))}
           </SiteGrid>

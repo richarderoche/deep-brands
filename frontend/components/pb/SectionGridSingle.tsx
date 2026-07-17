@@ -15,7 +15,8 @@ export default function SectionGridSingle({
   sectionKey: string
   isDarkBgColor: boolean
 }) {
-  const {rowWidth, pbBlocks, revealEffect, spaceBetweenBlocks, centerBlocks, bgLogoShape} = section
+  const {rowWidth, pbBlocks, revealEffect, spaceBetweenBlocks, centerBlocks, bgLogoShape, blockWidths} =
+    section
   // Skip if no blocks yet
   if (!pbBlocks || pbBlocks.length === 0) {
     return null
@@ -47,6 +48,7 @@ export default function SectionGridSingle({
                   revealEffect,
                   spaceBetweenBlocks,
                   centerBlocks,
+                  blockWidths,
                 }}
                 outerSettings={outerSettings}
               />

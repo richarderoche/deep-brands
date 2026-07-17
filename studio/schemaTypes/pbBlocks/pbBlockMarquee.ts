@@ -1,9 +1,8 @@
-import { CaseSensitive, ImageIcon } from 'lucide-react'
+import { ImageIcon } from 'lucide-react'
 import { defineField, defineType } from 'sanity'
 import { marqueeIcon } from '../../lib/customIcons'
 import { capitalize } from '../../lib/utils'
 import { crops, hotspotPreviews } from './pbBlockImage'
-import { textColorOptions, textSizeOptionsAll } from './pbBlockPlainText'
 
 export default defineType({
   title: 'Scrolling Marquee',
@@ -38,15 +37,6 @@ export default defineType({
           },
         }),
         defineField({
-          title: 'Color',
-          name: 'color',
-          type: 'string',
-          options: {
-            list: textColorOptions,
-          },
-          initialValue: 'text-body',
-        }),
-        defineField({
           title: 'Photo/Logo Size (in average px height)',
           description:
             'If elements include a mixture of ratios, the size of each will be adjusted from around this value to feel balanced in visual weight.',
@@ -68,44 +58,7 @@ export default defineType({
       name: 'elements',
       type: 'array',
       of: [
-        {
-          title: 'Text',
-          name: 'textElement',
-          type: 'object',
-          icon: CaseSensitive,
-          fields: [
-            defineField({
-              title: 'Text',
-              name: 'text',
-              type: 'string',
-            }),
-            defineField({
-              title: 'Style',
-              name: 'style',
-              type: 'string',
-              options: {
-                list: textSizeOptionsAll,
-              },
-              initialValue: 'ts-p-md',
-            }),
-          ],
-          preview: {
-            select: {
-              text: 'text',
-              style: 'style',
-            },
-            prepare({ text, style }) {
-              const textStyleText =
-                textSizeOptionsAll.find((o) => o.value === style)?.title ??
-                'Body'
-              return {
-                title: text ? text : 'Text',
-                subtitle: textStyleText,
-                media: CaseSensitive,
-              }
-            },
-          },
-        },
+        {title: 'Text', type: 'pbBlockPlainText'},
         {
           title: 'Image',
           name: 'imageElement',
@@ -182,23 +135,20 @@ export default defineType({
     select: {
       speed: 'settings.speed',
       direction: 'settings.direction',
-      color: 'settings.color',
       imageSize: 'settings.imageSize',
       elements: 'elements',
     },
     prepare({
       speed = 2,
       direction = 'left',
-      color = 'default',
       imageSize = 50,
       elements,
     }) {
       const elementCount = elements ? elements.length : 0
       const speedText = 'Speed: ' + speed
       const directionText = 'Direction: ' + capitalize(direction)
-      const colorText = 'Color: ' + capitalize(color)
       const imageSizeText = 'Size: ' + imageSize
-      const settingsArray = [speedText, directionText, colorText, imageSizeText]
+      const settingsArray = [speedText, directionText, imageSizeText]
       const settingsText = settingsArray.filter((s) => s !== '').join(' / ')
       return {
         title: 'Scrolling Marquee / Items: ' + elementCount,

@@ -1,5 +1,5 @@
-import HashAwareLink from './HashAwareLink'
 import type {CSSProperties} from 'react'
+import HashAwareLink from './HashAwareLink'
 
 import {colorValue} from '@/lib/colorValue'
 import {cn} from '@/lib/utils'
@@ -81,9 +81,10 @@ export default function Button(props: ButtonProps) {
   const isExternal = href?.startsWith('http')
   const isVerticalArrow = icon === 'arrow' && (arrowDirection === 'up' || arrowDirection === 'down')
   const buttonClasses = cn(
-    'flex w-fit items-center h-btn px-[.5em] rounded-btn border transition-all hover:scale-105 will-change-transform',
+    'flex w-fit items-center rounded-btn border transition-all hover:scale-105 will-change-transform',
+    !isNoBg && 'px-[.5em]',
     isNoBg ? 'ts-h6 ts-sans-wide' : 'ts-btn',
-    isVerticalArrow && 'flex-col h-auto py-[.5em] gap-[.15em]',
+    isVerticalArrow ? 'flex-col h-auto py-[.5em] gap-[.15em]' : 'h-btn',
     isOutline
       ? fgColor
         ? 'border-btn-fg text-btn-fg bg-transparent'

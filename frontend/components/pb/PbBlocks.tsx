@@ -2,7 +2,7 @@
 
 import {colorValue} from '@/lib/colorValue'
 import {cn, getClipPath} from '@/lib/utils'
-import type {PbBlockVideoEmbed} from '@/sanity.types'
+import type {PbBlockMarquee, PbBlockVideoEmbed} from '@/sanity.types'
 import {PbBlocksQueryResult} from '@/types'
 import {PortableText, PortableTextBlock} from 'next-sanity'
 import Link from 'next/link'
@@ -128,6 +128,7 @@ export default function PbBlocks({
                   showOnTablet={block.showOnTablet ?? true}
                   showOnDesktop={block.showOnDesktop ?? true}
                   showDividerLine={block.showDividerLine ?? true}
+                  showOrnament={block.showOrnament ?? false}
                   size={block.size ?? 1}
                 />
               )
@@ -136,7 +137,7 @@ export default function PbBlocks({
             case 'pbBlockMarquee':
               return (
                 <div key={_key} data-sanity={blockDataSanity}>
-                  <MarqueeBlock block={block} />
+                  <MarqueeBlock block={block as PbBlockMarquee} />
                 </div>
               )
 
@@ -159,7 +160,7 @@ export default function PbBlocks({
 }
 
 export function PlainTextBlock({block}) {
-  const isRichText = block.textStyle === 'ts-serif' && block.textContentRich
+  const isRichText = block.textStyle === 'ts-serif'
   return (
     <div
       className={cn(
@@ -174,7 +175,7 @@ export function PlainTextBlock({block}) {
         color: colorValue(block.textColor),
       }}
     >
-      {isRichText ? <PortableText value={block.textContentRich} /> : block.textContent || ''}
+      {isRichText ? <PortableText value={block.textContentRich || []} /> : block.textContent || ''}
     </div>
   )
 }
@@ -258,6 +259,8 @@ export function JobsBlock({block}) {
     <div className="flex flex-col gap-4">
       {block.jobs?.map((job) => {
         const {_key, title, subtitle, company, description, url} = job
+        const isFile = job.linkType === 'file'
+        const href = isFile ? job.fileLink?.url || '' : url || ''
         return (
           <div
             key={_key}
@@ -265,19 +268,20 @@ export function JobsBlock({block}) {
             className="border-t last:border-b border-body/50 p-gut-25"
           >
             <Link
-              href={url}
+              href={href}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex flex-col gap-gut-33 items-center justify-between p-gut-25 hover:bg-body/10 hover:scale-101 transition-all rounded-sm"
+              download={isFile ? true : false}
+              className="flex flex-col gap-gut-33 justify-between p-gut-25 hover:bg-body/10 hover:scale-101 transition-all rounded-sm"
             >
               <div className="flex gap-gut items-center justify-between w-full">
                 <div className="flex flex-col gap-gut-25">
                   <h3 className="ts-h6 ts-sans-wide text-balance">{title}</h3>
                   <div className="flex items-center gap-gut-33">
-                    <p className="ts-meta ts-sans-tall flex w-fit items-center h-btn px-[.5em] rounded-btn bg-white/20 whitespace-nowrap">
+                    <p className="ts-meta ts-sans-tall flex w-fit items-center h-btn px-[.5em] rounded-btn bg-current/15 whitespace-nowrap">
                       {company ? (company as string) : 'Deep Brands'}
                     </p>
-                    <p className="ts-meta line-clamp-1 ts-sans-wide opacity-80">{subtitle}</p>
+                    <p className="ts-meta line-clamp-1 ts-sans-wide opacity-70">{subtitle}</p>
                   </div>
                 </div>
                 <div className="rounded-full border ts-btn size-btn p-[.5em] flex items-center justify-center">

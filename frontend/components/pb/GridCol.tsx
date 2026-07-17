@@ -11,14 +11,9 @@ export interface GridColProps {
   col: NonNullable<PbGridMulti['columns']>[number]
   outerSettings: PbColSettings
   sticky?: boolean
-  blockWidths?: {
-    mobile?: string
-    tablet?: string
-    desktop?: string
-  }
 }
 
-export default function GridCol({col, outerSettings, blockWidths}: GridColProps) {
+export default function GridCol({col, outerSettings}: GridColProps) {
   const {_key, columnSettings, pbBlocks, yAlignment, revealEffect, spaceBetweenBlocks, centerBlocks} =
     col
   const {getDataAttribute} = useSanityDataAttribute()
@@ -41,7 +36,7 @@ export default function GridCol({col, outerSettings, blockWidths}: GridColProps)
       columnBlocks={pbBlocks as PbBlocksQueryResult}
       trueSizes={trueSizes}
       spaceBetweenBlocks={spaceBetweenBlocks || 'gap-gut'}
-      blockWidths={blockWidths}
+      blockWidths={col.blockWidths}
       contentAlign={centerBlocks ? 'center' : 'start'}
     />
   )

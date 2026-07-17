@@ -34,6 +34,10 @@ export const textAlignOptions = [
   {title: 'Right', value: 'text-right'},
 ]
 
+function isMarqueeElement(context: {path?: readonly unknown[]}) {
+  return context.path?.some((segment) => segment === 'elements') ?? false
+}
+
 export default defineType({
   name: 'pbBlockPlainText',
   title: 'Plain Text',
@@ -99,6 +103,7 @@ export default defineType({
       name: 'textAlign',
       type: 'string',
       initialValue: 'text-left',
+      hidden: isMarqueeElement,
       options: {
         list: textAlignOptions,
       },
@@ -113,6 +118,7 @@ export default defineType({
       name: 'balanceLines',
       type: 'boolean',
       initialValue: true,
+      hidden: isMarqueeElement,
     }),
   ],
   preview: {

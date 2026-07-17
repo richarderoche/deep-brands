@@ -6,7 +6,7 @@ import {defineConfig} from 'sanity'
 import {vercelWidget} from 'sanity-plugin-dashboard-widget-vercel'
 import {defaultConfig, muxInput} from 'sanity-plugin-mux-input'
 import {noteField} from 'sanity-plugin-note-field'
-import {presentationTool} from 'sanity/presentation'
+import {defineDocuments, presentationTool} from 'sanity/presentation'
 import {structureTool} from 'sanity/structure'
 import {schemaTypes, singletonSchemaTypes} from './schemaTypes'
 import {pageStructure} from './structure'
@@ -49,6 +49,15 @@ export default defineConfig({
       previewUrl: {
         origin: SANITY_STUDIO_PREVIEW_URL,
         previewMode: {enable: '/api/draft-mode/enable'},
+      },
+      resolve: {
+        mainDocuments: defineDocuments([
+          {route: '/', type: 'home'},
+          {
+            route: '/:slug',
+            filter: `_type == "page" && slug.current == $slug`,
+          },
+        ]),
       },
     }),
     muxInput(muxConfig),

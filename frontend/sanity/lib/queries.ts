@@ -95,6 +95,16 @@ const pbBlocks = `
       ),
     },
   },
+  _type == "pbBlockMarquee" => {
+    ...,
+    elements[]{
+      ...,
+      _type == "pbBlockPlainText" => {
+        ...,
+        ${textSizeByStyle},
+      },
+    },
+  },
 `
 
 const pbSections = `

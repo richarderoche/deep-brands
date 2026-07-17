@@ -76,23 +76,6 @@
           },
           "optional": true
         },
-        "color": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "union",
-            "of": [
-              {
-                "type": "string",
-                "value": "text-body"
-              },
-              {
-                "type": "string",
-                "value": "text-accent"
-              }
-            ]
-          },
-          "optional": true
-        },
         "imageSize": {
           "type": "objectAttribute",
           "value": {
@@ -5538,80 +5521,16 @@
                 {
                   "type": "object",
                   "attributes": {
-                    "text": {
+                    "_key": {
                       "type": "objectAttribute",
                       "value": {
                         "type": "string"
-                      },
-                      "optional": true
-                    },
-                    "style": {
-                      "type": "objectAttribute",
-                      "value": {
-                        "type": "union",
-                        "of": [
-                          {
-                            "type": "string",
-                            "value": "ts-h1"
-                          },
-                          {
-                            "type": "string",
-                            "value": "ts-h2"
-                          },
-                          {
-                            "type": "string",
-                            "value": "ts-h3"
-                          },
-                          {
-                            "type": "string",
-                            "value": "ts-h4"
-                          },
-                          {
-                            "type": "string",
-                            "value": "ts-p-lg"
-                          },
-                          {
-                            "type": "string",
-                            "value": "ts-p-md"
-                          },
-                          {
-                            "type": "string",
-                            "value": "ts-p-sm"
-                          },
-                          {
-                            "type": "string",
-                            "value": "ts-p-xs"
-                          },
-                          {
-                            "type": "string",
-                            "value": "ts-h5"
-                          },
-                          {
-                            "type": "string",
-                            "value": "ts-h6"
-                          }
-                        ]
-                      },
-                      "optional": true
-                    },
-                    "_type": {
-                      "type": "objectAttribute",
-                      "value": {
-                        "type": "string",
-                        "value": "textElement"
                       }
                     }
                   },
                   "rest": {
-                    "type": "object",
-                    "attributes": {
-                      "_key": {
-                        "type": "objectAttribute",
-                        "value": {
-                          "type": "string"
-                        }
-                      }
-                    }
+                    "type": "inline",
+                    "name": "pbBlockPlainText"
                   }
                 },
                 {

@@ -1,9 +1,11 @@
 'use client'
+import {colorValue} from '@/lib/colorValue'
 import {cn} from '@/lib/utils'
 import {PbBlockMarquee} from '@/sanity.types'
 import {getImageDimensions} from '@sanity/asset-utils'
 import {Marqy} from 'marqy'
 import 'marqy/dist/marqy.css'
+import {PortableText} from 'next-sanity'
 import {useState} from 'react'
 import IconPause from '../icons/IconPause'
 import IconPlay from '../icons/IconPlay'
@@ -12,24 +14,24 @@ import ImageBasic from '../shared/ImageBasic'
 export default function MarqueeBlock({block}: {block: PbBlockMarquee}) {
   const [isPaused, setIsPaused] = useState(false)
   const {settings, elements} = block
-  const {speed = 5, direction, color, imageSize} = settings ?? {}
-  const colorClass = color ? color : ''
+  const {speed = 5, direction, imageSize} = settings ?? {}
 
   if (!elements || elements.length === 0) return null
 
   return (
     <div className={cn('relative pr-28', isPaused && 'paused-by-button')}>
       <Marqy speed={speed / 10} direction={direction} pauseOnHover={false}>
-        <div className={cn('flex items-center gap-gut-150 pl-gut-150 bg-current-bg', colorClass)}>
+        <div className="flex items-center gap-gut-150 pl-gut-150 bg-current-bg">
           {elements.map((item) => {
             const {_type, _key} = item
+            const hasText =
+              _type === 'pbBlockPlainText' && (item.textContent || item.textContentRich)
+            const hasImage = _type === 'imageElement' && item.image
+            if (!hasText && !hasImage) return null
             return (
               <div key={_key}>
-                {_type === 'textElement' ? (
-                  <TextElement item={item} />
-                ) : _type === 'imageElement' ? (
-                  <ImageElement item={item} imageSize={imageSize} />
-                ) : null}
+                {hasText && <TextElement item={item} />}
+                {hasImage && <ImageElement item={item} imageSize={imageSize} />}
               </div>
             )
           })}
@@ -76,8 +78,15 @@ const ImageElement = ({item, imageSize = 50}) => {
 }
 
 const TextElement = ({item}) => {
-  const {text, style = 'ts-p-md'} = item
-  return <div className={cn('whitespace-nowrap', style)}>{text}</div>
+  const isRichText = item.textStyle === 'ts-serif' && item.textContentRich
+  return (
+    <div
+      className={cn('whitespace-nowrap', item.textStyle, item.textSize)}
+      style={{color: colorValue(item.textColor)}}
+    >
+      {isRichText ? <PortableText value={item.textContentRich} /> : item.textContent || ''}
+    </div>
+  )
 }
 
 const getWeightedHeight = (ratio, imageSize) => {
