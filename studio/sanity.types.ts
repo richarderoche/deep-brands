@@ -28,7 +28,6 @@ export type FileLink = {
 export type PbBlockMarqueeSettings = {
   speed: number
   direction?: 'left' | 'right'
-  color?: 'text-body' | 'text-accent'
   imageSize: number
 }
 
@@ -775,22 +774,9 @@ export type PbBlockMarquee = {
   _type: 'pbBlockMarquee'
   settings?: PbBlockMarqueeSettings
   elements?: Array<
-    | {
-        text?: string
-        style?:
-          | 'ts-h1'
-          | 'ts-h2'
-          | 'ts-h3'
-          | 'ts-h4'
-          | 'ts-p-lg'
-          | 'ts-p-md'
-          | 'ts-p-sm'
-          | 'ts-p-xs'
-          | 'ts-h5'
-          | 'ts-h6'
-        _type: 'textElement'
+    | ({
         _key: string
-      }
+      } & PbBlockPlainText)
     | {
         image?: ImageElementImage
         altText?: string

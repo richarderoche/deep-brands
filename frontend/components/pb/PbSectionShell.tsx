@@ -29,7 +29,7 @@ export default function PbSectionShell({
   className,
   children,
 }: PbSectionShellProps) {
-  const {getDataAttribute} = useSanityDataAttribute()
+  const {dataAttribute} = useSanityDataAttribute()
   const {sectionId, marginTop, marginBottom, sectionBgColor, topOrnament} = sectionSettings || {}
 
   const bgColor = colorValue(sectionBgColor)
@@ -49,7 +49,7 @@ export default function PbSectionShell({
         hasStickyImages && 'relative',
         className,
       )}
-      data-sanity={getDataAttribute(sectionPath)}
+      data-sanity={dataAttribute?.(sectionPath)}
       style={{backgroundColor: bgColor}}
     >
       {topOrnament && (
