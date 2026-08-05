@@ -1,7 +1,7 @@
 import bundleAnalyzer from '@next/bundle-analyzer'
-import type { NextConfig } from 'next'
-import { groq } from 'next-sanity'
-import { client } from './sanity/lib/client'
+import type {NextConfig} from 'next'
+import {groq} from 'next-sanity'
+import {client} from './sanity/lib/client'
 
 const redirectsQuery = groq`*[
 	_type == "redirect" &&
@@ -17,15 +17,9 @@ const nextConfig: NextConfig = {
   poweredByHeader: false,
   images: {
     dangerouslyAllowSVG: true,
-    remotePatterns: [{ protocol: 'https', hostname: 'cdn.sanity.io' }],
+    remotePatterns: [{protocol: 'https', hostname: 'cdn.sanity.io'}],
   },
   compiler: {
-    removeConsole:
-      process.env.NODE_ENV === 'production'
-        ? {
-            exclude: ['error', 'warn'],
-          }
-        : false,
     reactRemoveProperties: true,
   },
   typescript: {
